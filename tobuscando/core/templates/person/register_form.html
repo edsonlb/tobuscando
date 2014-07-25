@@ -1,0 +1,17 @@
+{% load i18n %}
+<h1>{% trans "Registrar um novo usuário" %}</h1>
+<form action="/register/validate/" method="POST">{% csrf_token %}
+        
+    {% if form.errors or msg %}
+        <b>{% trans "Erro!" %}</b> <br />
+        {{ msg }} <br />
+        {{ form.errors.as_text }}
+    {% endif %}
+
+    {% trans "Usuário" %}: <input name="{{ form.username.name }}" value="{{ form.username.value|default_if_none:'' }}" type="text" >
+    <br />
+    {% trans "Senha" %}: <input name="{{ form.password.name }}"  value="{{ form.password.value|default_if_none:'' }}" type="password" >
+    <br />
+    <button type="submit">{% trans "Cadastrar" %}</button>
+
+</form>
