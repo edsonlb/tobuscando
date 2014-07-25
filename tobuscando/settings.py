@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 from decouple import config
 from dj_database_url import parse as db_url
 
@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,8 +44,11 @@ INSTALLED_APPS = (
 
     'south',
     'cloudinary',
+    'smart_selects',
+    'mptt',
 
     'tobuscando.core',
+    'tobuscando.products',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -71,10 +75,14 @@ DATABASES = {
         cast=db_url)
 }
 
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'pt-Br'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
