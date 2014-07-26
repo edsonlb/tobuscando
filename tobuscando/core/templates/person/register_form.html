@@ -8,10 +8,14 @@
         {{ form.errors.as_text }}
     {% endif %}
 
+    <br />
     {% trans "Usuário" %}: <input name="{{ form.username.name }}" value="{{ form.username.value|default_if_none:'' }}" type="text" >
+    <br />
+    {% trans "E-Mail" %}: <input name="{{ form.email.name }}" value="{{ form.email.value|default_if_none:'' }}" type="text" >
     <br />
     {% trans "Senha" %}: <input name="{{ form.password.name }}"  value="{{ form.password.value|default_if_none:'' }}" type="password" >
     <br />
+    <input name="{{ form.last_login.name }}" value="{{ form.last_login.value|default_if_none:'' }}" type="hidden" >
     <button type="submit">{% trans "Cadastrar" %}</button>
 
 </form>

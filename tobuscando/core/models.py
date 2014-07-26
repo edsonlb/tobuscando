@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser, User
 from cloudinary.models import CloudinaryField
 
+Person._meta.get_field('email')._unique = True
 
 class Person(AbstractUser):
     # username
@@ -32,10 +33,33 @@ class Person(AbstractUser):
     notification2 = models.BooleanField(_(u'notificar resposta'), default=True, blank=True)
     notification3 = models.BooleanField(_(u'notificar celular'), default=True, blank=True)
     notification4 = models.BooleanField(_(u'notificar rede social'), default=True, blank=True)
+    validation = models.BooleanField(_(u'validação'), default=False, blank=True)
+
+    #criar pontos por negociação. Como no Mercado Livre. (Verificar com equipe: Cria outra tabela ou cria um campo nesta INTEIRO e controla por ele.)
 
     class Meta:
         verbose_name = _(u'Pessoa')
         verbose_name_plural = _(u'Pessoas')
+        ordering = ['email']
 
     def __unicode__(self):
         return u'{username} ({email})'.format(username=self.username, email=self.email)
+
+    def save(self, *args, **kwargs):
+        self.username = self.username.lower()
+        self.first_name = self.first_name.lower()
+        self.last_name = self.last_name.lower()
+        self.email = self.email.lower()
+        if self.address:
+            self.address = self.address.lower()
+        if self.district:
+            self.district = self.district.lower()
+        if self.city:
+            self.city = self.city.lower()
+        if self.state:
+            self.state = self.state.lower()
+        if self.country:
+            self.country = self.country.lower()
+
+        super(Person, self).save(*args, **kwargs)
+
