@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser, User
 from cloudinary.models import CloudinaryField
 
-Person._meta.get_field('email')._unique = True
 
 class Person(AbstractUser):
     # username

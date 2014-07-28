@@ -80,6 +80,10 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
+# MANUAL PARA GERAÇÃO DAS TRADUÇÕES
+# django-admin.py makemessages -l pt-br
+# django-admin.py compilemessages -l pt-br
+
 LANGUAGE_CODE = 'pt-br'
 
 LANGUAGE = (

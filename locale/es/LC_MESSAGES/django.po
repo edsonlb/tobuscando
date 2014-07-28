@@ -1,0 +1,202 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-28 19:35-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: tobuscando/core/models.py:19
+msgid "endereço"
+msgstr ""
+
+#: tobuscando/core/models.py:20
+msgid "número"
+msgstr ""
+
+#: tobuscando/core/models.py:21
+msgid "bairro"
+msgstr ""
+
+#: tobuscando/core/models.py:22
+msgid "cidade"
+msgstr ""
+
+#: tobuscando/core/models.py:23
+msgid "estado"
+msgstr ""
+
+#: tobuscando/core/models.py:24
+msgid "país"
+msgstr ""
+
+#: tobuscando/core/models.py:25
+msgid "cep"
+msgstr ""
+
+#: tobuscando/core/models.py:26
+msgid "idioma"
+msgstr ""
+
+#: tobuscando/core/models.py:27
+msgid "foto"
+msgstr ""
+
+#: tobuscando/core/models.py:28
+msgid "facebook link"
+msgstr ""
+
+#: tobuscando/core/models.py:29
+msgid "twitter link"
+msgstr ""
+
+#: tobuscando/core/models.py:30
+msgid "google plus"
+msgstr ""
+
+#: tobuscando/core/models.py:31
+msgid "notificar anúncio"
+msgstr ""
+
+#: tobuscando/core/models.py:32
+msgid "notificar resposta"
+msgstr ""
+
+#: tobuscando/core/models.py:33
+msgid "notificar celular"
+msgstr ""
+
+#: tobuscando/core/models.py:34
+msgid "notificar rede social"
+msgstr ""
+
+#: tobuscando/core/models.py:35
+msgid "validação"
+msgstr ""
+
+#: tobuscando/core/models.py:40
+msgid "Pessoa"
+msgstr ""
+
+#: tobuscando/core/models.py:41
+msgid "Pessoas"
+msgstr ""
+
+#: tobuscando/core/views.py:21
+msgid "Valide seu E-mail."
+msgstr ""
+
+#: tobuscando/core/views.py:21
+msgid "<h1>VALIDE SEU EMAIL CLICNDO NO LINK!</h1>"
+msgstr ""
+
+#: tobuscando/core/views.py:54
+msgid "Sucesso!"
+msgstr ""
+
+#: tobuscando/core/views.py:54
+msgid ""
+"Você validou o seu registro com sucesso! Agora você já pode realizar o Login!"
+msgstr ""
+
+#: tobuscando/core/views.py:58 tobuscando/core/views.py:101
+#: tobuscando/core/templates/person/login_normal.html:5
+#: tobuscando/core/templates/person/register_form.html:6
+msgid "Erro!"
+msgstr ""
+
+#: tobuscando/core/views.py:58
+msgid ""
+"Houve um erro de validação! Verifique o link informado no email ou solicite "
+"que seja enviado outro email de validação na tela de login."
+msgstr ""
+
+#: tobuscando/core/views.py:82
+msgid "Conta desativada."
+msgstr ""
+
+#: tobuscando/core/views.py:84
+msgid "Login Inválido."
+msgstr ""
+
+#: tobuscando/core/views.py:86
+msgid ""
+"Erro de Login! Revise todas as informações e tente novamente ou valide "
+"primeiro o seu e-mail."
+msgstr ""
+
+#: tobuscando/core/views.py:88 tobuscando/core/views.py:111
+msgid "Os dados não são válidos. Revise os campos!"
+msgstr ""
+
+#: tobuscando/core/views.py:91 tobuscando/core/views.py:114
+msgid "Erro de login."
+msgstr ""
+
+#: tobuscando/core/views.py:101
+msgid ""
+"Já existe uma pessoa cadastrada no sistema com este EMAIL. Faça o login ou "
+"peça o lembrete de senha."
+msgstr ""
+
+#: tobuscando/core/views.py:107
+msgid "Valide seu E-mail"
+msgstr ""
+
+#: tobuscando/core/views.py:107
+msgid "<h1>VALIDE SEU EMAIL!</h1>"
+msgstr ""
+
+#: tobuscando/core/views.py:108
+msgid "Cadsatro realizado com Sucesso!"
+msgstr ""
+
+#: tobuscando/core/views.py:108
+msgid "Foi enviado um e-mail para <b>"
+msgstr ""
+
+#: tobuscando/core/templates/person/dashboard_index.html:2
+msgid "Sair"
+msgstr ""
+
+#: tobuscando/core/templates/person/login_normal.html:10
+#: tobuscando/core/templates/person/register_form.html:12
+msgid "Usuário"
+msgstr ""
+
+#: tobuscando/core/templates/person/login_normal.html:12
+#: tobuscando/core/templates/person/register_form.html:16
+msgid "Senha"
+msgstr ""
+
+#: tobuscando/core/templates/person/login_normal.html:14
+msgid "Entrar"
+msgstr ""
+
+#: tobuscando/core/templates/person/login_normal.html:15
+msgid "Registrar"
+msgstr ""
+
+#: tobuscando/core/templates/person/register_form.html:2
+msgid "Registrar um novo usuário"
+msgstr ""
+
+#: tobuscando/core/templates/person/register_form.html:14
+msgid "E-Mail"
+msgstr ""
+
+#: tobuscando/core/templates/person/register_form.html:19
+msgid "Cadastrar"
+msgstr ""
