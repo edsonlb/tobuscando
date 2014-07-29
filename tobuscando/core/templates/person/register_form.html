@@ -15,7 +15,9 @@
     <br />
     {% trans "Senha" %}: <input name="{{ form.password.name }}"  value="{{ form.password.value|default_if_none:'' }}" type="password" >
     <br />
-    <input name="{{ form.last_login.name }}" value="{{ form.last_login.value|default_if_none:'' }}" type="hidden" >
+    
+    {{ form.last_login }}
+    {{ form.date_joined }}
     <button type="submit">{% trans "Cadastrar" %}</button>
 
 </form>

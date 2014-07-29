@@ -2,7 +2,15 @@
 from django import forms
 from tobuscando.core.models import Person
 
+
 class PersonForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(PersonForm, self).__init__(*args, **kwargs)
+
+        self.fields['last_login'].widget = forms.HiddenInput()
+        self.fields['date_joined'].widget = forms.HiddenInput()
+
     class Meta:
         model = Person
 
