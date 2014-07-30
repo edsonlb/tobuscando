@@ -12,6 +12,9 @@ urlpatterns = patterns('tobuscando.core.views',
     url(r'^register/(?P<token>\d+)/activate/$', 'register_activate', name='register_activate'),
     url(r'^activation_success/$', 'register_activation_success', name='registeractivation_success'),
     url(r'^activation_error/$', 'register_activation_error', name='register_activation_error'),
+    
+    url(r'^reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'register_reset_confirm', name='register_reset_confirm'),
+    url(r'^reset/$', 'register_reset', name='register_reset'),
 
 )
 

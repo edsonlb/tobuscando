@@ -7,6 +7,9 @@ from django.conf import settings
 from django.core.mail import send_mail
 from tobuscando.core.models import Person
 from tobuscando.core.forms import PersonForm, LoginForm
+from django.core.urlresolvers import reverse
+from django.contrib.auth.views import password_reset, password_reset_confirm
+
 
 URL = 'http://127.0.0.1:8000/' #Usado para realização de testes na máquina local.
 
@@ -14,7 +17,6 @@ URL = 'http://127.0.0.1:8000/' #Usado para realização de testes na máquina lo
 def email_enviar(email, assunto, corpo):
     corpo = u'%s E-MAIL AUTOMATICO! NAO RESPONDA!' % corpo
     assunto = u'ToBuscando.com - %s' % assunto
-
     send_mail(assunto, corpo, settings.EMAIL_HOST_USER, [email], fail_silently=False)
 
 def email_token(person):
@@ -58,6 +60,16 @@ def register_activation_success(request):
 def register_activation_error(request):
     msg = {'alert': 'alert-danger', 'msg_top': _(u'Erro!'), 'msg': _(u'Houve um erro de validação! Verifique o link informado no email ou solicite que seja enviado outro email de validação na tela de login.')}
     return render(request, 'person/register_msg.html', {'msg': msg})
+
+def register_reset_confirm(request, uidb64=None, token=None):
+    return password_reset_confirm(request, template_name='password/password_reset_confirm.html',
+                                            post_reset_redirect=reverse('login'))
+
+def register_reset(request):
+    return password_reset(request, template_name='password/password_reset_form.html',
+        email_template_name='password/password_reset_email.html',
+        subject_template_name='password/password_reset_subject.txt',
+        post_reset_redirect=reverse('login'))
 
 @login_required
 def dashboard_index(request):

@@ -11,7 +11,10 @@
     <br />
     {% trans "Senha" %}: <input name="{{ form.password.name }}"  value="{{ form.password.value|default_if_none:'' }}" type="password" >
     <br />
-    <button type="submit">{% trans "Entrar" %}</button>
-    <a href="/register/">{% trans "Registrar" %}</a>
+    <button type="submit">{% trans "Entrar" %}</button><br />
+    <a href="/register/">{% trans "Registrar" %}</a><br />
+    <a href="/reset/">{% trans "Lembrar senha" %}</a><br />
+
+    
 
 </form>
