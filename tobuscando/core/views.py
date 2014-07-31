@@ -61,15 +61,16 @@ def register_activation_error(request):
     msg = {'alert': 'alert-danger', 'msg_top': _(u'Erro!'), 'msg': _(u'Houve um erro de validação! Verifique o link informado no email ou solicite que seja enviado outro email de validação na tela de login.')}
     return render(request, 'person/register_msg.html', {'msg': msg})
 
-def register_reset_confirm(request, uidb64=None, token=None):
+def reset_confirm(request, uidb64=None, token=None):
     return password_reset_confirm(request, template_name='password/password_reset_confirm.html',
-                                            post_reset_redirect=reverse('login'))
+        uidb64=uidb64, token=token, post_reset_redirect=reverse('login'))
 
-def register_reset(request):
+def reset(request):
     return password_reset(request, template_name='password/password_reset_form.html',
         email_template_name='password/password_reset_email.html',
-        subject_template_name='password/password_reset_subject.txt',
+        subject_template_name='password/password_subject_text.txt',
         post_reset_redirect=reverse('login'))
+        #ARRUMAR AQUI!
 
 @login_required
 def dashboard_index(request):
@@ -104,29 +105,6 @@ def login_validate(request):
         return render(request, login_html, {'form': form, 'msg':_(u'Erro de login.')}) 
 
 def register_validate(request):
-    register_html = 'person/register_form.html'
-
-    if request.method == 'POST':
-        form = PersonForm(request.POST)
-        if form.is_valid(): 
-            try:
-                person = Person.objects.get(email=form.data['email'].lower()) #verifica se usuário já existe, e se já está validado o email (envia o lembrete de senha)
-                msg = {'alert': 'alert-danger', 'msg_top': _('Erro!'), 'msg': _('Já existe uma pessoa cadastrada no sistema com este EMAIL. Faça o login ou peça o lembrete de senha.')}
-                return render(request, 'person/register_msg.html', {'msg': msg})
-            except:  
-                person = form.save(commit=False)
-                person.set_password(person.password)
-                person.save()
-                email_token(person)
-                msg = {'alert': 'alert-info', 'msg_top': _('Cadastro realizado com Sucesso!'), 'msg': _('Foi enviado um e-mail para <b>'+person.email+'</b>.<br />Valide seu registro clicando no link enviado.')}
-                return render(request, 'person/register_msg.html', {'msg': msg})
-        else:
-            return render(request, register_html, {'form': form, 'msg':_(u'Os dados não são válidos. Revise os campos!')})    
-    else:
-        form = PersonForm()
-        return render(request, register_html, {'form': form, 'msg':_(u'Erro de login.')}) 
-
-def register_reminder(request):
     register_html = 'person/register_form.html'
 
     if request.method == 'POST':

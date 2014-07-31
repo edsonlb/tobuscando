@@ -30,16 +30,14 @@ LOGIN_URL = '/login/'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'south',
     'cloudinary',
-
     'tobuscando.core',
+    'django.contrib.auth',
 )
 
 MIDDLEWARE_CLASSES = (
