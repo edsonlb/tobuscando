@@ -1,0 +1,21 @@
+body {
+    background: #fff;
+    padding-top: 80px;
+}
+
+footer {
+    padding: 10px 0;
+}
+ul#category_id li label {
+    display: block;
+}
+ul#category_id li label input {
+    position: absolute;
+    left: -999px;
+}
+.dropdown-nav {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 270px;
+}

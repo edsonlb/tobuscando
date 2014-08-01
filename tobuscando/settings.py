@@ -46,9 +46,10 @@ INSTALLED_APPS = (
     'cloudinary',
     'smart_selects',
     'mptt',
+    'bootstrap3',
 
     'tobuscando.core',
-    'tobuscando.products',
+    'tobuscando.ads',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,3 +112,5 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False)
+
+MPTT_LEVEL_INDENT = 20

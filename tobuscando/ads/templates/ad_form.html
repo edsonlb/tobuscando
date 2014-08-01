@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load mptt_tags %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+
+<h2>Faça seu anúncio grátis!</h2>
+
+<form id="id_form_ad" name="form_ad" action="." method="POST">
+    {% csrf_token %}
+
+    <div class="well">
+        <div class="clearfix">
+            <ul id="category_id" class="list-group col-sm-3">
+                {% recursetree categories %}
+                <li id="dropdown-nav-{{ node.pk }}" class="list-group-item">
+                    <label for="id_category_{{ node.pk }}">
+                        {{ node.name }}
+                        {% if form_ad.category.value|add:"0" == node.pk|add:"0" %}
+                        <input checked="checked" id="id_category_{{ node.pk }}" name="category" type="radio" value="{{ node.pk }}">
+                        {% else %}
+                        <input id="id_category_{{ node.pk }}" name="category" type="radio" value="{{ node.pk }}">
+                        {% endif %}
+                    </label>
+
+                    {% if not node.is_leaf_node %}
+                    <ul id="dropdown-nav-{{ node.pk }}" class="list-group dropdown-nav col-sm-12">
+                        {{ children }}
+                    </ul>
+                    {% endif %}
+                {% endrecursetree %}
+                </li>
+            </ul>
+        </div>
+
+        {{ form_ad.category.errors }}
+        <div class="clearfix">
+            {% for field in form_ad %}
+            {% if field.name != 'category' %}
+            <div class="cleafix">
+                {% bootstrap_field field %}
+                {% bootstrap_form_errors form_ad %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        {% buttons %}
+        <button type="submit" class="btn btn-primary btn-lg pull-right">Cadastrar</button>
+        {% endbuttons %}
+
+    </div>
+</form>
+{% endblock content %}
