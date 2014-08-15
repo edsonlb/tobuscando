@@ -6,16 +6,27 @@ body {
 footer {
     padding: 10px 0;
 }
+ul#category_id li {
+    cursor: pointer;
+}
 ul#category_id li label {
     display: block;
+    cursor: pointer;
 }
 ul#category_id li label input {
     position: absolute;
     left: -999px;
 }
+ul#category_id li:hover,
+ul#category_id li.active {
+    background: #fafafa;
+}
+ul#category_id li:hover > ul.dropdown-nav {
+    display: block;
+}
 .dropdown-nav {
     position: absolute;
-    display: none;
+    /*display: none;*/
     top: 0;
-    left: 270px;
+    left: 265px;
 }

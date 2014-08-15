@@ -1,0 +1,20 @@
+{% load i18n %}
+<form action="/login/validate/" method="POST">{% csrf_token %}
+        
+    {% if form.errors or msg %}
+        <b>{% trans "Erro!" %}</b> <br />
+        {{ msg }} <br />
+        {{ form.errors.as_text }}
+    {% endif %}
+
+    {% trans "Usuário" %}: <input name="{{ form.username.name }}" value="{{ form.username.value|default_if_none:'' }}" type="text" >
+    <br />
+    {% trans "Senha" %}: <input name="{{ form.password.name }}"  value="{{ form.password.value|default_if_none:'' }}" type="password" >
+    <br />
+    <button type="submit">{% trans "Entrar" %}</button><br />
+    <a href="/register/">{% trans "Registrar" %}</a><br />
+    <a href="/reset/">{% trans "Lembrar senha" %}</a><br />
+
+    
+
+</form>

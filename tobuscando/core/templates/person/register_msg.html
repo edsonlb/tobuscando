@@ -1,0 +1,9 @@
+{% load i18n %}
+<title>{{ msg.msg_top|default:"" }}</title> <!-- alterar isso para Tag Template -->       
+    
+{% if msg.msg %}
+    <div class="alert {{ msg.alert|default:"" }}" role="alert">
+        <h3>{{ msg.msg_top|default:"" }}</h3>
+        {{ msg.msg|safe }}
+    </div>
+{% endif %}

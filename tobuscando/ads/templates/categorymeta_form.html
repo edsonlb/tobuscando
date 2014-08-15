@@ -1,0 +1,16 @@
+{% load bootstrap3 %}
+
+
+{{ meta_inlineformset.management_form }}
+
+{% for formset in meta_inlineformset  %}
+    <div class="clearfix metafields">
+        {% bootstrap_form formset %}
+    </div>
+{% endfor %}
+
+<style type="text/css">
+    .metafields .form-group:first-child {
+        margin-bottom: 0;
+    }
+</style>

@@ -10,14 +10,13 @@ HELP_ORDER = _(u'Utilizado para definir a ordem de exibição no site.')
 
 
 class Ad(models.Model):
-    #person = models.ForeignKey('core.Person', verbose_name=_(u'Pessoa'), blank=True, null=True)
     category = TreeForeignKey('Category', verbose_name=_(u'categoria'))
     title = models.CharField(_(u'título'), max_length=250)
     slug = models.SlugField(_(u'slug'), blank=True)
     price = models.DecimalField(_(u'preço'), max_digits=10, decimal_places=2)
     description = models.TextField(_(u'descrição'))
     link_reference = models.URLField(_(u'anúncio de referência'), blank=True)
-    image = CloudinaryField(_(u'imagem'))
+    image = CloudinaryField('imagem')
     limit_date = models.DateTimeField(_(u'data limite do anúncio'),
                                       blank=True, null=True)
     view_phone = models.BooleanField(_(u'exibir telefone no anúncio?'))
@@ -42,9 +41,7 @@ class Ad(models.Model):
 
 
 class AdMeta(models.Model):
-    ad = models.ForeignKey('Ad',
-                           related_name='+',
-                           verbose_name=_(u'anúncio'))
+    ad = models.ForeignKey('Ad', related_name='+', verbose_name=_(u'anúncio'))
     meta = models.ForeignKey('CategoryMeta',
                              related_name='category_meta',
                              verbose_name=_(u'categoria meta'))
@@ -161,12 +158,18 @@ class CategoryMeta(models.Model):
         verbose_name_plural = _(u'Campos Personalizados')
 
     def __unicode__(self):
-        return self.category.name
+        return self.meta.name
 
 
 """
     Signals
 """
+
+
+def ad_pre_save(signal, instance, sender, **kwargs):
+    instance.slug = slug(instance, sender, instance.title)
+
+models.signals.pre_save.connect(ad_pre_save, sender=Ad)
 
 
 def category_pre_save(signal, instance, sender, **kwargs):
