@@ -1,0 +1,52 @@
+{% load i18n %}
+
+{% load staticfiles %}
+
+{% include 'header.html' %}
+
+{% include 'navbar.html' %}
+
+{% block content %}
+<section id="login_bg">
+<div  class="container">
+<div class="row">
+    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+        <div id="login">
+            <form action="/login/validate/" method="POST">{% csrf_token %}
+                {% if form.errors or msg %}
+                {{ msg }} 
+                {{ form.errors.as_text }}
+                {% endif %}
+            <div class="row">
+            <div class="col-md-6 col-sm-6 login_social">
+                <a href="#" class="btn btn-primary btn-block"><i class="icon-facebook"></i> Facebook</a>
+            </div>
+            <div class="col-md-6 col-sm-6 login_social">
+                <a href="#" class="btn btn-info btn-block "><i class="icon-twitter"></i>Twitter</a>
+            </div>
+            </div> <!-- end row -->
+            <div class="login-or"><hr class="hr-or"><span class="span-or">ou</span></div>
+       
+                <div class="form-group">
+                    <input name="{{ form.username.name }}" value="{{ form.username.value|default_if_none:'' }}" type="text" class=" form-control " placeholder="Usuário">
+                    <span class="input-icon"><i class=" icon-user"></i></span>
+                </div>
+                <div class="form-group" style="margin-bottom:5px;">
+                    <input name="{{ form.password.name }}" value="{{ form.password.value|default_if_none:'' }}" type="password" class=" form-control" placeholder="Senha" style="margin-bottom:5px;">
+                    <span class="input-icon"><i class="icon-lock"></i></span>
+                </div>
+                <p class="small">
+                    <a href="#">Esqueceu sua senha?</a>
+                </p>
+                <button type="submit" class="button_fullwidth">Iniciar Sessão</button>
+                <a href="#" class="button_fullwidth-2">Cadastre-se aqui!</a>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</section> <!-- End login -->
+{% endblock content %}
+
+<!-- footer -->
+{% include 'footer.html' %}

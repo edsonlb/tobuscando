@@ -13,6 +13,11 @@ from django.contrib.auth.views import password_reset, password_reset_confirm
 
 URL = 'http://127.0.0.1:8000/' #Usado para realização de testes na máquina local.
 
+
+def home(request):
+    # do something...
+    return render(request, 'home/index.html')
+
 # OPERACAIONAL --------------------
 def email_enviar(email, assunto, corpo):
     corpo = u'%s E-MAIL AUTOMATICO! NAO RESPONDA!' % corpo
@@ -43,7 +48,7 @@ def login(request):
         return HttpResponseRedirect('/dashboard/')
     else:
         form = LoginForm()
-        return render(request, 'person/login_normal.html', {'form': form})
+        return render(request, 'person/login.html', {'form': form})
 
 def logoff(request):
     logout(request)
@@ -81,7 +86,7 @@ def dashboard_index(request):
 # LOGIN -------------------------------------
 
 def login_validate(request):
-    login_html = 'person/login_normal.html'
+    login_html = 'person/login.html'
 
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -128,7 +133,3 @@ def register_validate(request):
         return render(request, register_html, {'form': form, 'msg':_(u'Erro de login.')})
 
 # LOGIN FIM -------------------------------------
-
-
-
-

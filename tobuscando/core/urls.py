@@ -14,7 +14,7 @@ urlpatterns = patterns('tobuscando.core.views',
     url(r'^activation_error/$', 'register_activation_error', name='register_activation_error'),
 
 )
-
+"""
 urlpatterns += patterns('',
     #url(r'^reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', 'tobuscando.core.views.reset_confirm', name='reset_confirm'),
     url(r'^reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', 'tobuscando.core.views.reset_confirm', {'template_name': 'password/password_reset_confirm.html'}, name='reset_confirm'),
@@ -29,3 +29,4 @@ urlpatterns += patterns('',
 #http://blog.xjtian.com/post/54552214875/built-in-password-reset-views-in-django
 #http://garmoncheg.blogspot.com.br/2012/07/django-resetting-passwords-with.html
 #https://github.com/django/django/tree/master/django/contrib/admin/templates/registration
+"""
