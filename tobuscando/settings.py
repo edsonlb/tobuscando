@@ -16,7 +16,7 @@ SECRET_KEY = config('SECRET_KEY')
 SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False)
+DEBUG = config('DEBUG', default=True)
 
 TEMPLATE_DEBUG = True
 
