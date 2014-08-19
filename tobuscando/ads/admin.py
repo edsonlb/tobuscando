@@ -44,7 +44,7 @@ class CategoryMetaTabularInline(SortableTabularInline):
 
         if obj:
             extra = 0
-        return extra
+        return 1
 
 
 class CategoryAdmin(MPTTModelAdmin, SortableModelAdmin):
