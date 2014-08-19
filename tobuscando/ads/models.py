@@ -64,7 +64,7 @@ class Category(MPTTModel):
 
     parent = TreeForeignKey('self', verbose_name=_(u'parente'),
                             blank=True, null=True, related_name='children')
-    name = models.CharField(_(u'nome'), max_length=50, unique=True)
+    name = models.CharField(_(u'nome'), max_length=50)
     slug = models.SlugField(_(u'slug'), blank=True, null=True)
     image = CloudinaryField(_(u'imagem'), blank=True, null=True,
                             help_text=HELP_IMAGE)
