@@ -22,7 +22,7 @@ class MetaOptionTabularInline(SortableTabularInline):
 class MetaAdmin(SortableModelAdmin):
     list_display = ('name', 'field', 'is_active')
     list_filter = ('is_active', 'field')
-    search_field = ('name',)
+    search_fields = ('name',)
 
     inlines = [MetaOptionTabularInline]
 
@@ -49,7 +49,7 @@ class CategoryMetaTabularInline(SortableTabularInline):
 
 class CategoryAdmin(MPTTModelAdmin, SortableModelAdmin):
     list_display = ('name', 'slug', 'is_active')
-    search_field = ('name', 'slug')
+    search_fields = ('name', 'slug')
     list_filter = ('is_active', 'parent')
 
     inlines = [CategoryMetaTabularInline]
