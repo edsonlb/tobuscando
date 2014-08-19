@@ -20,7 +20,7 @@ class CategoryMetaForm(forms.ModelForm):
                 meta=self.instance.meta).order_by('order')
         except:
             self.fields['options'].queryset = MetaOption.objects.filter(
-                is_active=False).order_by('order')
+                is_active=True).order_by('order')
 
     class Meta:
         model = CategoryMeta
