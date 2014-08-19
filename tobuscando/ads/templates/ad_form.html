@@ -10,21 +10,20 @@
 
 
 {% block content %}
-
 <h2>Faça seu anúncio grátis!</h2>
-
-
 {% if form_ad.is_multipart %}
-<form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST">
+<form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
     {% else %}
-    <form id="id_form_ad" name="form_ad" action="." method="POST">
+    <form id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
         {% endif %}
         {% csrf_token %}
 
         <div class="well">
             <div class="clearfix">
                 <div class="form-group">
-                    {% bootstrap_label form_ad.category.label %}
+                    <div class="col-sm-2 control-label">
+                        {% bootstrap_label form_ad.category.label %}
+                    </div>
                     <ul id="category" class="list-group col-sm-3">
                         {% recursetree categories %}
                         <li id="dropdown-nav-{{ node.pk }}" class="list-group-item">
@@ -60,19 +59,27 @@
             <div class="clearfix">
                 {% for field in form_ad %}
                 {% if field.name != 'category' %}
-                <div class="cleafix">
-                    {% bootstrap_field field %}
-                    {% bootstrap_form_errors form_ad %}
-                </div>
+                {% bootstrap_field field layout='horizontal' %}
                 {% endif %}
                 {% endfor %}
+
+            </div>
+
+            <div class="clearfix">
+                <h3>Suas informações:</h3>
+
+                <div class="clearfix">
+                    {% bootstrap_form form_person layout='horizontal' %}
+                </div>
             </div>
 
             {% buttons %}
-            <br>
-            <button type="submit" class="btn btn-primary btn-lg">Cadastrar</button>
+            <hr>
+            <div class="col-sm-12 col-sm-offset-2">
+                <button type="submit" class="button_big">Publicar oferta</button>
+            </div>
             {% endbuttons %}
-
         </div>
-    </form>
-    {% endblock content %}
+    </div>
+</form>
+{% endblock content %}
