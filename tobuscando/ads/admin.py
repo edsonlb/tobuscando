@@ -1,3 +1,4 @@
+# coding: utf-8
 from django.contrib import admin
 from suit.admin import SortableModelAdmin, SortableTabularInline
 from mptt.admin import MPTTModelAdmin
