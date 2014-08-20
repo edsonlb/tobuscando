@@ -1,0 +1,56 @@
+{% load bootstrap3 %}
+{% load socialaccount %}
+{% load i18n %}
+{% load account %}
+{% load url from future %}
+
+{% load staticfiles %}
+
+{% include 'header.html' %}
+
+{% include 'navbar.html' %}
+
+{% block content %}
+<section id="login_bg">
+<div  class="container">
+<div class="row">
+    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+        <div id="login">
+            <form action="{% url 'account_login' %}" method="POST">{% csrf_token %}
+            {% for provider in socialaccount.providers %}
+            <div class="row">
+                {% ifequal provider.name "Facebook" %}
+                <div class="col-md-6 col-sm-6 login_social" style="margin-top: -39px;">
+                    <a href="{% provider_login_url provider.id openid=brand.openid_url process=process %}" class="btn btn-primary btn-block"><i class="icon-facebook"></i> Facebook</a>
+                </div>
+                {% endifequal %}
+                {% ifequal provider.name "Twitter" %}
+                <div class="col-md-6 col-sm-6 login_social" style="margin-left: 161px;">
+                    <a href="{% provider_login_url provider.id openid=brand.openid_url process=process %}" class="btn btn-info btn-block "><i class="icon-twitter"></i>Twitter</a>
+                </div>
+                {% endifequal %}
+            </div>
+            {% endfor %}
+            <div class="login-or"><hr class="hr-or"><span class="span-or">ou</span></div>
+       
+                <div class="form-group">
+                    {% bootstrap_form form %}
+                </div>
+                {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <p class="small">
+                    <a href="{% url 'account_reset_password' %}">{% trans "Esqueceu sua senha?" %}</a>
+                </p>
+                <button type="submit" class="button_fullwidth">{% trans "Iniciar Sessão" %}</button>
+                <a href="{{ signup_url }}" class="button_fullwidth-2">{% trans "Cadastre-se" %}</a>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</section> <!-- End login -->
+{% endblock content %}
+
+<!-- footer -->
+{% include 'footer.html' %}

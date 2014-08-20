@@ -24,8 +24,6 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'core.Person'
 
-LOGIN_URL = '/login/'
-
 # Application definition
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
