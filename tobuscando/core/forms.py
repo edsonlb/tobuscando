@@ -21,10 +21,18 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, required=True)
 
 
-class PersonPreRegisterForm(UserCreationForm):
+class PersonPreRegisterForm(forms.ModelForm):
+    terms = forms.BooleanField(
+        label=u'Estou ciente e de acordo com os Termos de Uso.')
 
-    terms = forms.BooleanField(label=u'Estou ciente e de acordo com os Termos de Uso.')
+    def __init__(self, *args, **kwargs):
+        super(PersonPreRegisterForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].required = True
 
     class Meta:
         model = Person
-        fields = ('first_name', 'username', 'email', 'password1', 'password2', 'terms')
+        fields = ('first_name', 'username', 'email', 'password', 'terms')
+        widget = {
+            'password': forms.PasswordInput()
+        }

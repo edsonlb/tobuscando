@@ -10,13 +10,15 @@ HELP_ORDER = _(u'Utilizado para definir a ordem de exibição no site.')
 
 
 class Ad(models.Model):
+    person = models.ForeignKey('core.Person', verbose_name=_(u'Pessoa'),
+                               blank=True, null=True)
     category = TreeForeignKey('Category', verbose_name=_(u'categoria:'))
     title = models.CharField(_(u'título:'), max_length=250)
-    slug = models.SlugField(_(u'slug'), blank=True)
+    slug = models.SlugField(_(u'slug'), blank=True, null=True)
     price = models.DecimalField(_(u'preço:'), max_digits=10, decimal_places=2)
     description = models.TextField(_(u'descrição:'))
     link_reference = models.URLField(_(u'anúncio de referência:'), blank=True)
-    image = CloudinaryField('<imagem:></imagem:>')
+    image = CloudinaryField(_(u'imagem:'), blank=True, null=True)
     limit_date = models.DateTimeField(_(u'data limite do anúncio:'),
                                       blank=True, null=True)
     view_phone = models.BooleanField(_(u'exibir telefone no anúncio?'))
@@ -32,12 +34,12 @@ class Ad(models.Model):
     def __unicode__(self):
         return self.title
 
-    def save(self):
-        pass
-
     @models.permalink
     def get_absolute_url(self):
         return ('')
+
+    def metas(self):
+        return self.admeta_set.all()
 
 
 class AdMeta(models.Model):

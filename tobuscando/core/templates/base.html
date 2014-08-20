@@ -24,6 +24,7 @@
     <link href="{% static 'layout_oficial/css/superfish.css' %}" rel="stylesheet">
     {% block css %}{% endblock css %}
     <link href="{% static 'layout_oficial/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="http://www.ansonika.com/learn/fontello/css/fontello.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
@@ -133,22 +134,11 @@
 <script src="{% static 'layout_oficial/js/jquery.placeholder.js' %}"></script>
 <script src="{% static 'layout_oficial/js/functions.js' %}"></script>
 <script src="{% static 'layout_oficial/js/classie.js' %}"></script>
-<script src="{% static 'layout_oficial/js/uisearch.js' %}"></script>
-<script src="{% static 'layout_oficial/js/wizard_func.js' %}"></script>
+<!--<script src="{% static 'layout_oficial/js/uisearch.js' %}"></script>-->
 <script src="{% static 'layout_oficial/js/jquery.icheck.js' %}"></script>
-<script>new UISearch( document.getElementById( 'sb-search' ) );</script>
+<!--<script>new UISearch( document.getElementById( 'sb-search' ) );</script>-->
 <script>$(".video").fitVids();</script>
 
-<!-- STYLE SWITCHER  -->
-<link rel="stylesheet" type="text/css" media="screen,projection" href="{% static 'css/jquery-sticklr-1.4-light-color.css' %}" >
-<script type="text/javascript" src="{% static 'layout_oficial/js/jquery-sticklr-1.4.min.js' %}"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#example-1').sticklr({
-            animate         : true,
-            showOn          : 'hover'
-        });
-    });
-</script>
+{% block js %}{% endblock js %}
 </body>
 </html>

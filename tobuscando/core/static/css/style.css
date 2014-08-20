@@ -1,32 +1,14 @@
 body {
     background: #fff;
     padding-top: 80px;
+    overflow-x: hidden;
 }
-
 footer {
     padding: 10px 0;
 }
-ul#category_id li {
-    cursor: pointer;
+textarea.form-control {
+    height: 100px !important;
 }
-ul#category_id li label {
-    display: block;
-    cursor: pointer;
-}
-ul#category_id li label input {
-    position: absolute;
-    left: -999px;
-}
-ul#category_id li:hover,
-ul#category_id li.active {
-    background: #fafafa;
-}
-ul#category_id li:hover > ul.dropdown-nav {
-    display: block;
-}
-.dropdown-nav {
-    position: absolute;
-    /*display: none;*/
-    top: 0;
-    left: 265px;
+#main_content {
+    padding: 40px 0 60px;
 }

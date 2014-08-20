@@ -2,7 +2,7 @@
 from django.contrib import admin
 from suit.admin import SortableModelAdmin, SortableTabularInline
 from mptt.admin import MPTTModelAdmin
-from .models import Ad, Category, Meta, MetaOption, CategoryMeta
+from .models import Ad, AdMeta, Category, Meta, MetaOption, CategoryMeta
 from .forms import CategoryMetaForm
 
 
@@ -60,6 +60,14 @@ class CategoryAdmin(MPTTModelAdmin, SortableModelAdmin):
         js = ['admin/js/category.js']
 
 
+class AdMetaInline(admin.TabularInline):
+    model = AdMeta
+    extra = 0
+
+
+class AdAdmin(admin.ModelAdmin):
+    inlines = [AdMetaInline]
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Meta, MetaAdmin)
-admin.site.register(Ad)
+admin.site.register(Ad, AdAdmin)

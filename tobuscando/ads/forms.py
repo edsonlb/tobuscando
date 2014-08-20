@@ -7,7 +7,7 @@ class AdForm(forms.ModelForm):
 
     class Meta:
         model = Ad
-        exclude = ('slug', 'is_active')
+        exclude = ('person', 'slug', 'is_active')
 
 
 class CategoryMetaForm(forms.ModelForm):
