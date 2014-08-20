@@ -39,11 +39,12 @@ class Ad(models.Model):
         return ('')
 
     def metas(self):
-        return self.admeta_set.all()
+        return self.metas_set.all()
 
 
 class AdMeta(models.Model):
-    ad = models.ForeignKey('Ad', related_name='+', verbose_name=_(u'anúncio'))
+    ad = models.ForeignKey('Ad', related_name='metas',
+                           verbose_name=_(u'anúncio'))
     meta = models.ForeignKey('CategoryMeta',
                              related_name='category_meta',
                              verbose_name=_(u'categoria meta'))
@@ -88,10 +89,6 @@ class Category(MPTTModel):
     def save(self, *args, **kwargs):
         super(Category, self).save(*args, **kwargs)
         Category.objects.rebuild()
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('')
 
 
 class Meta(models.Model):

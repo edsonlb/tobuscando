@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load cloudinary %}
 
 {% block content %}
 <div class="alert alert-info">
@@ -13,11 +14,31 @@
         <div class="panel-heading"><h4>Anúncio <a href="#" class="btn btn-link"><i class="icon-edit"></i> alterar</a></h4></div>
         <div class="panel-body">
             <h3>{{ ad.title }}</h3>
-            {% for meta in ad.metas %}
+            <div class="col-sm-12">
+                {% cloudinary ad.image alt=ad.title class='img-responsive' %}
+            </div>
+
+            <div class="clearfix">
+                <br>
+                {# for meta in ad.metas #}
                 <strong>{{ meta.meta.name }} - {{ meta.options }}</strong>
-            {% endfor %}
-            <strong>Descrição:</strong>
-            <p>{{ ad.description }}</p>
+                {# endfor #}
+                <strong>Descrição:</strong>
+                <p>{{ ad.description }}</p>
+
+                <strong>Preço:</strong>
+                <p>{{ ad.price }}</p>
+
+                {% if ad.link_reference %}
+                <strong>Anúncio referência:</strong>
+                <p>{{ ad.link_reference }}</p>
+                {% endif %}
+
+                {% if ad.limit_date %}
+                <strong>válido até:</strong>
+                <p>{{ ad.limit_date }}</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

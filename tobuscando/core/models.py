@@ -56,6 +56,9 @@ class Person(AbstractUser):
         return u'{username} ({email})'.format(username=self.username,
                                               email=self.email)
 
+    def ads(self):
+        return self.ad_set.all()
+
     def save(self, *args, **kwargs):
         self.username = self.username.lower()
         self.first_name = self.first_name.lower()

@@ -56,7 +56,10 @@
             </div>
             <div class="col-md-9 col-sm-9 col-xs-9" style="margin-top: 5px;">
                 <div class="pull-right">
-                    <a href="#" class="button_top hidden-xs" id="apply"><i class="icon-user"></i> Minha conta</a>
+                    {% if user.is_autheticate %}
+                    <span class="btn btn-link">{{ user.username }}</span>
+                    {% endif %}
+                    <a href="{% url 'core:dashboard' %}" class="button_top hidden-xs" id="apply"><i class="icon-user"></i> Minha conta</a>
                     <a href="#" title="Contato" class="btn btn-link">Contato</a>
                 </div>
             </div>
