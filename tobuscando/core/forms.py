@@ -1,7 +1,6 @@
 # coding: utf-8
 from django import forms
 from tobuscando.core.models import Person
-from django.contrib.auth.forms import UserCreationForm
 
 
 class PersonForm(forms.ModelForm):
@@ -36,3 +35,27 @@ class PersonPreRegisterForm(forms.ModelForm):
         widget = {
             'password': forms.PasswordInput()
         }
+
+
+class ProfileForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].help_text = None
+        self.fields['username'].widget = forms.TextInput(attrs={'readonly': 'readonly'})
+
+        self.fields['password'].widget = forms.HiddenInput()
+        self.fields['last_login'].widget = forms.HiddenInput()
+        self.fields['date_joined'].widget = forms.HiddenInput()
+
+    class Meta:
+        model = Person
+        fields = (
+            'avatar', 'first_name', 'username', 'email',
+            'address', 'number', 'district', 'city', 'state', 'country',
+            'zipcode', 'language',
+            'facebook_link', 'twitter_link', 'gplus_link',
+            'notification1', 'notification2', 'notification3', 'notification4',
+            'date_joined', 'last_login', 'password'
+        )

@@ -12,3 +12,29 @@ textarea.form-control {
 #main_content {
     padding: 40px 0 60px;
 }
+#search {
+    margin-top: 5px;
+}
+#search button {
+    height: 38px;
+}
+#search .input-group {
+    margin-bottom: 0;
+}
+h1.logo {
+    float: left;
+    font-size: 25px;
+    text-transform: lowercase;
+    margin-top: 4px;
+}
+h1.logo span {
+    display: inline-block;
+    width: 38px;
+    margin-right: 3px;
+}
+h1.logo span img {
+    width: 210px !important;
+}
+h1.logo a {
+    color: #444;
+}

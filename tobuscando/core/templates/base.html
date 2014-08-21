@@ -49,12 +49,21 @@
   <header>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-3">
-                <a href="{% url 'core:home' %}">
-                    <img src="{% static 'layout_oficial/img/LogoOficial5.png' %}" style="width: 240px;" alt="">
-                </a>
-            </div>
-            <div class="col-md-9 col-sm-9 col-xs-9" style="margin-top: 5px;">
+            <h1 class="logo">
+                <a href="/"><span><img src="/static/layout_oficial/img/LogoOficial5.png" alt=""></span> tôbuscando</a>
+            </h1>
+
+            <form id="search" action="." method="POST" class="col-sm-5 col-xs-5">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" placeholder="Ex: guitarra, bicicleta, moto, etc ..." class="form-control" autocomplete="off">
+                    <span class="input-group-btn">
+                        <button class="btn" type="submit"><i class="icon-search"></i></button>
+                    </span>
+                </div>
+            </form>
+
+            <div class="col-md-4 col-sm-4 col-xs-4 pull-right" style="margin-top: 5px;">
                 <div class="pull-right">
                     {% if user.is_authenticated %}
                     <span class="welcome">Olá, {{ user.username }}</span>

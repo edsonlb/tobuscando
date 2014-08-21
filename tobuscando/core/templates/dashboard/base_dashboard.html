@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load cloudinary %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+{% endblock css %}
+
+{% block content %}
+<aside id="dashboard-nav" class="col-sm-3">
+    <a href="{% url 'ads:ad_create' %}" id="link-ads" class="button_medium btn-block text-center"><i class="icon-plus-circle"></i> Novo Anúncio</a>
+    <a href="{% url 'core:dashboard' %}" id="link-ads" class="button_medium_outline btn-block text-center">Visão geral</a>
+    <a href="{% url 'core:dashboard_ads' %}" id="link-ads" class="button_medium_outline btn-block text-center">Meus Anúncios</a>
+    <a href="{% url 'core:dashboard_profile' %}" id="link-profile" class="button_medium_outline btn-block text-center">Meus dados</a>
+</aside>
+
+
+<div class="col-sm-9">
+{% block dashboard_content %}{% endblock dashboard_content %}
+</div>
+{% endblock content %}

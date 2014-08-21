@@ -1,6 +1,7 @@
 # coding: utf-8
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import TemplateView
+from django.views.generic import View, TemplateView, UpdateView
+from django.core.urlresolvers import reverse as r
 from django.contrib.auth import authenticate, logout, login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
@@ -10,6 +11,9 @@ from tobuscando.core.models import Person
 from tobuscando.core.forms import PersonForm, LoginForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.views import password_reset, password_reset_confirm
+from tobuscando.ads.models import Ad
+from tobuscando.ads.forms import AdUpdateForm
+from .forms import ProfileForm
 
 
 #Usado para realização de testes na máquina local.
@@ -21,11 +25,41 @@ class HomeView(TemplateView):
 
 
 class DashboardView(TemplateView):
-    template_name = "dashboard.html"
+    template_name = "dashboard/index.html"
 
 
 class DashboardAdsView(TemplateView):
     template_name = "dashboard/ad_list.html"
+
+
+class AdUpdateView(UpdateView):
+    template_name = 'dashboard/ad_form.html'
+    model = Ad
+    form = AdUpdateForm
+
+    def get_queryset(self):
+        return super(AdUpdateView, self)\
+            .get_queryset().filter(person=self.request.user)
+
+
+class ProfileView(View):
+    template_name = 'dashboard/profile.html'
+    form_class = ProfileForm
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(instance=request.user)
+
+        return render(request, self.template_name, locals())
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, instance=request.user)
+
+        if form.is_valid():
+            person = form.save(commit=False)
+
+            return HttpResponseRedirect(r('core:dashboard'))
+
+        return render(request, self.template_name, locals())
 
 # OPERACAIONAL --------------------
 
