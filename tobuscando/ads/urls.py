@@ -9,5 +9,5 @@ urlpatterns = patterns('tobuscando.ads.views',
         name="ad_create"),
     url(r'anunciar/$', AdCreateView.as_view(), name="ad_create"),
     url(r'anunciar/successo/$', AdCreateSuccessTemplateView.as_view(),
-        name="ad_create_success"),
+        name="ad_success"),
 )

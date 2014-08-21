@@ -1,13 +1,15 @@
 # coding: utf-8
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
-from .views import HomeView, DashboardView
+from .views import HomeView, DashboardView, DashboardAdsView
 
 
 urlpatterns = patterns('tobuscando.core.views',
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^dashboard/$', login_required (DashboardView.as_view()),
         name='dashboard'),
+    url(r'^dashboard/ads/$', login_required (DashboardAdsView.as_view()),
+        name='dashboard_ads'),
     url(r'^login/$', 'login', name='login'),
     url(r'^login/validate/$', 'login_validate', name='login'),
     url(r'^logoff/$', 'logoff', name='logoff'),

@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+{% load cloudinary %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+{% endblock css %}
+
+
 {% block content %}
-{{ user.ads }}
-{{ user }}
+{% include 'dashboard/dashboard_nav.html' %}
+
+<div class="col-sm-9">
+
+</div>
 {% endblock content %}

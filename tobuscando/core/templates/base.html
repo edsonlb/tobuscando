@@ -56,10 +56,13 @@
             </div>
             <div class="col-md-9 col-sm-9 col-xs-9" style="margin-top: 5px;">
                 <div class="pull-right">
-                    {% if user.is_autheticate %}
-                    <span class="btn btn-link">{{ user.username }}</span>
+                    {% if user.is_authenticated %}
+                    <span class="welcome">Olá, {{ user.username }}</span>
                     {% endif %}
                     <a href="{% url 'core:dashboard' %}" class="button_top hidden-xs" id="apply"><i class="icon-user"></i> Minha conta</a>
+                    {% if user.is_authenticated %}
+                    <a href="{# url 'allauth:logoff' #}" class="btn btn-link hidden-xs" id="apply">Sair</a>
+                    {% endif %}
                     <a href="#" title="Contato" class="btn btn-link">Contato</a>
                 </div>
             </div>

@@ -23,6 +23,10 @@ class HomeView(TemplateView):
 class DashboardView(TemplateView):
     template_name = "dashboard.html"
 
+
+class DashboardAdsView(TemplateView):
+    template_name = "dashboard/ad_list.html"
+
 # OPERACAIONAL --------------------
 
 

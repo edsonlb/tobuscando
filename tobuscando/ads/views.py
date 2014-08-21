@@ -62,7 +62,7 @@ class AdCreateView(View):
             request.session['ad_pk'] = ad.pk
 
             self._login(request, person)
-            return redirect(r('ads:ad_create_success'), ad=ad.pk)
+            return redirect(r('ads:ad_success'), ad=ad.pk)
 
         return render(request, self.template_name, locals())
 
@@ -78,7 +78,7 @@ class AdCreateView(View):
 
 
 class AdCreateSuccessTemplateView(TemplateView):
-    template_name = "ad_create_success.html"
+    template_name = "ad_success.html"
 
     def get_context_data(self, **kwargs):
         context = super(AdCreateSuccessTemplateView, self)\

@@ -34,9 +34,9 @@ class Ad(models.Model):
     def __unicode__(self):
         return self.title
 
-    @models.permalink
+    #@models.permalink
     def get_absolute_url(self):
-        return ('')
+        return ('oi')
 
     def metas(self):
         return self.metas_set.all()

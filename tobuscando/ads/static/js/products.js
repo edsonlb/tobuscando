@@ -5,8 +5,6 @@ $(document).ready(function() {
         var $this = $(this);
         var category = $this.find("input:radio").filter(':checked');
 
-        alert($("div." + category.attr('id')).length());
-
         if($("div." + category.attr('id')).length())
             return false;
     });
