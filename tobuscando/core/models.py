@@ -57,7 +57,6 @@ class Person(AbstractUser):
                                               email=self.email)
 
     def ads(self):
-        print self.pk
         return self.ad_set.all()
 
     def save(self, *args, **kwargs):

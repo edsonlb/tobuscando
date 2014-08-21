@@ -24,6 +24,10 @@ class HomeView(TemplateView):
     template_name = "index.html"
 
 
+class ProductView(TemplateView):
+    template_name = "products/products.html"
+
+
 class DashboardView(TemplateView):
     template_name = "dashboard/index.html"
 

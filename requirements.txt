@@ -10,3 +10,5 @@ django-smart-selects==1.0.9
 django-suit==0.2.9
 gunicorn==19.0.0
 wsgiref==0.1.2
+django-paginate
+django-allauth==0.18.0
