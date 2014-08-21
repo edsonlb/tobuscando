@@ -17,7 +17,10 @@ URL = 'http://127.0.0.1:8000/'
 
 
 class HomeView(TemplateView):
-    template_name = "index.html"
+    template_name = "home/index.html"
+
+class ProductView(TemplateView):
+    template_name = "products/products.html"
 
 
 class DashboardView(TemplateView):

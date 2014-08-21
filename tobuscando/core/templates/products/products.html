@@ -1,0 +1,243 @@
+{% load staticfiles %}
+{% include 'header.html' %}
+
+{% include 'navbar.html' %}
+
+{% block content %}
+
+    <section id="sub-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1 text-center">
+					<h1>Ta buscando?</h1>
+					<p class="lead boxed ">Aqui você encontra produtos nos melhores preços</p>
+		            <form action="#" method="get"  id="search-form" >
+						<div class="input-group" >
+							<input type="text" placeholder="Procure produtos, vendedores..."  name="autocomplete-ajax" id="autocomplete-ajax"  class="form-control style-2" />
+							<span class="input-group-btn">
+							<button class="btn" type="submit"><i class="icon-search"></i></button>
+							</span>
+						</div><!-- /input-group -->
+		                  <div class="adv_search"><a href="#">Busca avançada</a></div>
+					</form>
+				</div>
+			</div><!-- End row -->
+		</div><!-- End container -->
+		<div class="divider_top"></div>
+</section><!-- End sub-header -->
+    
+    
+    <section id="main_content">
+    	<div class="container">
+        
+        <ol class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li class="active">About</li>
+        </ol>
+        
+        <div class="row">
+        
+        <aside class="col-lg-3 col-md-4 col-sm-4">
+            <div class="box_style_1">
+            	<h4>Categorias</h4>
+            <ul class="submenu-col">
+                <li><a href="#" id="active">Todas as categorias</a></li>
+                <li><a href="course_details_2.html">Esportes (10)</a></li>
+                <li><a href="course_details_2.html">Animais e acessórios (08)</a></li>
+                <li><a href="course_details_2.html">Móveis (05) </a></li>
+                <li><a href="course_details_2.html">Eletrônicos e celulares (08) </a></li>
+                <li><a href="course_details_2.html">Música (04)</a></li>
+                <li><a href="course_details_2.html">Infantil (06)</a></li>
+                <li><a href="course_details_2.html">Veículos (08)</a></li>
+                <li><a href="course_details_2.html">Imóveis (08)</a></li>
+                <li><a href="course_details_2.html">Oportunidades (08)</a></li>
+            </ul>
+            
+            <hr>
+            
+            <h5>Adquira produtos</h5>
+            <p>ToBuscando.com tem o objetivo de facilitar a compra do seu produto, sem exigir esforço algum. Basta uma publicação e Puff! Em um piscar de olhos, você receberá a melhor oferta avaliada por nós.</p>
+            </div>
+        </aside>
+        
+        <div class="col-lg-9 col-md-8 col-sm-8">
+        	<div class="row">
+        		<div class="col-lg-4 col-md-6">
+                            <div class="col-item">
+                            <span class="ribbon_course"></span>
+                                <div class="photo">
+                                    <a href="#"><img src="{% static 'layout_oficial/img/pc.jpg' %}" alt="" /></a>
+                                    <div class="cat_row"><a href="#">Notebook Acer V5-123-3728 com Processador AMD E1, 2GB</a><span class="pull-right"><i class=" icon-clock"></i>6 Days</span></div>
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="course_info col-md-12 col-sm-12">
+                                            <h4>Notebook Acer</h4>
+                                            <p > Conecte-se com o mundo onde você estiver através de uma rede wireless sem fio disponível e acesse redes sociais e e-mails. Compartilhe seus melhores momentos com os amigos. </p>
+                                            <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class=" icon-star-empty"></i>
+                                        </div>
+                                        <div class="price pull-right">R$199</div>
+                                        </div>
+                                    </div>
+                                    <div class="separator clearfix">
+                                        <p class="btn-add"> <a href="apply_2.html"><i class="icon-export-4"></i> Subscribe</a></p>
+                                        <p class="btn-details"> <a href="course_details_1.html"><i class=" icon-list"></i> Details</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <a href="#"><img src="{% static 'layout_oficial/img/smartphone.jpg' %}" alt="" /></a>
+                                    <div class="cat_row"><a href="#">Smartphone Dual Chip Samsung Galaxy S Duos 2 Desbloqueado Preto Android 4.2 3G/Wi-Fi Câmera 5 MP 4GB</a><span class="pull-right"><i class=" icon-clock"></i>6 Days</span></div>
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="course_info col-md-12 col-sm-12">
+                                            <h4>Celular Samsumg</h4>
+                                            <p > Um smartphone com belo design, prático e com todos os recursos e funcionalidades que você precisa. </p>
+                                            <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class=" icon-star-empty"></i>
+                                        </div>
+                                        <div class="price pull-right">R$799,00</div>
+                                        </div>
+                                    </div>
+                                    <div class="separator clearfix">
+                                        <p class="btn-add"> <a href="apply_2.html"><i class="icon-export-4"></i> Subscribe</a></p>
+                                        <p class="btn-details"> <a href="course_details_1.html"><i class=" icon-list"></i> Details</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <a href="#"><img src="{% static 'layout_oficial/img/camera.jpg' %}" alt="" /></a>
+                                    <div class="cat_row"><a href="#">Câmera Digital Canon PowerShot SX510 HS - 12.1MP LCD 3" Zoom Óptico 30x Filma Full HD Wi-Fi </a><span class="pull-right"><i class=" icon-clock"></i>6 Days</span></div>
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="course_info col-md-12 col-sm-12">
+                                            <h4>Camera Cannon</h4>
+                                            <p > Super Zoom e Fácil de Compartilhar. Super compacta e ergonômica, a câmera PowerShot SX510 HS produz fotos. </p>
+                                            <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class=" icon-star-empty"></i>
+                                        </div>
+                                        <div class="price pull-right">R$3000,00</div>
+                                        </div>
+                                    </div>
+                                    <div class="separator clearfix">
+                                        <p class="btn-add"> <a href="apply_2.html"><i class="icon-export-4"></i> Subscribe</a></p>
+                                        <p class="btn-details"> <a href="course_details_1.html"><i class=" icon-list"></i> Details</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <a href="#"><img src="{% static 'layout_oficial/img/tv_samsung.jpg' %}" alt="" /></a>
+                                    <div class="cat_row"><a href="#">SmartTV LED 50" Samsung UN50FH5303GXZD Full HD 2 HDMI USB 120Hz</a><span class="pull-right"><i class=" icon-clock"></i>6 Days</span></div>
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="course_info col-md-12 col-sm-12">
+                                            <h4>TV Samsung</h4>
+                                            <p > Todas as informações divulgadas são de responsabilidade do fabricante/fornecedor. </p>
+                                            <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class=" icon-star-empty"></i>
+                                        </div>
+                                        <div class="price pull-right">199$</div>
+                                        </div>
+                                    </div>
+                                    <div class="separator clearfix">
+                                        <p class="btn-add"> <a href="apply_2.html"><i class="icon-export-4"></i> Subscribe</a></p>
+                                        <p class="btn-details"> <a href="course_details_1.html"><i class=" icon-list"></i> Details</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6" style="margin-top: -510px;">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <a href="#"><img src="{% static 'layout_oficial/img/caloy.jpg' %}" alt="" /></a>
+                                    <div class="cat_row"><a href="#">BICICLETA CALOI ANDES ARO 26 - 21 MARCHAS - SUSPENSÃO DIANTEIRA</a><span class="pull-right"><i class=" icon-clock"></i>postado à 6 Dias</span></div>
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="course_info col-md-12 col-sm-12">
+                                            <h4>Bicicleta Caloi</h4>
+                                            <p > A Bicicleta Caloi Andes Aro 26 - 21 Marchas - Suspensão Dianteira é ideal para passeio ou trilha leve. Possui quadro com design exclusivo e suspensão frontal que garante uma pedalada confortável. </p>
+                                            <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class=" icon-star-empty"></i>
+                                        </div>
+                                        <div class="price pull-right">199$</div>
+                                        </div>
+                                    </div>
+                                    <div class="separator clearfix">
+                                        <p class="btn-add"> <a href="apply_2.html"><i class="icon-export-4"></i> Subscribe</a></p>
+                                        <p class="btn-details"> <a href="course_details_1.html"><i class=" icon-list"></i> Details</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6" style="margin-top: -510px;">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <a href="#"><img src="{% static 'layout_oficial/img/tramontina.jpg' %}" alt="" /></a>
+                                    <div class="cat_row"><a href="#">Conjunto de Panelas Tramontina Versalhes Antiaderente 5 Peças</a><span class="pull-right"><i class=" icon-clock"></i>6 Days</span></div>
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="course_info col-md-12 col-sm-12">
+                                            <h4>Conjunto de panela Tramontina</h4>
+                                            <p > Fácil para limpar e rápido de cozinhar. As panelas possuem um revestimento antiaderente. </p>
+                                            <div class="rating">
+                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class=" icon-star-empty"></i>
+                                        </div>
+                                        <div class="price pull-right">199$</div>
+                                        </div>
+                                    </div>
+                                    <div class="separator clearfix">
+                                        <p class="btn-add"> <a href="apply_2.html"><i class="icon-export-4"></i> Subscribe</a></p>
+                                        <p class="btn-details"> <a href="course_details_1.html"><i class=" icon-list"></i> Details</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+       		</div><!-- End row -->
+        </div><!-- End col-lg-9-->
+        
+        			
+                        
+        </div><!-- End row -->
+        
+        <hr>
+        <div class="row">
+        	<div class="col-md-12 text-center">
+            	<ul class="pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+            	
+        </div><!-- End container -->
+    </section><!-- End main_content -->
+
+{% endblock content %}
+
+<!-- footer -->
+{% include 'footer.html' %}
