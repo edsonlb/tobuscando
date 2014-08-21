@@ -11,20 +11,20 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Verification -->
     <meta name="google-site-verification" content="SLHlAEf4Y-uOD9kXaaCZBDijBSRt31Uc_EbZcZEYuuI" />
-    
+
     <!-- Favicons-->
     <link rel="shortcut icon" href="{% static 'layout_oficial/img/icone_logo.png' %}" class="ico" type="image/x-icon"/>
     <link rel="apple-touch-icon" type="image/x-icon" href="{% static 'layout_oficial/img/apple-touch-icon-57x57-precomposed.png' %}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{% static 'layout_oficial/img/apple-touch-icon-72x72-precomposed.png' %}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{% static 'layout_oficial/img/apple-touch-icon-114x114-precomposed.png' %}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="{% static 'layout_oficial/img/apple-touch-icon-144x144-precomposed.png' %}">
-    
+
     <!-- CSS -->
     <link href="{% static 'layout_oficial/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'layout_oficial/css/superfish.css' %}" rel="stylesheet">
     <link href="{% static 'layout_oficial/css/style.css' %}" rel="stylesheet">
     <link href="http://www.ansonika.com/learn/fontello/css/fontello.css" rel="stylesheet">
-    
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -42,20 +42,19 @@
 		</script>
 
   </head>
-  
+
   <body>
   <header>
   	<div class="container">
 	<div class="row">
 		<div class="col-md-3 col-sm-3 col-xs-3">
-			<img src="{% static 'layout_oficial/img/LogoOficial5.png' %}" style="width: 284px; margin-left: 10px;" alt="">
+			<img src="{% static 'layout_oficial/img/logo2.png' %}" style="width: 284px; margin-left: 10px;" alt="">
 		</div>
 		<div class="col-md-9 col-sm-9 col-xs-9" style="margin-top: 10px;">
-			<div class="pull-right"><a href="." class="button_top" id="login_top">Iniciar Sessão</a> <a href="#" class="button_top hidden-xs" id="apply">Cadastrar-se</a></div>
+			<div class="pull-right"><a href="{% url 'account_login' %}" class="button_top" id="login_top">Iniciar Sessão</a> <a href="{{ signup_url }}" class="button_top hidden-xs" id="apply">Cadastrar-se</a></div>
             <ul id="top_nav" class="hidden-xs">
-                <li><a href="#">→ ANUNCIE </a></li>
-                <li><a href="#">tá buscando?</a></li>
-                <li><a href="#">Cadastre-se</a></li>
+                <li><a href="{% url 'ads:ad_create' %}">→ ANUNCIE </a></li>
+                <li><a href="{% url 'core:products' %}">tá buscando?</a></li>
             </ul>
 		</div>
 	</div>

@@ -7,7 +7,7 @@ class AdForm(forms.ModelForm):
 
     class Meta:
         model = Ad
-        exclude = ('slug', 'is_active')
+        exclude = ('person', 'slug', 'is_active')
 
 
 class CategoryMetaForm(forms.ModelForm):
@@ -20,7 +20,7 @@ class CategoryMetaForm(forms.ModelForm):
                 meta=self.instance.meta).order_by('order')
         except:
             self.fields['options'].queryset = MetaOption.objects.filter(
-                is_active=False).order_by('order')
+                is_active=True).order_by('order')
 
     class Meta:
         model = CategoryMeta
@@ -38,27 +38,27 @@ class CategoryMetaFormInline(forms.ModelForm):
         self.fields['meta'].label = self.instance.meta.name
         self.fields['meta'].widget.attrs['class'] = 'hide'
 
-        self.fields['options'].label = ''
-
         if self.instance.meta.field in ['text', 'textarea']:
-            self.fields['options'] = forms.CharField(required=False)
+            self.fields['options'] = forms.CharField(label='', required=False)
         else:
             self.fields['options'] = forms.ModelChoiceField(
-                required=False, queryset=option_list)
+                label='', required=False, queryset=option_list)
 
         if self.instance.meta.field == 'textarea':
-            self.fields['options'].widget = forms.TextareaInput()
+            self.fields['options'].widget = forms.TextareaInput(label='')
 
         if self.instance.meta.field == 'checkbox':
-            self.fields['options'].widget = forms.CheckboxSelectMultiple()
+            self.fields[
+                'options'].widget = forms.CheckboxSelectMultiple(label='')
 
         if self.instance.meta.field == 'radio':
-            self.fields['options'].widget = forms.RadioSelectMultiple()
+            self.fields['options'].widget = forms.RadioSelectMultiple(label='')
 
         if self.instance.meta.field == 'date':
             self.fields['options'] = forms.DateField(label='', required=False)
         if self.instance.meta.field == 'datetime':
-            self.fields['options'] = forms.DateTimeField(label='', required=False)
+            self.fields['options'] = forms.DateTimeField(
+                label='', required=False)
 
     class Meta:
         model = CategoryMeta

@@ -1,0 +1,18 @@
+#category label {
+    display: block;
+    cursor: pointer;
+}
+#category label input {
+    position: absolute;
+    top: -9999em;
+}
+#category label:hover,
+#category label.active {
+    background: #fafafa;
+}
+#category .dropdown-nav {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 275px;
+}
