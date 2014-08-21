@@ -10,13 +10,15 @@ HELP_ORDER = _(u'Utilizado para definir a ordem de exibição no site.')
 
 
 class Ad(models.Model):
+    person = models.ForeignKey('core.Person', verbose_name=_(u'Pessoa'),
+                               blank=True, null=True)
     category = TreeForeignKey('Category', verbose_name=_(u'categoria:'))
     title = models.CharField(_(u'título:'), max_length=250)
-    slug = models.SlugField(_(u'slug'), blank=True)
+    slug = models.SlugField(_(u'slug'), blank=True, null=True)
     price = models.DecimalField(_(u'preço:'), max_digits=10, decimal_places=2)
     description = models.TextField(_(u'descrição:'))
     link_reference = models.URLField(_(u'anúncio de referência:'), blank=True)
-    image = CloudinaryField('<imagem:></imagem:>')
+    image = CloudinaryField(_(u'imagem:'), blank=True, null=True)
     limit_date = models.DateTimeField(_(u'data limite do anúncio:'),
                                       blank=True, null=True)
     view_phone = models.BooleanField(_(u'exibir telefone no anúncio?'))
@@ -32,16 +34,17 @@ class Ad(models.Model):
     def __unicode__(self):
         return self.title
 
-    def save(self):
-        pass
-
-    @models.permalink
+    #@models.permalink
     def get_absolute_url(self):
-        return ('')
+        return ('oi')
+
+    def metas(self):
+        return self.metas_set.all()
 
 
 class AdMeta(models.Model):
-    ad = models.ForeignKey('Ad', related_name='+', verbose_name=_(u'anúncio'))
+    ad = models.ForeignKey('Ad', related_name='metas',
+                           verbose_name=_(u'anúncio'))
     meta = models.ForeignKey('CategoryMeta',
                              related_name='category_meta',
                              verbose_name=_(u'categoria meta'))
@@ -64,7 +67,7 @@ class Category(MPTTModel):
 
     parent = TreeForeignKey('self', verbose_name=_(u'parente'),
                             blank=True, null=True, related_name='children')
-    name = models.CharField(_(u'nome'), max_length=50, unique=True)
+    name = models.CharField(_(u'nome'), max_length=50)
     slug = models.SlugField(_(u'slug'), blank=True, null=True)
     image = CloudinaryField(_(u'imagem'), blank=True, null=True,
                             help_text=HELP_IMAGE)
@@ -86,10 +89,6 @@ class Category(MPTTModel):
     def save(self, *args, **kwargs):
         super(Category, self).save(*args, **kwargs)
         Category.objects.rebuild()
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('')
 
 
 class Meta(models.Model):

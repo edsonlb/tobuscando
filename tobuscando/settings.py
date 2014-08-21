@@ -16,7 +16,7 @@ SECRET_KEY = config('SECRET_KEY')
 SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False)
+DEBUG = True    # config('DEBUG', default=True)
 
 TEMPLATE_DEBUG = True
 
@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'smart_selects',
     'mptt',
     'bootstrap3',
+    'pagination',
 
     'tobuscando.core',
     'tobuscando.ads',
@@ -76,6 +77,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 )
 
 
@@ -174,7 +176,7 @@ STATIC_URL = '/static/'
 
 CLOUDINARY = {
     'cloud_name': config('CLOUDINARY_NAME'),
-    'api_key': config('CLOUDINARY_API_KEY', cast=int),
+    'api_key': config('CLOUDINARY_API_KEY'),
     'api_secret': config('CLOUDINARY_API_SECRET')
 }
 
@@ -182,7 +184,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_PORT = 587    # config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False)
 
 MPTT_LEVEL_INDENT = 20

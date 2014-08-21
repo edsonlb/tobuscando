@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../static/map/css/map.css">
+{% endblock css %}
+
+{% block sub_header %}
+<section id="sub-header" >
+    <div class="container">
+        <div class="col-md-6">
+            <h1>Nós avisamos!</h1>
+            <h2>Chegou o melhor site de compras e vendas do Brasil. Receba ofertas ou anuncie já!</h2>
+            <ul class="list_ok">
+                <li><strong>Segurança</strong> em suas compras</li>
+                <li><strong>Agilidade</strong> nas entregas</li>
+                <li><strong>Responsabilidade</strong> de escolhas</li>
+                <li><strong>Grátis</strong> durante 1 mês</li>
+            </ul>
+        </div>
+        <div class="col-md-6 video">
+            <iframe src="//player.vimeo.com/video/103229541" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+{% endblock sub_header %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <a href="{% url 'ads:ad_create' %}" title="Anunciar" class="button_outline btn-block text-center btn-info btn-new_ad">Publicar minha oferta</a>
+    </div>
+</div>
+
+<div class="row">
+
+</div>
+{% endblock content %}

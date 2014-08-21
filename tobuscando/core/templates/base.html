@@ -1,57 +1,150 @@
 {% load staticfiles %}
-{% load bootstrap3 %}
 
 <!DOCTYPE html>
-<html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie ie9" lang="en"> <![endif]-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-    <title>tôBuscando.com.br</title>
+    <meta charset="utf-8">
+    <title>ToBuscando Ofertas</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Verification -->
+    <meta name="google-site-verification" content="SLHlAEf4Y-uOD9kXaaCZBDijBSRt31Uc_EbZcZEYuuI" />
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="{% static 'layout_oficial/img/icone_logo.png' %}" class="ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" type="image/x-icon" href="{% static 'layout_oficial/img/apple-touch-icon-57x57-precomposed.png' %}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{% static 'layout_oficial/img/apple-touch-icon-72x72-precomposed.png' %}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{% static 'layout_oficial/img/apple-touch-icon-114x114-precomposed.png' %}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="{% static 'layout_oficial/img/apple-touch-icon-144x144-precomposed.png' %}">
+
+    <!-- CSS -->
+    <link href="{% static 'layout_oficial/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'layout_oficial/css/superfish.css' %}" rel="stylesheet">
+    {% block css %}{% endblock css %}
+    <link href="{% static 'layout_oficial/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="http://www.ansonika.com/learn/fontello/css/fontello.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+
+      <!-- Analytics Tobuscando.com -->
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-53737397-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
 </head>
-<body>
 
-    <header class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="/" class="navbar-brand" style="padding-top: 6px;">
-                    <img src="{% static 'images/logo.png' %}" width="200">
+<body>
+  <header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-3">
+                <a href="{% url 'core:home' %}">
+                    <img src="{% static 'layout_oficial/img/LogoOficial5.png' %}" style="width: 240px;" alt="">
                 </a>
             </div>
-            <div class="col-sm-6">
-                <form id="id_form_search" name="form_search" action="/search/" method="POST" class="navbar-form" role="search">
-                    {% csrf_token %}
-
-                    <div class="input-group col-sm-12">
-                        <input id="id_search" name="search" type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-default">{% bootstrap_icon "search" %}</button>
-                        </span>
-                    </div>
-                </form>
+            <div class="col-md-9 col-sm-9 col-xs-9" style="margin-top: 5px;">
+                <div class="pull-right">
+                    {% if user.is_authenticated %}
+                    <span class="welcome">Olá, {{ user.username }}</span>
+                    {% endif %}
+                    <a href="{% url 'core:dashboard' %}" class="button_top hidden-xs" id="apply"><i class="icon-user"></i> Minha conta</a>
+                    {% if user.is_authenticated %}
+                    <a href="{# url 'allauth:logoff' #}" class="btn btn-link hidden-xs" id="apply">Sair</a>
+                    {% endif %}
+                    <a href="#" title="Contato" class="btn btn-link">Contato</a>
+                </div>
             </div>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Cadastre-se</a></li>
-                <li><a href="#">Entre</a></li>
-                <li><a href="#">Contato</a></li>
-            </ul>
         </div>
-    </header>
+    </div>
+</header><!-- End header -->
 
-    <main>
-        <section class="container">
+<section id="content">
+    {% block sub_header %}{% endblock sub_header %}
+
+    <div id="main_content">
+        <div class="container">
             {% block content %}{% endblock content %}
-        </section>
-    </main>
+        </div>
+    </div>
+</section>
 
-    <footer></footer>
+<footer>
+    <div class="container" id="nav-footer">
+        <div class="row text-left">
+            <div class="col-md-3 col-sm-3">
+                <h4>Sobre o</h4>
+                <ul>
+                    <li><a href="#">TôBuscando</a></li>
+                    <li><a href="#">Anuncios</a></li>
+                    <li><a href="#">Produtos</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <h4>Experimente</h4>
+                <ul>
+                    <li><a href="#">Iniciar Sessão</a></li>
+                    <li><a href="#">Cadastre-se</a></li>
+                    <li><a href="#">Condições de Uso</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <h4>Minha conta</h4>
+                <ul>
+                    <li><a href="#">Entrar</a></li>
+                    <li><a href="#">Anunciar</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <ul id="follow_us">
+                    <li><a href="#"><i class="icon-facebook"></i></a></li>
+                    <li><a href="#"><i class="icon-twitter"></i></a></li>
+                    <li><a href="#"><i class=" icon-google"></i></a></li>
+                </ul>
+                <ul>
+                    <li>Dúvidas? <a href="#"><span class="__cf_email__">tobuscando@gmail.com</span><script type="text/javascript">
+                        /* <![CDATA[ */
+                        (function(){try{var s,a,i,j,r,c,l,b=document.getElementsByTagName("script");l=b[b.length-1].previousSibling;a=l.getAttribute('data-cfemail');if(a){s='';r=parseInt(a.substr(0,2),16);for(j=2;a.length-j;j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}s=document.createTextNode(s);l.parentNode.replaceChild(s,l);}}catch(e){}})();
+                        /* ]]> */
+                    </script></a></li>
+                </ul>
+            </div>
+        </div><!-- End row -->
+    </div>
+    <div id="copy_right">Todos os direitos reservados. © tobuscando.com</div>
+</footer>
 
-    <!-- JS -->
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    {% block js %}{% endblock js %}
-    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+<div id="toTop">Back to top</div>
 
+<!-- JQUERY -->
+<script src="{% static 'layout_oficial/js/jquery-1.10.2.min.js' %}"></script>
+
+<!-- OTHER JS -->
+<script src="{% static 'layout_oficial/js/superfish.js' %}"></script>
+<script src="{% static 'layout_oficial/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'layout_oficial/js/retina.min.js' %}"></script>
+<script src="{% static 'layout_oficial/js/jquery.fitvids.js' %}"></script> <!-- for video responsive-->
+<script src="{% static 'layout_oficial/js/validate.js' %}"></script>
+<script src="{% static 'layout_oficial/js/jquery.placeholder.js' %}"></script>
+<script src="{% static 'layout_oficial/js/functions.js' %}"></script>
+<script src="{% static 'layout_oficial/js/classie.js' %}"></script>
+<!--<script src="{% static 'layout_oficial/js/uisearch.js' %}"></script>-->
+<script src="{% static 'layout_oficial/js/jquery.icheck.js' %}"></script>
+<!--<script>new UISearch( document.getElementById( 'sb-search' ) );</script>-->
+<script>$(".video").fitVids();</script>
+
+{% block js %}{% endblock js %}
 </body>
 </html>

@@ -1,7 +1,8 @@
+# coding: utf-8
 from django.contrib import admin
 from suit.admin import SortableModelAdmin, SortableTabularInline
 from mptt.admin import MPTTModelAdmin
-from .models import Ad, Category, Meta, MetaOption, CategoryMeta
+from .models import Ad, AdMeta, Category, Meta, MetaOption, CategoryMeta
 from .forms import CategoryMetaForm
 
 
@@ -21,7 +22,7 @@ class MetaOptionTabularInline(SortableTabularInline):
 class MetaAdmin(SortableModelAdmin):
     list_display = ('name', 'field', 'is_active')
     list_filter = ('is_active', 'field')
-    search_field = ('name',)
+    search_fields = ('name',)
 
     inlines = [MetaOptionTabularInline]
 
@@ -43,12 +44,12 @@ class CategoryMetaTabularInline(SortableTabularInline):
 
         if obj:
             extra = 0
-        return extra
+        return 1
 
 
 class CategoryAdmin(MPTTModelAdmin, SortableModelAdmin):
     list_display = ('name', 'slug', 'is_active')
-    search_field = ('name', 'slug')
+    search_fields = ('name', 'slug')
     list_filter = ('is_active', 'parent')
 
     inlines = [CategoryMetaTabularInline]
@@ -59,6 +60,14 @@ class CategoryAdmin(MPTTModelAdmin, SortableModelAdmin):
         js = ['admin/js/category.js']
 
 
+class AdMetaInline(admin.TabularInline):
+    model = AdMeta
+    extra = 0
+
+
+class AdAdmin(admin.ModelAdmin):
+    inlines = [AdMetaInline]
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Meta, MetaAdmin)
-admin.site.register(Ad)
+admin.site.register(Ad, AdAdmin)
