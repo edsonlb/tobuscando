@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -13,35 +14,25 @@
     <meta name="google-site-verification" content="SLHlAEf4Y-uOD9kXaaCZBDijBSRt31Uc_EbZcZEYuuI" />
 
     <!-- Favicons-->
-    <link rel="shortcut icon" href="{% static 'layout_oficial/img/icone_logo.png' %}" class="ico" type="image/x-icon"/>
-    <link rel="apple-touch-icon" type="image/x-icon" href="{% static 'layout_oficial/img/apple-touch-icon-57x57-precomposed.png' %}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{% static 'layout_oficial/img/apple-touch-icon-72x72-precomposed.png' %}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{% static 'layout_oficial/img/apple-touch-icon-114x114-precomposed.png' %}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="{% static 'layout_oficial/img/apple-touch-icon-144x144-precomposed.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/icone_logo.png' %}" class="ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" type="image/x-icon" href="{% static 'images/apple-touch-icon-57x57-precomposed.png' %}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{% static 'images/apple-touch-icon-72x72-precomposed.png' %}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114-precomposed.png' %}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="{% static 'images/apple-touch-icon-144x144-precomposed.png' %}">
 
     <!-- CSS -->
-    <link href="{% static 'layout_oficial/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'layout_oficial/css/superfish.css' %}" rel="stylesheet">
-    {% block css %}{% endblock css %}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/superfish.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'layout_oficial/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/fontello.css' %}" rel="stylesheet">
     <link href="http://www.ansonika.com/learn/fontello/css/fontello.css" rel="stylesheet">
+
+    {% block css %}{% endblock css %}
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
       <![endif]-->
-
-      <!-- Analytics Tobuscando.com -->
-      <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-53737397-1', 'auto');
-        ga('send', 'pageview');
-    </script>
 
 </head>
 
@@ -50,7 +41,7 @@
     <div class="container">
         <div class="row">
             <h1 class="logo">
-                <a href="/"><span><img src="/static/layout_oficial/img/LogoOficial5.png" alt=""></span> tôbuscando</a>
+                <a href="/"><span><img src="{% static 'images/LogoOficial5.png' %}" alt="Tobuscando.com Página Inicial"></span> Tobuscando.com</a>
             </h1>
 
             <form id="search" action="." method="POST" class="col-sm-5 col-xs-5">
@@ -80,7 +71,7 @@
 </header><!-- End header -->
 
 <section id="content">
-    {% block sub_header %}{% endblock sub_header %}
+    {% block content_index %}{% endblock content_index %}
 
     <div id="main_content">
         <div class="container">
@@ -95,7 +86,7 @@
             <div class="col-md-3 col-sm-3">
                 <h4>Sobre o</h4>
                 <ul>
-                    <li><a href="#">TôBuscando</a></li>
+                    <li><a href="#">Tobuscando</a></li>
                     <li><a href="#">Anuncios</a></li>
                     <li><a href="#">Produtos</a></li>
                     <li><a href="#">Contato</a></li>
@@ -135,25 +126,36 @@
     <div id="copy_right">Todos os direitos reservados. © tobuscando.com</div>
 </footer>
 
-<div id="toTop">Back to top</div>
+<div id="toTop">Voltar ao topo</div>
 
 <!-- JQUERY -->
-<script src="{% static 'layout_oficial/js/jquery-1.10.2.min.js' %}"></script>
+<script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
 
 <!-- OTHER JS -->
-<script src="{% static 'layout_oficial/js/superfish.js' %}"></script>
-<script src="{% static 'layout_oficial/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'layout_oficial/js/retina.min.js' %}"></script>
-<script src="{% static 'layout_oficial/js/jquery.fitvids.js' %}"></script> <!-- for video responsive-->
-<script src="{% static 'layout_oficial/js/validate.js' %}"></script>
-<script src="{% static 'layout_oficial/js/jquery.placeholder.js' %}"></script>
-<script src="{% static 'layout_oficial/js/functions.js' %}"></script>
-<script src="{% static 'layout_oficial/js/classie.js' %}"></script>
-<!--<script src="{% static 'layout_oficial/js/uisearch.js' %}"></script>-->
-<script src="{% static 'layout_oficial/js/jquery.icheck.js' %}"></script>
+<script src="{% static 'js/superfish.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/retina.min.js' %}"></script>
+<script src="{% static 'js/jquery.fitvids.js' %}"></script> <!-- for video responsive-->
+<script src="{% static 'js/validate.js' %}"></script>
+<script src="{% static 'js/jquery.placeholder.js' %}"></script>
+<script src="{% static 'js/functions.js' %}"></script>
+<script src="{% static 'js/classie.js' %}"></script>
+<!--<script src="{% static 'js/uisearch.js' %}"></script>-->
+<!-- <script src="{% static 'js/jquery.icheck.js' %}"></script> -->
 <!--<script>new UISearch( document.getElementById( 'sb-search' ) );</script>-->
 <script>$(".video").fitVids();</script>
 
 {% block js %}{% endblock js %}
+
+<!-- Analytics Tobuscando.com -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-53737397-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 </body>
 </html>
