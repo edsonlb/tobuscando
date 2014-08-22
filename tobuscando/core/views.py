@@ -15,6 +15,7 @@ from django.contrib.auth.views import password_reset, password_reset_confirm
 #Usado para realização de testes na máquina local.
 URL = 'http://127.0.0.1:8000/'
 
+from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 
 class HomeView(TemplateView):
     template_name = "home/index.html"
