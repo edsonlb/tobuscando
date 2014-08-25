@@ -58,6 +58,7 @@ INSTALLED_APPS = (
 
     'tobuscando.core',
     'tobuscando.ads',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -77,7 +78,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'pagination.middleware.PaginationMiddleware',
 )
-
 
 
 AUTHENTICATION_BACKENDS = (
@@ -108,7 +108,7 @@ LOGIN_REDIRECT_URL = '/'
 
 
 ACCOUNT_ADAPTER = "allauth.account.adapter.DefaultAccountAdapter"
-ACCOUNT_AUTHENTICATION_METHOD = "username_email" 
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = LOGIN_URL
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = LOGIN_REDIRECT_URL

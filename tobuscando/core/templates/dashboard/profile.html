@@ -1,0 +1,20 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load bootstrap3 %}
+
+{% block dashboard_content %}
+
+<h2>Meus dados</h2>
+<br><br>
+
+<form action="." method= "POST" class="form-horizontal">
+
+    {% for field in form %}
+    {% bootstrap_field field layout='horizontal' %}
+    {% endfor %}
+
+    {% buttons %}
+    <button type="submit" class="button_medium">Salvar</button>
+    {% endbuttons %}
+</form>
+
+{% endblock dashboard_content %}

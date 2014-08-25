@@ -10,6 +10,17 @@ class AdForm(forms.ModelForm):
         exclude = ('person', 'slug', 'is_active')
 
 
+class AdUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Ad
+        exclude = ('slug', 'is_active')
+
+        widgets = {
+            'person': forms.HiddenInput()
+        }
+
+
 class CategoryMetaForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):

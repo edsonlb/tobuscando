@@ -1,0 +1,60 @@
+{% extends "base_site.html" %}
+
+{% load url from future %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Cadastrese" %}</h1>
+
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+</form>
+
+
+
+
+
+<section id="login_bg">
+<div  class="container">
+<div class="row">
+	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+		<div id="login">
+			<p class="text-center">
+				<img src="img/login_logo.png" alt="">
+			</p>
+			<hr>
+			<form>
+				<div class="form-group">
+					<input type="text" class=" form-control required"  placeholder="Username">
+					<span class="input-icon"><i class=" icon-user"></i></span>
+				</div>
+				<div class="form-group">
+					<input type="text" class=" form-control required" placeholder="Email">
+					<span class="input-icon"><i class="icon-email"></i></span>
+				</div>
+				<div class="form-group">
+					<input type="text" class=" form-control required" id="password1" placeholder="Password">
+					<span class="input-icon"><i class=" icon-lock"></i></span>
+				</div>
+				<div class="form-group">
+					<input type="text" class=" form-control required" id="password2" placeholder="Confirm password">
+					<span class="input-icon"><i class=" icon-lock"></i></span>
+				</div>
+                <div id="pass-info" class="clearfix"></div>
+				<button class="button_fullwidth">Create an account</button>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+</section><!-- End register -->
+
+
+{% endblock %}

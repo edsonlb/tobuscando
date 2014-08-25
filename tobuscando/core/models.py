@@ -28,7 +28,7 @@ class Person(AbstractUser):
     zipcode = models.CharField(_(u'cep'), max_length=10, blank=True, null=True)
     language = models.CharField(_(u'idioma'), max_length=10,
                                 blank=True, null=True)
-    #avatar = CloudinaryField(_(u'foto'), default='avatar.jpg', null=True)
+    avatar = CloudinaryField(_(u'foto'), default='avatar.jpg', null=True)
     facebook_link = models.CharField(_(u'facebook link'), max_length=100,
                                      blank=True, null=True)
     twitter_link = models.CharField(_(u'twitter link'), max_length=100,
@@ -58,7 +58,6 @@ class Person(AbstractUser):
                                               email=self.email)
 
     def ads(self):
-        print self.pk
         return self.ad_set.all()
 
     def get_accounts_facebook(self):
@@ -67,11 +66,11 @@ class Person(AbstractUser):
 
 
     def save(self, *args, **kwargs):
-        account = self.get_accounts_facebook()
-        if account:
-            self.first_name = account.extra_data['first_name']
-            self.last_name = account.extra_data['last_name']
-            self.facebook_link = account.extra_data['link']
+        #account = self.get_accounts_facebook()
+        #if account:
+        #    self.first_name = account.extra_data['first_name']
+        #    self.last_name = account.extra_data['last_name']
+        #    self.facebook_link = account.extra_data['link']
         self.username = self.username.lower()
         self.email = self.email.lower()
         if self.address:
