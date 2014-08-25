@@ -70,7 +70,6 @@ class AdCreateView(View):
         pass
 
     def _login(self, request, person):
-        print person.password
         user = authenticate(username=person.username, password=person.password)
         if user is not None:
             if user.is_active:
@@ -83,8 +82,6 @@ class AdCreateSuccessTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(AdCreateSuccessTemplateView, self)\
             .get_context_data(**kwargs)
-
-        print kwargs.get('ad')
 
         try:
             context['ad'] = get_object_or_404(Ad,

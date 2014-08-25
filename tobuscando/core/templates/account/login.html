@@ -12,7 +12,8 @@
     <h2 class="text-center">Acessar minha conta</h2>
     <br>
     <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-        <form action="{% url 'account_login' %}" method="POST">{% csrf_token %}
+        <form action="{% url 'account_login' %}" method="POST">
+            {% csrf_token %}
             <div class="form-group">
               {% bootstrap_form form %}
           </div>
@@ -31,7 +32,7 @@
             {% endifequal %}
             {% endfor %}
             <div class="col-md-6 col-sm-6 login_social">
-            <a href="{{ signup_url }}" class="button_fullwidth-2">{% trans "Criar uma conta" %}</a>
+                <a href="{{ signup_url }}" class="button_fullwidth-2">{% trans "Criar uma conta" %}</a>
             </div>
 
             <div class="clearfix"></div>

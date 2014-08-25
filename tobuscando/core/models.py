@@ -58,21 +58,3 @@ class Person(AbstractUser):
 
     def ads(self):
         return self.ad_set.all()
-
-    def save(self, *args, **kwargs):
-        self.username = self.username.lower()
-        self.first_name = self.first_name.lower()
-        self.last_name = self.last_name.lower()
-        self.email = self.email.lower()
-        if self.address:
-            self.address = self.address.lower()
-        if self.district:
-            self.district = self.district.lower()
-        if self.city:
-            self.city = self.city.lower()
-        if self.state:
-            self.state = self.state.lower()
-        if self.country:
-            self.country = self.country.lower()
-
-        super(Person, self).save(*args, **kwargs)

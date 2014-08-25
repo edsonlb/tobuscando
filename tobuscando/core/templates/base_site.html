@@ -70,7 +70,7 @@
                     {% endif %}
                     <a href="{% url 'core:dashboard' %}" class="button_top hidden-xs" id="apply"><i class="icon-user"></i> Minha conta</a>
                     {% if user.is_authenticated %}
-                    <a href="{# url 'allauth:logoff' #}" class="btn btn-link hidden-xs" id="apply">Sair</a>
+                    <a href="{% url 'account_logout' %}" class="btn btn-link hidden-xs" id="apply">Sair</a>
                     {% endif %}
                     <a href="#" title="Contato" class="btn btn-link">Contato</a>
                 </div>

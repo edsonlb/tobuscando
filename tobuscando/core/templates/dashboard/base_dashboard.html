@@ -8,15 +8,28 @@
 {% endblock css %}
 
 {% block content %}
-<aside id="dashboard-nav" class="col-sm-3">
-    <a href="{% url 'ads:ad_create' %}" id="link-ads" class="button_medium btn-block text-center"><i class="icon-plus-circle"></i> Novo Anúncio</a>
-    <a href="{% url 'core:dashboard' %}" id="link-ads" class="button_medium_outline btn-block text-center">Visão geral</a>
-    <a href="{% url 'core:dashboard_ads' %}" id="link-ads" class="button_medium_outline btn-block text-center">Meus Anúncios</a>
-    <a href="{% url 'core:dashboard_profile' %}" id="link-profile" class="button_medium_outline btn-block text-center">Meus dados</a>
+<aside id="dashboard-nav" class="col-sm-3 list-group">
+    <a href="{% url 'core:dashboard' %}" id="link-ads" class="list-group-item">Visão geral</a>
+    <a href="{% url 'core:dashboard_ads' %}" id="link-ads" class="list-group-item">Meus Anúncios</a>
+    <a href="{% url 'core:dashboard_profile' %}" id="link-profile" class="list-group-item">Meus dados</a>
 </aside>
 
 
 <div class="col-sm-9">
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+    {% ifequal message.tags 'success' %}
+    <i class="fa fa-check"></i>
+    {% else %}
+    <i class="fa fa-{{ message.tags }}"></i>
+    {% endifequal %}
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
 {% block dashboard_content %}{% endblock dashboard_content %}
 </div>
 {% endblock content %}

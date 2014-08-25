@@ -2,6 +2,8 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import View, TemplateView, UpdateView
 from django.core.urlresolvers import reverse as r
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import authenticate, logout, login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
@@ -11,8 +13,8 @@ from tobuscando.core.models import Person
 from tobuscando.core.forms import PersonForm, LoginForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.views import password_reset, password_reset_confirm
-from tobuscando.ads.models import Ad
-from tobuscando.ads.forms import AdUpdateForm
+from tobuscando.ads.models import Ad, AdMeta
+from tobuscando.ads.forms import AdUpdateForm, CategoryMetaInlineFormset
 from .forms import ProfileForm
 
 
@@ -35,20 +37,61 @@ class DashboardView(TemplateView):
 class DashboardAdsView(TemplateView):
     template_name = "dashboard/ad_list.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(DashboardAdsView, self).get_context_data(**kwargs)
+        context['ads'] = self.request.user.ads()
 
-class AdUpdateView(UpdateView):
+        return context
+
+
+class AdUpdateView(View):
     template_name = 'dashboard/ad_form.html'
-    model = Ad
-    form = AdUpdateForm
+    form_class = AdUpdateForm
+    meta_inlineformset_class = CategoryMetaInlineFormset
+    success_message = _(u'Anúncio alterado com sucesso.')
+    not_found_message = _(u'Anúncio não encontrado.')
 
-    def get_queryset(self):
-        return super(AdUpdateView, self)\
-            .get_queryset().filter(person=self.request.user)
+    def get(self, request, *args, **kwargs):
+        try:
+            ad = request.user.ad_set.get(pk=kwargs.get('pk'))
+        except:
+            messages.info(self.request, self.not_found_message)
+            return HttpResponseRedirect(r('core:dashboard_ads'))
+
+        form = self.form_class(instance=ad)
+        meta_inlineformset = self.meta_inlineformset_class(instance=ad.category)
+
+        return render(request, self.template_name, locals())
+
+    def post(self, request, *args, **kwargs):
+        try:
+            ad = request.user.ad_set.get(pk=kwargs.get('pk'))
+        except:
+            messages.info(self.request, self.not_found_message)
+            return HttpResponseRedirect(r('core:dashboard_ads'))
+
+        form = self.form_class(request.POST, request.FILES, instance=ad)
+        meta_inlineformset = self.meta_inlineformset_class(request.POST,
+                                                           instance=ad.category)
+
+        if form.is_valid() and meta_inlineformset.is_valid():
+            form.save()
+
+            for data in meta_inlineformset.cleaned_data:
+                meta, created = AdMeta.objects.get_or_create(ad=ad, meta=data['id'])
+                meta.option = data['options']
+                meta.save()
+
+            messages.success(self.request, self.success_message)
+            return HttpResponseRedirect(r('core:dashboard_ads'))
+
+        return render(request, self.template_name, locals())
 
 
 class ProfileView(View):
     template_name = 'dashboard/profile.html'
     form_class = ProfileForm
+    success_message = _(u'Dados alterados com sucesso.')
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(instance=request.user)
@@ -56,11 +99,13 @@ class ProfileView(View):
         return render(request, self.template_name, locals())
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, instance=request.user)
+        form = self.form_class(request.POST, request.FILES,
+                               instance=request.user)
 
         if form.is_valid():
-            person = form.save(commit=False)
+            person = form.save()
 
+            messages.success(request, self.success_message)
             return HttpResponseRedirect(r('core:dashboard'))
 
         return render(request, self.template_name, locals())

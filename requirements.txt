@@ -3,12 +3,11 @@ Pillow==2.5.1
 South==1.0
 cloudinary==1.0.18
 dj-database-url==0.3.0
+django-allauth==0.18.0
 django-bootstrap3==4.8.2
 django-decouple==2.1
 django-mptt==0.6.1
+django-pagination==1.0.7
 django-smart-selects==1.0.9
 django-suit==0.2.9
 gunicorn==19.0.0
-wsgiref==0.1.2
-django-paginate
-django-allauth==0.18.0

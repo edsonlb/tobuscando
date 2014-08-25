@@ -8,15 +8,13 @@ from .forms import CategoryMetaForm
 
 class MetaOptionTabularInline(SortableTabularInline):
     model = MetaOption
+    extra = 1
 
     sortable = 'order'
 
     def get_extra(self, request, obj=None, **kwargs):
-        extra = 1
-
         if obj:
-            extra = 0
-        return extra
+            return 0
 
 
 class MetaAdmin(SortableModelAdmin):
@@ -32,6 +30,7 @@ class MetaAdmin(SortableModelAdmin):
 class CategoryMetaTabularInline(SortableTabularInline):
     model = CategoryMeta
     form = CategoryMetaForm
+    extra = 1
 
     fields = ('meta', 'options', 'is_active', 'order')
     can_delete = False
@@ -40,11 +39,8 @@ class CategoryMetaTabularInline(SortableTabularInline):
     sortable = 'order'
 
     def get_extra(self, request, obj=None, **kwargs):
-        extra = 1
-
         if obj:
-            extra = 0
-        return 1
+            return 0
 
 
 class CategoryAdmin(MPTTModelAdmin, SortableModelAdmin):
