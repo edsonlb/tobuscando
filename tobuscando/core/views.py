@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.views import password_reset, password_reset_confirm
 from tobuscando.ads.models import Ad
 from tobuscando.ads.forms import AdUpdateForm
+from random import randint, choice
 from .forms import ProfileForm
 
 
@@ -21,8 +22,10 @@ URL = 'http://127.0.0.1:8000/'
 
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 
-class HomeView(TemplateView):
-    template_name = "index.html"
+def home(request):
+    rand_imagem = randint(1,4)
+    rand_video = ['103562276', '103229541', '103229540', '103229539']
+    return render(request, 'index.html',{'rand_imagem':rand_imagem, 'rand_video':choice(rand_video)})
 
 
 class ProductView(TemplateView):
