@@ -34,9 +34,9 @@ class Ad(models.Model):
     def __unicode__(self):
         return self.title
 
-    #@models.permalink
+    @models.permalink
     def get_absolute_url(self):
-        return ('oi')
+        return ('ads:ad_detail', (), {'slug': self.slug})
 
     def metas(self):
         return self.metas_set.all()
@@ -59,6 +59,13 @@ class AdMeta(models.Model):
 
     def __unicode__(self):
         return self.ad.title
+
+    def value(self):
+        if self.meta.meta.field in ['text', 'textarea', 'date', 'datetime']:
+            return self.option
+
+        option = self.meta.options.get(pk=self.option)
+        return option
 
 
 class Category(MPTTModel):

@@ -16,11 +16,11 @@ SECRET_KEY = config('SECRET_KEY')
 SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True    # config('DEBUG', default=True)
+DEBUG = config('DEBUG', default=True)
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com']
 
 AUTH_USER_MODEL = 'core.Person'
 
@@ -54,11 +54,12 @@ INSTALLED_APPS = (
     'smart_selects',
     'mptt',
     'bootstrap3',
-    'pagination',
 
     'tobuscando.core',
+    'tobuscando.dashboard',
     'tobuscando.ads',
 
+    'pagination',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

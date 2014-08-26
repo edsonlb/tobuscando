@@ -1,0 +1,71 @@
+{% extends 'base_site.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% load cloudinary %}
+
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}">
+{% endblock css %}
+
+{% block breadcrumb %}
+<li>{% trans "Categories" %}</li>
+<li class="active"><span>{{ slug|title }}</span></li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+<div class="clearfix">
+    <h2 class="text-center">{{ object.title|title }}</h2>
+    <small>{% trans "criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
+</div>
+
+<div class="row clearfix">
+    <div class="col-sm-7 text-center">
+        {% cloudinary object.image alt=object.title|title class='img-responsive' %}
+    </div>
+    <div class="col-sm-5">
+        <h3><i class="icon-list"></i> {% trans "Descrição do produto" %}</h3>
+        <p>{{ object.description|safe }}</p>
+
+        <div class="clearfix">
+            <a href="#sales" class="button_big">{% trans "Ofertar" %}</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="clearfix">
+        <h3><i class="icon-cog"></i> {% trans "Características do produto" %}</h3>
+
+        <table class="table table-striped">
+            <tbody>
+                {% for meta in object.metas.all %}
+                <td class="col-sm-4">{{ meta.meta.meta.name }}</td>
+                <td>{{ meta.value }}</td>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div id="sales" class="clearfix">
+        <h3><i class="icon-basket"></i> {% trans "Ofertas" %}</h3>
+
+        <div id="comments" class= "timeline">
+            <ul class="cbp_tmtimeline">
+                <li id="comment-{{ sale.pk }}">
+                    <div class="cbp_tmtime"><h4>Matheus Oliveira</h4></div>
+                    <div class="cbp_tmlabel">
+                    <div class="pull-right hidden-xs"><strong>Matheus Oliveira</strong><img src="img/teacher_1.jpg" alt="" class="img-circle speaker"></div>
+                        <h2><span>Lorem ipsum</span>Presentation</h2>
+
+                        <p>Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea sprouts wattle seed rutabaga okra yarrow cress avocado grape radish bush tomato ricebean black-eyed pea maize eggplant. </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

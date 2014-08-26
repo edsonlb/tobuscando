@@ -1,0 +1,8 @@
+{% extends 'ad_list.html' %}
+{% load i18n %}
+
+
+{% block breadcrumb %}
+<li>{% trans "Busca" %}</li>
+<li class="active"><span>{{ slug|title }}</span></li>
+{% endblock breadcrumb %}

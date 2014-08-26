@@ -1,9 +1,9 @@
 # coding: utf-8
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.core.urlresolvers import reverse as r
 from django.contrib.auth import login, authenticate
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, DetailView
 from django.template.loader import render_to_string
 from .models import Ad, AdMeta, Category
 from tobuscando.core.forms import PersonPreRegisterForm
@@ -105,3 +105,8 @@ class CategoryMetaView(View):
             return HttpResponse(render_to_string(self.template_name, locals()))
 
         return render(request, self.template_name, locals())
+
+
+class AdDetailView(DetailView):
+    template_name = 'ad_detail.html'
+    model = Ad
