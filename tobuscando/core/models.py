@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser, User
 from cloudinary.models import CloudinaryField
+from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 
 
 class Person(AbstractUser):
@@ -58,3 +59,7 @@ class Person(AbstractUser):
 
     def ads(self):
         return self.ad_set.all()
+
+    def get_accounts_facebook(self):
+        account_fc = SocialAccount.objects.filter(user_id=self.id)
+        return account_fc

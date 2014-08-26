@@ -34,114 +34,123 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
       <![endif]-->
 
-</head>
-<body>
-  <header>
-    <div class="container">
-        <div class="row">
-            <h1 class="logo">
-                <a href="/"><span><img src="{% static 'images/LogoOficial5.png' %}" alt="Tobuscando.com Página Inicial"></span> tôbuscando.com</a>
-            </h1>
-
-            <form id="id_form_search" name="form_search" action="." method="POST" class="col-sm-5 col-xs-5">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input type="text" id="id_search" name="search" placeholder="Ex: guitarra, bicicleta, moto, etc ..." class="form-control" autocomplete="off" value="{{ slug|default_if_none:"" }}">
-                    <span class="input-group-btn">
-                        <button class="btn" type="submit"><i class="icon-search"></i></button>
-                    </span>
-                </div>
-            </form>
-
-            <div class="col-md-4 col-sm-4 col-xs-4 pull-right" style="margin-top: 5px;">
-                <div class="pull-right">
-                    {% if user.is_authenticated %}
-                    <span class="welcome">Olá, {{ user.username }}</span>
-                    {% endif %}
-                    <a href="{% url 'dashboard:dash_home' %}" class="button_top hidden-xs" id="apply"><i class="icon-user"></i> Minha conta</a>
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'account_logout' %}" class="btn btn-link hidden-xs" id="apply">Sair</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</header><!-- End header -->
-
-<section id="content">
-    {% block content_index %}{% endblock content_index %}
-
-    <div id="main_content">
+  </head>
+  <body>
+      <header>
         <div class="container">
-            {% block content %}{% endblock content %}
+            <div class="row">
+                <h1 class="logo">
+                    <a href="/"><span><img src="{% static 'images/LogoOficial5.png' %}" alt="Tobuscando.com Página Inicial"></span> tôbuscando.com</a>
+                </h1>
+
+                <form id="id_form_search" name="form_search" action="." method="POST" class="col-sm-5 col-xs-5">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="text" id="id_search" name="search" placeholder="Ex: guitarra, bicicleta, moto, etc ..." class="form-control" autocomplete="off" value="{{ slug|default_if_none:"" }}">
+                        <span class="input-group-btn">
+                            <button class="btn" type="submit"><i class="icon-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+
+                <div class="col-md-4 col-sm-4 col-xs-4 pull-right" style="margin-top: 5px;">
+                    <div class="pull-right">
+                        <ul class="list-unstyle list-inline">
+                            <li><a href="{% url 'ads:ad_create' %}" title="{% trans 'Inserir anúncio' %}" class="button_outline text-center btn-info btn-new_ad"><i class="icon-plus-circle"></i> {% trans "Inserir anúncio" %}</a></li>
+                            {% if user.is_authenticated %}
+                            <li class="dropdown" style="margin-left: 10px;"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, <strong>{{ user.username }}</strong> <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'dashboard:ad_list' %}"><i class=" icon-download"></i> Anúncios</a></li>
+                                    <li><a href="{% url 'dashboard:dash_home' %}"><i class="icon-cog"></i> Configurações</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url 'account_logout' %}"><i class="icon-off"></i> Sair</a></li>
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li><a href="{% url 'dashboard:dash_home' %}" class="button_top hidden-xs" id="apply"><i class="icon-user"></i> Minha conta</a></li>
+                            {% endif %}
+                            <li><a href="#" title="{% trans 'Contato' %}">{% trans "Contato" %}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </header><!-- End header -->
 
-<footer>
-    <div class="container" id="nav-footer">
-        <div class="row text-left">
-            <div class="col-md-3 col-sm-3">
-                <h4>Sobre</h4>
-                <ul>
-                    <li><a href="/sobre/">Tobuscando</a></li>
-                    <li><a href="/publicidade/">Publicidade</a></li>
-                    <li><a href="/canais/">Redes Sociais</a></li>
-                </ul>
+    <section id="content">
+        {% block content_index %}{% endblock content_index %}
+
+        <div id="main_content">
+            <div class="container">
+                {% block content %}{% endblock content %}
             </div>
-            <div class="col-md-3 col-sm-3">
-                <h4>Experimente</h4>
-                <ul>
-                    <li><a href="/dashboard/">Cadastre-se</a></li>
-                    <li><a href="/termos_e_condicoes/">Termos e condições</a></li>
-                    <li><a href="/politica_de_privacidade/">Política de privacidade</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <h4>Minha conta</h4>
-                <ul>
-                    <li><a href="/dashboard/">Gerenciar</a></li>
-                    <li><a href="#">Anunciar</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <ul id="follow_us">
-                    <li><a target="_blank" href="https://www.facebook.com/tobuscando"><i class="icon-facebook"></i></a></li>
-                    <li><a target="_blank" href="https://twitter.com/tobuscando"><i class="icon-twitter"></i></a></li>
-                    <li><a target="_blank" href="https://www.youtube.com/user/tobuscando"><i class=" icon-youtube"></i></a></li>
-                </ul>
-                <ul>
-                    <li>Dúvidas? <a href="/faq/">Clique Aqui.</a></li>
-                </ul>
-            </div>
-        </div><!-- End row -->
-    </div>
-    <div id="copy_right">Todos os direitos reservados. © Tobuscando.com</div>
-</footer>
+        </div>
+    </section>
 
-<div id="toTop">Voltar ao topo</div>
+    <footer>
+        <div class="container" id="nav-footer">
+            <div class="row text-left">
+                <div class="col-md-3 col-sm-3">
+                    <h4>Sobre</h4>
+                    <ul>
+                        <li><a href="/sobre/">Tobuscando</a></li>
+                        <li><a href="/publicidade/">Publicidade</a></li>
+                        <li><a href="/canais/">Redes Sociais</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <h4>Experimente</h4>
+                    <ul>
+                        <li><a href="/dashboard/">Cadastre-se</a></li>
+                        <li><a href="/termos_e_condicoes/">Termos e condições</a></li>
+                        <li><a href="/politica_de_privacidade/">Política de privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <h4>Minha conta</h4>
+                    <ul>
+                        <li><a href="/dashboard/">Gerenciar</a></li>
+                        <li><a href="#">Anunciar</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <ul id="follow_us">
+                        <li><a target="_blank" href="https://www.facebook.com/tobuscando"><i class="icon-facebook"></i></a></li>
+                        <li><a target="_blank" href="https://twitter.com/tobuscando"><i class="icon-twitter"></i></a></li>
+                        <li><a target="_blank" href="https://www.youtube.com/user/tobuscando"><i class=" icon-youtube"></i></a></li>
+                    </ul>
+                    <ul>
+                        <li>Dúvidas? <a href="/faq/">Clique Aqui.</a></li>
+                    </ul>
+                </div>
+            </div><!-- End row -->
+        </div>
+        <div id="copy_right">Todos os direitos reservados. © Tobuscando.com</div>
+    </footer>
 
-<!-- JQUERY -->
-<script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+    <div id="toTop">Voltar ao topo</div>
 
-<!-- OTHER JS -->
-<script src="{% static 'js/superfish.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/retina.min.js' %}"></script>
-<script src="{% static 'js/jquery.fitvids.js' %}"></script> <!-- for video responsive-->
-<script src="{% static 'js/validate.js' %}"></script>
-<script src="{% static 'js/jquery.placeholder.js' %}"></script>
-<script src="{% static 'js/functions.js' %}"></script>
-<script src="{% static 'js/classie.js' %}"></script>
-<script src="{% static 'js/scripts.js' %}"></script>
-<!--<script src="{% static 'js/uisearch.js' %}"></script>-->
-<!-- <script src="{% static 'js/jquery.icheck.js' %}"></script> -->
-<!--<script>new UISearch( document.getElementById( 'sb-search' ) );</script>-->
-<script>$(".video").fitVids();</script>
+    <!-- JQUERY -->
+    <script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
 
-{% block js %}{% endblock js %}
+    <!-- OTHER JS -->
+    <script src="{% static 'js/superfish.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/retina.min.js' %}"></script>
+    <script src="{% static 'js/jquery.fitvids.js' %}"></script> <!-- for video responsive-->
+    <script src="{% static 'js/validate.js' %}"></script>
+    <script src="{% static 'js/jquery.placeholder.js' %}"></script>
+    <script src="{% static 'js/functions.js' %}"></script>
+    <script src="{% static 'js/classie.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <!--<script src="{% static 'js/uisearch.js' %}"></script>-->
+    <!-- <script src="{% static 'js/jquery.icheck.js' %}"></script> -->
+    <!--<script>new UISearch( document.getElementById( 'sb-search' ) );</script>-->
+    <script>$(".video").fitVids();</script>
 
-<!-- Analytics Tobuscando.com -->
+    {% block js %}{% endblock js %}
+
+    <!-- Analytics Tobuscando.com -->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

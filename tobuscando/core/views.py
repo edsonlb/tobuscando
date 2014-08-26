@@ -3,7 +3,9 @@ from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from random import randint, choice
 
+# coding: utf-8
 from tobuscando.ads.models import Ad
+from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 
 
 # Usado para realização de testes na máquina local.

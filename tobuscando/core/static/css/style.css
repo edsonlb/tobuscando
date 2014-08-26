@@ -75,3 +75,7 @@ ul.breadcrumb {
     -moz-border-radius: 0 !important;
     padding: 5px 10px;
 }
+header .btn-new_ad {
+    font-size: 12px;
+    padding: 6px 10px;
+}
