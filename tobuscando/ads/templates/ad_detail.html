@@ -16,7 +16,7 @@
 
 {% block content %}
 <div class="clearfix">
-    <h2 class="text-center">{{ object.title|title }}</h2>
+    <h2 class="text-center"><a href="{{ object.get_absolute_url }}">{{ object.title|title }}</a></h2>
     <small>{% trans "criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
 </div>
 
