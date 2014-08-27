@@ -5,7 +5,7 @@ from .views import (AdCreateView, AdDetailView,
 
 
 urlpatterns = patterns('tobuscando.ads.views',
-    url(r'^ads/category_meta/(?P<pk>\d+)/$', CategoryMetaView.as_view(),
+    url(r'^category_meta/(?P<pk>\d+)/$', CategoryMetaView.as_view(),
         name="ad_create"),
     url(r'^anunciar/successo/$', AdCreateSuccessTemplateView.as_view(),
         name="ad_success"),

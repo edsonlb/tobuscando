@@ -24,7 +24,7 @@ $(document).ready(function() {
         var $this = $(this);
 
         $.ajax({
-            url: '/ads/category_meta/<pk>/'.replace('<pk>', $this.val()),
+            url: '/anuncios/category_meta/<pk>/'.replace('<pk>', $this.val()),
             type: 'GET',
             dataType: 'html',
             statusCode: {
