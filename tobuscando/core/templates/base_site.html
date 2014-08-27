@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
+{% load flatpages %}
 
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -93,7 +94,7 @@
                 <div class="col-md-3 col-sm-3">
                     <h4>Sobre</h4>
                     <ul>
-                        <li><a href="/sobre/">Tobuscando</a></li>
+                        <li><a href="/pages/sobre/">Tobuscando</a></li>
                         <li><a href="/publicidade/">Publicidade</a></li>
                         <li><a href="/canais/">Redes Sociais</a></li>
                     </ul>
@@ -101,16 +102,16 @@
                 <div class="col-md-3 col-sm-3">
                     <h4>Experimente</h4>
                     <ul>
-                        <li><a href="/dashboard/">Cadastre-se</a></li>
-                        <li><a href="/termos_e_condicoes/">Termos e condições</a></li>
-                        <li><a href="/politica_de_privacidade/">Política de privacidade</a></li>
+                        <li><a href="{% url 'account_signup' %}">Cadastre-se</a></li>
+                        <li><a href="/pages/sobre/termos-e-condicoes/">Termos e condições</a></li>
+                        <li><a href="/pages/sobre/politica-de-privacidade/">Política de privacidade</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-3">
                     <h4>Minha conta</h4>
                     <ul>
-                        <li><a href="/dashboard/">Gerenciar</a></li>
-                        <li><a href="#">Anunciar</a></li>
+                        <li><a href="{% url 'dashboard:dash_home' %}">Gerenciar</a></li>
+                        <li><a href="{% url 'ads:ad_create' %}">Anunciar</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-3">
@@ -120,7 +121,7 @@
                         <li><a target="_blank" href="https://www.youtube.com/user/tobuscando"><i class=" icon-youtube"></i></a></li>
                     </ul>
                     <ul>
-                        <li>Dúvidas? <a href="/faq/">Clique Aqui.</a></li>
+                        <li>Dúvidas? <a href="/pages/faq/">Clique Aqui.</a></li>
                     </ul>
                 </div>
             </div><!-- End row -->

@@ -5,11 +5,10 @@ from .views import (AdCreateView, AdDetailView,
 
 
 urlpatterns = patterns('tobuscando.ads.views',
-    #
-    url(r'anuncio/(?P<slug>[\w_-]+)/$', AdDetailView.as_view(), name="ad_detail"),
-    url(r'ads/category_meta/(?P<pk>\d+)/$', CategoryMetaView.as_view(),
+    url(r'^ads/category_meta/(?P<pk>\d+)/$', CategoryMetaView.as_view(),
         name="ad_create"),
-    url(r'anunciar/successo/$', AdCreateSuccessTemplateView.as_view(),
+    url(r'^anunciar/successo/$', AdCreateSuccessTemplateView.as_view(),
         name="ad_success"),
-    url(r'anunciar/$', AdCreateView.as_view(), name="ad_create"),
+    url(r'^novo/$', AdCreateView.as_view(), name="ad_create"),
+    url(r'^(?P<slug>[\w_-]+)/$', AdDetailView.as_view(), name="ad_detail"),
 )

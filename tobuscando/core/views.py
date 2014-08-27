@@ -41,7 +41,6 @@ class SearchView(ListView):
 
     def get_queryset(self):
         slug = self.get_slug(self.kwargs.get('slug'))
-        print slug
         return self.model.objects.filter(Q(title__icontains=slug) |
                                          Q(description__icontains=slug) |
                                          Q(category__name__icontains=slug))
