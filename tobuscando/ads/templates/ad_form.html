@@ -36,6 +36,9 @@
         {% endif %}
         {% csrf_token %}
 
+        {{ form_ad.errors }}
+        {{ meta_inlineformset.errors }}
+
         <div class="well">
             <div class="clearfix">
                 <div class="form-group">
