@@ -1,5 +1,6 @@
 # coding: utf-8
 from django import forms
+from django.utils.translation import ugettext as _
 from tobuscando.core.models import Person
 
 
@@ -27,6 +28,8 @@ class PersonPreRegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PersonPreRegisterForm, self).__init__(*args, **kwargs)
 
+        self.fields['first_name'].label = _(u'Nome')
+        self.fields['email'].label = _(u'E-mail')
         self.fields['email'].required = True
 
     class Meta:

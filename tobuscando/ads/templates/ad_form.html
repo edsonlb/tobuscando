@@ -36,9 +36,6 @@
         {% endif %}
         {% csrf_token %}
 
-        {{ form_ad.errors }}
-        {{ meta_inlineformset.errors }}
-
         <div class="well">
             <div class="clearfix">
                 <div class="form-group">
@@ -55,7 +52,8 @@
                         </label>
 
                         {% if not node.is_leaf_node %}
-                        <div class="list-group dropdown-nav col-md-12 col-sm-12 id_category_{{ node.pk }}">
+                        <div class="list-group dropdown-nav col-md-12 col-sm-12 id_category_{{ node.pk }} parent">
+                            {{ node.parent.pk }}
                             {{ children }}
                         </div>
                         {% endif %}
@@ -96,7 +94,7 @@
                         <label class="control-label col-sm-2">Email:</label>
                         <div class="col-sm-10">{{ user.email }}</div>
                     </div>
-                    <p class="col-sm-offset-2">Não é você? <a href="#">Clique aqui.</a></p>
+                    <p class="col-sm-offset-2">Não é você? <a href="{% url 'account_logout' %}?next={% url 'ads:ad_create' %}">Clique aqui.</a></p>
                     {% else %}
                     {% bootstrap_form form_person layout='horizontal' %}
                     {% endif %}
