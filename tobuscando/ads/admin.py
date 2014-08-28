@@ -2,7 +2,7 @@
 from django.contrib import admin
 from suit.admin import SortableModelAdmin, SortableTabularInline
 from mptt.admin import MPTTModelAdmin
-from .models import Ad, AdMeta, Category, Meta, MetaOption, CategoryMeta
+from .models import Ad, AdMeta, Offer, Category, Meta, MetaOption, CategoryMeta
 from .forms import CategoryMetaForm
 
 
@@ -67,3 +67,4 @@ class AdAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Meta, MetaAdmin)
 admin.site.register(Ad, AdAdmin)
+admin.site.register(Offer)

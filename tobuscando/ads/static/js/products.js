@@ -13,8 +13,11 @@ $(document).ready(function() {
     $("#category label").click(function() {
         var $this = $(this);
 
+        $("#category div.dropdown-nav").hide();
         $("#category label").removeClass("active");
-        $this.addClass("active");
+
+        $this.addClass('active');
+        $this.parent('div.dropdown-nav').show();
 
         $("div." + $this.attr("for")).show();
     });
@@ -37,4 +40,17 @@ $(document).ready(function() {
             }
         });
     });
+
+    $("#if_form_offer").submit(function() {
+        var $this = $(this);
+
+        $.ajax({
+            url: $this.attr('action'),
+            type: 'POST',
+            data: $this.find('input, textarea'),
+            dataType: 'json'
+        })
+
+//        return false;
+    })
 });

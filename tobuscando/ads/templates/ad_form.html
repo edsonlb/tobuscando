@@ -52,8 +52,7 @@
                         </label>
 
                         {% if not node.is_leaf_node %}
-                        <div class="list-group dropdown-nav col-md-12 col-sm-12 id_category_{{ node.pk }} parent">
-                            {{ node.parent.pk }}
+                        <div class="list-group dropdown-nav col-md-12 col-sm-12 id_category_{{ node.pk }} {% if node.parent.pk %}parent-{{ node.parent.pk }}{% endif %}">
                             {{ children }}
                         </div>
                         {% endif %}

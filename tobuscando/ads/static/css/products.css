@@ -16,3 +16,23 @@
     top: 0;
     left: 275px;
 }
+.cbp_tmlabel p {
+    margin-bottom: 0 !important;
+}
+.cbp_tmtimeline>li .cbp_tmlabel {
+    margin: 0 0 15px 16%;
+    padding: 1em 1.5em;
+}
+.cbp_tmtimeline:before {
+    background: none !important;
+}
+
+.cbp_tmtimeline>li ul.cbp_tmtimeline {
+    margin: 10px 0 0px 20% !important;
+}
+.cbp_tmtimeline>li ul.cbp_tmtimeline>li .cbp_tmtime {
+    width: 30% !important;
+}
+.cbp_tmtimeline>li ul.cbp_tmtimeline>li .cbp_tmlabel {
+    margin: 0 0 15px 20%;
+}

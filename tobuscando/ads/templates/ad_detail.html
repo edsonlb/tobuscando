@@ -6,7 +6,12 @@
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/products.css' %}">
 {% endblock css %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/products.js' %}"></script>
+{% endblock js %}
 
 {% block breadcrumb %}
 <li>{% trans "Categories" %}</li>
@@ -29,7 +34,7 @@
         <p>{{ object.description|safe }}</p>
 
         <div class="clearfix">
-            <a href="#sales" class="button_big">{% trans "Ofertar" %}</a>
+            <a href="#offers" class="button_big">{% trans "Ofertar" %}</a>
         </div>
     </div>
 </div>
@@ -50,20 +55,38 @@
 </div>
 
 <div class="row">
-    <div id="sales" class="clearfix">
+    <div id="offers" class="clearfix">
         <h3><i class="icon-basket"></i> {% trans "Ofertas" %}</h3>
 
-        <div id="comments" class= "timeline">
-            <ul class="cbp_tmtimeline">
-                <li id="comment-{{ sale.pk }}">
-                    <div class="cbp_tmtime"><h4>Matheus Oliveira</h4></div>
-                    <div class="cbp_tmlabel">
-                    <div class="pull-right hidden-xs"><strong>Matheus Oliveira</strong><img src="img/teacher_1.jpg" alt="" class="img-circle speaker"></div>
-                        <h2><span>Lorem ipsum</span>Presentation</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion" href="#formOffer"><i class="icon-plus-circle"></i> Fazer uma oferta</a>
+                </h4>
+            </div>
 
-                        <p>Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea sprouts wattle seed rutabaga okra yarrow cress avocado grape radish bush tomato ricebean black-eyed pea maize eggplant. </p>
-                    </div>
-                </li>
+            <div id="formOffer" class="panel-body panel-collapse collapse {% if not user.is_authenticated %}in{% endif %}">
+            {% if not user.is_authenticated %}
+            <p>Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>.</p>
+            {% else %}
+            {% include 'form_offer_snnipet.html' %}
+            {% endif %}
+            </div>
+        </div>
+
+        <div id="offer_list" class= "timeline">
+            <ul class="offer-list cbp_tmtimeline">
+                {% for offer in object.offers %}
+                {% include 'offer_snippet.html' %}
+
+                {% if offer.relateds %}
+                <ul class="sub-offers cbp_tmtimeline">
+                    {% for offer in offer.relateds %}
+                    {% include 'offer_snippet.html' %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endfor %}
             </ul>
         </div>
     </div>

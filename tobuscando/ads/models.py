@@ -41,6 +41,9 @@ class Ad(models.Model):
     def metas(self):
         return self.metas_set.all()
 
+    def offers(self):
+        return self.offer_set.filter(is_active=True)
+
 
 class AdMeta(models.Model):
     ad = models.ForeignKey('Ad', related_name='metas',
@@ -165,6 +168,31 @@ class CategoryMeta(models.Model):
 
     def __unicode__(self):
         return self.meta.name
+
+
+class Offer(models.Model):
+    HELP_LINK = _(u'Link para página ou imagem de produto que está ofertando.')
+
+    ad = models.ForeignKey('Ad', verbose_name=_(u'Anúncio'))
+    person = models.ForeignKey('core.Person', verbose_name=_(u'Pessoa'))
+    parent = models.ForeignKey('self', verbose_name=_(u'Oferta pai'),
+                               null=True, blank=True)
+    link = models.URLField(_(u'link do produto'), help_text=HELP_LINK)
+    message = models.TextField(_(u'Mensagem'))
+    price = models.DecimalField(_(u'preço'), max_digits=5, decimal_places=2)
+    is_active = models.BooleanField(_(u'ativo?'), default=False)
+    created_at = models.DateTimeField(_(u'criado em'), auto_now_add=True)
+    updated_at = models.DateTimeField(_(u'alterado em'), auto_now=True)
+
+    class Meta:
+        verbose_name = _(u'Oferta')
+        verbose_name_plural = _(u'Ofertas')
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.ad.title, self.person)
+
+    def relateds(self):
+        pass
 
 
 """

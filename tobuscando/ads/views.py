@@ -2,12 +2,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse as r
+from django.template import loader
 from django.contrib.auth import login, authenticate
 from django.views.generic import View, TemplateView, DetailView
 from django.template.loader import render_to_string
 from .models import Ad, AdMeta, Category
 from tobuscando.core.forms import PersonPreRegisterForm
-from .forms import AdForm, CategoryMetaInlineFormset
+from .forms import AdForm, OfferForm, CategoryMetaInlineFormset
+
+import simplejson
 
 
 class AdCreateView(View):
@@ -96,6 +99,51 @@ class AdCreateSuccessTemplateView(TemplateView):
         return context
 
 
+class AdDetailView(DetailView):
+    template_name = 'ad_detail.html'
+    model = Ad
+
+    def get_context_data(self, **kwargs):
+        context = super(AdDetailView, self).get_context_data(**kwargs)
+        context['form_offer'] = OfferForm(initial={
+            'ad': self.object.pk,
+            'person': self.request.user.pk
+        })
+
+        return context
+
+
+class OfferCreateView(View):
+    template_name = 'form_offer_snnipet.html'
+    form_class = OfferForm
+
+    def post(self, request, *args, **kwargs):
+        form_offer = self.form_class(request.POST)
+
+        if form_offer.is_valid():
+            form_offer = self.form_class()
+            offer = form_offer.save(commit=False)
+            offer = Ad.objects.get(pk=offer.ad)
+            offer.save()
+
+            message = u'Sua oferta foi enviada com sucesso. \
+                        Aguarde retorno do anunciante.'
+
+            html = loader.render_to_string(self.template_name, {
+                'form_offer': self.form_class(initial={
+                    'ad': offer.ad.pk,
+                    'person': request.user.pk
+                })
+            })
+
+            return HttpResponse(simplejson.dumps({
+                'message': message,
+                'html': html
+            }))
+
+        return render(request, self.template_name, locals())
+
+
 class CategoryMetaView(View):
     template_name = 'categorymeta_form.html'
     meta_inlineformset_class = CategoryMetaInlineFormset
@@ -109,8 +157,3 @@ class CategoryMetaView(View):
             return HttpResponse(render_to_string(self.template_name, locals()))
 
         return render(request, self.template_name, locals())
-
-
-class AdDetailView(DetailView):
-    template_name = 'ad_detail.html'
-    model = Ad
