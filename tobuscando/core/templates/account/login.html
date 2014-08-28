@@ -16,7 +16,7 @@
             {% csrf_token %}
             <div class="form-group">
               {% bootstrap_form form %}
-          </div>
+            </div>
 
           <p class="small text-right">
             <a href="{% url 'account_reset_password' %}">{% trans "Esqueceu sua senha?" %}</a>

@@ -1,0 +1,107 @@
+{% extends 'base_site.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+  
+<section id="main_content" >
+<div class="container">
+<div class="row">
+	<div class="col-md-4">
+		<hr>
+		<h3>Siga-nos</h3>
+		<ul id="follow_us_contacts">
+			<li><a href="#"><i class="icon-facebook"></i>fb.com/tobuscando</a></li>
+			<li><a href="#"><i class="icon-twitter"></i>twitter.com/tobuscando</a></li>
+		</ul>
+        <hr>
+	</div>
+	<div class="col-md-8">
+		<div class=" box_style_2">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Contato</h3>
+					<p>Tem alguma dúvida, sugestão ou crítica a fazer? Precisa de alguma informação? Preencha os campos abaixo que nós entraremos em contato.</p>
+				</div>
+			</div>
+			<div id="message-contact"></div>
+			<form method="post" action="." id="contactform">
+				<div class="row">
+					{% csrf_token %}
+					<div class="col-md-12 col-sm-6">
+			            <div class="form-group">
+				            {% bootstrap_form_errors form type='non_fields' %}
+		        			{% bootstrap_field form.full_name %}
+	        			</div>	
+		            </div>
+		            <div class="col-md-6 col-sm-6">
+			            <div class="form-group">
+				            {% bootstrap_form_errors form type='non_fields' %}
+		        			{% bootstrap_field form.email %}
+	        			</div>	
+		            </div>
+		            <div class="col-md-6 col-sm-6">
+			            <div class="form-group">
+				            {% bootstrap_form_errors form type='non_fields' %}
+		        			{% bootstrap_field form.phone %}
+	        			</div>	
+		            </div>
+		            <div class="col-md-12 col-sm-6">
+			            <div class="form-group">
+				            {% bootstrap_form_errors form type='non_fields' %}
+		        			{% bootstrap_field form.message %}
+	        			</div>	
+		            </div>
+		        </div>
+				<div class="row">
+					<div class="col-md-12">
+						<input type="submit" value="Submit" class="button_medium" />
+					</div>
+				</div>
+			</form>
+			<div class="row">
+				<div class="col-md-12">
+				<span id="result" class="col-md-10" style="display: none; margin-top: 20px;">
+				    <p class='alert alert-success' style='text-align: center;'><b>Mensagem enviada!</b></p>
+				</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</section>
+
+{% endblock content %}
+
+{% block js %}
+<script type="text/javascript">
+  $(function () {
+    //$("#result").css('display', 'none');
+
+    $("#contactform").submit(function () {
+        $.ajax({
+            url: '/contato/',
+            data: $('#contactform').serialize(),
+            type: 'post',
+            cache: false,
+            success: function(data) {
+              if(data == 'ok') {
+                $("#result").slideDown(1000)
+                            .show(0)
+                            .delay(2000)
+                            .slideUp(1000)
+                            .hide(0);
+                $('input#id_full_name').val('').focus();
+                $('input#id_email').val('');
+                $('input#id_phone').val('');
+                $('textarea#id_message').val('');
+              }
+            }
+        });
+        return false;
+    });
+});
+</script>
+{% endblock js %}
