@@ -11,3 +11,9 @@ django-pagination==1.0.7
 django-smart-selects==1.0.9
 django-suit==0.2.9
 gunicorn==19.0.0
+oauthlib==0.6.3
+python-openid==2.2.5
+requests==2.3.0
+requests-oauthlib==0.4.1
+simplejson==3.6.3
+wsgiref==0.1.2
