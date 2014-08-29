@@ -1,7 +1,6 @@
 # coding: utf-8
 from django import forms
-from tobuscando.core.models import Person
-
+from tobuscando.core.models import Person, Contact
 
 class PersonForm(forms.ModelForm):
 
@@ -35,3 +34,7 @@ class PersonPreRegisterForm(forms.ModelForm):
         widget = {
             'password': forms.PasswordInput()
         }
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
