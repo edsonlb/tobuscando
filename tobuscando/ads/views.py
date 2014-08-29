@@ -121,10 +121,7 @@ class OfferCreateView(View):
         form_offer = self.form_class(request.POST)
 
         if form_offer.is_valid():
-            form_offer = self.form_class()
-            offer = form_offer.save(commit=False)
-            offer = Ad.objects.get(pk=offer.ad)
-            offer.save()
+            offer = form_offer.save()
 
             message = u'Sua oferta foi enviada com sucesso. \
                         Aguarde retorno do anunciante.'
@@ -133,13 +130,11 @@ class OfferCreateView(View):
                 'form_offer': self.form_class(initial={
                     'ad': offer.ad.pk,
                     'person': request.user.pk
-                })
+                }),
+                'message': message
             })
 
-            return HttpResponse(simplejson.dumps({
-                'message': message,
-                'html': html
-            }))
+            return HttpResponse(simplejson.dumps({'html': html}))
 
         return render(request, self.template_name, locals())
 

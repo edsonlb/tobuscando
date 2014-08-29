@@ -5,9 +5,9 @@ from django.views.generic import View, TemplateView
 from django.core.urlresolvers import reverse as r
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from tobuscando.ads.models import AdMeta
+from tobuscando.ads.models import AdMeta, Offer
 from tobuscando.ads.forms import AdUpdateForm, CategoryMetaInlineFormset
-from .forms import ProfileForm
+from .forms import OfferResponseForm, ProfileForm
 
 
 class DashboardView(TemplateView):
@@ -22,6 +22,52 @@ class DashboardAdsView(TemplateView):
         context['ads'] = self.request.user.ads()
 
         return context
+
+
+class OfferView(TemplateView):
+    template_name = "dashboard/offer_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(OfferView, self).get_context_data(**kwargs)
+        context['offers'] = self.request.user.offers()
+
+        return context
+
+
+class OfferResponseView(View):
+    template_name = 'dashboard/offer_response_form.html'
+    form_class = OfferResponseForm
+    success_message = _(u'Oferta respondido com sucesso.')
+
+    def get(self, request, *args, **kwargs):
+        offer = Offer.objects.get(pk=kwargs.get('pk'))
+        form = self.form_class(initial={
+                               'ad': offer.ad.pk,
+                               'person': offer.person.pk,
+                               'parent': kwargs.get('pk'),
+                               'is_active': True
+                               })
+
+        return render(request, self.template_name, locals())
+
+    def post(self, request, *args, **kwargs):
+        offer = Offer.objects.get(pk=kwargs.get('pk'))
+        form = self.form_class(request.POST)
+
+        print request.POST
+        offer.is_active = request.POST.get('offer_is_active')
+        offer.save()
+
+        if form.is_valid():
+            offer = form.save()
+
+            offer.parent.is_active = True
+            offer.parent.save()
+
+            messages.success(self.request, self.success_message)
+            return HttpResponseRedirect(r('dashboard:offer_list'))
+
+        return render(request, self.template_name, locals())
 
 
 class AdUpdateView(View):

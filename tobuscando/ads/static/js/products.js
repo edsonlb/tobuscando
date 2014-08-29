@@ -41,16 +41,21 @@ $(document).ready(function() {
         });
     });
 
-    $("#if_form_offer").submit(function() {
+    $("#id_form_offer").submit(function() {
         var $this = $(this);
 
         $.ajax({
             url: $this.attr('action'),
             type: 'POST',
             data: $this.find('input, textarea'),
-            dataType: 'json'
-        })
+            dataType: 'json',
+            statusCode: {
+                200: function(data) {
+                    $("div#formOffer form div").html(data.html);
+                }
+            }
+        });
 
-//        return false;
-    })
+        return false;
+    });
 });

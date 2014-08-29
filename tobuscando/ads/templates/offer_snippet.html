@@ -1,5 +1,5 @@
 
-<li id="comment-{{ offer.pk }}" class="{% if offer.parent %}parent-{{ offer.parent.pk }}{% endif %}">
+<li id="comment-{{ offer.pk }}" class="{% if offer.parent %}sub-offer parent-{{ offer.parent.pk }}{% endif %}">
     <div class="cbp_tmtime">
         <div class="hidden-xs"><strong>{{ offer.person.get_full_name }}</strong><img src="img/teacher_1.jpg" alt="" class="img-circle speaker"></div>
     </div>

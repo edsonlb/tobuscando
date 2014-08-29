@@ -10,7 +10,7 @@
 {% endblock css %}
 
 {% block js %}
-    <script type="text/javascript" src="{% static 'js/products.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/products.js' %}"></script>
 {% endblock js %}
 
 {% block breadcrumb %}
@@ -21,7 +21,7 @@
 
 {% block content %}
 <div class="clearfix">
-    <h2 class="text-center"><a href="{{ object.get_absolute_url }}">{{ object.title|title }}</a></h2>
+    <h2 class="text-center">{{ object.price }} - {{ object.title|title }}</h2>
     <small>{% trans "criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
 </div>
 
@@ -66,11 +66,17 @@
             </div>
 
             <div id="formOffer" class="panel-body panel-collapse collapse {% if not user.is_authenticated %}in{% endif %}">
-            {% if not user.is_authenticated %}
-            <p>Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>.</p>
-            {% else %}
-            {% include 'form_offer_snnipet.html' %}
-            {% endif %}
+                {% if not user.is_authenticated %}
+                <p>Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>. Para fazer login <a href="{% url 'account_login' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>.</p>
+                {% else %}
+                <form id="id_form_offer" name="form_offer" action="{% url 'ads:offer_create' %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        {% include 'form_offer_snnipet.html' %}
+                    </div>
+                    <button type="submit" class="button_medium">Ofertar</button>
+                </form>
+                {% endif %}
             </div>
         </div>
 
@@ -80,11 +86,9 @@
                 {% include 'offer_snippet.html' %}
 
                 {% if offer.relateds %}
-                <ul class="sub-offers cbp_tmtimeline">
-                    {% for offer in offer.relateds %}
-                    {% include 'offer_snippet.html' %}
-                    {% endfor %}
-                </ul>
+                {% for offer in offer.relateds %}
+                {% include 'offer_snippet.html' %}
+                {% endfor %}
                 {% endif %}
                 {% endfor %}
             </ul>

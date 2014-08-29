@@ -2,6 +2,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 from tobuscando.core.models import Person
+from tobuscando.ads.models import Offer
 
 
 class ProfileForm(forms.ModelForm):
@@ -26,3 +27,14 @@ class ProfileForm(forms.ModelForm):
             'notification1', 'notification2', 'notification3', 'notification4',
             'date_joined', 'last_login', 'password'
         )
+
+
+class OfferResponseForm(forms.ModelForm):
+
+    class Meta:
+        model = Offer
+        widgets = {
+            'parent': forms.HiddenInput(),
+            'person': forms.HiddenInput(),
+            'ad': forms.HiddenInput(),
+        }

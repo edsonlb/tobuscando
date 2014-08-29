@@ -1,10 +1,9 @@
 {% load bootstrap3 %}
 
 
-<form id="if_form_offer" name="form_offer" action="{% url 'ads:offer_create' %}" method="POST">
-    {% csrf_token %}
+{% if message %}
+<div class="alert alert-info">{{ message }}</div>
+{% endif %}
 
-    {% bootstrap_form form_offer %}
 
-    <button type="submit" class="button_medium">Ofertar</button>
-</form>
+{% bootstrap_form form_offer %}

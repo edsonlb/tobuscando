@@ -22,6 +22,11 @@ class AdUpdateForm(forms.ModelForm):
 
 class OfferForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(OfferForm, self).__init__(*args, **kwargs)
+
+        self.fields['link'].required = True
+
     class Meta:
         model = Offer
         exclude = ('is_active',)

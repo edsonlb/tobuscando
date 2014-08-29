@@ -42,7 +42,7 @@ class Ad(models.Model):
         return self.metas_set.all()
 
     def offers(self):
-        return self.offer_set.filter(is_active=True)
+        return self.offer_set.filter(parent=None, is_active=True)
 
 
 class AdMeta(models.Model):
@@ -177,7 +177,8 @@ class Offer(models.Model):
     person = models.ForeignKey('core.Person', verbose_name=_(u'Pessoa'))
     parent = models.ForeignKey('self', verbose_name=_(u'Oferta pai'),
                                null=True, blank=True)
-    link = models.URLField(_(u'link do produto'), help_text=HELP_LINK)
+    link = models.URLField(_(u'link do produto'), help_text=HELP_LINK,
+                           null=True, blank=True)
     message = models.TextField(_(u'Mensagem'))
     price = models.DecimalField(_(u'preço'), max_digits=5, decimal_places=2)
     is_active = models.BooleanField(_(u'ativo?'), default=False)
@@ -192,7 +193,7 @@ class Offer(models.Model):
         return u'%s - %s' % (self.ad.title, self.person)
 
     def relateds(self):
-        pass
+        return Offer.objects.filter(parent=self.pk, is_active=True)
 
 
 """
