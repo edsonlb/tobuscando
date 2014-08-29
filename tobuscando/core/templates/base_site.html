@@ -57,7 +57,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-4 pull-right" style="margin-top: 5px;">
                     <div class="pull-right">
                         <ul class="list-unstyle list-inline">
-                            <li><a href="{% url 'ads:ad_create' %}" title="{% trans 'Inserir anúncio' %}" class="button_outline text-center btn-info btn-new_ad"><i class="icon-plus-circle"></i> {% trans "Inserir anúncio" %}</a></li>
+                            <li><a href="{% url 'ads:ad_create' %}" title="{% trans 'Inserir anúncio' %}" class="button_outline text-center btn-info btn-new_ad hidden-xs"><i class="icon-plus-circle"></i> {% trans "Inserir anúncio" %}</a></li>
                             {% if user.is_authenticated %}
                             <li class="dropdown" style="margin-left: 10px;"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, <strong>{{ user.username }}</strong> <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -68,9 +68,8 @@
                                 </ul>
                             </li>
                             {% else %}
-                            <li><a href="{% url 'dashboard:dash_home' %}" class="button_top hidden-xs" id="apply"><i class="icon-user"></i> Minha conta</a></li>
+                            <li><a href="{% url 'dashboard:dash_home' %}" class="button_outline text-center btn-info btn-dash hidden-xs" id="apply"><i class="icon-user"></i> Minha conta</a></li>
                             {% endif %}
-                            <li><a href="#" title="{% trans 'Contato' %}">{% trans "Contato" %}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -95,16 +94,16 @@
                     <h4>Sobre</h4>
                     <ul>
                         <li><a href="/pages/sobre/">Tobuscando</a></li>
-                        <li><a href="/publicidade/">Publicidade</a></li>
-                        <li><a href="/canais/">Redes Sociais</a></li>
+                        <li><a href="/pages/publicidade/">Publicidade</a></li>
+                        <li><a href="/pages/canais/">Redes Sociais</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-3">
                     <h4>Experimente</h4>
                     <ul>
                         <li><a href="{% url 'account_signup' %}">Cadastre-se</a></li>
-                        <li><a href="/pages/sobre/termos-e-condicoes/">Termos e condições</a></li>
-                        <li><a href="/pages/sobre/politica-de-privacidade/">Política de privacidade</a></li>
+                        <li><a href="/pages/termos-e-condicoes/">Termos e condições</a></li>
+                        <li><a href="/pages/politica-de-privacidade/">Política de privacidade</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-3">
