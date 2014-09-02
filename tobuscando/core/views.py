@@ -12,7 +12,6 @@ from django.template.loader import render_to_string
 
 # coding: utf-8
 from tobuscando.ads.models import Ad
-from tobuscando.core.forms import ContactForm
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 
 

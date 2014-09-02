@@ -60,6 +60,9 @@ class Person(AbstractUser):
     def ads(self):
         return self.ad_set.all()
 
+    def offers(self):
+        return self.offer_set.filter(ad__person=self.pk)
+
     def get_accounts_facebook(self):
         account_fc = SocialAccount.objects.filter(user_id=self.id)
         return account_fc

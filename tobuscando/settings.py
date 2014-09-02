@@ -174,9 +174,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 CLOUDINARY = {
-    'cloud_name': config('CLOUDINARY_NAME'),
-    'api_key': config('CLOUDINARY_API_KEY'),
-    'api_secret': config('CLOUDINARY_API_SECRET')
+    'cloud_name': 'to-buscando',  # config('CLOUDINARY_NAME'),
+    'api_key': '698993111417921',   # config('CLOUDINARY_API_KEY'),
+    'api_secret': 'fullE2Yhx3OJcH9PB-p357eDyTU'     # config('CLOUDINARY_API_SECRET')
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

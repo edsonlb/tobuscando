@@ -13,8 +13,11 @@ $(document).ready(function() {
     $("#category label").click(function() {
         var $this = $(this);
 
+        $("#category div.dropdown-nav").hide();
         $("#category label").removeClass("active");
-        $this.addClass("active");
+
+        $this.addClass('active');
+        $this.parent('div.dropdown-nav').show();
 
         $("div." + $this.attr("for")).show();
     });
@@ -24,7 +27,7 @@ $(document).ready(function() {
         var $this = $(this);
 
         $.ajax({
-            url: '/ads/category_meta/<pk>/'.replace('<pk>', $this.val()),
+            url: '/anuncios/category_meta/<pk>/'.replace('<pk>', $this.val()),
             type: 'GET',
             dataType: 'html',
             statusCode: {
@@ -36,5 +39,23 @@ $(document).ready(function() {
                 }
             }
         });
+    });
+
+    $("#id_form_offer").submit(function() {
+        var $this = $(this);
+
+        $.ajax({
+            url: $this.attr('action'),
+            type: 'POST',
+            data: $this.find('input, textarea'),
+            dataType: 'json',
+            statusCode: {
+                200: function(data) {
+                    $("div#formOffer form div").html(data.html);
+                }
+            }
+        });
+
+        return false;
     });
 });

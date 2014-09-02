@@ -1,6 +1,6 @@
 # coding: utf-8
 from django import forms
-from .models import Ad, Category, CategoryMeta, MetaOption
+from .models import Ad, Offer, Category, CategoryMeta, MetaOption
 
 
 class AdForm(forms.ModelForm):
@@ -18,6 +18,23 @@ class AdUpdateForm(forms.ModelForm):
             'image', 'category', 'title', 'price', 'description',
             'link_reference', 'limit_date', 'view_phone', 'is_bargain'
         )
+
+
+class OfferForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(OfferForm, self).__init__(*args, **kwargs)
+
+        self.fields['link'].required = True
+
+    class Meta:
+        model = Offer
+        exclude = ('is_active',)
+        widgets = {
+            'ad': forms.HiddenInput(),
+            'person': forms.HiddenInput(),
+            'parent': forms.HiddenInput()
+        }
 
 
 class CategoryMetaForm(forms.ModelForm):

@@ -1,0 +1,52 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% load cloudinary %}
+{% load bootstrap3 %}
+
+{% block dashboard_content %}
+
+{{ form.errors }}
+
+{% if form.is_multipart %}
+<form id="id_form_offer" name="form_offer" action="." method="POST" class="form-horizontal">
+    {% else %}
+    <form id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
+        {% endif %}
+        <h2>Meus dados</h2>
+        <br><br>
+
+        <h4>Oferta</h4>
+
+        <div class="col-sm-12">
+            <div class="clearfix">
+                <label class="text-right col-sm-2">Usuário: </label>{{ offer.person.get_full_name }}
+            </div>
+            <div class="clearfix">
+                <label class="text-right col-sm-2">Preço: </label>{{ offer.price }}
+            </div>
+            <div class="clearfix">
+                <label class="text-right col-sm-2">Link: </label>{{ offer.link }}
+            </div>
+            <div class="clearfix">
+                <label class="text-right col-sm-2">Mensagem: </label>{{ offer.message }}
+            </div>
+            <div class="clearfix">
+                <label class="text-right col-sm-2">Ativo?: </label> <input {% if offer.is_active %} checked="checked"{% endif %} class="" id="id_offer_is_active" name="offer_is_active" type="checkbox">
+            </div>
+            <br><br>
+        </div>
+
+        <h4>Resposta</h4>
+        <hr>
+        {% csrf_token %}
+
+        {% for field in form %}
+        {% bootstrap_field field layout='horizontal' %}
+        {% endfor %}
+
+        {% buttons %}
+        <button type="submit" class="button_medium">Salvar</button>
+        {% endbuttons %}
+    </form>
+
+    {% endblock dashboard_content %}
