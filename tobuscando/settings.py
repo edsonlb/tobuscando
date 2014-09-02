@@ -59,7 +59,6 @@ INSTALLED_APPS = (
     'tobuscando.core',
     'tobuscando.dashboard',
     'tobuscando.ads',
-    'tobuscando.contacts',
 
     'pagination',
     'allauth',

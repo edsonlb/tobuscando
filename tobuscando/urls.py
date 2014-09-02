@@ -16,7 +16,7 @@ urlpatterns = patterns('',
         namespace='dashboard')),
     url(r'^anuncios/', include('tobuscando.ads.urls', namespace='ads')),
     url(r'^', include('tobuscando.core.urls', namespace='core')),
-    url(r'^contato/$', 'tobuscando.contacts.views.contact', name='contato'),
+    url(r'^contact/$', 'tobuscando.core.views.contact', name='contact'),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
