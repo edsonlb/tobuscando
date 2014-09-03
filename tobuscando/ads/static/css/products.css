@@ -11,9 +11,13 @@
     position: absolute;
     top: -9999em;
 }
-#category label:hover,
+#category label:hover{
+   background: #E6E6E6 url(../img/arrow.png) no-repeat 96% center;
+}
 #category label.active {
-    background: #E6E6E6;
+    background: #DC4713 url(../img/verify.png) no-repeat 96% center;
+    color: white;
+
 }
 #category .dropdown-nav {
     position: absolute;
