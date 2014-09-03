@@ -11,12 +11,10 @@ urlpatterns = patterns('',
     # url(r'^$', 'tobuscando.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    (r'^accounts/', include('allauth.urls')),
-    url(r'^dashboard/', include('tobuscando.dashboard.urls',
-        namespace='dashboard')),
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^dashboard/', include('tobuscando.dashboard.urls', namespace='dashboard')),
     url(r'^anuncios/', include('tobuscando.ads.urls', namespace='ads')),
     url(r'^', include('tobuscando.core.urls', namespace='core')),
-    url(r'^contact/$', 'tobuscando.core.views.contact', name='contact'),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

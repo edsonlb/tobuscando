@@ -1,17 +1,32 @@
-<aside class="col-lg-3 col-md-4 col-sm-4">
-    <div class="box_style_1">
-        <h4>Categorias</h4>
-        <ul class="submenu-col">
-            <li><a href="#" id="active">Todas as categorias</a></li>
-            <li><a href="course_details_2.html">Esportes (10)</a></li>
-            <li><a href="course_details_2.html">Animais e acessórios (08)</a></li>
-            <li><a href="course_details_2.html">Móveis (05) </a></li>
-            <li><a href="course_details_2.html">Eletrônicos e celulares (08) </a></li>
-            <li><a href="course_details_2.html">Música (04)</a></li>
-            <li><a href="course_details_2.html">Infantil (06)</a></li>
-            <li><a href="course_details_2.html">Veículos (08)</a></li>
-            <li><a href="course_details_2.html">Imóveis (08)</a></li>
-            <li><a href="course_details_2.html">Oportunidades (08)</a></li>
-        </ul>
-    </div>
-</aside>
+{% load mptt_tags %}
+
+
+<div class="box_style_1">
+    {% if categories %}
+    <h4>Categorias</h4>
+    <ul class="submenu-col">
+        {% recursetree categories %}
+        <li><a href="{% url 'ads:category_detail' node.slug %}" title="{{ category.name }}">{{ node.name }}</a></li>
+        {% endrecursetree %}
+    </ul>
+    {% endif %}
+
+    {% for meta in object.metas %}
+    <h4>{{ meta.meta.name }}</h4>
+    <ul class="submenu-col">
+        {% for option in meta.options.all %}
+        <li><a href="?meta_{{ meta.meta.name }}__option={{ option.value }}" title="{{ option.value|title }}">{{ option.value|title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+
+    <h4>Filtrar</h4>
+    <ul class="submenu-col">
+        <form action="." method="GET">
+            <li><input id="id_min_price" name="min_price" placeholder="Preço mínimo" value="{{ min_price|floatformat:'2'|default_if_none:'' }}" class="form-control"></li>
+            <li><input id="id_max_price" name="max_price" placeholder="Preço máximo" value="{{ max_price|floatformat:'2'|default_if_none:'' }}" class="form-control"></li>
+            <li><button class="button_outline text-center btn-info btn-block btn-new_ad hidden-xs">Filtrar</button></li>
+        </form>
+    </ul>
+    <br>
+</div>

@@ -1,7 +1,10 @@
 {% extends 'base_site.html' %}
-{% load staticfiles %}
+
+
 {% load i18n %}
+{% load staticfiles %}
 {% load cloudinary %}
+{% load core_tags %}
 
 
 {% block css %}
@@ -21,7 +24,7 @@
 
 {% block content %}
 <div class="clearfix">
-    <h2 class="text-center">{{ object.price }} - {{ object.title|title }}</h2>
+    <h2 class="text-center">{{ object.price|brl }} - {{ object.title|title }}</h2>
     <small>{% trans "criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
 </div>
 
