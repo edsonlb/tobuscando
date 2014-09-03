@@ -30,15 +30,15 @@ def set_attribute(sender, **kwargs):
     except Exception:
         extra_data = None
     if extra_data is not None:
-        social_link = extra_data['link'] or ''
-        name = extra_data['name'] or ''
-        first_name = extra_data['first_name'] or ''
-        last_name = extra_data['last_name'] or ''
-        email = extra_data['email'] or ''
-        language = extra_data['locale'] or ''
+        social_link = extra_data['link'] 
+        name = extra_data['name'] 
+        first_name = extra_data['first_name'] 
+        last_name = extra_data['last_name'] 
+        email = extra_data['email'] 
+        language = extra_data['locale'] 
         if language == 'pt_BR':
-            user.language = u'Português' or ''
-            user.country = 'Brasil' or ''
+            user.language = u'Português' 
+            user.country = 'Brasil' 
         else: 
             user.language = language
 
@@ -58,6 +58,17 @@ def set_attribute(sender, **kwargs):
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+    else:
+        subject = 'Bem vindo ao TôBuscando!'
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [user.email, settings.EMAIL_HOST_USER]
+        to = user.email
+        text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
+        html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
 
 class HomeView(TemplateView):
     template_name = 'index.html'
