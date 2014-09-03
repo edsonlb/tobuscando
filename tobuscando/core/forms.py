@@ -42,6 +42,28 @@ class PersonPreRegisterForm(forms.ModelForm):
             'password': forms.PasswordInput()
         }
 
+class SignupForm(forms.Form):
+    first_name = forms.CharField(max_length=30, label='Nome')
+    last_name = forms.CharField(max_length=30, label='Sobrenome')
+    address = forms.CharField(max_length=50, label='Endereço')
+    city = forms.CharField(max_length=50, label='Cidade')
+    state = forms.CharField(max_length=50, label='Estado')
+    country = forms.CharField(max_length=50, label='País')
+    zipcode = forms.CharField(max_length=50, label='CEP')
+    language = forms.CharField(max_length=50, label='Idioma')
+
+
+    def signup(self, request, user):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.address = self.cleaned_data['address']
+        user.city = self.cleaned_data['city']
+        user.state = self.cleaned_data['state']
+        user.country = self.cleaned_data['country']
+        user.zipcode = self.cleaned_data['zipcode']
+        user.language = self.cleaned_data['language']
+        user.save()
+
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
