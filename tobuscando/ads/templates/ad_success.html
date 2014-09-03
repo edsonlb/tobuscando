@@ -1,5 +1,9 @@
 {% extends 'base_site.html' %}
+
+{% load i18n %}
 {% load cloudinary %}
+{% load core_tags %}
+
 
 {% block content %}
 <div class="alert alert-info">
@@ -28,7 +32,7 @@
                     <p>{{ ad.description }}</p>
 
                     <strong>Preço:</strong>
-                    <p>{{ ad.price }}</p>
+                    <p>{{ ad.price|brl }}</p>
 
                     {% if ad.link_reference %}
                     <strong>Anúncio referência:</strong>

@@ -6,7 +6,7 @@ from locale import setlocale, currency as moeda, LC_ALL
 register = template.Library()
 
 
-@register.filter()
+@register.filter
 def brl(self):
     try:
         setlocale(LC_ALL, 'pt_BR.UTF-8')

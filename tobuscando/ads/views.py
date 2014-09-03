@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse as r
 from django.template import loader
 from django.contrib.auth import login, authenticate
-from django.views.generic import View, TemplateView, DetailView
+from django.views.generic import View, TemplateView, DetailView, ListView
 from django.template.loader import render_to_string
+from django.db.models import Q
 from .models import Ad, AdMeta, Category
 from tobuscando.core.forms import PersonPreRegisterForm
 from .forms import AdForm, OfferForm, CategoryMetaInlineFormset
@@ -152,3 +153,45 @@ class CategoryMetaView(View):
             return HttpResponse(render_to_string(self.template_name, locals()))
 
         return render(request, self.template_name, locals())
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = "category_list.html"
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = "category_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryDetailView, self).get_context_data(**kwargs)
+
+        categories = self.object.get_children()
+        q = Q()
+        q.add(Q(category=self.object) |
+              Q(category__in=self.object.get_children()), Q.AND)
+
+        min_price = self.request.GET.get('min_price')
+        max_price = self.request.GET.get('max_price')
+        if min_price and max_price:
+            q.add(Q(price__in=[min_price, max_price]), Q.AND)
+        elif min_price:
+            q.add(Q(price__gte=min_price), Q.AND)
+        elif max_price:
+            q.add(Q(price__lte=max_price), Q.AND)
+
+        f = dict()
+        for get in self.request.GET.iteritems():
+            if get[0].count('meta'):
+                meta = get[0].split('_')
+                f['metas__option'] = get[1]
+
+        object_list = Ad.objects.filter(q)  #.filter(**f)
+
+        order_by = self.request.GET.get('order_by')
+        if order_by:
+            object_list = object_list.order_by(order_by)
+
+        context.update(locals())
+        return context

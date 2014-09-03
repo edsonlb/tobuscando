@@ -73,7 +73,12 @@ h1.logo span img {
     width: 210px !important;
 }
 h1.logo a {
+    display: block;
+    background: url("/static/images/logoTobuscando.png") center center no-repeat;
+    width: 249px;
+    height: 44px;
     color: #444;
+    text-indent: -9999em;
 }
 a.facebook {
     font-size: 14px !important;
