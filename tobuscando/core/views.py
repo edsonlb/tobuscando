@@ -73,7 +73,7 @@ def contact(request):
         to = save_it.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
         html_content = render_to_string('email-marketing.html', {'equipe':'tobuscando'})
-        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         #send_mail(subject, message, from_email, to_list, fail_silently=True)"""

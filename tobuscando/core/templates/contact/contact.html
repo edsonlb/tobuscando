@@ -4,7 +4,7 @@
 
 
 {% block content %}
-  
+
 <section id="main_content" >
 <div class="container">
 <div class="row">
@@ -33,25 +33,25 @@
 			            <div class="form-group">
 				            {% bootstrap_form_errors form type='non_fields' %}
 		        			{% bootstrap_field form.full_name %}
-	        			</div>	
+	        			</div>
 		            </div>
 		            <div class="col-md-6 col-sm-6">
 			            <div class="form-group">
 				            {% bootstrap_form_errors form type='non_fields' %}
 		        			{% bootstrap_field form.email %}
-	        			</div>	
+	        			</div>
 		            </div>
 		            <div class="col-md-6 col-sm-6">
 			            <div class="form-group">
 				            {% bootstrap_form_errors form type='non_fields' %}
 		        			{% bootstrap_field form.phone %}
-	        			</div>	
+	        			</div>
 		            </div>
 		            <div class="col-md-12 col-sm-6">
 			            <div class="form-group">
 				            {% bootstrap_form_errors form type='non_fields' %}
 		        			{% bootstrap_field form.message %}
-	        			</div>	
+	        			</div>
 		            </div>
 		        </div>
 				<div class="row">
@@ -82,7 +82,7 @@
 
     $("#contactform").submit(function () {
         $.ajax({
-            url: '/contact/',
+            url: '/contato/',
             data: $('#contactform').serialize(),
             type: 'post',
             cache: false,
