@@ -15,6 +15,30 @@ from tobuscando.ads.models import Ad, Category
 URL = 'http://127.0.0.1:8000/'
 
 
+from django.dispatch import receiver
+from allauth.account.signals import user_signed_up
+
+@receiver(user_signed_up)
+def set_attribute(sender, **kwargs):
+    user = kwargs.pop('user')
+    extra_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
+    social_link = extra_data['link']
+    name = extra_data['name']
+    first_name = extra_data['first_name']
+    last_name = extra_data['last_name']
+    language = extra_data['locale']
+    if language == 'pt_BR':
+        user.language = u'Português'
+        user.country = 'Brasil'
+    else: user.language = language
+
+    user.facebook_link = social_link
+    user.name = name
+    user.first_name = first_name
+    user.last_name = last_name
+
+    user.save()
+
 class HomeView(TemplateView):
     template_name = 'index.html'
 

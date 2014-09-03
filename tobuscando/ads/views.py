@@ -13,7 +13,6 @@ from .forms import AdForm, OfferForm, CategoryMetaInlineFormset
 
 import simplejson
 
-
 class AdCreateView(View):
     template_name = "ad_form.html"
     model_class = Ad
