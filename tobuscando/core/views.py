@@ -26,6 +26,7 @@ def set_attribute(sender, **kwargs):
     name = extra_data['name']
     first_name = extra_data['first_name']
     last_name = extra_data['last_name']
+    email = extra_data['email']
     language = extra_data['locale']
     if language == 'pt_BR':
         user.language = u'Português'
@@ -38,6 +39,17 @@ def set_attribute(sender, **kwargs):
     user.last_name = last_name
 
     user.save()
+
+    #try to send welcome email
+    subject = 'Bem vindo ao TôBuscando!'
+    from_email = settings.EMAIL_HOST_USER
+    to_list = [email, settings.EMAIL_HOST_USER]
+    to = email
+    text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
+    html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
 
 class HomeView(TemplateView):
     template_name = 'index.html'
