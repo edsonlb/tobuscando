@@ -19,10 +19,6 @@ from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 URL = 'http://127.0.0.1:8000/'
 
 
-class TestView(TemplateView):
-    template_name = 'ad_form_ac.html'
-
-
 class HomeView(TemplateView):
     template_name = 'index.html'
 

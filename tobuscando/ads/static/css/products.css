@@ -1,14 +1,19 @@
+#category {
+    text-align: center;
+}
+
 #category label {
     display: block;
     cursor: pointer;
 }
+
 #category label input {
     position: absolute;
     top: -9999em;
 }
 #category label:hover,
 #category label.active {
-    background: #fafafa;
+    background: #E6E6E6;
 }
 #category .dropdown-nav {
     position: absolute;
