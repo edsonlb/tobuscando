@@ -14,7 +14,7 @@
     <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
         <form action="{% url 'account_signup' %}" method="POST">{% csrf_token %}
             <div class="form-group">
-              {% bootstrap_form form %}
+              {% bootstrap_form form layout='inline' %}
               {% if redirect_field_value %}
               <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
               {% endif %}
