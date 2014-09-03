@@ -1,18 +1,14 @@
 # coding: utf-8
+from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from random import randint, choice
-from django.shortcuts import render
 from django.http import HttpResponse
-
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
-from django.template.loader import get_template
-from django.template.loader import render_to_string
-
-# coding: utf-8
-from tobuscando.ads.models import Ad
+from django.template.loader import render_to_string, get_template
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
+from tobuscando.ads.models import Ad, Category
 
 
 # Usado para realização de testes na máquina local.
@@ -39,11 +35,13 @@ class SearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+
         try:
             context['slug'] = self.get_slug(self.kwargs.get('slug'))
         except:
             pass
-
+# {% url 'ads:category_detail' object.slug %}
         return context
 
     def get_queryset(self):

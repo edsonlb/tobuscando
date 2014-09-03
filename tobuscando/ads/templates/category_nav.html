@@ -1,13 +1,15 @@
 {% load mptt_tags %}
 
+
 <div class="box_style_1">
+    {% if categories %}
     <h4>Categorias</h4>
     <ul class="submenu-col">
-        <li><a href="{% url 'ads:category_detail' object.slug %}" title="{{ object.name }}">{{ object.name }}</a></li>
         {% recursetree categories %}
         <li><a href="{% url 'ads:category_detail' node.slug %}" title="{{ category.name }}">{{ node.name }}</a></li>
         {% endrecursetree %}
     </ul>
+    {% endif %}
 
     {% for meta in object.metas %}
     <h4>{{ meta.meta.name }}</h4>
