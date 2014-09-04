@@ -8,7 +8,8 @@ def slug(instance, model, title):
         new_slug = slug
 
         count = 0
-        while model.objects.filter(slug=new_slug).exclude(pk=instance.pk).count() > 0:
+        while model.objects.filter(slug=new_slug)\
+                   .exclude(pk=instance.pk).count() > 0:
             count += 1
             new_slug = '{slug}-{counter}'.format(slug=slug, counter=count)
 

@@ -12,7 +12,6 @@ class ProfileForm(forms.ModelForm):
 
         self.fields['first_name'].label = _(u'Nome')
         self.fields['username'].help_text = None
-        self.fields['username'].widget = forms.TextInput(attrs={'readonly': 'readonly'})
 
         self.fields['password'].widget = forms.HiddenInput()
         self.fields['last_login'].widget = forms.HiddenInput()
@@ -27,6 +26,11 @@ class ProfileForm(forms.ModelForm):
             'notification1', 'notification2', 'notification3', 'notification4',
             'date_joined', 'last_login', 'password'
         )
+
+        widgets = {
+            'username': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'email': forms.TextInput(attrs={'readonly': 'readonly'}),
+        }
 
 
 class OfferResponseForm(forms.ModelForm):
