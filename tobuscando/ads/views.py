@@ -13,6 +13,7 @@ from .forms import AdForm, OfferForm, CategoryMetaInlineFormset
 
 import simplejson
 
+
 class AdCreateView(View):
     template_name = "ad_form.html"
     model_class = Ad
@@ -186,7 +187,7 @@ class CategoryDetailView(DetailView):
                 meta = get[0].split('_')
                 f['metas__option'] = get[1]
 
-        object_list = Ad.objects.filter(q)  #.filter(**f)
+        object_list = Ad.objects.filter(q).filter(**f)
 
         order_by = self.request.GET.get('order_by')
         if order_by:

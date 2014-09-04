@@ -100,10 +100,6 @@ class Category(MPTTModel):
     def get_absolute_url(self):
         return ('ads:category_detail', (), {'slug': self.slug})
 
-    def save(self, *args, **kwargs):
-        super(Category, self).save(*args, **kwargs)
-        Category.objects.rebuild()
-
     def metas(self,):
         return self.categorymeta_set.all()
 
