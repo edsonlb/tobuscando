@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
-    $("input#id_price").extend({
+    $("input#id_price").maskMoney({
         symbol: "R$",
-        decimal: ".",
+        decimal: ",",
         precision: 2,
-        thousands: ",",
+        thousands: ".",
         showSymbol:true
     });
 
