@@ -3,8 +3,6 @@ from django.template.defaultfilters import slugify
 
 
 def slug(instance, model, title):
-    print title
-
     if not instance.slug:
         slug = slugify(title)
         new_slug = slug
