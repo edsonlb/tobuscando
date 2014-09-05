@@ -28,7 +28,7 @@ class Person(AbstractUser):
     zipcode = models.CharField(_(u'cep'), max_length=10, blank=True, null=True)
     language = models.CharField(_(u'idioma'), max_length=10,
                                 blank=True, null=True)
-    avatar = CloudinaryField(_(u'foto'), default='avatar.jpg', null=True)
+    avatar = CloudinaryField(_(u'foto'), null=True)
     facebook_link = models.CharField(_(u'facebook link'), max_length=100,
                                      blank=True, null=True)
     twitter_link = models.CharField(_(u'twitter link'), max_length=100,
