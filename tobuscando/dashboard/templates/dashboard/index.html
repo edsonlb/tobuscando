@@ -2,6 +2,20 @@
 
 
 {% block dashboard_content %}
-    <h2>Visão geral</h2>
-    <br><br>
+<h2>Visão geral</h2>
+<br><br>
+
+<h2 class="col-sm-3">
+    <a href="{% url 'dashboard:ad_list' %}" class="alert alert-info text-center col-sm-12">
+        <i class="glyphicon glyphicon-user"></i>
+        <span class="help-block">{{ user.ads.count }}</span>
+    </a>
+</h2>
+
+<h2 class="col-sm-3">
+    <a href="{% url 'dashboard:offer_list' %}" class="alert alert-warning text-center col-sm-12">
+        <i class="glyphicon glyphicon-user"></i>
+        <span class="help-block">{{ user.offers.count }}</span>
+    </a>
+</h2>
 {% endblock dashboard_content %}

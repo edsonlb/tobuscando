@@ -85,7 +85,8 @@ class AdUpdateView(View):
             return HttpResponseRedirect(r('dashboard:ad_list'))
 
         form = self.form_class(instance=ad)
-        meta_inlineformset = self.meta_inlineformset_class(instance=ad.category)
+        meta_inlineformset = self.meta_inlineformset_class(
+            instance=ad.category)
 
         return render(request, self.template_name, locals())
 
@@ -104,10 +105,13 @@ class AdUpdateView(View):
             form.save()
 
             for data in meta_inlineformset.cleaned_data:
-                meta, created = AdMeta.objects.get_or_create(ad=ad,
-                                                             meta=data['id'])
-                meta.option = data['options']
-                meta.save()
+                try:
+                    meta, created = AdMeta.objects.get_or_create(
+                        ad=ad, meta=data['id'])
+                    meta.option = data['options']
+                    meta.save()
+                except:
+                    pass
 
             messages.success(self.request, self.success_message)
             return HttpResponseRedirect(r('dashboard:ad_list'))

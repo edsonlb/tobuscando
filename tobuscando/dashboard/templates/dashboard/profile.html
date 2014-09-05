@@ -1,5 +1,6 @@
 {% extends 'dashboard/base_dashboard.html' %}
 
+{% load staticfiles %}
 {% load cloudinary %}
 {% load bootstrap3 %}
 
@@ -20,11 +21,20 @@
         {% endif %}
 
         {% for field in form %}
-        {% if field.name == 'avatar' and field.value and user.avatar %}
+        {% if field.name == 'avatar'  %}
+        {% if field.value %}
         <div class="col-sm-offset-2 col-sm-10">
             {% cloudinary user.avatar width=100 height=100 %}
             {{ avatar }}
         </div>
+        {% else %}
+        <div class="clearfix">
+            <div class="col-sm-2 col-sm-offset-2">
+                <img src="{% static '/static/images/avatar.png' %}" width="100" height="100">
+                <br><br>
+            </div>
+        </div>
+        {% endif %}
         {% endif %}
 
         {% if field.name == 'date_joined' %}

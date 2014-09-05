@@ -28,6 +28,7 @@
             <div id="metaoptions" class="clearfix">
                 {% if form.category.value %}
                 {{ meta_inlineformset.management_form }}
+                {{ meta_inlineformset }}
 
                 {% for formset in meta_inlineformset %}
                 <div class="row-inline">
