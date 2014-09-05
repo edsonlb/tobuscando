@@ -52,8 +52,8 @@ class AdCreateView(View):
                     person.set_password(person.password)
                     person.is_active = True
                     person.save()
-
-                return render(request, self.template_name, locals())
+                else:
+                    return render(request, self.template_name, locals())
             else:
                 person = request.user
 
@@ -93,7 +93,7 @@ class AdCreateSuccessTemplateView(TemplateView):
         try:
             context['ad'] = get_object_or_404(Ad,
                                               pk=self.request.session['ad_pk'])
-            del self.request.session['ad_pk']
+            # del self.request.session['ad_pk']
         except:
             context['ad'] = get_object_or_404(Ad, pk=4)
 

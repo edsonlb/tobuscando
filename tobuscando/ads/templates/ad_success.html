@@ -25,14 +25,16 @@
 
                 <div class="clearfix">
                     <br>
-                    {# for meta in ad.metas #}
-                    <strong>{{ meta.meta.name }} - {{ meta.options }}</strong>
-                    {# endfor #}
+                    <div class="clearfix">
+                        {% for meta in ad.metas.all %}
+                        <strong>- {{ meta.meta.meta.name }}:</strong> {{ meta.option }}
+                        {% endfor %}
+                    </div>
                     <strong>Descrição:</strong>
                     <p>{{ ad.description }}</p>
 
                     <strong>Preço:</strong>
-                    <p>{{ ad.price|brl }}</p>
+                    <p>{{ ad.price }}</p>
 
                     {% if ad.link_reference %}
                     <strong>Anúncio referência:</strong>

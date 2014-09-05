@@ -15,7 +15,7 @@ class ProfileForm(forms.ModelForm):
 
         self.fields['password'].widget = forms.HiddenInput()
         self.fields['last_login'].widget = forms.HiddenInput()
-        self.fields['date_joined'].widget = forms.HiddenInput()
+        #self.fields['date_joined'].widget = forms.HiddenInput()
 
     class Meta:
         model = Person

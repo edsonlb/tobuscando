@@ -38,9 +38,6 @@ class Ad(models.Model):
     def get_absolute_url(self):
         return ('ads:ad_detail', (), {'slug': self.slug})
 
-    def metas(self):
-        return self.metas_set.all()
-
     def offers(self):
         return self.offer_set.filter(parent=None, is_active=True)
 
