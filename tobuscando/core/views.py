@@ -21,10 +21,8 @@ from allauth.account.signals import user_signed_up
 @receiver(user_signed_up)
 def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
-    try:
-        extra_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
-    except Exception:
-        pass
+    extra_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
+
     if extra_data:
         social_link = extra_data['link'] 
         name = extra_data['name'] 
