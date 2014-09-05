@@ -20,19 +20,21 @@
             <div class="panel-body">
                 <h3>{{ ad.title }}</h3>
                 <div class="col-sm-12">
-                    {% cloudinary ad.image alt=ad.title class='img-responsive' %}
+                    {% cloudinary ad.image width=400 height=400 alt=ad.title class='img-responsive' %}
                 </div>
 
                 <div class="clearfix">
                     <br>
-                    {# for meta in ad.metas #}
-                    <strong>{{ meta.meta.name }} - {{ meta.options }}</strong>
-                    {# endfor #}
+                    <div class="clearfix">
+                        {% for meta in ad.metas.all %}
+                        <strong>- {{ meta.meta.meta.name }}:</strong> {{ meta.option }}
+                        {% endfor %}
+                    </div>
                     <strong>Descrição:</strong>
                     <p>{{ ad.description }}</p>
 
                     <strong>Preço:</strong>
-                    <p>{{ ad.price|brl }}</p>
+                    <p>{{ ad.price }}</p>
 
                     {% if ad.link_reference %}
                     <strong>Anúncio referência:</strong>

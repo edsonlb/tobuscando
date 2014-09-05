@@ -38,7 +38,7 @@ class PersonPreRegisterForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = ('first_name', 'username', 'email', 'password', 'terms')
-        widget = {
+        widgets = {
             'password': forms.PasswordInput()
         }
 

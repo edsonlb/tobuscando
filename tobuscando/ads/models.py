@@ -15,7 +15,7 @@ class Ad(models.Model):
     category = TreeForeignKey('Category', verbose_name=_(u'categoria:'))
     title = models.CharField(_(u'título:'), max_length=250)
     slug = models.SlugField(_(u'slug'), blank=True, null=True)
-    price = models.DecimalField(_(u'preço:'), max_digits=10, decimal_places=2)
+    price = models.CharField(_(u'preço:'), max_length=100)
     description = models.TextField(_(u'descrição:'))
     link_reference = models.URLField(_(u'anúncio de referência:'), blank=True)
     image = CloudinaryField(_(u'imagem:'), blank=True, null=True)
@@ -23,7 +23,7 @@ class Ad(models.Model):
                                       blank=True, null=True)
     view_phone = models.BooleanField(_(u'exibir telefone no anúncio?'))
     is_bargain = models.BooleanField(_(u'topa negociar?'))
-    is_active = models.BooleanField(_(u'ativo?'), default=False)
+    is_active = models.BooleanField(_(u'ativo?'), default=True)
     created_at = models.DateTimeField(_(u'criado em:'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'alterado em:'), auto_now=True)
 
@@ -37,9 +37,6 @@ class Ad(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('ads:ad_detail', (), {'slug': self.slug})
-
-    def metas(self):
-        return self.metas_set.all()
 
     def offers(self):
         return self.offer_set.filter(parent=None, is_active=True)
@@ -99,10 +96,6 @@ class Category(MPTTModel):
     @models.permalink
     def get_absolute_url(self):
         return ('ads:category_detail', (), {'slug': self.slug})
-
-    def save(self, *args, **kwargs):
-        super(Category, self).save(*args, **kwargs)
-        Category.objects.rebuild()
 
     def metas(self,):
         return self.categorymeta_set.all()

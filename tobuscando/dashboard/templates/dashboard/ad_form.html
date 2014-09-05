@@ -8,8 +8,6 @@
 <h2>Editar anúncio</h2>
 <br><br>
 
-{{ ad.metas.all }}
-
 {% if form.is_multipart %}
 <form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
     {% else %}
@@ -51,7 +49,7 @@
         {% buttons %}
         <div class="col-sm-offset-2">
             <a href="javascript:history.back()" class="btn btn-link">Cancelar</a>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="button_outline text-center btn-info btn-new_ad hidden-xs">Salvar</button>
         </div>
         {% endbuttons %}
     </form>

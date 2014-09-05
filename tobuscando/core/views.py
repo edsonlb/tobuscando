@@ -18,6 +18,7 @@ URL = 'http://127.0.0.1:8000/'
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
 
+
 @receiver(user_signed_up)
 def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
@@ -121,10 +122,12 @@ def contact(request):
         to_list = [save_it.email, settings.EMAIL_HOST_USER]
         to = save_it.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
-        html_content = render_to_string('email-marketing.html', {'equipe':'tobuscando'})
+        html_content = render_to_string(
+            'email-marketing.html', {'equipe': 'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        #send_mail(subject, message, from_email, to_list, fail_silently=True)"""
+        # send_mail(subject, message, from_email, to_list,
+        # fail_silently=True)"""
         return HttpResponse("ok")
-    return render(request, 'contact/contact.html', {'form':form})
+    return render(request, 'contact/contact.html', {'form': form})

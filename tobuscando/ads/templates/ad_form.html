@@ -29,6 +29,12 @@
 
 {% block content %}
 <h2>Faça seu anúncio grátis!</h2>
+
+
+{{ form_ad.errors }}
+{{ meta_inlineformset.errors }}
+{{ form_person.errors }}
+
 {% if form_ad.is_multipart %}
 <form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
     {% else %}

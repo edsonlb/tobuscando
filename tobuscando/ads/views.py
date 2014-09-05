@@ -13,6 +13,7 @@ from .forms import AdForm, OfferForm, CategoryMetaInlineFormset
 
 import simplejson
 
+
 class AdCreateView(View):
     template_name = "ad_form.html"
     model_class = Ad
@@ -51,8 +52,8 @@ class AdCreateView(View):
                     person.set_password(person.password)
                     person.is_active = True
                     person.save()
-
-                return render(request, self.template_name, locals())
+                else:
+                    return render(request, self.template_name, locals())
             else:
                 person = request.user
 
@@ -92,7 +93,7 @@ class AdCreateSuccessTemplateView(TemplateView):
         try:
             context['ad'] = get_object_or_404(Ad,
                                               pk=self.request.session['ad_pk'])
-            del self.request.session['ad_pk']
+            # del self.request.session['ad_pk']
         except:
             context['ad'] = get_object_or_404(Ad, pk=4)
 
@@ -186,7 +187,7 @@ class CategoryDetailView(DetailView):
                 meta = get[0].split('_')
                 f['metas__option'] = get[1]
 
-        object_list = Ad.objects.filter(q)  #.filter(**f)
+        object_list = Ad.objects.filter(q).filter(**f)
 
         order_by = self.request.GET.get('order_by')
         if order_by:

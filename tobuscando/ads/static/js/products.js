@@ -3,6 +3,7 @@ $(document).ready(function() {
     // Validate form
     $("#id_form_ad").submit(function() {
         var $this = $(this);
+
         var category = $this.find("input:radio").filter(':checked');
 
         if($("div." + category.attr('id')).length())
