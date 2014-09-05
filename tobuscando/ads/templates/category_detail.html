@@ -1,0 +1,39 @@
+{% extends 'base_site.html' %}
+{% load i18n %}
+
+
+{% block page_title %}{{ object.name }} - {% endblock page_title %}
+
+{% block content %}
+<div id="breadcrumb" class="clearfix col-sm-12">
+    <ul class="breadcrumb">
+        <li><a href="{% url 'core:home' %}" tilte="{% trans 'Início' %}">{% trans "Início" %}</a></li>
+        <li><a href="{% url 'ads:category_list' %}" tilte="{% trans 'Categorias' %}">{% trans 'Categorias' %}</a></li>
+        {% if object.parent %}
+        <li><a href="{% url 'ads:category_detail' object.parent.slug %}" tilte="{% trans object.name %}">{% trans object.parent.name %}</a></li>
+        {% endif %}
+        <li><a href="{% url 'ads:category_detail' object.slug %}" tilte="{% trans object.name %}">{% trans object.name %}</a></li>
+    </ul>
+</div>
+
+<aside class="col-lg-3 col-md-4 col-sm-4">
+    {% include 'category_nav.html' %}
+</aside>
+
+<div class="col-sm-9">
+    <div class="clearfix">
+        <ul class="list-unstyle list-inline pull-right">
+            <li>{% trans 'Ordernar por:' %}</li>
+            <li><a href="?order_by=price" title="Menor preço">Menor preço</a></li>
+            <li><a href="?order_by=-price" title="Maior preço">Maior preço</a></li>
+        </ul>
+    </div>
+    <div class="clearfix">
+        {% for object in object_list %}
+        {% include 'ad_snippet.html' %}
+        {% empty %}
+        {% include 'not_found.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

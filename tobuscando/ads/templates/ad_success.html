@@ -1,5 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'base_site.html' %}
+
+{% load i18n %}
 {% load cloudinary %}
+{% load core_tags %}
+
 
 {% block content %}
 <div class="alert alert-info">
@@ -12,7 +16,7 @@
 <div class="row">
     <div class="col-sm-8">
         <div class="panel panel-default">
-            <div class="panel-heading"><h4>Anúncio <a href="#" class="btn btn-link"><i class="icon-edit"></i> alterar</a></h4></div>
+            <div class="panel-heading"><h4>Anúncio <a href="{% url 'dashboard:ad_edit' ad.pk %}" class="btn btn-link"><i class="icon-edit"></i> alterar</a></h4></div>
             <div class="panel-body">
                 <h3>{{ ad.title }}</h3>
                 <div class="col-sm-12">
@@ -28,7 +32,7 @@
                     <p>{{ ad.description }}</p>
 
                     <strong>Preço:</strong>
-                    <p>{{ ad.price }}</p>
+                    <p>{{ ad.price|brl }}</p>
 
                     {% if ad.link_reference %}
                     <strong>Anúncio referência:</strong>
@@ -46,7 +50,7 @@
 
     <div class="col-sm-4">
         <div class="panel panel-default">
-            <div class="panel-heading"><h4>Dados pessoais <a href="#" class="btn btn-link"><i class="icon-edit"></i> alterar</a></h4></div>
+            <div class="panel-heading"><h4>Dados pessoais <a href="{% url 'dashboard:profile' %}" class="btn btn-link"><i class="icon-edit"></i> alterar</a></h4></div>
             <div class="panel-body">
                 <strong>Usuário</strong>
                 <p>{{ ad.person.username }}</p>

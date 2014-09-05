@@ -1,0 +1,41 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% load pagination_tags %}
+{% load cloudinary %}
+
+{% block dashboard_content %}
+<h2>Ofertas</h2>
+<br><br>
+
+{% autopaginate offers 10 %}
+{% for offer in offers %}
+<div class="item clearfix">
+    <div class="col-sm-1">
+        {% cloudinary offer.ad.image class='img-responsive' width=50 height=50 %}
+    </div>
+    <div class="col-sm-8">
+        <div class="clearfix ad-title">{{ offer.ad.title }} <a href="{{ offer.ad.get_absolute_url }}" target="_blank" class="small"><i class="icon-link"></i></a> </div>
+        <div class="cleafix">
+            <ul class="list-unstyle list-inline">
+                <li><a href="{% url 'dashboard:offer_response' pk=offer.pk %}"><i class="icon-edit"></i> Responder</a></li>
+                {% if offer.is_active %}
+                <li><strong>Status:</strong> <span class="icon-ok-circle"></span></li>
+                {% else %}
+                <li><strong>Status:</strong> <span class="icon-cancel-circle"></span></li>
+                {% endif %}
+                <div class="clearfix col-sm-12">
+                    <ul class="list-unstyle">
+                        <li><strong>Usuário: </strong>{{ offer.person.username }}</li>
+                        <li><strong>Mensagem: </strong> <p>{{ offer.message|truncatewords:100|safe }}</p></li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+{% empty %}
+<div class="alert alert-info">Você ainda não possui anúncios. Crie <a href="{% url 'ads:ad_create' %}">aqui</a> o seu primeiro.</div>
+{% endfor %}
+
+{% paginate %}
+{% endblock dashboard_content %}

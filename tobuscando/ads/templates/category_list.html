@@ -1,0 +1,31 @@
+{% extends 'base_site.html' %}
+{% load i18n %}
+{% load mptt_tags %}
+
+
+{% block content %}
+<h2>{% trans 'Categorias' %}</h2>
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li>{% trans "Busca" %}</li>
+    <li class="active"><span>{% trans 'Categorias' %}</span></li>
+</ul>
+{% endblock breadcrumb %}
+
+
+<div class="clearfix">
+    {% recursetree category_list %}
+    <ul>
+        <li><a href="{{ node.get_absolute_url }}" title="{{ node.name }}">{{ node.name }}</a>
+
+            {% if not node.is_leaf_node %}
+            <ul>
+                {{ children }}
+            </ul>
+            {% endif %}
+        </li>
+    </ul>
+    {% endrecursetree %}
+</div>
+{% endblock content %}

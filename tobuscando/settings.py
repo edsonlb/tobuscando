@@ -16,15 +16,13 @@ SECRET_KEY = config('SECRET_KEY')
 SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True    # config('DEBUG', default=True)
+DEBUG = config('DEBUG', default=True)
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com']
 
 AUTH_USER_MODEL = 'core.Person'
-
-LOGIN_URL = '/login/'
 
 # Application definition
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
@@ -36,7 +34,7 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    #"django.core.context_processors.request",
+    "django.core.context_processors.request",
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
 )
@@ -50,16 +48,19 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.auth',
+    'django.contrib.flatpages',
 
     'south',
     'cloudinary',
     'smart_selects',
     'mptt',
     'bootstrap3',
-    'pagination',
 
     'tobuscando.core',
+    'tobuscando.dashboard',
     'tobuscando.ads',
+
+    'pagination',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -79,7 +80,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'pagination.middleware.PaginationMiddleware',
 )
-
 
 
 AUTHENTICATION_BACKENDS = (
@@ -104,14 +104,13 @@ DATABASES = {
 }
 
 
-
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/dashboard/'
 
 
 ACCOUNT_ADAPTER = "allauth.account.adapter.DefaultAccountAdapter"
-ACCOUNT_AUTHENTICATION_METHOD = "username_email" 
-ACCOUNT_CONFIRM_EMAIL_ON_GET = False
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = LOGIN_URL
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = LOGIN_REDIRECT_URL
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 10
@@ -119,7 +118,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = None
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "Subject is: "
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
-ACCOUNT_LOGOUT_ON_GET = False
+ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = LOGIN_URL
 ACCOUNT_SIGNUP_FORM_CLASS = None
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
@@ -175,9 +174,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 CLOUDINARY = {
-    'cloud_name': config('CLOUDINARY_NAME'),
-    'api_key': config('CLOUDINARY_API_KEY'),
-    'api_secret': config('CLOUDINARY_API_SECRET')
+    'cloud_name': 'to-buscando',  # config('CLOUDINARY_NAME'),
+    'api_key': '698993111417921',   # config('CLOUDINARY_API_KEY'),
+    'api_secret': 'fullE2Yhx3OJcH9PB-p357eDyTU'     # config('CLOUDINARY_API_SECRET')
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -1,6 +1,6 @@
 # coding: utf-8
 from django import forms
-from .models import Ad, Category, CategoryMeta, MetaOption
+from .models import Ad, Offer, Category, CategoryMeta, MetaOption
 
 
 class AdForm(forms.ModelForm):
@@ -8,6 +8,33 @@ class AdForm(forms.ModelForm):
     class Meta:
         model = Ad
         exclude = ('person', 'slug', 'is_active')
+
+
+class AdUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Ad
+        fields = (
+            'image', 'category', 'title', 'price', 'description',
+            'link_reference', 'limit_date', 'view_phone', 'is_bargain'
+        )
+
+
+class OfferForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(OfferForm, self).__init__(*args, **kwargs)
+
+        self.fields['link'].required = True
+
+    class Meta:
+        model = Offer
+        exclude = ('is_active',)
+        widgets = {
+            'ad': forms.HiddenInput(),
+            'person': forms.HiddenInput(),
+            'parent': forms.HiddenInput()
+        }
 
 
 class CategoryMetaForm(forms.ModelForm):
@@ -34,31 +61,34 @@ class CategoryMetaFormInline(forms.ModelForm):
         super(CategoryMetaFormInline, self).__init__(*args, **kwargs)
 
         option_list = self.instance.options.all()
+        label = '%s:' % self.instance.meta.name
 
-        self.fields['meta'].label = self.instance.meta.name
         self.fields['meta'].widget.attrs['class'] = 'hide'
 
         if self.instance.meta.field in ['text', 'textarea']:
-            self.fields['options'] = forms.CharField(label='', required=False)
+            self.fields['options'] = forms.CharField(label=label,
+                                                     required=False)
         else:
             self.fields['options'] = forms.ModelChoiceField(
-                label='', required=False, queryset=option_list)
+                label=label, required=False, queryset=option_list)
 
         if self.instance.meta.field == 'textarea':
-            self.fields['options'].widget = forms.TextareaInput(label='')
+            self.fields['options'].widget = forms.TextareaInput(label=label)
 
         if self.instance.meta.field == 'checkbox':
             self.fields[
-                'options'].widget = forms.CheckboxSelectMultiple(label='')
+                'options'].widget = forms.CheckboxSelectMultiple(label=label)
 
         if self.instance.meta.field == 'radio':
-            self.fields['options'].widget = forms.RadioSelectMultiple(label='')
+            self.fields['options'].widget = forms.RadioSelectMultiple(
+                label=label)
 
         if self.instance.meta.field == 'date':
-            self.fields['options'] = forms.DateField(label='', required=False)
+            self.fields['options'] = forms.DateField(label=label,
+                                                     required=False)
         if self.instance.meta.field == 'datetime':
             self.fields['options'] = forms.DateTimeField(
-                label='', required=False)
+                label=label, required=False)
 
     class Meta:
         model = CategoryMeta

@@ -1,38 +1,228 @@
-{% extends "base.html" %}
+{% extends 'base_site.html' %}
+{% load staticfiles %}
+{% load i18n %}
 
-
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="../static/map/css/map.css">
-{% endblock css %}
-
-{% block sub_header %}
+{% block content_index %}
 <section id="sub-header" >
     <div class="container">
-        <div class="col-md-6">
-            <h1>Nós avisamos!</h1>
-            <h2>Chegou o melhor site de compras e vendas do Brasil. Receba ofertas ou anuncie já!</h2>
-            <ul class="list_ok">
-                <li><strong>Segurança</strong> em suas compras</li>
-                <li><strong>Agilidade</strong> nas entregas</li>
-                <li><strong>Responsabilidade</strong> de escolhas</li>
-                <li><strong>Grátis</strong> durante 1 mês</li>
-            </ul>
-        </div>
-        <div class="col-md-6 video">
-            <iframe src="//player.vimeo.com/video/103229541" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </div>
+        <div class="row">
+            <div class="col-md-6" id="fade">
+                <h1>É gratuito!</h1>
+                <h2>Chegou o melhor site de Leilão Inverso do Brasil! Faça a sua proposta de compra e receba ofertas já!</h2>
+                <ul class="list_ok">
+                    <li><strong>Comodidade</strong> em suas compras</li>
+                    <li><strong>Facilidade</strong> de negociação</li>
+                    <li><strong>Faça já o seu cadastro e comece a usar!</strong></li>
+                </ul>
+            </div>
+            <div class="col-md-6 video">
+                <iframe src="//player.vimeo.com/video/{{ rand_video }}" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+        </div><!-- End row -->
     </div>
-</section>
-{% endblock sub_header %}
+  </section><!-- End sub-header -->
 
+<section id="main_content">
+<div class="container">
+
+     <div class="row">
+    <div class="col-md-7">
+
+        <h3>Uma grande ideia que permite a inovação!</h3>
+        <p  align="justify">
+            Para o <b>vendedor</b>, tem o objetivo de facilitar a compra do seu produto ou serviço sem exigir esforço. Para o <b>comprador</b>, basta publicar a sua intenção de compra e deixar que o Tobuscando.com faça o resto! É tudo <b>gratuito</b>, e quando menos esperar você receberá várias propostas e ofertas para avaliar, podendo analizar qual se encaixa melhor em seu orçamento!
+        </p>
+        <h4>Mas o quê é o Leilão Inverso?</h4>
+        <p align="justify">
+            Dentre as diversas formas de estabelecer negócios on-line, ressalta a dos Leilões e, em particular, a dos Leilões Inversos, em que os Vendedores & Empresas fornecedoras competem entre si para apresentar ao futuro Cliente a melhor experiência de compra para a proposta colocada em leilão. O <b>Tobuscando.com</b> se trata deste conceito interessante, pois <b>valoriza o Cliente</b> e oferece a ele uma ferramenta para que as Empresas o trate com o valor merecido, trabalhando assim fatores como <b>transparência</b>, <b>clareza</b> e <b>proximidade</b> com os seus consumidores.
+        </p>
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+        <div class="row">
+        <div class="col-md-12 col-sm-6">
+                <div class="project-item-image-container">
+                    <img src="{% static 'images/randomicas/ladoDireito' %}{{ rand_imagem }}.png"/>
+                </div>
+            </div><!-- End col-md-12-->
+
+     </div><!-- End row -->
+       </div>
+    </div><!-- End row -->
+</div><!-- End container -->
+</section><!-- End main_content-->
+
+    <section id="main-features">
+    <div class="divider_top_black"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-10 col-md-offset-1 text-center">
+                <h2>Como Funciona?</h2>
+                <p class="lead" align="justify">
+                    Primeiramente, o <b>Tobuscando.com</b> é um serviço <b>gratuito</b> tanto para quem <b>Vende</b>, quanto para quem <b>Compra</b>. Cuidamos para que a sua intenção de compra seja visualizada pelos Vendedores, e que você receba propostas coerentes com aquilo que você procura. <b>Não fazemos o papel de Loja Virtual</b>, mas sim a de um <b>facilitador entre negociações</b>. O Vendedor ainda continua tendo o seu papel, e fará a venda de seu produto ou serviço utilizando-se de sua própria Loja Virtual.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="feature">
+                    <i class="icon-user"></i>
+                    <h3>1º Passo</h3>
+                    <p align="justify">
+                        Você se cadastra e divulga a sua Intenção de Compra informando o <b>preço médio</b> que vai pagar.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature">
+                    <i class="icon-tags"></i>
+                    <h3>3º Passo</h3>
+                    <p align="justify">
+                        Os interessados em te propor uma Oferta vão entrar em contato com você através do <b>Tobuscando.com</b> oferecendo exatamente o que você procura, ou então propondo novas alternativas ao seu interesse, e que pode também lhe agradar.
+                    </p>                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature">
+                    <i class="icon-star"></i>
+                    <h3>2º Passo</h3>
+                    <p align="justify">
+                        O <b>Tobuscando.com</b> vai divulgar na Internet a sua Intenção de Compra para que chegue até os Vendedores e Empresas do seu produto ou serviço solicitado!
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature">
+                    <i class="icon-basket-3"></i>
+                    <h3>4º Passo</h3>
+                    <p align="justify">
+                        Você analiza as propostas recebidas, e negocia diretamente com os Vendedores e Empresas! Escolhe a Oferta que melhor te agrada e faz a compra diretamente no site da Empresa!
+                    </p>
+                </div>
+            </div>
+            </div><!-- End row -->
+            </div><!-- End container -->
+    </section><!-- End main-features -->
+    <section id="join">
+       <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+            <div class="row">
+            <div class="col-md-2 hidden-sm hidden-xs"><img src="{% static 'images/arrow_hand_1.png' %}" alt="Arrow" > </div>
+            <div class="col-md-8"><a href="/accounts/login/?next=/dashboard/" class="button_big">Cadastre-se</a> </div>
+            </div>
+             </div>
+     </div>
+      </div>
+     </section>
+
+
+
+
+    <section id="testimonials">
+        <div class="container">
+            <div class="row">
+                <div class='col-md-offset-2 col-md-8 text-center'>
+                    <h2>Depoimentos</h2>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-offset-2 col-md-8'>
+                    <div class="carousel slide" data-ride="carousel" data-pause="hover" data-interval="4000" id="quote-carousel">
+                        <!-- Bottom Carousel Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#quote-carousel" data-slide-to="1"></li>
+                            <li data-target="#quote-carousel" data-slide-to="2"></li>
+                            <li data-target="#quote-carousel" data-slide-to="3"></li>
+                        </ol>
+                        <!-- Carousel Slides / Quotes -->
+                        <div class="carousel-inner">
+                            <!-- Quote 1 -->
+                            <div class="item active">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-3 text-center">
+                                            <img class="img-circle" src="{% static 'images/rosto1.png' %}" alt="">
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p>
+                                                Conforme os produtos que desejava, adorei ter a possibilidade do vendedor chegar até mim.
+                                            </p>
+                                            <small>Maria Fátima</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <!-- Quote 2 -->
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-3 text-center">
+                                            <img class="img-circle" src="{%  static 'images/rosto2.png' %}" alt="">
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p>
+                                                Como logista, a ferramenta é ótima para encontrar consumidores para os meus produtos!
+                                            </p>
+                                            <small>Luís Silva</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <!-- Quote 3 -->
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-3 text-center">
+                                            <img class="img-circle" src="{%  static 'images/rosto3.png' %}" alt="">
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p>
+                                                Satisfeita com a proposta do site! Como não tinha pressa na compra, pude aproveitar melhor o meu dinheiro aguardando uma oferta interessante para mim!
+                                            </p>
+                                            <small>Júlia Castanha</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <!-- Quote 4 -->
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-3 text-center">
+                                            <img class="img-circle" src="{%  static 'images/rosto4.png' %}" alt="">
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p>
+                                                Vi que é possível se surpreender com o Tobuscando! Não comprei pelo menor valor, mas sim pela melhor proposta. Estou satisfeita com as ofertas que recebi.
+                                            </p>
+                                            <small>Paula Regina</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       </section><!-- End testimonials -->
+
+
+{% endblock content_index %}
 {% block content %}
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-        <a href="{% url 'ads:ad_create' %}" title="Anunciar" class="button_outline btn-block text-center btn-info btn-new_ad">Publicar minha oferta</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2" align="center">
+            <h3>Informe seu e-mail para receber notícias.</h3>
+            <div id="message-newsletter">
+            </div>
+            <form method="post" action="#" name="newsletter" id="newsletter" class="form-inline">
+                <input name="email_newsletter" id="email_newsletter" type="email" value="" placeholder="Seu Email" class="form-control">
+                <button id="submit-newsletter" class="button_outline text-center btn-info btn-new_ad"> Enviar</button>
+            </form>
+        </div>
     </div>
-</div>
-
-<div class="row">
-
 </div>
 {% endblock content %}

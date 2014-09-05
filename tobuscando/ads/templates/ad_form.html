@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_site.html' %}
 
 {% load staticfiles %}
 {% load mptt_tags %}
@@ -17,9 +17,9 @@
         $("div.id_category_{{ form_ad.category.value }}").show();
 
         $("label[for=id_category_{{ form_ad.category.value }}]")
-            .addClass('active')
-            .parent('div')
-            .show();
+        .addClass('active')
+        .parent('div')
+        .show();
     });
 </script>
 {% endif %}
@@ -42,7 +42,7 @@
                     <label class="col-md-2 control-label">{{ form_ad.category.label }}</label>
                     <div id="category" class="col-md-3">
                         {% recursetree categories %}
-                        <label for="id_category_{{ node.pk }}" class="list-group-item">
+                        <label for="id_category_{{ node.pk }}" class="list-group-item" title="{{node.name}}">
                             {{ node.name }}
                             {% if form_ad.category.value|add:"0" == node.pk|add:"0" %}
                             <input checked="checked" id="id_category_{{ node.pk }}" name="category" type="radio" value="{{ node.pk }}" class="radio-category">
@@ -52,13 +52,14 @@
                         </label>
 
                         {% if not node.is_leaf_node %}
-                        <div class="list-group dropdown-nav col-md-12 col-sm-12 id_category_{{ node.pk }}">
+                        <div class="list-group dropdown-nav col-md-12 col-sm-12 id_category_{{ node.pk }} {% if node.parent.pk %}parent-{{ node.parent.pk }}{% endif %}">
                             {{ children }}
                         </div>
                         {% endif %}
                         {% endrecursetree %}
                     </div>
                 </div>
+
                 <div class="col-sm-offset-2 col-sm-10 has-error">
                     {% for error in form_ad.category.errors %}
                     <span class="help-block">{{ error }}</span>
@@ -78,14 +79,25 @@
                 {% bootstrap_field field layout='horizontal' %}
                 {% endif %}
                 {% endfor %}
-
             </div>
 
             <div class="clearfix">
                 <h3>Suas informações:</h3>
 
                 <div class="clearfix">
+                    {% if user.is_authenticated %}
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Nome:</label>
+                        <div class="col-sm-10">{{ user.first_name }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Email:</label>
+                        <div class="col-sm-10">{{ user.email }}</div>
+                    </div>
+                    <p class="col-sm-offset-2">Não é você? <a href="{% url 'account_logout' %}?next={% url 'ads:ad_create' %}">Clique aqui.</a></p>
+                    {% else %}
                     {% bootstrap_form form_person layout='horizontal' %}
+                    {% endif %}
                 </div>
             </div>
 

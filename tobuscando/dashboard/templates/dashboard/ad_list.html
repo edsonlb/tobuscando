@@ -1,0 +1,35 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% load pagination_tags %}
+{% load cloudinary %}
+
+{% block dashboard_content %}
+<h2>Meus Anúncios</h2>
+<br><br>
+
+{% autopaginate ads 10 %}
+{% for ad in ads %}
+<div class="item clearfix">
+    <div class="col-sm-1">
+        {% cloudinary ad.image class='img-responsive' width=50 height=50 %}
+    </div>
+    <div class="col-sm-8">
+        <div class="clearfix ad-title">{{ ad.title }} <a href="{{ ad.get_absolute_url }}" target="_blank" class="small"><i class="icon-link"></i></a> </div>
+        <div class="cleafix">
+            <ul class="list-unstyle list-inline">
+                <li><a href="{% url 'dashboard:ad_edit' pk=ad.pk %}"><i class="icon-edit"></i> Editar</a></li>
+                {% if ad.is_active %}
+                <li><strong>Status:</strong> <span class="icon-ok-circle"></span></li>
+                {% else %}
+                <li><strong>Status:</strong> <span class="icon-cancel-circle"></span></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% empty %}
+<div class="alert alert-info">Você ainda não possui anúncios. Crie <a href="{% url 'ads:ad_create' %}">aqui</a> o seu primeiro.</div>
+{% endfor %}
+
+{% paginate %}
+{% endblock dashboard_content %}

@@ -1,0 +1,26 @@
+{% extends 'base_site.html' %}
+
+
+{% block page_title %}{{ slug|title }} - {% endblock page_title %}
+
+{% block content %}
+
+<div id="breadcrumb" class="clearfix col-sm-12">
+    <ul class="breadcrumb">{% block breadcrumb %}{% endblock breadcrumb %}</ul>
+</div>
+
+<aside class="col-lg-3 col-md-4 col-sm-4">
+    {% include 'category_nav.html' %}
+</aside>
+
+<div class="col-sm-9">
+    <div class="clearfix">
+        {% for object in object_list %}
+        {% include 'ad_snippet.html' %}
+        {% empty %}
+        {% include 'not_found.html' %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

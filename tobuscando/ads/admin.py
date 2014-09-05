@@ -2,21 +2,19 @@
 from django.contrib import admin
 from suit.admin import SortableModelAdmin, SortableTabularInline
 from mptt.admin import MPTTModelAdmin
-from .models import Ad, AdMeta, Category, Meta, MetaOption, CategoryMeta
+from .models import Ad, AdMeta, Offer, Category, Meta, MetaOption, CategoryMeta
 from .forms import CategoryMetaForm
 
 
 class MetaOptionTabularInline(SortableTabularInline):
     model = MetaOption
+    extra = 1
 
     sortable = 'order'
 
     def get_extra(self, request, obj=None, **kwargs):
-        extra = 1
-
         if obj:
-            extra = 0
-        return extra
+            return 0
 
 
 class MetaAdmin(SortableModelAdmin):
@@ -32,6 +30,7 @@ class MetaAdmin(SortableModelAdmin):
 class CategoryMetaTabularInline(SortableTabularInline):
     model = CategoryMeta
     form = CategoryMetaForm
+    extra = 1
 
     fields = ('meta', 'options', 'is_active', 'order')
     can_delete = False
@@ -40,11 +39,8 @@ class CategoryMetaTabularInline(SortableTabularInline):
     sortable = 'order'
 
     def get_extra(self, request, obj=None, **kwargs):
-        extra = 1
-
         if obj:
-            extra = 0
-        return 1
+            return 0
 
 
 class CategoryAdmin(MPTTModelAdmin, SortableModelAdmin):
@@ -71,3 +67,4 @@ class AdAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Meta, MetaAdmin)
 admin.site.register(Ad, AdAdmin)
+admin.site.register(Offer)

@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser, User
 from cloudinary.models import CloudinaryField
+from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 
 
 class Person(AbstractUser):
@@ -27,7 +28,7 @@ class Person(AbstractUser):
     zipcode = models.CharField(_(u'cep'), max_length=10, blank=True, null=True)
     language = models.CharField(_(u'idioma'), max_length=10,
                                 blank=True, null=True)
-    avatar = CloudinaryField(_(u'foto'), default='avatar.jpg', null=True)
+    avatar = CloudinaryField(_(u'foto'), null=True)
     facebook_link = models.CharField(_(u'facebook link'), max_length=100,
                                      blank=True, null=True)
     twitter_link = models.CharField(_(u'twitter link'), max_length=100,
@@ -57,23 +58,23 @@ class Person(AbstractUser):
                                               email=self.email)
 
     def ads(self):
-        print self.pk
         return self.ad_set.all()
 
-    def save(self, *args, **kwargs):
-        self.username = self.username.lower()
-        self.first_name = self.first_name.lower()
-        self.last_name = self.last_name.lower()
-        self.email = self.email.lower()
-        if self.address:
-            self.address = self.address.lower()
-        if self.district:
-            self.district = self.district.lower()
-        if self.city:
-            self.city = self.city.lower()
-        if self.state:
-            self.state = self.state.lower()
-        if self.country:
-            self.country = self.country.lower()
+    def offers(self):
+        return self.offer_set.filter(ad__person=self.pk)
 
-        super(Person, self).save(*args, **kwargs)
+    def get_accounts_facebook(self):
+        account_fc = SocialAccount.objects.filter(user_id=self.id)
+        return account_fc
+        
+class Contact(models.Model):
+        full_name = models.CharField(_('nome completo'), max_length=100)
+        email = models.EmailField(_('email'))
+        phone = models.CharField(_('telefone'), max_length=20, blank=True)
+        message = models.TextField(_('mensagem'), max_length=500)
+
+        class Meta:
+            verbose_name = _(u'contato')
+            verbose_name_plural = _(u'contatos')
+
+        def __unicode__(self): return self.full_name

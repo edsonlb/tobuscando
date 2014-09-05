@@ -1,7 +1,10 @@
 # coding: utf-8
 from django import forms
+
+from tobuscando.core.models import Person, Contact
+
+from django.utils.translation import ugettext as _
 from tobuscando.core.models import Person
-from django.contrib.auth.forms import UserCreationForm
 
 
 class PersonForm(forms.ModelForm):
@@ -28,6 +31,8 @@ class PersonPreRegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PersonPreRegisterForm, self).__init__(*args, **kwargs)
 
+        self.fields['first_name'].label = _(u'Nome')
+        self.fields['email'].label = _(u'E-mail')
         self.fields['email'].required = True
 
     class Meta:
@@ -36,3 +41,29 @@ class PersonPreRegisterForm(forms.ModelForm):
         widget = {
             'password': forms.PasswordInput()
         }
+
+class SignupForm(forms.Form):
+    first_name = forms.CharField(max_length=30, label='Nome')
+    last_name = forms.CharField(max_length=30, label='Sobrenome')
+    address = forms.CharField(max_length=50, label='Endereço')
+    city = forms.CharField(max_length=50, label='Cidade')
+    state = forms.CharField(max_length=50, label='Estado')
+    country = forms.CharField(max_length=50, label='País')
+    zipcode = forms.CharField(max_length=50, label='CEP')
+    language = forms.CharField(max_length=50, label='Idioma')
+
+
+    def signup(self, request, user):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.address = self.cleaned_data['address']
+        user.city = self.cleaned_data['city']
+        user.state = self.cleaned_data['state']
+        user.country = self.cleaned_data['country']
+        user.zipcode = self.cleaned_data['zipcode']
+        user.language = self.cleaned_data['language']
+        user.save()
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact

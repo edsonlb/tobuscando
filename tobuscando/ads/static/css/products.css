@@ -1,18 +1,46 @@
+#category {
+    text-align: center;
+}
+
 #category label {
     display: block;
     cursor: pointer;
 }
+
 #category label input {
     position: absolute;
     top: -9999em;
 }
-#category label:hover,
+#category label:hover{
+   background: #E6E6E6 url(../img/arrow.png) no-repeat 96% center;
+}
 #category label.active {
-    background: #fafafa;
+    background: #DC4713 url(../img/verify.png) no-repeat 96% center;
+    color: white;
 }
 #category .dropdown-nav {
     position: absolute;
     display: none;
     top: 0;
     left: 275px;
+}
+.cbp_tmlabel p {
+    margin-bottom: 0 !important;
+}
+.cbp_tmtimeline>li .cbp_tmlabel {
+    margin: 0 0 15px 16%;
+    padding: 1em 1.5em;
+}
+.cbp_tmtimeline:before {
+    background: none !important;
+}
+
+.cbp_tmtimeline>li ul.cbp_tmtimeline {
+    margin: 10px 0 0px 20% !important;
+}
+.cbp_tmtimeline>li ul.cbp_tmtimeline>li .cbp_tmtime {
+    width: 30% !important;
+}
+.cbp_tmtimeline>li ul.cbp_tmtimeline>li .cbp_tmlabel {
+    margin: 0 0 15px 20%;
 }

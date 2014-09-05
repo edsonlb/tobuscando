@@ -1,0 +1,32 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% load cloudinary %}
+{% load bootstrap3 %}
+
+{% block dashboard_content %}
+
+<h2>Meus dados</h2>
+<br><br>
+
+{% if form.is_multipart %}
+<form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
+        {% else %}
+        <form id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
+        {% endif %}
+    {% csrf_token %}
+
+    {% for field in form %}
+    {% if field.name == 'avatar' and user.avatar %}
+    <div class="col-sm-offset-2 col-sm-10">
+        {% cloudinary user.avatar width=100 height=100 %}
+    </div>
+    {% endif %}
+    {% bootstrap_field field layout='horizontal' %}
+    {% endfor %}
+
+    {% buttons %}
+    <button type="submit" class="button_medium">Salvar</button>
+    {% endbuttons %}
+</form>
+
+{% endblock dashboard_content %}
