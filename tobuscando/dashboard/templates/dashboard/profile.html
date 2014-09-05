@@ -16,6 +16,8 @@
     {% csrf_token %}
 
     {% for field in form %}
+
+    {{ user.avatar }}
     {% if field.name == 'avatar' and user.avatar %}
     <div class="col-sm-offset-2 col-sm-10">
         {% cloudinary user.avatar width=100 height=100 %}
