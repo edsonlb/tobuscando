@@ -23,8 +23,8 @@ def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
     subject = 'Bem vindo ao TôBuscando!'
     from_email = settings.EMAIL_HOST_USER
-    to_list = [user.email, settings.EMAIL_HOST_USER]
-    to = user.email
+    to_list = ['alex.falcucci@gmail.com', settings.EMAIL_HOST_USER]
+    to = 'alex.falcucci@gmail'
     text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
     html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
