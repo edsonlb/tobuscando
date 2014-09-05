@@ -8,6 +8,9 @@ class AdForm(forms.ModelForm):
     class Meta:
         model = Ad
         exclude = ('person', 'slug', 'is_active')
+        widgets = {
+            'price': forms.TextInput()
+        }
 
 
 class AdUpdateForm(forms.ModelForm):
@@ -18,6 +21,10 @@ class AdUpdateForm(forms.ModelForm):
             'image', 'category', 'title', 'price', 'description',
             'link_reference', 'limit_date', 'view_phone', 'is_bargain'
         )
+
+        widgets = {
+            'price': forms.TextInput()
+        }
 
 
 class OfferForm(forms.ModelForm):

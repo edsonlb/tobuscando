@@ -28,8 +28,7 @@ class Person(AbstractUser):
     zipcode = models.CharField(_(u'cep'), max_length=10, blank=True, null=True)
     language = models.CharField(_(u'idioma'), max_length=10,
                                 blank=True, null=True)
-    avatar = CloudinaryField(_(u'foto'),
-                             blank=True, null=True)
+    avatar = CloudinaryField(_(u'foto'), blank=True, null=True)
     facebook_link = models.CharField(_(u'facebook link'), max_length=100,
                                      blank=True, null=True)
     twitter_link = models.CharField(_(u'twitter link'), max_length=100,
@@ -68,6 +67,7 @@ class Person(AbstractUser):
         account_fc = SocialAccount.objects.filter(user_id=self.id)
         return account_fc
 
+
 class Contact(models.Model):
         full_name = models.CharField(_('nome completo'), max_length=100)
         email = models.EmailField(_('email'))
@@ -78,4 +78,5 @@ class Contact(models.Model):
             verbose_name = _(u'contato')
             verbose_name_plural = _(u'contatos')
 
-        def __unicode__(self): return self.full_name
+        def __unicode__(self):
+            return self.full_name

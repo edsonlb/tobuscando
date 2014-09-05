@@ -47,7 +47,7 @@ def set_attribute(sender, **kwargs):
         user.save()
 
         # try to send welcome email
-        subject = 'Bem vindo ao TôBuscando!'
+        subject = 'Bem vindo ao Tobuscando!'
         from_email = settings.EMAIL_HOST_USER
         to_list = [email, settings.EMAIL_HOST_USER]
         to = email
@@ -58,7 +58,7 @@ def set_attribute(sender, **kwargs):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
     else:
-        subject = 'Bem vindo ao TôBuscando!'
+        subject = 'Bem vindo ao Tobuscando!'
         from_email = settings.EMAIL_HOST_USER
         to_list = [user.email, settings.EMAIL_HOST_USER]
         to = user.email
