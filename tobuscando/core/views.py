@@ -21,7 +21,6 @@ from allauth.account.signals import user_signed_up
 @receiver(user_signed_up)
 def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
-    """
     try:
         extra_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
     except Exception:
@@ -56,11 +55,10 @@ def set_attribute(sender, **kwargs):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
     else:
-    """
         subject = 'Bem vindo ao TôBuscando!'
         from_email = settings.EMAIL_HOST_USER
         to_list = [user.email, settings.EMAIL_HOST_USER]
-        to = 'alex.falcucci@gmail.com'
+        to = user.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
         html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
