@@ -125,20 +125,22 @@ ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = "username"
 ACCOUNT_USER_MODEL_EMAIL_FIELD = "email"
-#ACCOUNT_USER_DISPLAY (=a callable returning user.username)
+# ACCOUNT_USER_DISPLAY (=a callable returning user.username)
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 ACCOUNT_USERNAME_BLACKLIST = ['some_username_youdon\t_want']
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = False
 ACCOUNT_PASSWORD_MIN_LENGTH = 6
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
-SOCIALACCOUNT_PROVIDERS = \
-    {'facebook':
-       {'SCOPE': ['email', 'publish_stream'],
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'publish_stream'],
         'AUTH_PARAMS': {'auth_type': 'https'},
         'METHOD': 'oauth2',
-        'VERIFIED_EMAIL': False}}
+        'VERIFIED_EMAIL': False
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -176,7 +178,8 @@ STATIC_URL = '/static/'
 CLOUDINARY = {
     'cloud_name': 'to-buscando',  # config('CLOUDINARY_NAME'),
     'api_key': '698993111417921',   # config('CLOUDINARY_API_KEY'),
-    'api_secret': 'fullE2Yhx3OJcH9PB-p357eDyTU'     # config('CLOUDINARY_API_SECRET')
+    # config('CLOUDINARY_API_SECRET')
+    'api_secret': 'fullE2Yhx3OJcH9PB-p357eDyTU'
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
