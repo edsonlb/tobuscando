@@ -26,7 +26,7 @@ def set_attribute(sender, **kwargs):
         extra_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
     except Exception:
         extra_data = None
-    if extra_data is not None:
+    if extra_data['link'] is not None or extra_data['link'] != '':
         social_link = extra_data['link'] 
         name = extra_data['name'] 
         first_name = extra_data['first_name'] 
