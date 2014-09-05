@@ -22,8 +22,8 @@ from allauth.account.signals import user_signed_up
 def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
     subject = 'Bem vindo ao TôBuscando!'
-    from_email = settings.EMAIL_HOST_USER
-    to_list = ['alex.falcucci@gmail.com', settings.EMAIL_HOST_USER]
+    from_email = 'ToBuscando.com <webmaster@tobuscando.com>'
+    to_list = ['alex.falcucci@gmail.com', 'ToBuscando.com <webmaster@tobuscando.com>']
     to = 'alex.falcucci@gmail'
     text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
     html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
