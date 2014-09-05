@@ -18,15 +18,15 @@ URL = 'http://127.0.0.1:8000/'
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
 
-
 @receiver(user_signed_up)
 def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
+    """
     try:
         extra_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
     except Exception:
-        pass
-    if extra_data['link'] is not None or extra_data['link'] != '':
+        extra_data = None
+    if extra_data is not None:
         social_link = extra_data['link'] 
         name = extra_data['name'] 
         first_name = extra_data['first_name'] 
@@ -56,6 +56,7 @@ def set_attribute(sender, **kwargs):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
     else:
+    """
         subject = 'Bem vindo ao TôBuscando!'
         from_email = settings.EMAIL_HOST_USER
         to_list = [user.email, settings.EMAIL_HOST_USER]
@@ -122,12 +123,10 @@ def contact(request):
         to_list = [save_it.email, settings.EMAIL_HOST_USER]
         to = save_it.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
-        html_content = render_to_string(
-            'email-marketing.html', {'equipe': 'tobuscando'})
+        html_content = render_to_string('email-marketing.html', {'equipe':'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        # send_mail(subject, message, from_email, to_list,
-        # fail_silently=True)"""
+        #send_mail(subject, message, from_email, to_list, fail_silently=True)"""
         return HttpResponse("ok")
-    return render(request, 'contact/contact.html', {'form': form})
+    return render(request, 'contact/contact.html', {'form':form})
