@@ -14,7 +14,7 @@ from tobuscando.ads.models import Ad, Category
 # Usado para realização de testes na máquina local.
 URL = 'http://127.0.0.1:8000/'
 
-
+from django.core import mail
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
 
