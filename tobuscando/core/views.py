@@ -64,7 +64,7 @@ def set_attribute(sender, **kwargs):
         html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
+        #msg.send()
 
 
 class HomeView(TemplateView):
