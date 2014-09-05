@@ -21,15 +21,49 @@ from allauth.account.signals import user_signed_up
 @receiver(user_signed_up)
 def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
-    subject = 'Bem vindo ao TôBuscando!'
-    from_email = 'ToBuscando.com <webmaster@tobuscando.com>'
-    to_list = ['alex.falcucci@gmail.com', 'ToBuscando.com <webmaster@tobuscando.com>']
-    to = 'alex.falcucci@gmail'
-    text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
-    html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
-    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
+    try:
+        extra_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
+    except Exception:
+        extra_data = None
+    if extra_data is not None:
+        social_link = extra_data['link'] 
+        name = extra_data['name'] 
+        first_name = extra_data['first_name'] 
+        last_name = extra_data['last_name'] 
+        email = extra_data['email'] 
+        language = extra_data['locale'] 
+        if language == 'pt_BR':
+            user.language = u'Português' 
+            user.country = 'Brasil' 
+        else: 
+            user.language = language
+
+        user.facebook_link = social_link
+        user.name = name
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+        
+        #try to send welcome email
+        subject = 'Bem vindo ao TôBuscando!'
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [email, settings.EMAIL_HOST_USER]
+        to = email
+        text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
+        html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+    else:
+        subject = 'Bem vindo ao TôBuscando!'
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [user.email, settings.EMAIL_HOST_USER]
+        to = user.email
+        text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
+        html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
+        msg.attach_alternative(html_content, "text/html")
+        #msg.send()
 
 
 class HomeView(TemplateView):
