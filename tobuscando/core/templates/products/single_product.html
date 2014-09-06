@@ -14,7 +14,7 @@
 		.col-md-12 {
 			margin-top: 20px;
 		}
-		
+
 	</style>
 
 {% endblock %}
@@ -29,7 +29,7 @@
 						<div class="input-group" >
 							<input type="text" placeholder="Procure produtos, vendedores..."  name="autocomplete-ajax" id="autocomplete-ajax"  class="form-control style-2" />
 							<span class="input-group-btn">
-							<button class="btn" type="submit"><i class="icon-search"></i></button>
+							<button class="btn" type="submit"><i class="fa fa-search"></i></button>
 							</span>
 						</div><!-- /input-group -->
 		                  <div class="adv_search"><a href="#">Busca avançada</a></div>
@@ -42,41 +42,41 @@
 
 <section id="main_content">
     	<div class="container">
-        
+
         <ol class="breadcrumb">
           <li><a href="{% url 'core:products' %}">Produtos</a></li>
           <li class="active">Unidade</li>
         </ol>
-	
+
 		<div class="row">
 			<div class="col-md-12">
 				<div class="col-md-6">
 				<div class="col-item">
 					<div class="photo">
                         <a href="#"><img src="{% static 'layout_oficial/img/pc.jpg' %}" alt="" /></a>
-                        <div class="cat_row"><span class="pull-right"><i class=" icon-clock"></i>Anunciado à 6 Dias</span></div>
+                        <div class="cat_row"><span class="pull-right"><i class=" fa fa-clock"></i>Anunciado à 6 Dias</span></div>
                     </div>
 				</div>
 				<!-- mini image-->
 				<div class="col-md-12">
 					<div class="col-md-2">
 						<img src="{% static 'layout_oficial/img/pc.jpg' %}" class="img-responsive" style="width: 200px">
-					</div>	
+					</div>
 					<div class="col-md-2">
 						<img src="{% static 'layout_oficial/img/pc.jpg' %}" class="img-responsive" style="width: 200px">
-					</div>	
+					</div>
 					<div class="col-md-2">
 						<img src="{% static 'layout_oficial/img/pc.jpg' %}" class="img-responsive" style="width: 200px">
-					</div>	
+					</div>
 					<div class="col-md-2">
 						<img src="{% static 'layout_oficial/img/pc.jpg' %}" class="img-responsive" style="width: 200px">
-					</div>	
+					</div>
 					<div class="col-md-2">
 						<img src="{% static 'layout_oficial/img/pc.jpg' %}" class="img-responsive" style="width: 200px">
-					</div>	
+					</div>
 					<div class="col-md-2">
 						<img src="{% static 'layout_oficial/img/pc.jpg' %}" class="img-responsive" style="width: 200px">
-					</div>				
+					</div>
 				</div>
 
 				</div>
@@ -87,10 +87,10 @@
 						<p>Conecte-se com o mundo onde você estiver através de uma rede wireless sem fio disponível e acesse redes sociais e e-mails. Compartilhe seus melhores momentos com os amigos.</p>
 			    </div>
 			    <div class="col-md-3">
-						<form action="." method="POST" class="form-group" accept-charset="utf-8"> 
+						<form action="." method="POST" class="form-group" accept-charset="utf-8">
 							<input type="hidden" name="#" id="#"value="#">
 								{% csrf_token %}
-								
+
 								<div class="col-md-6">
 								<input type="number" name="quantity" id="id_quantity" value="1" placeholder="Quantidade" required="required" class="form-control" ><br><br>
 								</div>
@@ -114,17 +114,17 @@
                                  <label class="radio-inline">
                                 <input type="radio" id="" value="" name="payment"><img src="{% static 'layout_oficial/img/logo_maestro.png' %}" alt="Card" class="payment_logos">
                                 </label>
-                            </div>  
-                </div> 
+                            </div>
+                </div>
 
 			<div class="col-md-10 col-md-offset-1">
-                <h3>Order summary</h3>	
-                <div class="table-responsive">             
+                <h3>Order summary</h3>
+                <div class="table-responsive">
                                 <table class="table table-hover " style="margin-bottom:0;">
                                     <thead>
-                                    <tr>								
+                                    <tr>
                                         <th>Items</th>
-                                        <th>Amount</th>									
+                                        <th>Amount</th>
                                     </tr></thead>
                                 <tbody>
                                 <tr>
@@ -143,7 +143,7 @@
                                     <td><small>VAT (19%)</small></td>
                                     <td> <small>€0.16</small> </td>
                                 </tr>
-                              
+
                             </tbody></table>
                         </div>
                 </div>
