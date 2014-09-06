@@ -76,7 +76,8 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         rand_imagem = randint(1, 4)
-        rand_video = ['103562276', '103229541', '103229540', '103229539']
+        # https://vimeo.com/tobuscando/videos
+        rand_video = ['105236559','103562276','103229541','103229540'] #103229539 (Video do Hotsite - Retirado)
 
         context['rand_imagem'] = rand_imagem
         context['rand_video'] = choice(rand_video)
