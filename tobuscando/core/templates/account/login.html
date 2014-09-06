@@ -27,7 +27,7 @@
             {% for provider in socialaccount.providers %}
             {% ifequal provider.name "Facebook" %}
             <div class="col-md-6 col-sm-6 login_social">
-                <a href="{% provider_login_url provider.id openid=brand.openid_url process=process %}" class="button_outline btn-block text-center btn-info btn-new_ad facebook"><i class="icon-facebook"></i> Facebook</a>
+                <a href="{% provider_login_url provider.id openid=brand.openid_url process=process %}" class="button_outline btn-block text-center btn-info btn-new_ad facebook"><i class="fa fa-facebook"></i> Facebook</a>
             </div>
             {% endifequal %}
             {% endfor %}

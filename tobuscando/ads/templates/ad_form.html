@@ -29,6 +29,8 @@
 
 {% block content %}
 <h2>Faça seu anúncio grátis!</h2>
+
+
 {% if form_ad.is_multipart %}
 <form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
     {% else %}
@@ -37,6 +39,21 @@
         {% csrf_token %}
 
         <div class="well">
+
+            {% if form_ad.errors or meta_inlineformset.errors or form_person.errors %}
+            <div class="alert alert-danger">
+                <div class="clearfix">
+                    {{ form_ad.errors|default_if_none:"" }}
+                </div>
+                <div class="clearfix">
+                    {{ meta_inlineformset.errors|default_if_none:"" }}
+                </div>
+                <div class="clearfix">
+                    {{ form_person.errors|default_if_none:"" }}
+                </div>
+            </div>
+            {% endif %}
+
             <div class="clearfix">
                 <div class="form-group">
                     <label class="col-md-2 control-label">{{ form_ad.category.label }}</label>

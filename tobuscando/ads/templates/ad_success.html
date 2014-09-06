@@ -16,23 +16,25 @@
 <div class="row">
     <div class="col-sm-8">
         <div class="panel panel-default">
-            <div class="panel-heading"><h4>Anúncio <a href="{% url 'dashboard:ad_edit' ad.pk %}" class="btn btn-link"><i class="icon-edit"></i> alterar</a></h4></div>
+            <div class="panel-heading"><h4>Anúncio <a href="{% url 'dashboard:ad_edit' ad.pk %}" class="btn btn-link"><i class="fa fa-edit"></i> alterar</a></h4></div>
             <div class="panel-body">
                 <h3>{{ ad.title }}</h3>
                 <div class="col-sm-12">
-                    {% cloudinary ad.image alt=ad.title class='img-responsive' %}
+                    {% cloudinary ad.image width=400 height=400 alt=ad.title class='img-responsive' %}
                 </div>
 
                 <div class="clearfix">
                     <br>
-                    {# for meta in ad.metas #}
-                    <strong>{{ meta.meta.name }} - {{ meta.options }}</strong>
-                    {# endfor #}
+                    <div class="clearfix">
+                        {% for meta in ad.metas.all %}
+                        <strong>- {{ meta.meta.meta.name }}:</strong> {{ meta.option }}
+                        {% endfor %}
+                    </div>
                     <strong>Descrição:</strong>
                     <p>{{ ad.description }}</p>
 
                     <strong>Preço:</strong>
-                    <p>{{ ad.price|brl }}</p>
+                    <p>{{ ad.price }}</p>
 
                     {% if ad.link_reference %}
                     <strong>Anúncio referência:</strong>
@@ -50,7 +52,7 @@
 
     <div class="col-sm-4">
         <div class="panel panel-default">
-            <div class="panel-heading"><h4>Dados pessoais <a href="{% url 'dashboard:profile' %}" class="btn btn-link"><i class="icon-edit"></i> alterar</a></h4></div>
+            <div class="panel-heading"><h4>Dados pessoais <a href="{% url 'dashboard:profile' %}" class="btn btn-link"><i class="fa fa-edit"></i> alterar</a></h4></div>
             <div class="panel-body">
                 <strong>Usuário</strong>
                 <p>{{ ad.person.username }}</p>

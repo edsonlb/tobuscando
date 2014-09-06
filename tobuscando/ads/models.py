@@ -41,9 +41,6 @@ class Ad(models.Model):
         else:
             return ('ads:ad_detail', (), {'slug': 'PRODUTO_SEM_SLUG'})
 
-    def metas(self):
-        return self.metas_set.all()
-
     def offers(self):
         return self.offer_set.filter(parent=None, is_active=True)
 

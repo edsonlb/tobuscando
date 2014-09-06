@@ -36,26 +36,25 @@ class AdCreateView(View):
         categories = self.category_objects
         form_ad = self.form_class(request.POST, request.FILES)
 
-        form_person = self.form_person_class(request.POST)
-        if request.user.is_authenticated():
-            form_person = self.form_person_class(request.POST)
-
         if request.POST.get('category'):
             category = Category.objects.get(pk=request.POST.get('category'))
             meta_inlineformset = self.meta_inlineformset_class(request.POST,
                                                                instance=category)
 
         if form_ad.is_valid() and meta_inlineformset.is_valid():
+            print request.user.is_authenticated()
+
+            person = request.user
             if not request.user.is_authenticated():
+                form_person = self.form_person(request.POST)
+
                 if form_person.is_valid():
                     person = form_person.save(commit=False)
                     person.set_password(person.password)
                     person.is_active = True
                     person.save()
-
-                return render(request, self.template_name, locals())
-            else:
-                person = request.user
+                else:
+                    return render(request, self.template_name, locals())
 
             ad = form_ad.save(commit=False)
             ad.person = person
@@ -93,7 +92,7 @@ class AdCreateSuccessTemplateView(TemplateView):
         try:
             context['ad'] = get_object_or_404(Ad,
                                               pk=self.request.session['ad_pk'])
-            del self.request.session['ad_pk']
+            # del self.request.session['ad_pk']
         except:
             context['ad'] = get_object_or_404(Ad, pk=4)
 

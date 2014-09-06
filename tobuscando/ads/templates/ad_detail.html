@@ -52,14 +52,18 @@
 
 <div class="row clearfix">
     <div class="col-sm-7 text-center">
+        {% if object.image %}
         {% cloudinary object.image alt=object.title|title class='img-responsive' %}
+        {% else %}
+        <img src="{% static 'images/ad.gif' %}" alt="Anúncio" width="100" height="100">
+        {% endif %}
     </div>
     <div class="col-sm-5">
 
         <div class="clearfix">
         <div class="fb-like" data-href="http://tobuscando.com{{request.get_full_path}}" data-width="100%" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
         </div>
-        <h3><i class="icon-list"></i> {% trans "Descrição do produto" %}</h3>
+        <h3><i class="fa fa-list"></i> {% trans "Descrição do produto" %}</h3>
         <p>{{ object.description|safe }}</p>
         <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
         <div class="clearfix">
@@ -70,7 +74,7 @@
 
 <div class="row">
     <div class="clearfix">
-        <h3><i class="icon-cog"></i> {% trans "Características do produto" %}</h3>
+        <h3><i class="fa fa-cog"></i> {% trans "Características do produto" %}</h3>
 
         <table class="table table-striped">
             <tbody>
@@ -85,12 +89,17 @@
 
 <div class="row">
     <div id="offers" class="clearfix">
+<<<<<<< HEAD
         <h3><i class="icon-basket"></i> {% trans "Ofertas" %}</h3>
         <small>{% trans "Proposta de compra criada em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
+=======
+        <h3><i class="fa fa-basket"></i> {% trans "Ofertas" %}</h3>
+
+>>>>>>> 846769662d611cc8e4caa7b2d68d1dcaf09638c9
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion" href="#formOffer"><i class="icon-plus-circle"></i> Fazer uma oferta</a>
+                    <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion" href="#formOffer"><i class="fa fa-plus-circle"></i> Fazer uma oferta</a>
                 </h4>
             </div>
 

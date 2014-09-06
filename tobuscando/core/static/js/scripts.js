@@ -1,11 +1,14 @@
 $(document).ready(function() {
 
-    $("input#id_price").maskMoney({
+    $("input[name*=price]").maskMoney({
         symbol: "R$",
         decimal: ",",
         thousands: "."
     });
-    $('input[name*="date"]').mask('99/99/9999');
+    $('input[name*="date"]').datepicker({
+        'format': 'dd/mm/yyyy',
+        'language': 'pt-BR'
+    });
 
     $("form#id_form_search").submit(function() {
         var $this = $(this);
