@@ -12,6 +12,11 @@ class AdForm(forms.ModelForm):
             'price': forms.TextInput()
         }
 
+    def __init__(self, *args, **kwargs):
+        super(AdForm, self).__init__(*args, **kwargs)
+        self.fields['link_reference'].widget = forms.TextInput(attrs={
+            'placeholder': 'Link se já encontrou algo parecido na Internet...'})
+
 
 class AdUpdateForm(forms.ModelForm):
 

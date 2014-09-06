@@ -1,11 +1,24 @@
 {% extends 'base_site.html' %}
 
-
 {% load i18n %}
 {% load staticfiles %}
 {% load cloudinary %}
 {% load core_tags %}
 
+{% block metatag %}
+<meta property="og:locale" content="pt_BR"> <!-- Depois pegar a língua em que o anúncio foi feito. Não é o caso nesse MVP. -->
+<meta property="og:url" content="http://tobuscando.com{{request.get_full_path}}">
+<meta property="og:title" content="Estou buscando {{ object.title }} na faixa de R${{ object.price|brl }}">
+<meta property="og:site_name" content="Tobuscando">
+<meta property="og:description" content="Você tem alguma proposta para {{ object.title }} na média de R${{ object.price|brl }} para me ofertar? Use o Tobuscando.com para me ajudar a encontrar!">
+<meta property="og:image" content="http://res.cloudinary.com/to-buscando/image/upload/c_fill,h_252,w_484/{{ object.image }}.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="484">
+<meta property="og:image:height" content="252">
+<meta property="og:type" content="website">
+{% endblock metatag %}
+
+{% block page_title %}Estou buscando {{ object.title }} até na média de {{ object.price|brl }} reais no {% endblock page_title %}
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}">
@@ -23,9 +36,18 @@
 
 
 {% block content %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=283595268500721&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="fb-root"></div>
+
 <div class="clearfix">
-    <h2 class="text-center">{{ object.price|brl }} - {{ object.title|title }}</h2>
-    <small>{% trans "criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
+    <h2 class="text-center"><img src="{% static 'images/logo_mobile.png' %}">Tobuscando {{ object.title|title }} na média de {{ object.price|brl }}!</h2>
 </div>
 
 <div class="row clearfix">
@@ -33,9 +55,13 @@
         {% cloudinary object.image alt=object.title|title class='img-responsive' %}
     </div>
     <div class="col-sm-5">
+
+        <div class="clearfix">
+        <div class="fb-like" data-href="http://tobuscando.com{{request.get_full_path}}" data-width="100%" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+        </div>
         <h3><i class="icon-list"></i> {% trans "Descrição do produto" %}</h3>
         <p>{{ object.description|safe }}</p>
-
+        <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
         <div class="clearfix">
             <a href="#offers" class="button_big">{% trans "Ofertar" %}</a>
         </div>
@@ -60,7 +86,7 @@
 <div class="row">
     <div id="offers" class="clearfix">
         <h3><i class="icon-basket"></i> {% trans "Ofertas" %}</h3>
-
+        <small>{% trans "Proposta de compra criada em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -95,6 +121,16 @@
                 {% endif %}
                 {% endfor %}
             </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="offers" class="clearfix">
+        <h3><i class="icon-chat-empty"></i> {% trans "Comentários" %}</h3>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+<div class="fb-comments" data-href="http://tobuscando.com{{request.get_full_path}}" data-numposts="4" data-colorscheme="light" data-width="100%"></div>
+            </div>
         </div>
     </div>
 </div>

@@ -36,7 +36,10 @@ class Ad(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('ads:ad_detail', (), {'slug': self.slug})
+        if self.slug:
+            return ('ads:ad_detail', (), {'slug': self.slug})
+        else:
+            return ('ads:ad_detail', (), {'slug': 'PRODUTO_SEM_SLUG'})
 
     def metas(self):
         return self.metas_set.all()
