@@ -30,7 +30,6 @@
 {% block content %}
 <h2>Faça seu anúncio grátis!</h2>
 
-
 {% if form_ad.is_multipart %}
 <form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
     {% else %}
@@ -112,7 +111,7 @@
                         <div class="col-md-4">
                         <input type="email" class="form-control" id="email_usuario" name="email_usuario" placeholder="Email do usuário logado." title="Verifique se o seu e-mail está correto." type="text" value="{{ user.email|upper }}" readonly>
                         </div>
-                        
+
                     </div>
                     <p class="col-sm-offset-2">Não é você? <a href="{% url 'account_logout' %}?next={% url 'ads:ad_create' %}">Clique aqui.</a></p>
                     {% else %}

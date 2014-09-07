@@ -97,7 +97,7 @@ class SearchView(ListView):
             context['slug'] = self.get_slug(self.kwargs.get('slug'))
         except:
             pass
-# {% url 'ads:category_detail' object.slug %}
+
         return context
 
     def get_queryset(self):
