@@ -56,7 +56,7 @@ def set_attribute(sender, **kwargs):
             'welcome.html', {'equipe': 'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
+        #msg.send()
     else:
         subject = 'Bem vindo ao Tobuscando!'
         from_email = settings.EMAIL_HOST_USER
@@ -67,7 +67,7 @@ def set_attribute(sender, **kwargs):
             'welcome.html', {'equipe': 'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
+        #msg.send()
 
 
 class HomeView(TemplateView):
