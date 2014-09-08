@@ -30,11 +30,6 @@
 {% block content %}
 <h2>Faça seu anúncio grátis!</h2>
 
-
-{{ form_ad.errors }}
-{{ meta_inlineformset.errors }}
-{{ form_person.errors }}
-
 {% if form_ad.is_multipart %}
 <form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
     {% else %}
@@ -43,6 +38,21 @@
         {% csrf_token %}
 
         <div class="well">
+
+            {% if form_ad.errors or meta_inlineformset.errors or form_person.errors %}
+            <div class="alert alert-danger">
+                <div class="clearfix">
+                    {{ form_ad.errors|default_if_none:"" }}
+                </div>
+                <div class="clearfix">
+                    {{ meta_inlineformset.errors|default_if_none:"" }}
+                </div>
+                <div class="clearfix">
+                    {{ form_person.errors|default_if_none:"" }}
+                </div>
+            </div>
+            {% endif %}
+
             <div class="clearfix">
                 <div class="form-group">
                     <label class="col-md-2 control-label">{{ form_ad.category.label }}</label>
@@ -88,17 +98,20 @@
             </div>
 
             <div class="clearfix">
-                <h3>Suas informações:</h3>
+                <h3>Usuário que está anunciando:</h3>
 
                 <div class="clearfix">
                     {% if user.is_authenticated %}
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="control-label col-sm-2">Nome:</label>
                         <div class="col-sm-10">{{ user.first_name }}</div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Email:</label>
-                        <div class="col-sm-10">{{ user.email }}</div>
+                        <div class="control-label col-md-2"><label for="email_usuario">Email:</label></div>
+                        <div class="col-md-4">
+                        <input type="email" class="form-control" id="email_usuario" name="email_usuario" placeholder="Email do usuário logado." title="Verifique se o seu e-mail está correto." type="text" value="{{ user.email|upper }}" readonly>
+                        </div>
+
                     </div>
                     <p class="col-sm-offset-2">Não é você? <a href="{% url 'account_logout' %}?next={% url 'ads:ad_create' %}">Clique aqui.</a></p>
                     {% else %}

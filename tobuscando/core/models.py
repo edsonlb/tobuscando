@@ -7,6 +7,12 @@ from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 
 
 class Person(AbstractUser):
+    LANGUAGE_CHOIES = (
+        ('en', _(u'Ingês USA')),
+        ('pt_br', _(u'Português Brasil')),
+        ('es', _(u'Espanhol')),
+    )
+
     # username
     # first_name
     # last_name
@@ -27,7 +33,7 @@ class Person(AbstractUser):
     country = models.CharField(_(u'país'), max_length=60, blank=True, null=True)
     zipcode = models.CharField(_(u'cep'), max_length=10, blank=True, null=True)
     language = models.CharField(_(u'idioma'), max_length=10,
-                                blank=True, null=True)
+                                blank=True, null=True, choices=LANGUAGE_CHOIES)
     avatar = CloudinaryField(_(u'foto'), blank=True, null=True)
     
     facebook_link = models.CharField(_(u'facebook link'), max_length=100,

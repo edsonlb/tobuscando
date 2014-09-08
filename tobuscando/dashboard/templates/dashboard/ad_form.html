@@ -15,6 +15,20 @@
         {% endif %}
         {% csrf_token %}
 
+        {% if form_ad.errors or meta_inlineformset.errors or form_person.errors %}
+        <div class="alert alert-danger">
+            <div class="clearfix">
+                {{ form_ad.errors|default_if_none:"" }}
+            </div>
+            <div class="clearfix">
+                {{ meta_inlineformset.errors|default_if_none:"" }}
+            </div>
+            <div class="clearfix">
+                {{ form_person.errors|default_if_none:"" }}
+            </div>
+        </div>
+        {% endif %}
+
         {% for field in form %}
         <div class="clearfix">
             {% if field.name == 'image' and ad.image %}
@@ -29,6 +43,12 @@
                 {% if form.category.value %}
                 {{ meta_inlineformset.management_form }}
 
+                <div id="metaoptions" class="clearfix">
+                    {% if form_ad.category.value %}
+                    {% include 'categorymeta_form.html' %}
+                    {% endif %}
+                </div>
+
                 {% for formset in meta_inlineformset %}
                 <div class="row-inline">
                     {% bootstrap_form formset layout='horizontal' %}
@@ -39,7 +59,7 @@
                     .row-inline > div:first-child {
                         display: none;
                     }
-                    </style>
+                </style>
                 {% endif %}
             </div>
             {% endifequal %}

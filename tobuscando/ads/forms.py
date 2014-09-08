@@ -5,6 +5,11 @@ from .models import Ad, Offer, Category, CategoryMeta, MetaOption
 
 class AdForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(AdForm, self).__init__(*args, **kwargs)
+        self.fields['link_reference'].widget = forms.TextInput(attrs={
+            'placeholder': 'Link se já encontrou algo parecido na Internet...'})
+
     class Meta:
         model = Ad
         exclude = ('person', 'slug', 'is_active')

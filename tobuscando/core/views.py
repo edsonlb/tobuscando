@@ -10,11 +10,9 @@ from django.template.loader import render_to_string, get_template
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 from tobuscando.ads.models import Ad, Category
 
-
 # Usado para realização de testes na máquina local.
 URL = 'http://127.0.0.1:8000/'
 
-from django.core import mail
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
 
@@ -55,7 +53,7 @@ def set_attribute(sender, **kwargs):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
     else:
-        subject = 'Bem vindo ao TôBuscando!'
+        subject = 'Bem vindo ao Tobuscando!'
         from_email = settings.EMAIL_HOST_USER
         to_list = [user.email, settings.EMAIL_HOST_USER]
         to = user.email
@@ -65,14 +63,14 @@ def set_attribute(sender, **kwargs):
         msg.attach_alternative(html_content, "text/html")
         #msg.send()
 
-
 class HomeView(TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         rand_imagem = randint(1, 4)
-        rand_video = ['103562276', '103229541', '103229540', '103229539']
+        # https://vimeo.com/tobuscando/videos
+        rand_video = ['105236559','103562276','103229541','103229540'] #103229539 (Video do Hotsite - Retirado)
 
         context['rand_imagem'] = rand_imagem
         context['rand_video'] = choice(rand_video)
@@ -92,7 +90,7 @@ class SearchView(ListView):
             context['slug'] = self.get_slug(self.kwargs.get('slug'))
         except:
             pass
-# {% url 'ads:category_detail' object.slug %}
+
         return context
 
     def get_queryset(self):

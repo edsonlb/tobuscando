@@ -63,6 +63,8 @@ class AdMetaInline(admin.TabularInline):
 
 class AdAdmin(admin.ModelAdmin):
     inlines = [AdMetaInline]
+    list_display = ('title', 'category', 'slug', 'created_at')
+
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Meta, MetaAdmin)
