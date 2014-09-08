@@ -10,14 +10,11 @@ from django.template.loader import render_to_string, get_template
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 from tobuscando.ads.models import Ad, Category
 
-
 # Usado para realização de testes na máquina local.
 URL = 'http://127.0.0.1:8000/'
 
-
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
-
 
 @receiver(user_signed_up)
 def set_attribute(sender, **kwargs):
@@ -67,8 +64,7 @@ def set_attribute(sender, **kwargs):
             'welcome.html', {'equipe': 'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
-        #msg.send()
-
+        msg.send()
 
 class HomeView(TemplateView):
     template_name = 'index.html'
