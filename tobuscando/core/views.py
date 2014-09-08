@@ -48,7 +48,7 @@ def set_attribute(sender, **kwargs):
         to_list = [email, settings.EMAIL_HOST_USER]
         to = email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
-        html_content = render_to_string('account/email/email_confirmation_message.html', {'equipe':'tobuscando'})
+        html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -58,7 +58,7 @@ def set_attribute(sender, **kwargs):
         to_list = [user.email, settings.EMAIL_HOST_USER]
         to = user.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
-        html_content = render_to_string('account/email/email_confirmation_message.html', {'equipe':'tobuscando'})
+        html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
         msg.attach_alternative(html_content, "text/html")
         msg.send()
