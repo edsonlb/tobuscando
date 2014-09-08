@@ -151,8 +151,6 @@ LANGUAGE_CODE = 'pt-br'
 # django-admin.py makemessages -l pt-br
 # django-admin.py compilemessages -l pt-br
 
-LANGUAGE_CODE = 'pt-br'
-
 LANGUAGE = (
     ('pt-br', u'Português'),
     ('en-us', u'English'),
@@ -190,7 +188,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587    # config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False)
 """
-# .env 
+# .env fail
 EMAIL_HOST='smtp.mandrillapp.com'
 EMAIL_HOST_USER='Tobuscando.com <webmaster@tobuscando.com>'
 EMAIL_HOST_PASSWORD='Bu4-Owel5LDbUquSoqEWdg'
