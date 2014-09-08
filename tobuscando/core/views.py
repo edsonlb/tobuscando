@@ -26,8 +26,8 @@ def set_attribute(sender, **kwargs):
         extra_data = user.socialaccount_set.filter(
             provider='facebook')[0].extra_data
     except Exception:
-        extra_data = None
-    if extra_data is not None:
+        pass
+    if extra_data:
         social_link = extra_data['link']
         name = extra_data['name']
         first_name = extra_data['first_name']
@@ -56,7 +56,7 @@ def set_attribute(sender, **kwargs):
             'welcome.html', {'equipe': 'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
-        #msg.send()
+        msg.send()
     else:
         subject = 'Bem vindo ao Tobuscando!'
         from_email = settings.EMAIL_HOST_USER
