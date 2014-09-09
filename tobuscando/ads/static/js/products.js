@@ -24,7 +24,7 @@ $(document).ready(function() {
     });
 
     // Radio category
-    $('#category .radio-category').click(function() {
+    $('#category .radio-category, select#id_category').change(function() {
         var $this = $(this);
 
         $.ajax({
@@ -53,6 +53,7 @@ $(document).ready(function() {
             statusCode: {
                 200: function(data) {
                     $("div#formOffer form div").html(data.html);
+                    return window.reload();
                 }
             }
         });

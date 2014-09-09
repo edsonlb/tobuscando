@@ -1,12 +1,19 @@
 {% extends 'dashboard/base_dashboard.html' %}
 
+{% load staticfiles %}
 {% load bootstrap3 %}
 {% load cloudinary %}
+
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/products.js' %}"></script>
+{% endblock js %}
 
 
 {% block dashboard_content %}
 <h2>Editar anúncio</h2>
 <br><br>
+
 
 {% if form.is_multipart %}
 <form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
@@ -40,26 +47,10 @@
 
             {% ifequal field.name 'category' %}
             <div id="metaoptions" class="clearfix">
+
                 {% if form.category.value %}
-                {{ meta_inlineformset.management_form }}
+                {% include 'categorymeta_form.html' %}
 
-                <div id="metaoptions" class="clearfix">
-                    {% if form_ad.category.value %}
-                    {% include 'categorymeta_form.html' %}
-                    {% endif %}
-                </div>
-
-                {% for formset in meta_inlineformset %}
-                <div class="row-inline">
-                    {% bootstrap_form formset layout='horizontal' %}
-                </div>
-                {% endfor %}
-
-                <style type="text/css">
-                    .row-inline > div:first-child {
-                        display: none;
-                    }
-                </style>
                 {% endif %}
             </div>
             {% endifequal %}

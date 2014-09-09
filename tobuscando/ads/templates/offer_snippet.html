@@ -1,9 +1,21 @@
+{% load staticfiles %}
+{% load cloudinary %}
 
-<li id="comment-{{ offer.pk }}" class="{% if offer.parent %}sub-offer parent-{{ offer.parent.pk }}{% endif %}">
+<li id="comment-{{ offer.pk }}" class="{% if offer.parent %}sub-offer parent-{{ offer.parent.pk }}{% endif %} {% if offer.parent %}col-sm-offset-2{% endif %}">
     <div class="cbp_tmtime">
-        <div class="hidden-xs"><strong>{{ offer.person.get_full_name }}</strong><img src="img/teacher_1.jpg" alt="" class="img-circle speaker"></div>
+        <div class="hidden-xs"><strong>{{ offer.person.get_full_name }}</strong
+            >
+            {% if not offer.person.avatar %}
+            <img src="{% static 'images/avatar.png' %}" alt="" class="img-circle speaker">
+            {% else %}
+            {% cloudinary offer.person.avatar width=50 height=50 %}
+            {% endif %}
+        </div>
     </div>
     <div class="cbp_tmlabel">
         <p>{{ offer.message }}</p>
+        {% if offer.link %}
+        <strong>Link:</strong> <a href="{{ offer.link }}" title="{{ object.title }}">{{ offer.link }}</a>
+        {% endif %}
     </div>
 </li>

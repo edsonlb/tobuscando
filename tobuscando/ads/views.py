@@ -1,6 +1,6 @@
 # coding: utf-8
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse as r
 from django.template import loader
 from django.contrib.auth import login, authenticate
@@ -42,8 +42,6 @@ class AdCreateView(View):
                                                                instance=category)
 
         if form_ad.is_valid() and meta_inlineformset.is_valid():
-            print request.user.is_authenticated()
-
             person = request.user
             if not request.user.is_authenticated():
                 form_person = self.form_person(request.POST)
@@ -61,9 +59,10 @@ class AdCreateView(View):
             ad.save()
 
             for data in meta_inlineformset.cleaned_data:
-                AdMeta.objects.create(ad=ad,
-                                      meta=data['id'],
-                                      option=data['options'])
+                if data['options']:
+                    AdMeta.objects.create(ad=ad,
+                                          meta=data['id'],
+                                          option=data['options'])
 
             request.session['ad_pk'] = ad.pk
 
@@ -92,9 +91,8 @@ class AdCreateSuccessTemplateView(TemplateView):
         try:
             context['ad'] = get_object_or_404(Ad,
                                               pk=self.request.session['ad_pk'])
-            # del self.request.session['ad_pk']
         except:
-            context['ad'] = get_object_or_404(Ad, pk=4)
+            return HttpResponseRedirect(r('core:home'))
 
         return context
 
@@ -105,6 +103,7 @@ class AdDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(AdDetailView, self).get_context_data(**kwargs)
+
         context['form_offer'] = OfferForm(initial={
             'ad': self.object.pk,
             'person': self.request.user.pk
