@@ -72,7 +72,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-12 pull-right" style="margin-top: 4px;">
                     <div class="pull-right">
                         <ul class="list-unstyle list-inline navbar-right">
-                            <li><a href="{% url 'ads:ad_create' %}" title="{% trans 'Inserir anúncio' %}" class="button_outline text-center btn-info btn-new_ad hidden-xs"><i class="fa fa-plus-circle"></i> {% trans "Inserir anúncio" %}</a></li>
+                            <li><a href="{% url 'ads:ad_create' %}" title="{% trans 'Inserir anúncio' %}" class="button_outline text-center btn-info btn-new_ad"><i class="fa fa-plus-circle"></i> {% trans "Inserir anúncio" %}</a></li>
                             {% if user.is_authenticated %}
                             <li class="dropdown" style="margin-left: 10px;"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, <strong>{{ user.username }}</strong> <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -83,7 +83,7 @@
                                 </ul>
                             </li>
                             {% else %}
-                            <li><a href="{% url 'dashboard:dash_home' %}" class="button_outline text-center btn-info btn-dash hidden-xs" id="apply"><i class="fa fa-user"></i> Minha conta</a></li>
+                            <li><a href="{% url 'dashboard:dash_home' %}" class="button_outline text-center btn-info btn-dash" id="apply"><i class="fa fa-user"></i> Minha conta</a></li>
                             {% endif %}
                         </ul>
                     </div>
