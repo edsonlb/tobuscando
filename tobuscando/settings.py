@@ -68,7 +68,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.twitter',
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -115,7 +115,7 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = LOGIN_URL
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = LOGIN_REDIRECT_URL
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 10
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = None
+ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "Subject is: "
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
 ACCOUNT_LOGOUT_ON_GET = True
@@ -151,8 +151,6 @@ LANGUAGE_CODE = 'pt-br'
 # django-admin.py makemessages -l pt-br
 # django-admin.py compilemessages -l pt-br
 
-LANGUAGE_CODE = 'pt-br'
-
 LANGUAGE = (
     ('pt-br', u'Português'),
     ('en-us', u'English'),
@@ -183,10 +181,18 @@ CLOUDINARY = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+"""
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587    # config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False)
+"""
+# .env fail
+EMAIL_HOST='smtp.mandrillapp.com'
+EMAIL_HOST_USER='Tobuscando.com <webmaster@tobuscando.com>'
+EMAIL_HOST_PASSWORD='Bu4-Owel5LDbUquSoqEWdg'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
 
 MPTT_LEVEL_INDENT = 20

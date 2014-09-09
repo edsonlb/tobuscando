@@ -42,20 +42,25 @@
 
   </head>
   <body>
-      <header>
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+    <header style="width: 103.5%;">
+      
+      <div class="container">
+        <div class="row">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" style="background-color: black;">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <div class="container">
-            <div class="row">
-                <h1 class="logo">
-                    <a href="/"><span><img src="{% static 'images/LogoOficial5.png' %}" alt="Tobuscando.com Página Inicial"></span> Tobuscando.com</a>
+            <span class="icon-bar" style="background-color: white;"></span>
+            <span class="icon-bar" style="background-color: white;"></span>
+            <span class="icon-bar" style="background-color: white;"></span>
+          </button>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+                <h1 class="logo" style="margin-left: -33px; ">
+                        <a href="/"><span><img src="{% static 'images/LogoOficial5.png' %}" alt="Tobuscando.com Página Inicial"></span> Tobuscando.com</a>
                 </h1>
-
-                <form id="id_form_search" name="form_search" action="." method="POST" class="col-sm-5 col-xs-5">
+            </div>
+        </div>
+        <div class="navbar-collapse collapse">
+          <form id="id_form_search" name="form_search" action="." method="POST" class="col-sm-5 col-xs-12">
                     {% csrf_token %}
                     <div class="input-group">
                         <input type="text" id="id_search" name="search" placeholder="Ex: guitarra, bicicleta, moto, etc ..." class="form-control" autocomplete="off" value="{{ slug|default_if_none:"" }}">
@@ -64,8 +69,7 @@
                         </span>
                     </div>
                 </form>
-
-                <div class="col-md-4 col-sm-4 col-xs-4 pull-right" style="margin-top: 5px;">
+                <div class="col-md-4 col-sm-4 col-xs-12 pull-right" style="margin-top: 4px;">
                     <div class="pull-right">
                         <ul class="list-unstyle list-inline navbar-right">
                             <li><a href="{% url 'ads:ad_create' %}" title="{% trans 'Inserir anúncio' %}" class="button_outline text-center btn-info btn-new_ad hidden-xs"><i class="fa fa-plus-circle"></i> {% trans "Inserir anúncio" %}</a></li>
@@ -84,8 +88,17 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+
+        
+
+
+
+
+
+
+        </div><!--/.navbar-collapse -->
         </div>
+      </div>
     </header><!-- End header -->
 
     <section id="content">

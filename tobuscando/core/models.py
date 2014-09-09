@@ -35,6 +35,7 @@ class Person(AbstractUser):
     language = models.CharField(_(u'idioma'), max_length=10,
                                 blank=True, null=True, choices=LANGUAGE_CHOIES)
     avatar = CloudinaryField(_(u'foto'), blank=True, null=True)
+    
     facebook_link = models.CharField(_(u'facebook link'), max_length=100,
                                      blank=True, null=True)
     twitter_link = models.CharField(_(u'twitter link'), max_length=100,
