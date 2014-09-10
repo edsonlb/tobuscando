@@ -36,10 +36,10 @@ class Ad(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        if self.slug:
-            return ('ads:ad_detail', (), {'slug': self.slug})
-        else:
-            return ('ads:ad_detail', (), {'slug': 'PRODUTO_SEM_SLUG'})
+        if not self.slug:
+            return ('core:home')
+
+        return ('ads:ad_detail', (), {'slug': self.slug})
 
     def offers(self):
         return self.offer_set.filter(parent=None, is_active=True)
@@ -64,11 +64,12 @@ class AdMeta(models.Model):
         return self.ad.title
 
     def value(self):
-        if self.meta.meta.field in ['text', 'textarea', 'date', 'datetime']:
-            return self.option
+        try:
+            option = self.meta.options.get(pk=self.option)
 
-        option = self.meta.options.get(pk=self.option)
-        return option
+            return option
+        except:
+            return self.option
 
 
 class Category(MPTTModel):
@@ -184,7 +185,7 @@ class Offer(models.Model):
                            null=True, blank=True)
     message = models.TextField(_(u'Mensagem'))
     price = models.DecimalField(_(u'preço'), max_digits=5, decimal_places=2)
-    is_active = models.BooleanField(_(u'ativo?'), default=False)
+    is_active = models.BooleanField(_(u'ativo?'), default=True)
     created_at = models.DateTimeField(_(u'criado em'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'alterado em'), auto_now=True)
 

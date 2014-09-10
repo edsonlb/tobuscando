@@ -84,13 +84,14 @@
                 {% endfor %}
             </tbody>
         </table>
+        O Tobuscando.com não vende este produto e não participa de qualquer parte da negociação, limitando-se apenas a anunciar produtos dos seus usuários.
     </div>
 </div>
 
 <div class="row">
     <div id="offers" class="clearfix">
 
-        <h3><i class="fa fa-basket"></i> {% trans "Ofertas" %}</h3>
+        <h3><i class="fa fa-star"></i> {% trans "Ofertas" %}</h3>
         <small>{% trans "Proposta de compra criada em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
 
         <div class="panel panel-default">
@@ -109,7 +110,7 @@
                     <div>
                         {% include 'form_offer_snnipet.html' %}
                     </div>
-                    <button type="submit" class="button_medium">Ofertar</button>
+                    <button type="submit" class="button_outline text-center btn-info btn-new_ad hidden-xs">Ofertar</button>
                 </form>
                 {% endif %}
             </div>
@@ -132,7 +133,7 @@
 </div>
 <div class="row">
     <div id="offers" class="clearfix">
-        <h3><i class="fa fa-chat-empty"></i> {% trans "Comentários" %}</h3>
+        <h3><i class="fa fa-comments"></i> {% trans "Comentários" %}</h3>
         <div class="panel panel-default">
             <div class="panel-heading">
 <div class="fb-comments" data-href="http://tobuscando.com{{request.get_full_path}}" data-numposts="4" data-colorscheme="light" data-width="100%"></div>

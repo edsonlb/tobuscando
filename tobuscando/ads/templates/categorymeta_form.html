@@ -3,9 +3,24 @@
 {{ meta_inlineformset.management_form }}
 
 {% for formset in meta_inlineformset %}
-    <div class="row-inline">
+    <div class="row-inline row-inline-{{ forloop.counter0 }}">
     {% bootstrap_form formset layout='horizontal' %}
     </div>
+
+    {% if ad.pk %}
+        {% for meta in ad.metas.all %}
+
+        {% ifequal formset.meta.value meta.meta.pk|add:"0" %}
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_{{ formset.prefix }}-options').val('{{ meta.option }}');
+        });
+        </script>
+        {% endifequal %}
+
+        {% endfor %}
+    {% endif %}
+
 {% endfor %}
 
 <style type="text/css">

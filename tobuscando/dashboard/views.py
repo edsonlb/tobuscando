@@ -54,7 +54,6 @@ class OfferResponseView(View):
         offer = Offer.objects.get(pk=kwargs.get('pk'))
         form = self.form_class(request.POST)
 
-        print request.POST
         offer.is_active = request.POST.get('offer_is_active')
         offer.save()
 
@@ -98,20 +97,23 @@ class AdUpdateView(View):
             return HttpResponseRedirect(r('dashboard:ad_list'))
 
         form = self.form_class(request.POST, request.FILES, instance=ad)
+
         meta_inlineformset = self.meta_inlineformset_class(request.POST,
                                                            instance=ad.category)
 
-        if form.is_valid() and meta_inlineformset.is_valid():
+        if form.is_valid():
             form.save()
-
-            for data in meta_inlineformset.cleaned_data:
-                try:
-                    meta, created = AdMeta.objects.get_or_create(
-                        ad=ad, meta=data['id'])
-                    meta.option = data['options']
-                    meta.save()
-                except:
-                    pass
+            try:
+                for data in meta_inlineformset.cleaned_data:
+                    try:
+                        meta, created = AdMeta.objects.get_or_create(
+                            ad=ad, meta=data['id'])
+                        meta.option = data['options']
+                        meta.save()
+                    except:
+                        pass
+            except:
+                        pass
 
             messages.success(self.request, self.success_message)
             return HttpResponseRedirect(r('dashboard:ad_list'))
