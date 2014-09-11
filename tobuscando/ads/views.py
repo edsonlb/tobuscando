@@ -44,7 +44,7 @@ class AdCreateView(View):
         if form_ad.is_valid() and meta_inlineformset.is_valid():
             person = request.user
             if not request.user.is_authenticated():
-                form_person = self.form_person(request.POST)
+                form_person = self.form_person_class(request.POST)
 
                 if form_person.is_valid():
                     person = form_person.save(commit=False)
@@ -66,7 +66,7 @@ class AdCreateView(View):
 
             request.session['ad_pk'] = ad.pk
 
-            self._login(request, person)
+            self._login(request)
             return redirect(r('ads:ad_success'), ad=ad.pk)
 
         return render(request, self.template_name, locals())
@@ -74,8 +74,9 @@ class AdCreateView(View):
     def _set_admeta(self):
         pass
 
-    def _login(self, request, person):
-        user = authenticate(username=person.username, password=person.password)
+    def _login(self, request):
+        user = authenticate(username=request.POST.get('username'),
+                            password=request.POST.get('password'))
         if user is not None:
             if user.is_active:
                 login(request, user)

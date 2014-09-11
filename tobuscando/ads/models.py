@@ -184,7 +184,7 @@ class Offer(models.Model):
     link = models.URLField(_(u'link do produto'), help_text=HELP_LINK,
                            null=True, blank=True)
     message = models.TextField(_(u'Mensagem'))
-    price = models.DecimalField(_(u'preço'), max_digits=5, decimal_places=2)
+    price = models.CharField(_(u'preço'), max_length=100)
     is_active = models.BooleanField(_(u'ativo?'), default=True)
     created_at = models.DateTimeField(_(u'criado em'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'alterado em'), auto_now=True)

@@ -7,10 +7,10 @@ register = template.Library()
 
 
 @register.filter
-def brl(self):
+def brl(value):
     try:
         setlocale(LC_ALL, 'pt_BR.UTF-8')
-        preco = moeda(self, grouping=True)
+        preco = moeda(value, grouping=True)
 
         return preco
     except:
