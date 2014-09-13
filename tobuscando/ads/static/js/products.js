@@ -52,8 +52,10 @@ $(document).ready(function() {
             dataType: 'json',
             statusCode: {
                 200: function(data) {
+                    if(data.ok == 'true')
+                        return window.location.reload();
+
                     $("div#formOffer form div").html(data.html);
-                    return window.location.reload();
                 }
             }
         });

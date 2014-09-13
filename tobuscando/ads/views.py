@@ -170,9 +170,10 @@ class OfferCreateView(View):
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
-            return HttpResponse(simplejson.dumps({'html': html}))
+            return HttpResponse(simplejson.dumps({'ok': 'true', 'html': html}))
 
-        return render(request, self.template_name, locals())
+        html = loader.render_to_string(self.template_name, locals())
+        return HttpResponse(simplejson.dumps({'ok': 'false', 'html': html}))
 
 
 class CategoryMetaView(View):
