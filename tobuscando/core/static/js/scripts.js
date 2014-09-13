@@ -5,7 +5,7 @@ $(document).ready(function() {
         decimal: ",",
         thousands: "."
     });
-    $('input[name*="date"]').datepicker({
+    $('input[name*=date]').datepicker({
         'format': 'dd/mm/yyyy',
         'language': 'pt-BR'
     });

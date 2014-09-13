@@ -27,6 +27,11 @@
 
 {% block js %}
 <script type="text/javascript" src="{% static 'js/products.js' %}"></script>
+<script type="text/javascript">
+    $("a.offer").click(function() {
+        $("#formOffer").addClass('in');
+    });
+</script>
 {% endblock js %}
 
 {% block breadcrumb %}
@@ -67,7 +72,7 @@
         <p>{{ object.description|safe }}</p>
         <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
         <div class="clearfix">
-            <a href="#offers" class="button_big">{% trans "Ofertar" %}</a>
+            <a href="#offers" title="Ofertar" class="offer button_big">{% trans "Ofertar" %}</a>
         </div>
     </div>
 </div>
@@ -95,9 +100,9 @@
         <small>{% trans "Proposta de compra criada em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
 
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion" href="#formOffer"><i class="fa fa-plus-circle"></i> Fazer uma oferta</a>
+            <div class="button_fullwidth-2" style="margin-bottom: 0">
+                <h4 class="panel-title text-left">
+                    <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion"><i class="fa fa-plus-circle"></i> Fazer uma oferta</a>
                 </h4>
             </div>
 
