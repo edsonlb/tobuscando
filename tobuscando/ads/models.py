@@ -197,7 +197,7 @@ class Offer(models.Model):
         return u'%s - %s' % (self.ad.title, self.person)
 
     def relateds(self):
-        return Offer.objects.filter(parent=self.pk, is_active=True)
+        return Offer.objects.filter(parent=self.pk)
 
 
 """

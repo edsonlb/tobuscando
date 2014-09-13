@@ -72,7 +72,7 @@ class AdCreateView(View):
             #to = user.email
             text_content = "(%s)<br />Olá! Sua proposta de compra foi cadastrada com sucesso no Tobuscando.com!<br/><a href='%s'>CLIQUE AQUI PARA VER!</a>"%(request.user.email, "http://tobuscando.com"+ad.get_absolute_url)
             html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
-            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)       
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
@@ -150,7 +150,7 @@ class OfferCreateView(View):
             #to = user.email
             text_content = "(%s)<br />Olá! Seu anúncio no Tobuscando.com recebeu uma proposta!<br/><a href='%s'>CLIQUE AQUI PARA VER!</a>"%(request.user.email, "http://tobuscando.com"+form_offer.ad.get_absolute_url)
             html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
-            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)       
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
