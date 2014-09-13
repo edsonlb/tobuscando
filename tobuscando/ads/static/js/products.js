@@ -53,7 +53,7 @@ $(document).ready(function() {
             statusCode: {
                 200: function(data) {
                     $("div#formOffer form div").html(data.html);
-//                    return window.location.reload();
+                    return window.location.reload();
                 }
             }
         });
