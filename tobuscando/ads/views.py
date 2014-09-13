@@ -66,6 +66,16 @@ class AdCreateView(View):
 
             request.session['ad_pk'] = ad.pk
 
+            subject = 'Proposta de compra cadastrada!'
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [request.user.email, settings.EMAIL_HOST_USER]
+            #to = user.email
+            text_content = "(%s)<br />Olá! Sua proposta de compra foi cadastrada com sucesso no Tobuscando.com!<br/><a href='%s'>CLIQUE AQUI PARA VER!</a>"%(request.user.email, "http://tobuscando.com"+ad.get_absolute_url)
+            html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)       
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
             self._login(request)
             return redirect(r('ads:ad_success'), ad=ad.pk)
 
@@ -133,6 +143,16 @@ class OfferCreateView(View):
                 }),
                 'message': message
             })
+
+            subject = 'Você recebeu uma proposta!'
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [request.user.email, settings.EMAIL_HOST_USER]
+            #to = user.email
+            text_content = "(%s)<br />Olá! Seu anúncio no Tobuscando.com recebeu uma proposta!<br/><a href='%s'>CLIQUE AQUI PARA VER!</a>"%(request.user.email, "http://tobuscando.com"+form_offer.ad.get_absolute_url)
+            html_content = render_to_string('welcome.html', {'equipe':'tobuscando'})
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)       
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
 
             return HttpResponse(simplejson.dumps({'html': html}))
 
