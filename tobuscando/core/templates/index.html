@@ -2,6 +2,19 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block metatag %}
+<meta property="og:locale" content="pt_BR"> <!-- Depois pegar a língua em que o anúncio foi feito. Não é o caso nesse MVP. -->
+<meta property="og:url" content="http://www.tobuscando.com">
+<meta property="og:title" content="Tobuscando - O seu site de leilão inverso.">
+<meta property="og:site_name" content="Tobuscando">
+<meta property="og:description" content="O maior site de leilão reverso do Brasil!">
+<meta property="og:image" content="{% static 'images/banner-facebook1.jpg' %}">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="641">
+<meta property="og:image:height" content="281">
+<meta property="og:type" content="website">
+{% endblock metatag %}
+
 {% block content_index %}
 <section id="sub-header" >
     <div class="container">
