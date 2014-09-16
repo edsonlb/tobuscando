@@ -145,7 +145,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'pt-BR'
 
 # MANUAL PARA GERAÇÃO DAS TRADUÇÕES
 # django-admin.py makemessages -l pt-br
