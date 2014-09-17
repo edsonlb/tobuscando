@@ -70,13 +70,13 @@ class AdCreateView(View):
 
             subject = u'Proposta de compra cadastrada!'
             from_email = settings.EMAIL_HOST_USER
-            to_list = [request.user.email, settings.EMAIL_HOST_USER]
+            to_list = [person.email, settings.EMAIL_HOST_USER]
             #to = user.email
             text_content = u""""
                 (%s)<br />Olá! Sua proposta de compra foi cadastrada com \
                 sucesso no Tobuscando.com!<br/>\
                 <a href='%s%s'>CLIQUE AQUI PARA VER!</a>
-                """ % (request.user.email, settings.SITE_URL,
+                """ % (person.email, settings.SITE_URL,
                        ad.get_absolute_url())
             html_content = render_to_string(
                 'welcome.html', {'equipe': 'tobuscando'})

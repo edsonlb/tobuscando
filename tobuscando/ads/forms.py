@@ -43,6 +43,9 @@ class OfferForm(forms.ModelForm):
         model = Offer
         exclude = ('is_active',)
         widgets = {
+            'link': forms.URLInput(attrs={
+                'placeholder': 'http://tobuscando/seuproduto'
+            }),
             'ad': forms.HiddenInput(),
             'person': forms.HiddenInput(),
             'parent': forms.HiddenInput()

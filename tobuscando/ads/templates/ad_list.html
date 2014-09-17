@@ -1,5 +1,6 @@
 {% extends 'base_site.html' %}
 
+{% load i18n %}
 {% load pagination_tags %}
 
 
@@ -16,6 +17,14 @@
 </aside>
 
 <div class="col-sm-9">
+    <div class="clearfix">
+        <ul class="list-unstyle list-inline pull-right">
+            <li>{% trans 'Ordernar por:' %}</li>
+            <li><a href="?order_by=price" title="Menor preço">Menor preço</a></li>
+            <li><a href="?order_by=-price" title="Maior preço">Maior preço</a></li>
+        </ul>
+    </div>
+
     <div class="clearfix">
         {% autopaginate object_list 10 %}
         {% for object in object_list %}

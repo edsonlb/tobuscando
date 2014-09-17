@@ -58,7 +58,7 @@
                     <label class="col-md-2 control-label">{{ form_ad.category.label }}</label>
                     <div id="category" class="col-md-3">
                         {% recursetree categories %}
-                        <label for="id_category_{{ node.pk }}" class="list-group-item" title="{{node.name}}">
+                        <label for="id_category_{{ node.pk }}" class="list-group-item" title="{{node.name}}" data-parent="{{ node.parent.pk }}">
                             {{ node.name }}
                             {% if form_ad.category.value|add:"0" == node.pk|add:"0" %}
                             <input checked="checked" id="id_category_{{ node.pk }}" name="category" type="radio" value="{{ node.pk }}" class="radio-category">

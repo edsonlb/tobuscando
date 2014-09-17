@@ -1,6 +1,7 @@
 {% extends 'base_site.html' %}
 
 {% load i18n %}
+{% load staticfiles %}
 {% load cloudinary %}
 {% load core_tags %}
 
@@ -20,7 +21,11 @@
             <div class="panel-body">
                 <h3>{{ ad.title }}</h3>
                 <div class="col-sm-12">
+                    {% if ad.image %}
                     {% cloudinary ad.image width=250 height=250 alt=ad.title class='img-responsive' %}
+                    {% else %}
+                    <img src="{% static 'images/ad.gif' %}" alt="Anúncio" width="250" height="250">
+                    {% endif %}
                 </div>
 
                 <div class="clearfix">

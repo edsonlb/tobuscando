@@ -30,6 +30,7 @@ class Ad(models.Model):
     class Meta:
         verbose_name = _(u'Anúncio')
         verbose_name_plural = _(u'Anúncios')
+        ordering = ['-created_at']
 
     def __unicode__(self):
         return self.title
