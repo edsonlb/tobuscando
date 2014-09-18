@@ -65,7 +65,7 @@
         <div class="fb-like" data-href="http://www.tobuscando.com{{request.get_full_path}}" data-width="100%" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
         </div>
         <h3><i class="fa fa-list"></i> {% trans "Descrição do produto" %}</h3>
-        <p>{{ object.description|safe }}</p>
+        <p><img src="http://res.cloudinary.com/to-buscando/image/upload/c_fill,h_50,w_50/{{ object.person.avatar }}.jpg" class="img-circle speaker">{{ object.description|safe }}</p>
         <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
         <div class="clearfix">
             <a href="#offers" class="button_big">{% trans "Ofertar" %}</a>
