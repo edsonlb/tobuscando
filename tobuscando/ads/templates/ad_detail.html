@@ -71,9 +71,10 @@
             </div>
         <div class="col-sm-10">
             <h4>{{ object.description|safe }}</h4>
+            <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
         </div>
         </div>
-        <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
+        
         <div class="clearfix">
             <a href="#offers" class="button_big">{% trans "Ofertar" %}</a>
         </div>
