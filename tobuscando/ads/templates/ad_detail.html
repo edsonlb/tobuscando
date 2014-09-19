@@ -73,8 +73,20 @@
                 <img src="http://res.cloudinary.com/to-buscando/image/upload/c_fill,h_50,w_50/{{ object.person.avatar }}.jpg" class="img-circle speaker">
             </div>
         <div class="col-sm-10">
-            <h4>{{ object.description|safe }}</h4>
+        <!-- MONSTRAR TELEFONE QUANDO FOR MARCADO, MAS NAO TEM AINDA O CAMPO DE TELEFONE NO CADASTRO DA PESSOA.
+            {% if object.view_phone %}
+            <h4>{% trans "Fone:" %} {{ object.persondescription|safe }}</h4>
+            {% endif %}
+        -->
+            {% if object.is_bargain %}
+            <h4>{% trans "Aceito negociar propostas similares." %}</h4>
+            {% endif %}
             <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
+            {% if object.limit_date %}
+            <small>{% trans "Termina em:" %} {{ object.limit_date|date:"d/m/Y" }}</small>
+            {% else %}
+            <small>{% trans "Sem prazo de término. Vence quando receber a melhor oferta/proposta." %}</small>
+            {% endif %}
         </div>
         </div>
         
