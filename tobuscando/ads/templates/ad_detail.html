@@ -85,6 +85,7 @@
     <div class="clearfix">
         <h3><i class="fa fa-cog"></i> {% trans "Características do produto" %}</h3>
 
+        {% if object.metas.all %}
         <table class="table table-striped">
             <tbody>
                 {% for meta in object.metas.all %}
@@ -94,8 +95,10 @@
             </tbody>
         </table>
         <br />
+        {% endif %}
+
         <h4>{{ object.description|safe }}</h4>
-        O Tobuscando.com não vende este produto e não participa de qualquer parte da negociação, limitando-se apenas a anunciar produtos dos seus usuários.
+        {% trans "O Tobuscando.com não vende este produto e não participa de qualquer parte da negociação, limitando-se apenas a anunciar produtos dos seus usuários." %}
     </div>
 </div>
 
@@ -108,20 +111,20 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion" href="#formOffer"><i class="fa fa-plus-circle"></i> Fazer uma oferta</a>
+                    <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion" href="#formOffer"><i class="fa fa-plus-circle"></i> {% trans "Fazer uma oferta" %}</a>
                 </h4>
             </div>
 
             <div id="formOffer" class="panel-body panel-collapse collapse {% if not user.is_authenticated %}in{% endif %}">
                 {% if not user.is_authenticated %}
-                <p>Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>. Para fazer login <a href="{% url 'account_login' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>.</p>
+                <p>{% trans "Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar" %} <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>. Para fazer login <a href="{% url 'account_login' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>.</p>
                 {% else %}
                 <form id="id_form_offer" name="form_offer" action="{% url 'ads:offer_create' %}" method="POST">
                     {% csrf_token %}
                     <div>
                         {% include 'form_offer_snnipet.html' %}
                     </div>
-                    <button type="submit" class="button_outline text-center btn-info btn-new_ad">Ofertar</button>
+                    <button type="submit" class="button_outline text-center btn-info btn-new_ad">{% trans "Ofertar" %}</button>
                 </form>
                 {% endif %}
             </div>
