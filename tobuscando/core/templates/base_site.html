@@ -77,7 +77,7 @@
           <form id="id_form_search" name="form_search" action="." method="POST" class="col-sm-5 col-xs-12">
                     {% csrf_token %}
                     <div class="input-group">
-                        <input pattern=".{3,}" type="text" id="id_search" name="search" placeholder="{% trans 'Ex: guitarra, bicicleta, moto, etc ...' %}" class="form-control" autocomplete="off" value="{{ slug|default_if_none:"" }}" required>
+                        <input pattern=".{4,}" type="text" id="id_search" name="search" placeholder="{% trans 'Ex: guitarra, bicicleta, moto, etc ...' %}" class="form-control" autocomplete="off" value="{{ slug|default_if_none:"" }}" required title="Digite no mínimo 3 caracteres.">
                         <span class="input-group-btn">
                             <button class="btn" type="submit"><i class="fa fa-search"></i></button>
                         </span>
