@@ -22,6 +22,8 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com']
 
+SITE_URL = 'http://www.tobuscando.com'
+
 AUTH_USER_MODEL = 'core.Person'
 
 # Application definition

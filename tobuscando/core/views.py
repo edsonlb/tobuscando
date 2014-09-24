@@ -16,24 +16,26 @@ URL = 'http://127.0.0.1:8000/'
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
 
+
 @receiver(user_signed_up)
 def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
     try:
-        extra_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
+        extra_data = user.socialaccount_set.filter(
+            provider='facebook')[0].extra_data
     except Exception:
         extra_data = None
     if extra_data is not None:
-        social_link = extra_data['link'] 
-        name = extra_data['name'] 
-        first_name = extra_data['first_name'] 
-        last_name = extra_data['last_name'] 
-        email = extra_data['email'] 
-        language = extra_data['locale'] 
+        social_link = extra_data['link']
+        name = extra_data['name']
+        first_name = extra_data['first_name']
+        last_name = extra_data['last_name']
+        email = extra_data['email']
+        language = extra_data['locale']
         if language == 'pt_BR':
-            user.language = u'Português' 
-            user.country = 'Brasil' 
-        else: 
+            user.language = u'Português'
+            user.country = 'Brasil'
+        else:
             user.language = language
 
         user.facebook_link = social_link
@@ -41,17 +43,17 @@ def set_attribute(sender, **kwargs):
         user.first_name = first_name
         user.last_name = last_name
         user.save()
-        
-        #try to send welcome email
+
+        # try to send welcome email
         subject = 'Bem vindo ao TôBuscando!'
         from_email = settings.EMAIL_HOST_USER
         to_list = [email, settings.EMAIL_HOST_USER]
         to = email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
         html_content = render_to_string(
-            'welcome.html', {'equipe':'tobuscando'}
-            )
-        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
+            'welcome.html', {'equipe': 'tobuscando'}
+        )
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
     else:
@@ -61,11 +63,12 @@ def set_attribute(sender, **kwargs):
         to = user.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
         html_content = render_to_string(
-            'welcome.html', {'equipe':'tobuscando'}
-            )
-        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])       
+            'welcome.html', {'equipe': 'tobuscando'}
+        )
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -74,6 +77,7 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         rand_imagem = randint(1, 4)
         # https://vimeo.com/tobuscando/videos
+
         rand_video = ['105236559','103562276','103229541','103229540', '106585219'] #103229539 (Video do Hotsite - Retirado)
 
         context['rand_imagem'] = rand_imagem
@@ -99,9 +103,16 @@ class SearchView(ListView):
 
     def get_queryset(self):
         slug = self.get_slug(self.kwargs.get('slug'))
-        return self.model.objects.filter(Q(title__icontains=slug) |
-                                         Q(description__icontains=slug) |
-                                         Q(category__name__icontains=slug))
+
+        object_list = self.model.objects.filter(
+            Q(title__icontains=slug) | Q(description__icontains=slug) |
+            Q(category__name__icontains=slug))
+
+        order_by = self.request.GET.get('order_by')
+        if order_by:
+            object_list = object_list.order_by(order_by)
+
+        return object_list
 
     def get_slug(self, slug):
         if not slug:
@@ -123,10 +134,12 @@ def contact(request):
         to_list = [save_it.email, settings.EMAIL_HOST_USER]
         to = save_it.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
-        html_content = render_to_string('email-marketing.html', {'equipe':'tobuscando'})
+        html_content = render_to_string(
+            'email-marketing.html', {'equipe': 'tobuscando'})
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        #send_mail(subject, message, from_email, to_list, fail_silently=True)"""
+        # send_mail(subject, message, from_email, to_list,
+        # fail_silently=True)"""
         return HttpResponse("ok")
-    return render(request, 'contact/contact.html', {'form':form})
+    return render(request, 'contact/contact.html', {'form': form})

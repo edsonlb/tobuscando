@@ -30,6 +30,7 @@ class Ad(models.Model):
     class Meta:
         verbose_name = _(u'Anúncio')
         verbose_name_plural = _(u'Anúncios')
+        ordering = ['-created_at']
 
     def __unicode__(self):
         return self.title
@@ -192,12 +193,13 @@ class Offer(models.Model):
     class Meta:
         verbose_name = _(u'Oferta')
         verbose_name_plural = _(u'Ofertas')
+        ordering = ['-created_at']
 
     def __unicode__(self):
         return u'%s - %s' % (self.ad.title, self.person)
 
     def relateds(self):
-        return Offer.objects.filter(parent=self.pk, is_active=True)
+        return Offer.objects.filter(parent=self.pk)
 
 
 """

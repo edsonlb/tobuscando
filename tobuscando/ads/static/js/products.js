@@ -13,6 +13,7 @@ $(document).ready(function() {
     // Dropdown
     $("#category label").click(function() {
         var $this = $(this);
+        var parent = $this.attr('data-parent');
 
         $("#category div.dropdown-nav").hide();
         $("#category label").removeClass("active");
@@ -20,7 +21,7 @@ $(document).ready(function() {
         $this.addClass('active');
         $this.parent('div.dropdown-nav').show();
 
-        $("div." + $this.attr("for")).show();
+        $("div." + $this.attr("for") + ', div.id_category_' + parent).show();
     });
 
     // Radio category
@@ -52,8 +53,10 @@ $(document).ready(function() {
             dataType: 'json',
             statusCode: {
                 200: function(data) {
+                    if(data.ok == 'true')
+                        return window.location.reload();
+
                     $("div#formOffer form div").html(data.html);
-//                    return window.location.reload();
                 }
             }
         });
