@@ -22,7 +22,7 @@
                 <div class="price col-sm-3">{{ object.price|brl }}</div>
                 <div class="price col-sm-2 text-right">
                 <span class="label label-info">{{ object.person.username }}</span><br />
-                <small>{% trans "criado em" %}<br>{{ object.created_at|dat\e:"d/m/y" }}</small></div>
+                <small>{% trans "criado em" %}<br>{{ object.created_at|date:"d/m/y" }}</small></div>
             </div>
         </div>
         <div class="clearfix"></div>
