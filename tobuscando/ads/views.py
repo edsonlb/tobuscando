@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse as r
 from django.template import loader
-from django.conf import settings
 from django.contrib.auth import login, authenticate
 from django.views.generic import View, TemplateView, DetailView, ListView
 from django.template.loader import render_to_string
