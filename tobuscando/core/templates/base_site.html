@@ -78,7 +78,7 @@
           <form id="id_form_search" name="form_search" action="." method="POST" class="col-sm-5 col-xs-12">
                     {% csrf_token %}
                     <div class="input-group">
-                        <input type="text" id="id_search" name="search" placeholder="Ex: guitarra, bicicleta, moto, etc ..." class="form-control" autocomplete="off" value="{{ slug|default_if_none:"" }}">
+                        <input pattern=".{4,}" type="text" id="id_search" name="search" placeholder="{% trans 'Ex: guitarra, bicicleta, moto, etc ...' %}" class="form-control" autocomplete="off" value="{{ slug|default_if_none:"" }}" required title="Digite no mínimo 3 caracteres.">
                         <span class="input-group-btn">
                             <button class="btn" type="submit"><i class="fa fa-search"></i></button>
                         </span>
@@ -140,7 +140,7 @@
         <div id="copy_right">Todos os direitos reservados. © Tobuscando.com</div>
     </footer>
 
-    <div id="toTop">Voltar ao topo</div>
+    <!-- <div id="toTop">Voltar ao topo</div> -->
 
     <!-- OTHER JS -->
     <script src="{% static 'js/superfish.js' %}"></script>

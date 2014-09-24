@@ -69,9 +69,32 @@
         <div class="clearfix">
         <div class="fb-like" data-href="http://www.tobuscando.com{{request.get_full_path}}" data-width="100%" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
         </div>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="tobuscando">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
         <h3><i class="fa fa-list"></i> {% trans "Descrição do produto" %}</h3>
-        <p>{{ object.description|safe }}</p>
-        <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
+        <div class="row clearfix">
+            <div class="col-sm-2">
+                <img src="http://res.cloudinary.com/to-buscando/image/upload/c_fill,h_50,w_50/{{ object.person.avatar }}.jpg" class="img-circle speaker">
+            </div>
+        <div class="col-sm-10">
+        <!-- MONSTRAR TELEFONE QUANDO FOR MARCADO, MAS NAO TEM AINDA O CAMPO DE TELEFONE NO CADASTRO DA PESSOA.
+            {% if object.view_phone %}
+            <h4>{% trans "Fone:" %} {{ object.persondescription|safe }}</h4>
+            {% endif %}
+        -->
+            {% if object.is_bargain %}
+            <h4>{% trans "Aceito negociar propostas similares." %}</h4>
+            {% endif %}
+            <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
+            {% if object.limit_date %}
+            <small>{% trans "Termina em:" %} {{ object.limit_date|date:"d/m/Y" }}</small>
+            {% else %}
+            <small>{% trans "Sem prazo de término. Vence quando receber a melhor oferta/proposta." %}</small>
+            {% endif %}
+        </div>
+        </div>
+
         <div class="clearfix">
             <a href="#offers" title="Ofertar" class="offer button_big">{% trans "Ofertar" %}</a>
         </div>
@@ -82,6 +105,7 @@
     <div class="clearfix">
         <h3><i class="fa fa-cog"></i> {% trans "Características do produto" %}</h3>
 
+        {% if object.metas.all %}
         <table class="table table-striped">
             <tbody>
                 {% for meta in object.metas.all %}
@@ -90,7 +114,11 @@
                 {% endfor %}
             </tbody>
         </table>
-        O Tobuscando.com não vende este produto e não participa de qualquer parte da negociação, limitando-se apenas a anunciar produtos dos seus usuários.
+        <br />
+        {% endif %}
+
+        <h4>{{ object.description|safe }}</h4>
+        {% trans "O Tobuscando.com não vende este produto e não participa de qualquer parte da negociação, limitando-se apenas a anunciar produtos dos seus usuários." %}
     </div>
 </div>
 
@@ -101,22 +129,27 @@
         <small>{% trans "Proposta de compra criada em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
 
         <div class="panel panel-default">
+
             <div class="button_fullwidth-2" style="margin-bottom: 0">
                 <h4 class="panel-title text-left">
                     <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion"><i class="fa fa-plus-circle"></i> Fazer uma oferta</a>
+
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion" href="#formOffer"><i class="fa fa-plus-circle"></i> {% trans "Fazer uma oferta" %}</a>
                 </h4>
             </div>
 
             <div id="formOffer" class="panel-body panel-collapse collapse {% if not user.is_authenticated %}in{% endif %}">
                 {% if not user.is_authenticated %}
-                <p>Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>. Para fazer login <a href="{% url 'account_login' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>.</p>
+                <p>{% trans "Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar" %} <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>. Para fazer login <a href="{% url 'account_login' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>.</p>
                 {% else %}
                 <form id="id_form_offer" name="form_offer" action="{% url 'ads:offer_create' %}" method="POST">
                     {% csrf_token %}
                     <div>
                         {% include 'form_offer_snnipet.html' %}
                     </div>
-                    <button type="submit" class="button_outline text-center btn-info btn-new_ad hidden-xs">Ofertar</button>
+                    <button type="submit" class="button_outline text-center btn-info btn-new_ad">{% trans "Ofertar" %}</button>
                 </form>
                 {% endif %}
             </div>

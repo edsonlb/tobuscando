@@ -78,6 +78,7 @@ class HomeView(TemplateView):
         rand_imagem = randint(1, 4)
         # https://vimeo.com/tobuscando/videos
         # 103229539 (Video do Hotsite - Retirado)
+
         rand_video = ['105236559', '103562276', '103229541', '103229540']
 
         context['rand_imagem'] = rand_imagem

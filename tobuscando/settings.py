@@ -70,7 +70,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.twitter',
 )
 
-SITE_ID = 2
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -147,7 +147,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'pt-BR'
 
 # MANUAL PARA GERAÇÃO DAS TRADUÇÕES
 # django-admin.py makemessages -l pt-br
