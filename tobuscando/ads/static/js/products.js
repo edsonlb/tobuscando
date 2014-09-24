@@ -15,7 +15,7 @@ $(document).ready(function() {
         var $this = $(this);
         var parent = $this.attr('data-parent');
 
-        $("#category div.dropdown-nav").hide();
+        //$("#category div.dropdown-nav").hide();
         $("#category label").removeClass("active");
 
         $this.addClass('active');
