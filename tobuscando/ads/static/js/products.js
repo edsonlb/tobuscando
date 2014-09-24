@@ -22,7 +22,6 @@ $(document).ready(function() {
         $this.parent('div.dropdown-nav').show();
 
         $("div." + $this.attr("for") + ', div.id_category_' + parent).show();
-        $this.addClass('active');
     });
 
     // Radio category
