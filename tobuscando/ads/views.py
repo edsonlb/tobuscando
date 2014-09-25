@@ -1,5 +1,4 @@
 # coding: utf-8
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse as r
@@ -15,6 +14,7 @@ from .models import Ad, AdMeta, Category
 from tobuscando.core.forms import PersonPreRegisterForm
 from .forms import AdForm, OfferForm, CategoryMetaInlineFormset
 
+from datetime import date
 import simplejson
 
 
@@ -132,6 +132,14 @@ class AdDetailView(DetailView):
         })
 
         return context
+
+    def get_object(self):
+
+        print self.kwargs['slug']
+
+        return self.model.objects.get(Q(limit_date__isnull=True) |
+                                      Q(limit_date__lte=date.today()),
+                                      slug=self.kwargs['slug'])
 
 
 class OfferCreateView(View):
