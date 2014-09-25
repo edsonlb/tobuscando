@@ -75,8 +75,8 @@ class AdCreateView(View):
             #to = user.email
             c = Context({
                 'username': request.user.username, 
-                'url':settings.SITE_URL, 
-                'url2':ad.get_absolute_url()
+                'url': settings.SITE_URL, 
+                'url2': ad.get_absolute_url()
                 })
             html_content = render_to_string(
                 'emails-response/ad_success.html', c)
@@ -155,16 +155,14 @@ class OfferCreateView(View):
 
             subject = u'Você recebeu uma proposta!'
             from_email = settings.EMAIL_HOST_USER
-            to_list = [request.user.email, settings.EMAIL_HOST_USER]
-            #to = user.email
-            text_content = u"""
-                (%s)<br />Olá! Seu anúncio no Tobuscando.com recebeu \
-                uma proposta!<br/> <a href='%s%s'>CLIQUE AQUI PARA VER!</a>
-                """ % (request.user.email,
-                       settings.SITE_URL,
-                       offer.ad.get_absolute_url())
-            html_content = render_to_string(
-                'welcome.html', {'equipe': 'tobuscando'})
+            to_list = [person.email, settings.EMAIL_HOST_USER]
+            text_content = 'Do you like coffee?'
+            c = Context({
+            'username': request.user.username, 
+            'url': settings.SITE_URL, 
+            'url2': offer.ad.get_absolute_url()
+            })
+            html_content = render_to_string('emails-response/offer_success.html', c)
             msg = EmailMultiAlternatives(
                 subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
