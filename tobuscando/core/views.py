@@ -52,7 +52,7 @@ def set_attribute(sender, **kwargs):
         to = email
         text_content = ''
         c = Context({
-                'username': request.user.username, 
+                'username': request.user.username
                 })
         html_content = render_to_string('welcome.html', c)
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
