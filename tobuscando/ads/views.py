@@ -13,9 +13,8 @@ from django.core.mail import EmailMultiAlternatives
 from .models import Ad, AdMeta, Category
 from tobuscando.core.forms import PersonPreRegisterForm
 from .forms import AdForm, OfferForm, CategoryMetaInlineFormset
-
 import simplejson
-
+from django.template import Context
 
 class AdCreateView(View):
     template_name = "ad_form.html"
@@ -72,15 +71,15 @@ class AdCreateView(View):
             subject = u'Proposta de compra cadastrada!'
             from_email = settings.EMAIL_HOST_USER
             to_list = [person.email, settings.EMAIL_HOST_USER]
+            text_content = 'Do something...'
             #to = user.email
-            text_content = u""""
-                (%s)<br />Olá! Sua proposta de compra foi cadastrada com \
-                sucesso no Tobuscando.com!<br/>\
-                <a href='%s%s'>CLIQUE AQUI PARA VER!</a>
-                """ % (person.email, settings.SITE_URL,
-                       ad.get_absolute_url())
+            c = Context({
+                'username': request.user.username, 
+                'url':settings.SITE_URL, 
+                'url2':ad.get_absolute_url()
+                })
             html_content = render_to_string(
-                'welcome.html', {'equipe': 'tobuscando'})
+                'emails-response/ad_success.html', c)
             msg = EmailMultiAlternatives(
                 subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
