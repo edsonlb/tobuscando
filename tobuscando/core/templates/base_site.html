@@ -78,7 +78,7 @@
           <form id="id_form_search" name="form_search" action="." method="POST" class="col-sm-5 col-xs-12">
                     {% csrf_token %}
                     <div class="input-group">
-                        <input pattern=".{4,}" type="text" id="id_search" name="search" placeholder="{% trans 'Ex: guitarra, bicicleta, moto, etc ...' %}" class="form-control" autocomplete="off" value="{{ slug|default_if_none:"" }}" required title="Digite no mínimo 3 caracteres.">
+                        <input pattern=".{3,}" type="text" id="id_search" name="search" placeholder="{% trans 'Ex: guitarra, bicicleta, moto, etc ...' %}" class="form-control" autocomplete="off" value="{{ slug|default_if_none:"" }}" required title="Digite no mínimo 3 caracteres.">
                         <span class="input-group-btn">
                             <button class="btn" type="submit"><i class="fa fa-search"></i></button>
                         </span>
@@ -154,17 +154,11 @@
     <script src="{% static 'js/jquery.placeholder.js' %}"></script>
     <script src="{% static 'js/functions.js' %}"></script>
     <script src="{% static 'js/classie.js' %}"></script>
-<<<<<<< HEAD
-    <script src="{% static 'datepicker/js/bootstrap-datepicker.js' %}"></script>
-    <script type="text/javascript" src="{% static 'datepicker/js/locales/bootstrap-datepicker.pt-BR.js' %}" charset="UTF-8"></script>
-    <script src="{% static 'js/scripts.js' %}"></script>
-=======
+
     <!-- <script src="{% static 'js/modal.js' %}"></script> -->
     <script src="{% static 'datepicker/js/bootstrap-datepicker.js' %}"></script>
     <script type="text/javascript" src="{% static 'datepicker/js/locales/bootstrap-datepicker.pt-BR.js' %}" charset="UTF-8"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
-    <!-- <script src="{% static 'js/bootstrap-datepicker.js' %}"></script> -->
->>>>>>> 497106eaff1b3e45701148b54e10018cf278d5ce
     <!--<script src="{% static 'js/uisearch.js' %}"></script>-->
     <!-- <script src="{% static 'js/jquery.icheck.js' %}"></script> -->
     <!--<script>new UISearch( document.getElementById( 'sb-search' ) );</script>-->

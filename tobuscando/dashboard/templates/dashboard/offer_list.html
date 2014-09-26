@@ -2,6 +2,7 @@
 
 {% load pagination_tags %}
 {% load cloudinary %}
+{% load core_tags %}
 
 {% block dashboard_content %}
 <h2>Ofertas</h2>
@@ -19,15 +20,19 @@
             <ul class="list-unstyle list-inline">
                 <li><a href="{% url 'dashboard:offer_response' pk=offer.pk %}"><i class="fa fa-edit"></i> Responder</a></li>
                 {% if offer.is_active %}
-                <li><strong>Status:</strong> <span class="fa fa-ok-circle"></span></li>
+                <li><strong>Status:</strong> <span class="fa fa-check-circle"></span></li>
                 {% else %}
-                <li><strong>Status:</strong> <span class="fa fa-cancel-circle"></span></li>
+                <li><strong>Status:</strong> <span class="fa fa-close"></span></li>
                 {% endif %}
                 <div class="clearfix col-sm-12">
-                    <ul class="list-unstyle">
-                        <li><strong>Usuário: </strong>{{ offer.person.username }}</li>
-                        <li><strong>Mensagem: </strong> <p>{{ offer.message|truncatewords:100|safe }}</p></li>
-                    </ul>
+                    <dl>
+                        <dt><strong>Usuário</strong></dt>
+                        <dd>{{ offer.person.username }}</dd>
+                        <dt>Mensagem</dt>
+                        <dd>{{ offer.message|truncatewords:100|safe }}</dd>
+                        <dt><strong>Valor da oferta</strong></dt>
+                        <dd class="label label-success">{{ offer.price|brl }}</dd>
+                    </dl>
                 </div>
             </ul>
         </div>

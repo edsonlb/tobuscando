@@ -9,6 +9,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string, get_template
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 from tobuscando.ads.models import Ad, Category
+from django.template import Context
 
 # Usado para realização de testes na máquina local.
 URL = 'http://127.0.0.1:8000/'
@@ -49,10 +50,11 @@ def set_attribute(sender, **kwargs):
         from_email = settings.EMAIL_HOST_USER
         to_list = [email, settings.EMAIL_HOST_USER]
         to = email
-        text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
-        html_content = render_to_string(
-            'welcome.html', {'equipe': 'tobuscando'}
-        )
+        text_content = ''
+        c = Context({
+                'username': request.user.username
+                })
+        html_content = render_to_string('welcome.html', c)
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
@@ -77,9 +79,8 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         rand_imagem = randint(1, 4)
         # https://vimeo.com/tobuscando/videos
-        # 103229539 (Video do Hotsite - Retirado)
 
-        rand_video = ['105236559', '103562276', '103229541', '103229540']
+        rand_video = ['105236559','103562276','103229541','103229540', '106585219'] #103229539 (Video do Hotsite - Retirado)
 
         context['rand_imagem'] = rand_imagem
         context['rand_video'] = choice(rand_video)
@@ -124,7 +125,6 @@ class SearchView(ListView):
 
         return slug
 
-
 def contact(request):
     form = ContactForm(request.POST or None)
     if form.is_valid() and request.is_ajax():
@@ -135,8 +135,11 @@ def contact(request):
         to_list = [save_it.email, settings.EMAIL_HOST_USER]
         to = save_it.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
+        c = Context({
+                'username': request.user.username, 
+                })
         html_content = render_to_string(
-            'email-marketing.html', {'equipe': 'tobuscando'})
+            'email-marketing.html', c)
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()

@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse as r
 from django.template import loader
-from django.conf import settings
 from django.contrib.auth import login, authenticate
 from django.views.generic import View, TemplateView, DetailView, ListView
 from django.template.loader import render_to_string
@@ -16,7 +15,7 @@ from .forms import AdForm, OfferForm, CategoryMetaInlineFormset
 
 from datetime import date
 import simplejson
-
+from django.template import Context
 
 class AdCreateView(View):
     template_name = "ad_form.html"
@@ -73,15 +72,15 @@ class AdCreateView(View):
             subject = u'Proposta de compra cadastrada!'
             from_email = settings.EMAIL_HOST_USER
             to_list = [person.email, settings.EMAIL_HOST_USER]
+            text_content = 'Do something...'
             #to = user.email
-            text_content = u""""
-                (%s)<br />Olá! Sua proposta de compra foi cadastrada com \
-                sucesso no Tobuscando.com!<br/>\
-                <a href='%s%s'>CLIQUE AQUI PARA VER!</a>
-                """ % (person.email, settings.SITE_URL,
-                       ad.get_absolute_url())
+            c = Context({
+                'username': request.user.username,
+                'url': settings.SITE_URL,
+                'url2': ad.get_absolute_url()
+                })
             html_content = render_to_string(
-                'welcome.html', {'equipe': 'tobuscando'})
+                'emails-response/ad_success.html', c)
             msg = EmailMultiAlternatives(
                 subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
@@ -134,12 +133,9 @@ class AdDetailView(DetailView):
         return context
 
     def get_object(self):
-
-        print self.kwargs['slug']
-
         return self.model.objects.get(Q(limit_date__isnull=True) |
                                       Q(limit_date__lte=date.today()),
-                                      slug=self.kwargs['slug'])
+                                      slug__exact=self.kwargs['slug'])
 
 
 class OfferCreateView(View):
@@ -165,16 +161,14 @@ class OfferCreateView(View):
 
             subject = u'Você recebeu uma proposta!'
             from_email = settings.EMAIL_HOST_USER
-            to_list = [request.user.email, settings.EMAIL_HOST_USER]
-            #to = user.email
-            text_content = u"""
-                (%s)<br />Olá! Seu anúncio no Tobuscando.com recebeu \
-                uma proposta!<br/> <a href='%s%s'>CLIQUE AQUI PARA VER!</a>
-                """ % (request.user.email,
-                       settings.SITE_URL,
-                       offer.ad.get_absolute_url())
-            html_content = render_to_string(
-                'welcome.html', {'equipe': 'tobuscando'})
+            to_list = [person.email, settings.EMAIL_HOST_USER]
+            text_content = 'Do you like coffee?'
+            c = Context({
+            'username': request.user.username,
+            'url': settings.SITE_URL,
+            'url2': offer.ad.get_absolute_url()
+            })
+            html_content = render_to_string('emails-response/offer_success.html', c)
             msg = EmailMultiAlternatives(
                 subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
