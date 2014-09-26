@@ -15,7 +15,8 @@ from .models import Person
 from datetime import date
 
 # Usado para realização de testes na máquina local.
-URL = 'http://127.0.0.1:8000/'
+#URL = 'http://127.0.0.1:8000/'
+URL = 'http://www.tobuscando.com/'
 
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
@@ -108,16 +109,17 @@ class SearchView(ListView):
 
     def get_queryset(self):
         slug = self.get_slug(self.kwargs.get('slug'))
-
-        object_list = self.model.objects.filter(
-            Q(title__icontains=slug) | Q(description__icontains=slug) |
-            Q(category__name__icontains=slug))\
-            .filter(limit_date__lte=date.today())
-
+    
+        object_list = self.model.objects.filter(Q(title__icontains=slug) | 
+                                                Q(description__icontains=slug) |
+                                                Q(category__name__icontains=slug))\
+                                        .filter(Q(limit_date__gte=date.today()) | 
+                                                Q(limit_date__isnull=True))
+    
         order_by = self.request.GET.get('order_by')
         if order_by:
             object_list = object_list.order_by(order_by)
-
+    
         return object_list
 
     def get_slug(self, slug):
