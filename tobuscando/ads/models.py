@@ -15,7 +15,7 @@ class Ad(models.Model):
     category = TreeForeignKey('Category', verbose_name=_(u'categoria:'))
     title = models.CharField(_(u'título:'), max_length=250)
     slug = models.SlugField(_(u'slug'), blank=True, null=True)
-    price = models.CharField(_(u'preço:'), max_length=100)
+    price = models.DecimalField(_(u'preço:'), max_digits=5, decimal_places=2)
     description = models.TextField(_(u'descrição:'))
     link_reference = models.URLField(_(u'anúncio de referência:'), blank=True)
     image = CloudinaryField(_(u'imagem:'), blank=True, null=True)
@@ -208,6 +208,7 @@ class Offer(models.Model):
 
 
 def ad_pre_save(signal, instance, sender, **kwargs):
+    print 'oi'
     instance.slug = slug(instance, sender, instance.title)
 
 models.signals.pre_save.connect(ad_pre_save, sender=Ad)

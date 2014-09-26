@@ -1,6 +1,6 @@
 # coding: utf-8
-from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import View, TemplateView, ListView
 from django.db.models import Q
 from random import randint, choice
 from django.http import HttpResponse
@@ -10,6 +10,9 @@ from django.template.loader import render_to_string, get_template
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 from tobuscando.ads.models import Ad, Category
 from django.template import Context
+from .models import Person
+
+from datetime import date
 
 # Usado para realização de testes na máquina local.
 URL = 'http://127.0.0.1:8000/'
@@ -108,7 +111,8 @@ class SearchView(ListView):
 
         object_list = self.model.objects.filter(
             Q(title__icontains=slug) | Q(description__icontains=slug) |
-            Q(category__name__icontains=slug))
+            Q(category__name__icontains=slug))\
+            .filter(limit_date__lte=date.today())
 
         order_by = self.request.GET.get('order_by')
         if order_by:
@@ -136,7 +140,7 @@ def contact(request):
         to = save_it.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
         c = Context({
-                'username': request.user.username, 
+                'username': request.user.username,
                 })
         html_content = render_to_string(
             'email-marketing.html', c)
@@ -147,3 +151,14 @@ def contact(request):
         # fail_silently=True)"""
         return HttpResponse("ok")
     return render(request, 'contact/contact.html', {'form': form})
+
+
+class PersonAdView(View):
+    model = Person
+    template_name = "person_view.html"
+
+    def get(self, request, *args, **kwargs):
+        print kwargs.get('username')
+        person = get_object_or_404(Person, username=kwargs.get('username'))
+
+        return render(request, self.template_name, locals())

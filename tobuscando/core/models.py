@@ -23,6 +23,7 @@ class Person(AbstractUser):
     # is_superuser
     # last_login
     # date_joined
+    phone = models.CharField(_(u'telefone'), max_length=50)
     address = models.CharField(_(u'endereço'), max_length=100,
                                blank=True, null=True)
     number = models.IntegerField(_(u'número'), blank=True, null=True)
@@ -35,7 +36,7 @@ class Person(AbstractUser):
     language = models.CharField(_(u'idioma'), max_length=10,
                                 blank=True, null=True, choices=LANGUAGE_CHOIES)
     avatar = CloudinaryField(_(u'foto'), blank=True, null=True)
-    
+
     facebook_link = models.CharField(_(u'facebook link'), max_length=100,
                                      blank=True, null=True)
     twitter_link = models.CharField(_(u'twitter link'), max_length=100,

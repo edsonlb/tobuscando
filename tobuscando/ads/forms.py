@@ -27,10 +27,6 @@ class AdUpdateForm(forms.ModelForm):
             'link_reference', 'limit_date', 'view_phone', 'is_bargain'
         )
 
-        widgets = {
-            'price': forms.TextInput()
-        }
-
 
 class OfferForm(forms.ModelForm):
 

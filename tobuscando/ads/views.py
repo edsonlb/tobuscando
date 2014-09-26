@@ -134,7 +134,7 @@ class AdDetailView(DetailView):
 
     def get_object(self):
         return self.model.objects.get(Q(limit_date__isnull=True) |
-                                      Q(limit_date__lte=date.today()),
+                                      Q(limit_date__gte=date.today()),
                                       slug__exact=self.kwargs['slug'])
 
 
@@ -227,7 +227,10 @@ class CategoryDetailView(DetailView):
                 meta = get[0].split('_')
                 f['metas__option'] = get[1]
 
-        object_list = Ad.objects.filter(q).filter(**f)
+        object_list = Ad.objects.filter(q)\
+                                .filter(**f)\
+                                .filter(limit_date__gte=date.today())
+        # href="{% url 'core:person_view' object.person.username %}"
 
         order_by = self.request.GET.get('order_by')
         if order_by:

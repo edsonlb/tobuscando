@@ -13,13 +13,12 @@ $(document).ready(function() {
     // Dropdown
     $("#category label").click(function() {
         var $this = $(this);
-        var parent = $this.attr('data-parent');
+        var parent = $this.attr('class').split('parent-')[1];
 
         $("#category div.dropdown-nav").hide();
         $("#category label").removeClass("active");
 
         $this.addClass('active');
-        $this.parent('div.dropdown-nav').show();
 
         $("div." + $this.attr("for") + ', div.id_category_' + parent).show();
     });

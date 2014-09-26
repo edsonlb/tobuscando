@@ -10,6 +10,19 @@ $(document).ready(function() {
         'language': 'pt-BR'
     }).mask('99/99/9999');
 
+    $("input[name^=phone]").focusout(function(){
+        var phone, element;
+        element = $(this);
+        element.unmask();
+        phone = element.val().replace(/\D/g, '');
+
+        if(phone.length > 10) {
+            element.mask("(99) 99999-999?9");
+        } else {
+            element.mask("(99) 9999-9999?9");
+        }
+    }).trigger('focusout');
+
     $("form#id_form_search").submit(function() {
         var $this = $(this);
         var search = $(this).find('input#id_search');

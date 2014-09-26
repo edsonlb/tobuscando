@@ -8,7 +8,7 @@ register = template.Library()
 
 @register.filter
 def brl(value):
-    value = float(value.replace('.', '').replace(',', '.'))
+    #value = float(value.replace('.', '').replace(',', '.'))
 
     try:
         setlocale(LC_ALL, 'pt_BR.UTF-8')
