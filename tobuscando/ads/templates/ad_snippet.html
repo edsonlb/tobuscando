@@ -17,7 +17,7 @@
             <div class="row col-md-12 col-sm-12">
                 <div class="col-sm-7">
                     <h4>{{ object.category.name|title }}</h4>
-                    <p><b>{{ object.title|safe }}:</b> {{ object.description|truncatewords_html:15|slice:":140" }}...</p>
+                    <p><b>{{ object.title|safe }}:</b> {{ object.description|truncatewords_html:50|slice:":140" }}...</p>
                 </div>
                 <div class="price col-sm-3">{{ object.price }}</div>
                 <div class="price col-sm-2 text-right">
