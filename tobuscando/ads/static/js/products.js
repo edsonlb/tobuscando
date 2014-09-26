@@ -19,8 +19,12 @@ $(document).ready(function() {
         $("#category label").removeClass("active");
 
         $this.addClass('active');
+        $this.parent('div.dropdown-nav').show();
 
-        $("div." + $this.attr("for") + ', div.id_category_' + parent).show();
+        $("div." + $this.attr("for")).show();
+
+        if(parent != '')
+            $("div.id_category_" + parent).show();
     });
 
     // Radio category
