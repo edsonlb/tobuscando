@@ -31,15 +31,6 @@ tinymce.init({
     browser_spellcheck : true,
     menubar : false,
     toolbar: "undo redo | bold italic",
-    auto_focus: "id_description",
-
-    setup : function(ed)
-    {
-        ed.onInit.add(function(ed)
-        {
-                      tinyMCE.activeEditor.getElement().value = 'test'
-        });
-    },
  });
 </script>
 
@@ -50,7 +41,7 @@ tinymce.init({
 <h2>Faça seu anúncio grátis!</h2>
 
 {% if form_ad.is_multipart %}
-<form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
+<form novalidate enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
     {% else %}
     <form id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
         {% endif %}
