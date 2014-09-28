@@ -78,14 +78,14 @@
             <br>
         </div>
         <div class="row clearfix">
-            {% if object.person.avatar %}
-            <div class="col-sm-2">
-                {% cloudinary object.person.avatar width=50 height=50 %}
-            </div>
-            {% endif %}
+            <a href="{% url 'core:person_view' object.person.username %}" title="{{ object.person.get_full_name }}" style="color: #444;">
+                {% if object.person.avatar %}
+                <div class="col-sm-2">
+                    {% cloudinary object.person.avatar width=50 height=50 %}
+                </div>
+                {% endif %}
 
-            <div class="col-sm-10">
-                <a href="{% url 'core:person_view' object.person.username %}" title="{{ object.person.username }}">
+                <div class="col-sm-10">
                     <ul class="list-unstyled">
                         <li>{{ object.person.username }}</li>
                         {% if object.view_phone %}
@@ -101,8 +101,8 @@
                         <li><strong>{% trans "Sem prazo de término. Vence quando receber a melhor oferta/proposta." %}</strong></li>
                         {% endif %}
                     </ul>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
     </div>
 
