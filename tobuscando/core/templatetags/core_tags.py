@@ -9,15 +9,9 @@ register = template.Library()
 
 @register.filter
 def brl(value):
-    #value = float(value.replace('.', '').replace(',', '.'))
+    setlocale(LC_ALL, 'pt_BR.UTF-8')
 
-    try:
-        setlocale(LC_ALL, 'pt_BR.UTF-8')
-        preco = moeda(value, grouping=True)
-
-        return preco
-    except:
-        return ''
+    return moeda(value, grouping=True)
 
 
 tag_end_re = re.compile(r'(\w+)[^>]*>')
