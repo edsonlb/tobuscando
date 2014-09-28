@@ -2,9 +2,10 @@ $(document).ready(function() {
 
     $("input[name*=price]").maskMoney({
         symbol: "R$",
-        decimal: ",",
-        thousands: "."
+        decimal: ".",
+        thousands: ""
     });
+
     $('input[name*=date]').datepicker({
         'format': 'dd/mm/yyyy',
         'language': 'pt-BR'

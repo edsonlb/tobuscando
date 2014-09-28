@@ -13,7 +13,8 @@ $(document).ready(function() {
     // Dropdown
     $("#category label").click(function() {
         var $this = $(this);
-        var parent = $this.attr('data-parent');
+        var parent = String($('div.id_category_' + $this.attr('data-parent')).attr('class')).split('parent-')[1];
+        var label = $("label[for=id_category_" + parent + "]");
 
         $("#category div.dropdown-nav").hide();
         $("#category label").removeClass("active");
@@ -23,9 +24,9 @@ $(document).ready(function() {
 
         $("div." + $this.attr("for")).show();
 
-        if(parent != '')
-            $("div.id_category_" + parent).show();
+        $("div.id_category_" + parent).show();
     });
+
 
     // Radio category
     $('#category .radio-category, select#id_category').change(function() {
