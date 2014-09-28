@@ -75,7 +75,7 @@
         <h3><i class="fa fa-list"></i> {% trans "Descrição do produto" %}</h3>
         <div class="clearfix">
             {{ object.description|safe }}
-            <br><br>
+            <br><br><br>
         </div>
         <div class="row clearfix">
             <a href="{% url 'core:person_view' object.person.username %}" title="{{ object.person.get_full_name }}" style="color: #444;">
@@ -104,10 +104,10 @@
                 </div>
             </a>
         </div>
-    </div>
 
-    <div class="clearfix">
-        <a href="#offers" title="Ofertar" class="offer button_big">{% trans "Ofertar" %}</a>
+        <div class="clearfix">
+            <a href="#offers" title="Ofertar" class="offer button_big">{% trans "Ofertar" %}</a>
+        </div>
     </div>
 </div>
 
