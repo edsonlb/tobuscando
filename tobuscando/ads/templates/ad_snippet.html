@@ -19,7 +19,7 @@
                     <h4>{{ object.category.name|title }}</h4>
                     <p><b>{{ object.title|safe }}:</b> {{ object.description|truncatechars_html:"140" }}...</p>
                     {% if object.minor_offer %}
-                        <p><strong>Menor oferta:</strong> {{ object.minor_offer }}</p>
+                        <p><strong>Menor oferta:</strong> {{ object.minor_offer|brl }}</p>
                     {% endif %}
                 </div>
                 <div class="price col-sm-3">{{ object.price|brl }}</div>
