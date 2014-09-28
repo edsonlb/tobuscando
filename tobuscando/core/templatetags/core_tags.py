@@ -1,7 +1,7 @@
 # coding: utf-8
 from django import template
 from django.utils.text import Truncator, wrap, phone2numeric
-from locale import setlocale, currency, LC_ALL
+import locale
 import re
 
 register = template.Library()
@@ -9,9 +9,14 @@ register = template.Library()
 
 @register.filter
 def brl(value):
-    setlocale(LC_ALL, 'pt_BR.UTF-8')
+    try:
+        locale.setlocale(locale.LC_ALL,'en_US.UTF-8')
+    except:
+        locale.setlocale(locale.LC_ALL,'')
 
-    return currency(value, grouping=True)
+    value =Decimal(value)
+    loc = locale.localeconv()
+    return locale.currency(value, loc['currency_symbol'], grouping=True)
 
 
 tag_end_re = re.compile(r'(\w+)[^>]*>')
