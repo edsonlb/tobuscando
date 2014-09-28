@@ -42,9 +42,10 @@ class OfferForm(forms.ModelForm):
             'link': forms.URLInput(attrs={
                 'placeholder': 'http://tobuscando/seuproduto'
             }),
+            'price': forms.TextInput(),
             'ad': forms.HiddenInput(),
             'person': forms.HiddenInput(),
-            'parent': forms.HiddenInput()
+            'parent': forms.HiddenInput(),
         }
 
 
