@@ -47,13 +47,12 @@ class Ad(models.Model):
         return self.offer_set.filter(parent=None, is_active=True)
 
     def minor_offer(self):
-        price =  self.offer_set.all().values_list('price')\
-                    .annotate(Min('price'))\
-                    .order_by('price')
-
-        print price
-
-        return price
+        try:
+            return self.offer_set.all().values_list('price')\
+                                       .annotate(Min('price'))\
+                                       .order_by('price')[0]
+        except:
+            return None
 
 
 class AdMeta(models.Model):
