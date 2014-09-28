@@ -1,5 +1,5 @@
 # coding: utf-8
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import View, TemplateView
 from django.core.urlresolvers import reverse as r
@@ -119,6 +119,16 @@ class AdUpdateView(View):
             return HttpResponseRedirect(r('dashboard:ad_list'))
 
         return render(request, self.template_name, locals())
+
+
+class AdDeleteView(View):
+    model = Ad
+
+    def get(self, request, pk):
+        ad = get_object_or_404(Ad, pk=pk)
+        ad.delete()
+
+        return HttpResponseRedirect(r('dashboard:ad_list'))
 
 
 class ProfileView(View):
