@@ -72,11 +72,6 @@
         <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="tobuscando">Tweet</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-        <div class="clearfix">
-            <br>
-            <a href="{% url 'core:person_view' object.person.username %}" title="{{ object.person.username }}" class="btn btn-default">{{ object.person.username }}</a>
-        </div>
-
         <h3><i class="fa fa-list"></i> {% trans "Descrição do produto" %}</h3>
         <div class="clearfix">{{ object.description|safe }}</div>
         <div class="row clearfix">
@@ -87,20 +82,23 @@
             {% endif %}
 
             <div class="col-sm-10">
-                <ul class="list-unstyled">
-                    {% if object.view_phone %}
-                    <li><strong>{% trans "Fone:" %}:</strong> {{ object.person.phone|safe }}</li>
-                    {% endif %}
-                    {% if object.is_bargain %}
-                    <li><strong>{% trans "Aceito negociar propostas similares." %}</strong></li>
-                    {% endif %}
-                    <li><strong>{% trans "Criado em:" %}</strong> {{ object.created_at|date:"d/m/Y" }}</li>
-                    {% if object.limit_date %}
-                    <li><strong>{% trans "Termina em:" %}</strong> {{ object.limit_date|date:"d/m/Y" }}</li>
-                    {% else %}
-                    <li><strong>{% trans "Sem prazo de término. Vence quando receber a melhor oferta/proposta." %}</strong></li>
-                    {% endif %}
-                </ul>
+                <a href="{% url 'core:person_view' object.person.username %}" title="{{ object.person.username }}" class="btn btn-default">
+                    <ul class="list-unstyled">
+                        <li>{{ object.person.username }}</li>
+                        {% if object.view_phone %}
+                        <li><strong>{% trans "Fone:" %}:</strong> {{ object.person.phone|safe }}</li>
+                        {% endif %}
+                        {% if object.is_bargain %}
+                        <li><strong>{% trans "Aceito negociar propostas similares." %}</strong></li>
+                        {% endif %}
+                        <li><strong>{% trans "Criado em:" %}</strong> {{ object.created_at|date:"d/m/Y" }}</li>
+                        {% if object.limit_date %}
+                        <li><strong>{% trans "Termina em:" %}</strong> {{ object.limit_date|date:"d/m/Y" }}</li>
+                        {% else %}
+                        <li><strong>{% trans "Sem prazo de término. Vence quando receber a melhor oferta/proposta." %}</strong></li>
+                        {% endif %}
+                    </ul>
+                </a>
             </div>
         </div>
     </div>
