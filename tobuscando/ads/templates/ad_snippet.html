@@ -18,9 +18,9 @@
                 <div class="col-sm-7">
                     <h4>{{ object.category.name|title }}</h4>
                     <p><b>{{ object.title|safe }}:</b> {{ object.description|truncatechars_html:"140" }}...</p>
-                    <p><strong>Menor oferta:</strong> {{ object.minor_offer|brl }}</p>
+                    <p><strong>Menor oferta:</strong> {{ object.minor_offer }}</p>
                 </div>
-                <div class="price col-sm-3">{{ object.price }}</div>
+                <div class="price col-sm-3">{{ object.price|brl }}</div>
                 <div class="price col-sm-2 text-right">
                 <span class="label label-info">{{ object.person.username }}</span>
                 <br />
