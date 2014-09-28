@@ -138,11 +138,6 @@ class AdDetailView(DetailView):
                                       slug__exact=self.kwargs['slug'])
 
 
-class AdDeleteView(DeleteView):
-    model = Ad
-    template_name = "ad_delete.html"
-
-
 class OfferCreateView(View):
     template_name = 'form_offer_snnipet.html'
     form_class = OfferForm

@@ -5,7 +5,7 @@ from django.views.generic import View, TemplateView
 from django.core.urlresolvers import reverse as r
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from tobuscando.ads.models import AdMeta, Offer
+from tobuscando.ads.models import Ad, AdMeta, Offer
 from tobuscando.ads.forms import AdUpdateForm, CategoryMetaInlineFormset
 from .forms import OfferResponseForm, ProfileForm
 
