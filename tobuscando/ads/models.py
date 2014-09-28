@@ -1,5 +1,6 @@
 # coding: utf-8
 from django.db import models
+from django.db.models import Min
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
 from cloudinary.models import CloudinaryField
@@ -44,6 +45,15 @@ class Ad(models.Model):
 
     def offers(self):
         return self.offer_set.filter(parent=None, is_active=True)
+
+    def minor_offer(self):
+        price =  self.offser_set.all().value_list('price')\
+                    .annotate(Min('price'))\
+                    .order_by('price')[0]
+
+        print price
+
+        return price
 
 
 class AdMeta(models.Model):

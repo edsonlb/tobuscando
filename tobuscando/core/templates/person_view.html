@@ -5,7 +5,7 @@
 {% load cloudinary %}
 
 
-{% block page_title %}{{ object.name }} - {% endblock page_title %}
+{% block page_title %}{{ person.name }} - {% endblock page_title %}
 
 {% block content %}
 <div id="breadcrumb" class="clearfix col-sm-12">
@@ -20,7 +20,7 @@
     {% cloudinary person.avatar width=100 h=100 %}
     {% endif %}
 
-    <div class="pull-left">>
+    <div class="pull-left">
         <h3>{{ person.get_full_name }}</h3>
         <p>{{ person.username }}</p>
     </div>
