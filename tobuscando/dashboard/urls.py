@@ -6,7 +6,7 @@ from .views import (DashboardView, DashboardAdsView, AdUpdateView, AdDeleteView,
 
 
 urlpatterns = patterns('tobuscando.dashboard.views',
-    url(r'^ads/delete/$', login_required
+    url(r'^ads/delete/(?P<pk>\d+)/$', login_required
         (AdDeleteView.as_view()), name='ad_delete'),
     url(r'^ads/(?P<pk>\d+)/$', login_required
         (AdUpdateView.as_view()), name='ad_edit'),
