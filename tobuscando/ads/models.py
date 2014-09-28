@@ -48,9 +48,9 @@ class Ad(models.Model):
 
     def minor_offer(self):
         try:
-            return self.offer_set.all().values_list('price')\
-                                       .annotate(Min('price'))\
-                                       .order_by('price')[0]
+            price = self.offer_set.annotate(min_price=Min('price'))[0]
+
+            return price.min_price
         except:
             return None
 
