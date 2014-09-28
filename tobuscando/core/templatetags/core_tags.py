@@ -1,6 +1,7 @@
 # coding: utf-8
 from django import template
 from django.utils.text import Truncator, wrap, phone2numeric
+from decimal import Decimal
 import locale
 import re
 
@@ -10,11 +11,11 @@ register = template.Library()
 @register.filter
 def brl(value):
     try:
-        locale.setlocale(locale.LC_ALL,'en_US.UTF-8')
+        locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
     except:
-        locale.setlocale(locale.LC_ALL,'')
+        locale.setlocale(locale.LC_ALL, '')
 
-    value =Decimal(value)
+    value = Decimal(value)
     loc = locale.localeconv()
     return locale.currency(value, loc['currency_symbol'], grouping=True)
 
@@ -48,11 +49,13 @@ def truncatechars_html(string, length, ellipsis='...'):
                     i += match.end()
 
                     # save the end tag for possible later use if there is one
-                    match = re.search(r'(</' + tag + '[^>]*>)', string[i:], re.IGNORECASE)
+                    match = re.search(
+                        r'(</' + tag + '[^>]*>)', string[i:], re.IGNORECASE)
                     if match:
-                        pending_close_tags[i + match.start()] = match.groups()[0]
+                        pending_close_tags[
+                            i + match.start()] = match.groups()[0]
                 else:
-                    output_length += 1 # some kind of garbage, but count it in
+                    output_length += 1  # some kind of garbage, but count it in
 
         elif c == '&':
             # possible character entity, we need to skip it
