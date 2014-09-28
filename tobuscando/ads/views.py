@@ -161,7 +161,7 @@ class OfferCreateView(View):
 
             subject = u'Você recebeu uma proposta!'
             from_email = settings.EMAIL_HOST_USER
-            to_list = [person.email, settings.EMAIL_HOST_USER]
+            to_list = [offer.person.email]
             text_content = 'Do you like coffee?'
             c = Context({
             'username': request.user.username,
