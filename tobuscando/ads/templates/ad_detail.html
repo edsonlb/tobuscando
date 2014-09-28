@@ -78,6 +78,7 @@
         </div>
 
         <h3><i class="fa fa-list"></i> {% trans "Descrição do produto" %}</h3>
+        <div class="clearfix">{{ object.description|safe }}</div>
         <div class="row clearfix">
             {% if object.person.avatar %}
             <div class="col-sm-2">
@@ -109,11 +110,10 @@
     </div>
 </div>
 
+{% if object.metas.count %}
 <div class="row">
     <div class="clearfix">
         <h3><i class="fa fa-cog"></i> {% trans "Características do produto" %}</h3>
-
-        {% if object.metas.all %}
         <table class="table table-striped">
             <tbody>
                 {% for meta in object.metas.all %}
@@ -123,12 +123,11 @@
             </tbody>
         </table>
         <br />
-        {% endif %}
 
-        <h4>{{ object.description|safe }}</h4>
         <small><strong>{% trans "O Tobuscando.com não vende este produto e não participa de qualquer parte da negociação, limitando-se apenas a anunciar produtos dos seus usuários." %}</strong></small>
     </div>
 </div>
+{% endif %}
 
 <div class="row">
     <div id="offers" class="clearfix">
