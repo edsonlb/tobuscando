@@ -47,7 +47,7 @@ class Ad(models.Model):
         return self.offer_set.filter(parent=None, is_active=True)
 
     def minor_offer(self):
-        price =  self.offser_set.all().value_list('price')\
+        price =  self.offer_set.all().value_list('price')\
                     .annotate(Min('price'))\
                     .order_by('price')[0]
 
