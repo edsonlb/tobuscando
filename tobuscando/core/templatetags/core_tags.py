@@ -11,7 +11,7 @@ register = template.Library()
 @register.filter
 def brl(value):
     try:
-        locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+        locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
     except:
         locale.setlocale(locale.LC_ALL, '')
 
