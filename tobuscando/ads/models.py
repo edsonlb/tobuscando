@@ -49,7 +49,7 @@ class Ad(models.Model):
     def minor_offer(self):
         price =  self.offer_set.all().values_list('price')\
                     .annotate(Min('price'))\
-                    .order_by('price')[0]
+                    .order_by('price')
 
         print price
 
