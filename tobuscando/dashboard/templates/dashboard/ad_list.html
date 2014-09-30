@@ -4,15 +4,6 @@
 {% load cloudinary %}
 
 
-{% block js %}
-    <script type="text/javascript">
-    $("a.delete").click(function() {
-        if(!confirm('Confirma a exclusão do seu anuncio?'))
-            return false;
-    })
-    </script>
-{% endblock js %}
-
 {% block dashboard_content %}
 <h2>Meus Anúncios</h2>
 <br><br>
@@ -45,4 +36,13 @@
 {% endfor %}
 
 {% paginate %}
+
+<script type="text/javascript">
+    $("a.delete").click(function() {
+        if(!confirm('Confirma a exclusão do seu anuncio?'))
+            return false;
+
+        return false;
+    })
+</script>
 {% endblock dashboard_content %}
