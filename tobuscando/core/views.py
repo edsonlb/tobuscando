@@ -114,7 +114,7 @@ class SearchView(ListView):
                                                 Q(description__icontains=keyword) |
                                                 Q(slug__icontains=keyword) |
                                                 Q(category__name__icontains=keyword) |
-                                                Q(category__slug__icontains=keyword) |
+                                                Q(category__slug__icontains=keyword),
                                                 Q(limit_date__gte=date.today()) |
                                                 Q(limit_date__isnull=True))
     
