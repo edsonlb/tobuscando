@@ -35,4 +35,9 @@ $(document).ready(function() {
         search.focus();
         return false;
     });
+
+    $("[data-action=delete]").click(function() {
+        if(!confirm('Confirma a exclusão do seu anuncio?'))
+            return false;
+    })
 });

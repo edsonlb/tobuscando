@@ -16,7 +16,7 @@ class Ad(models.Model):
     category = TreeForeignKey('Category', verbose_name=_(u'categoria:'))
     title = models.CharField(_(u'título:'), max_length=250)
     slug = models.SlugField(_(u'slug'), blank=True, null=True)
-    price = models.DecimalField(_(u'preço:'), max_digits=5, decimal_places=2)
+    price = models.DecimalField(_(u'preço:'), max_digits=10, decimal_places=2)
     description = models.TextField(_(u'descrição:'))
     link_reference = models.URLField(_(u'anúncio de referência:'), blank=True)
     image = CloudinaryField(_(u'imagem:'), blank=True, null=True)
@@ -194,7 +194,7 @@ class Offer(models.Model):
     link = models.URLField(_(u'link do produto'), help_text=HELP_LINK,
                            null=True, blank=True)
     message = models.TextField(_(u'Mensagem'))
-    price = models.DecimalField(_(u'preço:'), max_digits=5, decimal_places=2)
+    price = models.DecimalField(_(u'preço:'), max_digits=10, decimal_places=2)
     is_active = models.BooleanField(_(u'ativo?'), default=True)
     created_at = models.DateTimeField(_(u'criado em'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'alterado em'), auto_now=True)
