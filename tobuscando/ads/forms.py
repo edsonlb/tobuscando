@@ -33,13 +33,13 @@ class OfferForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(OfferForm, self).__init__(*args, **kwargs)
 
-        self.fields['link'].required = True
+        self.fields['link'].required = False
 
     class Meta:
         model = Offer
         exclude = ('is_active',)
         widgets = {
-            'link': forms.URLInput(attrs={
+            'link': forms.TextInput(attrs={
                 'placeholder': 'http://tobuscando/seuproduto'
             }),
             'price': forms.TextInput(),
