@@ -39,5 +39,12 @@ $(document).ready(function() {
     $("[data-action=delete]").click(function() {
         if(!confirm('Confirma a exclusão do seu anuncio?'))
             return false;
-    })
+    });
+
+    $('input[name*=url').keyup(function() {
+        var $this = $(this);
+        var val = $this.val().replace('http://', '');
+
+        $this.val('http://' + val);
+    });
 });
