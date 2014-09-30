@@ -108,12 +108,14 @@ class SearchView(ListView):
         return context
 
     def get_queryset(self):
-        slug = self.get_slug(self.kwargs.get('slug'))
+        keyword = self.get_slug(self.kwargs.get('slug'))
     
-        object_list = self.model.objects.filter(Q(title__icontains=slug) | 
-                                                Q(description__icontains=slug) |
-                                                Q(category__name__icontains=slug))\
-                                        .filter(Q(limit_date__gte=date.today()) | 
+        object_list = self.model.objects.filter(Q(title__icontains=keyword) | 
+                                                Q(description__icontains=keyword) |
+                                                Q(slug__icontains=keyword) |
+                                                Q(category__name__icontains=keyword) |
+                                                Q(category__slug__icontains=keyword) |
+                                                Q(limit_date__gte=date.today()) |
                                                 Q(limit_date__isnull=True))
     
         order_by = self.request.GET.get('order_by')
