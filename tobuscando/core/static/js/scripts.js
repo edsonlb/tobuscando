@@ -11,7 +11,7 @@ $(document).ready(function() {
         'language': 'pt-BR'
     }).mask('99/99/9999');
 
-    $("input[name^=phone]").focusout(function(){
+    $("input[name$=phone]").focusout(function(){
         var phone, element;
         element = $(this);
         element.unmask();
