@@ -8,14 +8,16 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding field 'Person.phone'
+        db.add_column(u'core_person', 'phone',
+                      self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True),
+                      keep_default=False)
 
-        # Changing field 'Person.phone'
-        db.alter_column(u'core_person', 'phone', self.gf('django.db.models.fields.CharField')(max_length=50, null=True))
 
     def backwards(self, orm):
+        # Deleting field 'Person.phone'
+        db.delete_column(u'core_person', 'phone')
 
-        # Changing field 'Person.phone'
-        db.alter_column(u'core_person', 'phone', self.gf('django.db.models.fields.CharField')(default=2, max_length=50))
 
     models = {
         u'auth.group': {
