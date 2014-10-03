@@ -37,10 +37,12 @@ class PersonPreRegisterForm(forms.ModelForm):
 
     class Meta:
         model = Person
-        fields = ('first_name', 'username', 'email', 'password', 'terms')
+        fields = ('first_name', 'phone',
+                  'username', 'email', 'password', 'terms')
         widgets = {
             'password': forms.PasswordInput()
         }
+
 
 class SignupForm(forms.Form):
     first_name = forms.CharField(max_length=30, label='Nome')
@@ -51,7 +53,6 @@ class SignupForm(forms.Form):
     country = forms.CharField(max_length=50, label='País')
     zipcode = forms.CharField(max_length=50, label='CEP')
     language = forms.CharField(max_length=50, label='Idioma')
-
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
@@ -64,6 +65,8 @@ class SignupForm(forms.Form):
         user.language = self.cleaned_data['language']
         user.save()
 
+
 class ContactForm(forms.ModelForm):
+
     class Meta:
         model = Contact

@@ -1,5 +1,6 @@
 # coding: utf-8
 from django.db import models
+from django.db.models import Min
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
 from cloudinary.models import CloudinaryField
@@ -15,7 +16,7 @@ class Ad(models.Model):
     category = TreeForeignKey('Category', verbose_name=_(u'categoria:'))
     title = models.CharField(_(u'título:'), max_length=250)
     slug = models.SlugField(_(u'slug'), blank=True, null=True)
-    price = models.CharField(_(u'preço:'), max_length=100)
+    price = models.DecimalField(_(u'preço:'), max_digits=5, decimal_places=2)
     description = models.TextField(_(u'descrição:'))
     link_reference = models.URLField(_(u'anúncio de referência:'), blank=True)
     image = CloudinaryField(_(u'imagem:'), blank=True, null=True)
@@ -44,6 +45,14 @@ class Ad(models.Model):
 
     def offers(self):
         return self.offer_set.filter(parent=None, is_active=True)
+
+    def minor_offer(self):
+        try:
+            price = self.offer_set.annotate(min_price=Min('price'))[0]
+
+            return price.min_price
+        except:
+            return None
 
 
 class AdMeta(models.Model):
@@ -185,7 +194,7 @@ class Offer(models.Model):
     link = models.URLField(_(u'link do produto'), help_text=HELP_LINK,
                            null=True, blank=True)
     message = models.TextField(_(u'Mensagem'))
-    price = models.CharField(_(u'preço'), max_length=100)
+    price = models.DecimalField(_(u'preço:'), max_digits=5, decimal_places=2)
     is_active = models.BooleanField(_(u'ativo?'), default=True)
     created_at = models.DateTimeField(_(u'criado em'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'alterado em'), auto_now=True)
@@ -208,6 +217,7 @@ class Offer(models.Model):
 
 
 def ad_pre_save(signal, instance, sender, **kwargs):
+    print 'oi'
     instance.slug = slug(instance, sender, instance.title)
 
 models.signals.pre_save.connect(ad_pre_save, sender=Ad)

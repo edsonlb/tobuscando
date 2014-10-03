@@ -2,13 +2,27 @@ $(document).ready(function() {
 
     $("input[name*=price]").maskMoney({
         symbol: "R$",
-        decimal: ",",
-        thousands: "."
+        decimal: ".",
+        thousands: ""
     });
+
     $('input[name*=date]').datepicker({
         'format': 'dd/mm/yyyy',
         'language': 'pt-BR'
     }).mask('99/99/9999');
+
+    $("input[name^=phone]").focusout(function(){
+        var phone, element;
+        element = $(this);
+        element.unmask();
+        phone = element.val().replace(/\D/g, '');
+
+        if(phone.length > 10) {
+            element.mask("(99) 99999-999?9");
+        } else {
+            element.mask("(99) 9999-9999?9");
+        }
+    }).trigger('focusout');
 
     $("form#id_form_search").submit(function() {
         var $this = $(this);

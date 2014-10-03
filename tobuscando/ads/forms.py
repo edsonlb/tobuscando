@@ -27,10 +27,6 @@ class AdUpdateForm(forms.ModelForm):
             'link_reference', 'limit_date', 'view_phone', 'is_bargain'
         )
 
-        widgets = {
-            'price': forms.TextInput()
-        }
-
 
 class OfferForm(forms.ModelForm):
 
@@ -46,9 +42,10 @@ class OfferForm(forms.ModelForm):
             'link': forms.URLInput(attrs={
                 'placeholder': 'http://tobuscando/seuproduto'
             }),
+            'price': forms.TextInput(),
             'ad': forms.HiddenInput(),
             'person': forms.HiddenInput(),
-            'parent': forms.HiddenInput()
+            'parent': forms.HiddenInput(),
         }
 
 

@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
 
         # Changing field 'Ad.price'
-        db.alter_column(u'ads_ad', 'price', self.gf('django.db.models.fields.CharField')(max_length=100))
+        db.alter_column(u'ads_ad', 'price', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2))
 
     def backwards(self, orm):
 
@@ -19,18 +19,18 @@ class Migration(SchemaMigration):
 
     models = {
         u'ads.ad': {
-            'Meta': {'object_name': 'Ad'},
+            'Meta': {'ordering': "['-created_at']", 'object_name': 'Ad'},
             'category': ('mptt.fields.TreeForeignKey', [], {'to': u"orm['ads.Category']"}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('cloudinary.models.CloudinaryField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_bargain': ('django.db.models.fields.BooleanField', [], {}),
             'limit_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'link_reference': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'person': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Person']", 'null': 'True', 'blank': 'True'}),
-            'price': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'price': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
@@ -95,11 +95,11 @@ class Migration(SchemaMigration):
             'value': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
         u'ads.offer': {
-            'Meta': {'object_name': 'Offer'},
+            'Meta': {'ordering': "['-created_at']", 'object_name': 'Offer'},
             'ad': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['ads.Ad']"}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'link': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'message': ('django.db.models.fields.TextField', [], {}),
             'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['ads.Offer']", 'null': 'True', 'blank': 'True'}),
@@ -153,6 +153,7 @@ class Migration(SchemaMigration):
             'notification4': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'number': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'phone': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'state': ('django.db.models.fields.CharField', [], {'max_length': '2', 'null': 'True', 'blank': 'True'}),
             'twitter_link': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),

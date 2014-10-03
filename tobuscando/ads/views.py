@@ -1,5 +1,4 @@
 # coding: utf-8
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse as r
@@ -13,6 +12,8 @@ from django.core.mail import EmailMultiAlternatives
 from .models import Ad, AdMeta, Category
 from tobuscando.core.forms import PersonPreRegisterForm
 from .forms import AdForm, OfferForm, CategoryMetaInlineFormset
+
+from datetime import date
 import simplejson
 from django.template import Context
 
@@ -74,8 +75,8 @@ class AdCreateView(View):
             text_content = 'Do something...'
             #to = user.email
             c = Context({
-                'username': request.user.username, 
-                'url': settings.SITE_URL, 
+                'username': request.user.username,
+                'url': settings.SITE_URL,
                 'url2': ad.get_absolute_url()
                 })
             html_content = render_to_string(
@@ -131,6 +132,11 @@ class AdDetailView(DetailView):
 
         return context
 
+    def get_object(self):
+        return self.model.objects.get(Q(limit_date__isnull=True) |
+                                      Q(limit_date__gte=date.today()),
+                                      slug__exact=self.kwargs['slug'])
+
 
 class OfferCreateView(View):
     template_name = 'form_offer_snnipet.html'
@@ -155,11 +161,11 @@ class OfferCreateView(View):
 
             subject = u'Você recebeu uma proposta!'
             from_email = settings.EMAIL_HOST_USER
-            to_list = [person.email, settings.EMAIL_HOST_USER]
+            to_list = [offer.person.email]
             text_content = 'Do you like coffee?'
             c = Context({
-            'username': request.user.username, 
-            'url': settings.SITE_URL, 
+            'username': request.user.username,
+            'url': settings.SITE_URL,
             'url2': offer.ad.get_absolute_url()
             })
             html_content = render_to_string('emails-response/offer_success.html', c)
@@ -221,7 +227,10 @@ class CategoryDetailView(DetailView):
                 meta = get[0].split('_')
                 f['metas__option'] = get[1]
 
-        object_list = Ad.objects.filter(q).filter(**f)
+        object_list = Ad.objects.filter(q)\
+                                .filter(**f)\
+                                .filter(limit_date__gte=date.today())
+        # href="{% url 'core:person_view' object.person.username %}"
 
         order_by = self.request.GET.get('order_by')
         if order_by:

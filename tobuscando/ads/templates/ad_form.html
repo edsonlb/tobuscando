@@ -24,6 +24,16 @@
 </script>
 {% endif %}
 
+<script type="text/javascript" src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+    browser_spellcheck : true,
+    menubar : false,
+    toolbar: "undo redo | bold italic",
+ });
+</script>
+
 {% endblock js %}
 
 
@@ -31,7 +41,7 @@
 <h2>Faça seu anúncio grátis!</h2>
 
 {% if form_ad.is_multipart %}
-<form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
+<form novalidate enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
     {% else %}
     <form id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
         {% endif %}

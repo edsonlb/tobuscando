@@ -1,6 +1,6 @@
 # coding: utf-8
-from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import View, TemplateView, ListView
 from django.db.models import Q
 from random import randint, choice
 from django.http import HttpResponse
@@ -10,9 +10,13 @@ from django.template.loader import render_to_string, get_template
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 from tobuscando.ads.models import Ad, Category
 from django.template import Context
+from .models import Person
+
+from datetime import date
 
 # Usado para realização de testes na máquina local.
-URL = 'http://127.0.0.1:8000/'
+#URL = 'http://127.0.0.1:8000/'
+URL = 'http://www.tobuscando.com/'
 
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
@@ -104,16 +108,20 @@ class SearchView(ListView):
         return context
 
     def get_queryset(self):
-        slug = self.get_slug(self.kwargs.get('slug'))
-
-        object_list = self.model.objects.filter(
-            Q(title__icontains=slug) | Q(description__icontains=slug) |
-            Q(category__name__icontains=slug))
-
+        keyword = self.get_slug(self.kwargs.get('slug'))
+    
+        object_list = self.model.objects.filter(Q(title__icontains=keyword) | 
+                                                Q(description__icontains=keyword) |
+                                                Q(slug__icontains=keyword) |
+                                                Q(category__name__icontains=keyword) |
+                                                Q(category__slug__icontains=keyword),
+                                                Q(limit_date__gte=date.today()) |
+                                                Q(limit_date__isnull=True))
+    
         order_by = self.request.GET.get('order_by')
         if order_by:
             object_list = object_list.order_by(order_by)
-
+    
         return object_list
 
     def get_slug(self, slug):
@@ -136,7 +144,7 @@ def contact(request):
         to = save_it.email
         text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
         c = Context({
-                'username': request.user.username, 
+                'username': request.user.username,
                 })
         html_content = render_to_string(
             'email-marketing.html', c)
@@ -147,3 +155,14 @@ def contact(request):
         # fail_silently=True)"""
         return HttpResponse("ok")
     return render(request, 'contact/contact.html', {'form': form})
+
+
+class PersonAdView(View):
+    model = Person
+    template_name = "person_view.html"
+
+    def get(self, request, *args, **kwargs):
+        print kwargs.get('username')
+        person = get_object_or_404(Person, username=kwargs.get('username'))
+
+        return render(request, self.template_name, locals())

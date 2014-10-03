@@ -1,5 +1,7 @@
 {% load staticfiles %}
 {% load cloudinary %}
+{% load core_tags %}
+
 
 <li id="comment-{{ offer.pk }}" class="{% if offer.parent %}sub-offer parent-{{ offer.parent.pk }}{% endif %} {% if offer.parent %}col-sm-offset-2{% endif %}">
     <div class="cbp_tmtime">
@@ -13,6 +15,7 @@
         </div>
     </div>
     <div class="cbp_tmlabel">
+        <p><strong>Valor: </strong> {{ offer.price|brl }}</p>
         <p>{{ offer.message }}</p>
         {% if offer.link %}
         <a href="{{ offer.link }}" title="{{ object.title }}" target="_blank"><strong>Clique aqui e veja o produto de referência <i class="fa fa-link"></i></strong></a>

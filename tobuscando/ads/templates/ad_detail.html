@@ -67,32 +67,42 @@
     <div class="col-sm-5">
 
         <div class="clearfix">
-        <div class="fb-like" data-href="http://www.tobuscando.com{{request.get_full_path}}" data-width="100%" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+            <div class="fb-like" data-href="http://www.tobuscando.com{{request.get_full_path}}" data-width="100%" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
         </div>
         <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="tobuscando">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
         <h3><i class="fa fa-list"></i> {% trans "Descrição do produto" %}</h3>
-        <div class="row clearfix">
-            <div class="col-sm-2">
-                <img src="http://res.cloudinary.com/to-buscando/image/upload/c_fill,h_50,w_50/{{ object.person.avatar }}.jpg" class="img-circle speaker">
-            </div>
-        <div class="col-sm-10">
-        <!-- MONSTRAR TELEFONE QUANDO FOR MARCADO, MAS NAO TEM AINDA O CAMPO DE TELEFONE NO CADASTRO DA PESSOA.
-            {% if object.view_phone %}
-            <h4>{% trans "Fone:" %} {{ object.persondescription|safe }}</h4>
-            {% endif %}
-        -->
-            {% if object.is_bargain %}
-            <h4>{% trans "Aceito negociar propostas similares." %}</h4>
-            {% endif %}
-            <small>{% trans "Criado em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
-            {% if object.limit_date %}
-            <small>{% trans "Termina em:" %} {{ object.limit_date|date:"d/m/Y" }}</small>
-            {% else %}
-            <small>{% trans "Sem prazo de término. Vence quando receber a melhor oferta/proposta." %}</small>
-            {% endif %}
+        <div class="clearfix">
+            {{ object.description|safe }}
+            <br><br><br>
         </div>
+        <div class="row clearfix">
+            <a href="{% url 'core:person_view' object.person.username %}" title="{{ object.person.get_full_name }}" style="color: #444;">
+                {% if object.person.avatar %}
+                <div class="col-sm-2">
+                    {% cloudinary object.person.avatar width=50 height=50 %}
+                </div>
+                {% endif %}
+
+                <div class="col-sm-10">
+                    <ul class="list-unstyled">
+                        <li><strong>{{ object.person.get_full_name }}</strong></li>
+                        {% if object.view_phone %}
+                        <li><strong>{% trans "Fone:" %}:</strong> {{ object.person.phone|safe }}</li>
+                        {% endif %}
+                        {% if object.is_bargain %}
+                        <li><strong>{% trans "Aceito negociar propostas similares." %}</strong></li>
+                        {% endif %}
+                        <li><strong>{% trans "Criado em:" %}</strong> {{ object.created_at|date:"d/m/Y" }}</li>
+                        {% if object.limit_date %}
+                        <li><strong>{% trans "Termina em:" %}</strong> {{ object.limit_date|date:"d/m/Y" }}</li>
+                        {% else %}
+                        <li><strong>{% trans "Sem prazo de término. Vence quando receber a melhor oferta/proposta." %}</strong></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </a>
         </div>
 
         <div class="clearfix">
@@ -101,11 +111,10 @@
     </div>
 </div>
 
+{% if object.metas.count %}
 <div class="row">
     <div class="clearfix">
         <h3><i class="fa fa-cog"></i> {% trans "Características do produto" %}</h3>
-
-        {% if object.metas.all %}
         <table class="table table-striped">
             <tbody>
                 {% for meta in object.metas.all %}
@@ -115,12 +124,11 @@
             </tbody>
         </table>
         <br />
-        {% endif %}
 
-        <h4>{{ object.description|safe }}</h4>
-        {% trans "O Tobuscando.com não vende este produto e não participa de qualquer parte da negociação, limitando-se apenas a anunciar produtos dos seus usuários." %}
+        <small><strong>{% trans "O Tobuscando.com não vende este produto e não participa de qualquer parte da negociação, limitando-se apenas a anunciar produtos dos seus usuários." %}</strong></small>
     </div>
 </div>
+{% endif %}
 
 <div class="row">
     <div id="offers" class="clearfix">
@@ -130,15 +138,9 @@
 
         <div class="panel panel-default">
 
+            <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion" class="button_fullwidth-2 text-left" style="margin-bottom: 0; text-align: left;"><i class="fa fa-plus-circle"></i> {% trans "Fazer uma oferta" %}</a>
 
-
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a href="#formOffer" title="Fazer uma oferta" data-toggle="collapse" data-parent="#accordion" href="#formOffer"><i class="fa fa-plus-circle"></i> {% trans "Fazer uma oferta" %}</a>
-                </h4>
-            </div>
-
-            <div id="formOffer" class="panel-body panel-collapse collapse {% if not user.is_authenticated %}in{% endif %}">
+            <div id="formOffer" class="panel-body panel-collapse collapse">
                 {% if not user.is_authenticated %}
                 <p>{% trans "Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar" %} <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>. Para fazer login <a href="{% url 'account_login' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se">clique aqui</a>.</p>
                 {% else %}
@@ -173,7 +175,7 @@
         <h3><i class="fa fa-comments"></i> {% trans "Comentários" %}</h3>
         <div class="panel panel-default">
             <div class="panel-heading">
-<div class="fb-comments" data-href="http://www.tobuscando.com{{request.get_full_path}}" data-numposts="4" data-colorscheme="light" data-width="100%"></div>
+                <div class="fb-comments" data-href="http://www.tobuscando.com{{request.get_full_path}}" data-numposts="4" data-colorscheme="light" data-width="100%"></div>
             </div>
         </div>
     </div>
