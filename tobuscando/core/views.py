@@ -19,10 +19,10 @@ from datetime import date
 URL = 'http://www.tobuscando.com/'
 
 from django.dispatch import receiver
-from allauth.account.signals import user_signed_up
+from allauth.account.signals import user_signed_up, password_reset
 
 
-@receiver(user_signed_up)
+@receiver(user_signed_up, dispatch_uid="some.unique.string.id.for.allauth.user_signed_up")
 def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
     try:
@@ -75,6 +75,10 @@ def set_attribute(sender, **kwargs):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
+@receiver(password_reset)
+def password_reset(sender, request, **kwargs):
+    print 'Redirect to url'
+
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -108,12 +112,14 @@ class SearchView(ListView):
         return context
 
     def get_queryset(self):
-        slug = self.get_slug(self.kwargs.get('slug'))
+        keyword = self.get_slug(self.kwargs.get('slug'))
     
-        object_list = self.model.objects.filter(Q(title__icontains=slug) | 
-                                                Q(description__icontains=slug) |
-                                                Q(category__name__icontains=slug))\
-                                        .filter(Q(limit_date__gte=date.today()) | 
+        object_list = self.model.objects.filter(Q(title__icontains=keyword) | 
+                                                Q(description__icontains=keyword) |
+                                                Q(slug__icontains=keyword) |
+                                                Q(category__name__icontains=keyword) |
+                                                Q(category__slug__icontains=keyword),
+                                                Q(limit_date__gte=date.today()) |
                                                 Q(limit_date__isnull=True))
     
         order_by = self.request.GET.get('order_by')
