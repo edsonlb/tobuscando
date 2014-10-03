@@ -19,7 +19,7 @@ from datetime import date
 URL = 'http://www.tobuscando.com/'
 
 from django.dispatch import receiver
-from allauth.account.signals import user_signed_up
+from allauth.account.signals import user_signed_up, password_reset
 
 
 @receiver(user_signed_up, dispatch_uid="some.unique.string.id.for.allauth.user_signed_up")
@@ -74,6 +74,10 @@ def set_attribute(sender, **kwargs):
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+
+@receiver(password_reset)
+def password_reset(sender, request, **kwargs):
+    print 'Redirect to url'
 
 
 class HomeView(TemplateView):
