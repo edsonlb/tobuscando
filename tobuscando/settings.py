@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.flatpages',
 
-    'south',
+    #'south',
     'cloudinary',
     'smart_selects',
     'mptt',
