@@ -32,6 +32,12 @@
     $("a.offer").click(function() {
         $("#formOffer").addClass('in');
     });
+
+    $("#formOffer").submit(function() {
+        var link = $(this).find('#id_link');
+
+        link.val("http://" + link.val());
+    });
 </script>
 {% endblock js %}
 

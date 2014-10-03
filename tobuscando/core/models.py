@@ -23,7 +23,8 @@ class Person(AbstractUser):
     # is_superuser
     # last_login
     # date_joined
-    phone = models.CharField(_(u'telefone'), max_length=50, blank=True, null=True)
+    phone = models.CharField(_(u'telefone'), max_length=50)
+    cellphone = models.CharField(_(u'celular'), max_length=50)
     address = models.CharField(_(u'endereço'), max_length=100,
                                blank=True, null=True)
     number = models.IntegerField(_(u'número'), blank=True, null=True)

@@ -13,14 +13,11 @@ class ProfileForm(forms.ModelForm):
         self.fields['first_name'].label = _(u'Nome')
         self.fields['username'].help_text = None
 
-        self.fields['password'].widget = forms.HiddenInput()
-        self.fields['last_login'].widget = forms.HiddenInput()
-        #self.fields['date_joined'].widget = forms.HiddenInput()
 
     class Meta:
         model = Person
         fields = (
-            'avatar', 'first_name', 'username', 'email',
+            'avatar', 'first_name', 'username', 'email', 'phone', 'cellphone',
             'zipcode', 'address', 'number', 'district', 'city', 'state', 'country',
             'language', 'facebook_link', 'twitter_link', 'gplus_link',
             'notification1', 'notification2', 'notification3', 'notification4',
@@ -30,6 +27,9 @@ class ProfileForm(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={'readonly': 'readonly'}),
             'email': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'password': forms.HiddenInput(),
+            'last_login': forms.HiddenInput(),
+            #'date_joined': forms.HiddenInput()
         }
 
 

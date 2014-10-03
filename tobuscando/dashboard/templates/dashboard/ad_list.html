@@ -3,6 +3,7 @@
 {% load pagination_tags %}
 {% load cloudinary %}
 
+
 {% block dashboard_content %}
 <h2>Meus Anúncios</h2>
 <br><br>
@@ -20,7 +21,7 @@
         <div class="cleafix">
             <ul class="list-unstyle list-inline">
                 <li><a href="{% url 'dashboard:ad_edit' pk=ad.pk %}"><i class="fa fa-edit"></i> Editar</a></li>
-                <li><a href="{% url 'dashboard:ad_delete' pk=ad.pk %}"><i class="fa fa-remove"></i> Excluir</a></li>
+                <li><a href="{% url 'dashboard:ad_delete' pk=ad.pk %}" class="delete"><i class="fa fa-remove"></i> Excluir</a></li>
                 {% if ad.is_active %}
                 <li><strong>Status:</strong> <span class="fa  fa-check-circle"></span></li>
                 {% else %}
@@ -35,4 +36,11 @@
 {% endfor %}
 
 {% paginate %}
+
+<script type="text/javascript">
+    $("a.delete").click(function() {
+        if(!confirm('Confirma a exclusão do seu anuncio?'))
+            return false;
+    });
+</script>
 {% endblock dashboard_content %}

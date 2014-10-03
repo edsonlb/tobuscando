@@ -47,7 +47,6 @@ def set_attribute(sender, **kwargs):
         user.name = name
         user.first_name = first_name
         user.last_name = last_name
-        user.phone = 0
         user.save()
 
         # try to send welcome email
