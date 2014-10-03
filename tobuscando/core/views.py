@@ -18,7 +18,7 @@ from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
 
 
-@receiver(user_signed_up)
+@receiver(user_signed_up, dispatch_uid="some.unique.string.id.for.allauth.user_signed_up")
 def set_attribute(sender, **kwargs):
     user = kwargs.pop('user')
     try:
