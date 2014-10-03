@@ -12,16 +12,16 @@ class Migration(SchemaMigration):
         # Changing field 'Person.phone'
         db.alter_column(u'core_person', 'phone', self.gf('django.db.models.fields.CharField')(max_length=50, null=True))
 
-        # Changing field 'Contact.full_name'
-        db.alter_column(u'core_contact', 'full_name', self.gf('django.db.models.fields.CharField')(max_length=100, null=True))
+        # Changing field 'Contact.phone'
+        db.alter_column(u'core_contact', 'phone', self.gf('django.db.models.fields.CharField')(max_length=20, null=True))
 
     def backwards(self, orm):
 
         # Changing field 'Person.phone'
-        db.alter_column(u'core_person', 'phone', self.gf('django.db.models.fields.CharField')(default=2005, max_length=50))
+        db.alter_column(u'core_person', 'phone', self.gf('django.db.models.fields.CharField')(default=0, max_length=50))
 
-        # Changing field 'Contact.full_name'
-        db.alter_column(u'core_contact', 'full_name', self.gf('django.db.models.fields.CharField')(default=2005, max_length=100))
+        # Changing field 'Contact.phone'
+        db.alter_column(u'core_contact', 'phone', self.gf('django.db.models.fields.CharField')(default='', max_length=20))
 
     models = {
         u'auth.group': {
@@ -47,10 +47,10 @@ class Migration(SchemaMigration):
         u'core.contact': {
             'Meta': {'object_name': 'Contact'},
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
-            'full_name': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'full_name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'message': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
-            'phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'})
+            'phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'})
         },
         u'core.person': {
             'Meta': {'ordering': "['email']", 'object_name': 'Person'},
