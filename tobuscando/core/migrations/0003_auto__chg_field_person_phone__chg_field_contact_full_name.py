@@ -1,19 +1,27 @@
 # -*- coding: utf-8 -*-
 from south.utils import datetime_utils as datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
 
-class Migration(DataMigration):
+
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        # Note: Don't use "from appname.models import ModelName". 
-        # Use orm.ModelName to refer to models in this application,
-        # and orm['appname.ModelName'] for models in other applications.
+
+        # Changing field 'Person.phone'
+        db.alter_column(u'core_person', 'phone', self.gf('django.db.models.fields.CharField')(max_length=50, null=True))
+
+        # Changing field 'Contact.full_name'
+        db.alter_column(u'core_contact', 'full_name', self.gf('django.db.models.fields.CharField')(max_length=100, null=True))
 
     def backwards(self, orm):
-        "Write your backwards methods here."
+
+        # Changing field 'Person.phone'
+        db.alter_column(u'core_person', 'phone', self.gf('django.db.models.fields.CharField')(default=2005, max_length=50))
+
+        # Changing field 'Contact.full_name'
+        db.alter_column(u'core_contact', 'full_name', self.gf('django.db.models.fields.CharField')(default=2005, max_length=100))
 
     models = {
         u'auth.group': {
@@ -39,7 +47,7 @@ class Migration(DataMigration):
         u'core.contact': {
             'Meta': {'object_name': 'Contact'},
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
-            'full_name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'full_name': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'message': ('django.db.models.fields.TextField', [], {'max_length': '500'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'})
@@ -81,4 +89,3 @@ class Migration(DataMigration):
     }
 
     complete_apps = ['core']
-    symmetrical = True

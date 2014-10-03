@@ -77,7 +77,7 @@ class Person(AbstractUser):
 
 
 class Contact(models.Model):
-        full_name = models.CharField(_('nome completo'), max_length=100)
+        full_name = models.CharField(_('nome completo'), max_length=100, blank=True, null=True)
         email = models.EmailField(_('email'))
         phone = models.CharField(_('telefone'), max_length=20, blank=True)
         message = models.TextField(_('mensagem'), max_length=500)
