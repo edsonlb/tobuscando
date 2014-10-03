@@ -1,0 +1,15 @@
+{% extends "base_site.html" %}
+
+{% load i18n %}
+{% load account %}
+
+{% block head_title %}{% trans "Verifique o seu endereço de email" %}{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top: 60px;">
+	<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+    <h3 class="text-center"><strong>{% trans "Verifique o seu endereço de e-mail" %}</strong></h3>
+    <h4 class="text-center">{% trans "Enviamos-lhe um e-mail para verificação. Por favor, clique no link dentro deste e-mail. Contacte-nos se não o receber dentro dos próximos minutos." %}</h4>
+    </div>
+</div>
+{% endblock %}
