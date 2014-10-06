@@ -59,7 +59,7 @@ $(document).ready(function() {
                 200: function(data) {
                     if(data.ok == 'true')
                         $("div#formOffer form div").html(data.html);
-                        $.delay(2000).("div#formOffer").removeClass('in');
+                        $("div#formOffer").delay(2000).removeClass('in');
 
                     $("div#formOffer form div").html(data.html);
                 }
