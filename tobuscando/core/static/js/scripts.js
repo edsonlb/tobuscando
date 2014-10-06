@@ -11,6 +11,8 @@ $(document).ready(function() {
         'language': 'pt-BR'
     }).mask('99/99/9999');
 
+    $('input[name*=cep]').mask('99999-999');
+
     $("input[name$=phone]").focusout(function(){
         var phone, element;
         element = $(this);
@@ -36,10 +38,11 @@ $(document).ready(function() {
         return false;
     });
 
-    $('input[name*=url').keyup(function() {
+    $('input[name=url').focus(function() {
         var $this = $(this);
-        var val = $this.val().replace('http://', '');
+        var val = $this.val();
 
-        $this.val('http://' + val);
+        if (!val)
+            $this.val('http://' + val);
     });
 });
