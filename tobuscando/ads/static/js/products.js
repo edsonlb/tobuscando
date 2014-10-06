@@ -57,9 +57,10 @@ $(document).ready(function() {
             dataType: 'json',
             statusCode: {
                 200: function(data) {
-                    if(data.ok == 'true')
+                    if(data.ok == 'true') {
                         $("div#formOffer form div").html(data.html);
                         $("div#formOffer").delay(2000).removeClass('in');
+                    }
 
                     $("div#formOffer form div").html(data.html);
                 }
