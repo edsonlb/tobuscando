@@ -58,7 +58,8 @@ $(document).ready(function() {
             statusCode: {
                 200: function(data) {
                     if(data.ok == 'true')
-                        return window.location.reload();
+                        $("div#formOffer form div").html(data.html);
+                        $.delay(2000).("div#formOffer").removeClass('in');
 
                     $("div#formOffer form div").html(data.html);
                 }
