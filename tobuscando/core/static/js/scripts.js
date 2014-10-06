@@ -42,7 +42,7 @@ $(document).ready(function() {
         var $this = $(this);
         var val = $this.val();
 
-        if (!val)
+        if (val != '')
             $this.val('http://' + val);
     });
 });
