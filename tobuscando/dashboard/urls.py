@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 from .views import (DashboardView, DashboardAdsView, AdUpdateView, AdDeleteView,
-                    OfferView, OfferResponseView, ProfileView)
+                    OfferView, OfferResponseView, ProfileView, ProfileDelete)
 
 
 urlpatterns = patterns('tobuscando.dashboard.views',
