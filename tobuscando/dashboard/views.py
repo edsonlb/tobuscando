@@ -152,3 +152,9 @@ class ProfileView(View):
             return HttpResponseRedirect(r('dashboard:dash_home'))
 
         return render(request, self.template_name, locals())
+
+class ProfileDelete(View):
+    person = Person.objects.get(pk=request.user.id)
+    person.delete() # Apagar pq o Django não aceita duplicidade de emails, então nao adianta somente o active = False
+
+    return HttpResponseRedirect(r('core:home'))

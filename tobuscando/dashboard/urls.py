@@ -18,6 +18,8 @@ urlpatterns = patterns('tobuscando.dashboard.views',
         (OfferResponseView.as_view()), name='offer_response'),
     url(r'^profile/$', login_required
         (ProfileView.as_view()), name='profile'),
+    url(r'^profile/delete/$', login_required
+        (ProfileDelete.as_view()), name='profile_delete'),
     url(r'^$', login_required
         (DashboardView.as_view()), name='dash_home'),
 )
