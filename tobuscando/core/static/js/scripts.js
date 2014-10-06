@@ -38,7 +38,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $('input[name=url').focus(function() {
+    $('input[name="link"').focus(function() {
         var $this = $(this);
         var val = $this.val();
 
