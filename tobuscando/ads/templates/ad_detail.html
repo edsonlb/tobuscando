@@ -65,7 +65,7 @@
 <div class="row clearfix">
     <div class="col-sm-7 text-center">
         {% if object.image %}
-        {% cloudinary object.image alt=object.title|title class='img-responsive' %}
+        {% cloudinary object.image alt=object.title|title class='img-responsive' style="border-radius: 25px;" %}
         {% else %}
         <img src="{% static 'images/ad.gif' %}" alt="Anúncio" width="100" height="100">
         {% endif %}
