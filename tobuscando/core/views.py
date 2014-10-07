@@ -20,6 +20,7 @@ URL = 'http://www.tobuscando.com/'
 
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up, password_reset, email_confirmed, email_confirmation_sent, password_changed
+from allauth.socialaccount.signals import pre_social_login
 
 
 @receiver(user_signed_up, dispatch_uid="some.unique.string.id.for.allauth.user_signed_up")
@@ -102,6 +103,10 @@ def change_your_pass(sender, user, **kwargs):
     msg.attach_alternative(html_content, "text/html")
     msg.send()
     print user.email
+
+@receiver(pre_social_login)
+def pre_social_account(sender, **kwargs):
+    print 'confirm account'
 
 class HomeView(TemplateView):
     template_name = 'index.html'
