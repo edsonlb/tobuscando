@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import View, TemplateView, ListView
 from django.db.models import Q
 from random import randint, choice
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string, get_template
@@ -62,7 +62,6 @@ def set_attribute(sender, request, **kwargs):
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-        return HttpResponseRedirect('/dashboard/')
     else:
         subject = 'Bem vindo ao Tobuscando!'
         from_email = settings.EMAIL_HOST_USER
@@ -76,18 +75,17 @@ def set_attribute(sender, request, **kwargs):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-        return HttpResponseRedirect('/accounts/confirm-email/')
-
 @receiver(password_reset)
 def password_reset(sender, request, **kwargs):
     print 'Redirect to url'
 
-#@receiver(email_confirmed)
-#def to_email(sender, request, **kwargs):
-#    print 'Redirect to url'
+@receiver(email_confirmed)
+def to_email(sender, request, **kwargs):
+    print 'Redirect to url'
 
-#@receiver(email_confirmation_sent)
-#def do_you_confirmed(sender, **kwargs):
+@receiver(email_confirmation_sent)
+def do_you_confirmed(sender, **kwargs):
+    print 'confirm account'
 
 @receiver(password_changed)
 def change_your_pass(sender, user, **kwargs):
