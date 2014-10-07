@@ -82,9 +82,9 @@ def set_attribute(sender, request, **kwargs):
 def password_reset(sender, request, **kwargs):
     print 'Redirect to url'
 
-@receiver(email_confirmed)
-def to_email(sender, request, **kwargs):
-    print 'Redirect to url'
+#@receiver(email_confirmed)
+#def to_email(sender, request, **kwargs):
+#    print 'Redirect to url'
 
 #@receiver(email_confirmation_sent)
 #def do_you_confirmed(sender, **kwargs):
