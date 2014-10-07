@@ -87,7 +87,7 @@
             <a href="{% url 'core:person_view' object.person.username %}" title="{{ object.person.get_full_name }}" style="color: #444;">
                 {% if object.person.avatar %}
                 <div class="col-sm-2">
-                    {% cloudinary object.person.avatar width=50 height=50 %}
+                    {% cloudinary object.person.avatar width=75 height=75 style="border-radius: 15px;" %}
                 </div>
                 {% endif %}
 
