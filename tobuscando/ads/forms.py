@@ -9,15 +9,12 @@ class AdForm(forms.ModelForm):
         super(AdForm, self).__init__(*args, **kwargs)
         self.fields['link_reference'].widget = forms.TextInput(attrs={
             'placeholder': 'Link se já encontrou algo parecido na Internet...'})
-        #self.fields['limit_date'].widget = forms.DateField(format=('%d/%m/%y'),
-         #                                                   attrs={})
 
     class Meta:
         model = Ad
         exclude = ('person', 'slug', 'is_active')
         widgets = {
             'price': forms.TextInput(),
-
         }
 
 class AdUpdateForm(forms.ModelForm):
