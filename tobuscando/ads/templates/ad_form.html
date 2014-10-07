@@ -24,16 +24,6 @@
 </script>
 {% endif %}
 
-<script type="text/javascript" src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
-<script type="text/javascript">
-tinymce.init({
-    selector: "textarea",
-    browser_spellcheck : true,
-    menubar : false,
-    toolbar: "undo redo | bold italic",
- });
-</script>
-
 {% endblock js %}
 
 
@@ -102,7 +92,13 @@ tinymce.init({
             <div class="clearfix">
                 {% for field in form_ad %}
                 {% if field.name != 'category' %}
+                {% if field.field.required %}
+                <span class="required">
+                    {% bootstrap_field field layout='horizontal' %}
+                </span>
+                {% else %}
                 {% bootstrap_field field layout='horizontal' %}
+                {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>
@@ -119,11 +115,11 @@ tinymce.init({
                     <div class="form-group">
                         <div class="control-label col-md-2"><label for="email_usuario">Email:</label></div>
                         <div class="col-md-4">
-                        <input type="email" class="form-control" id="email_usuario" name="email_usuario" placeholder="Email do usuário logado." title="Verifique se o seu e-mail está correto." type="text" value="{{ user.email|lower }}" readonly>
+                            <input type="email" class="form-control" id="email_usuario" name="email_usuario" placeholder="Email do usuário logado." title="Verifique se o seu e-mail está correto." type="text" value="{{ user.email|lower }}" readonly>
                         </div>
 
                     </div>
-                    <p class="col-sm-offset-2">Não é você? <a href="{% url 'account_logout' %}?next={% url 'ads:ad_create' %}">Clique aqui.</a></p>
+                    <p class="col-sm-offset-2">Não é você? <a href="{% url 'account_logout' %}?next={% url 'ads:ad_create' %}"><strong>Clique aqui.</strong></a></p>
                     {% else %}
                     {% bootstrap_form form_person layout='horizontal' %}
                     {% endif %}

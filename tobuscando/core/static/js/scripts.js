@@ -11,20 +11,10 @@ $(document).ready(function() {
         'language': 'pt-BR'
     }).mask('99/99/9999');
 
-    $('input[name*=cep]').mask('99999-999');
+    $('input#id_zipcode').mask('99999-999');
 
-    $("input[name$=phone]").focusout(function(){
-        var phone, element;
-        element = $(this);
-        element.unmask();
-        phone = element.val().replace(/\D/g, '');
-
-        if(phone.length > 10) {
-            element.mask("(99) 99999-999?9");
-        } else {
-            element.mask("(99) 9999-9999?9");
-        }
-    }).trigger('focusout');
+    $("input#id_phone").mask("(99) 9999-9999");
+    $("input#id_cellphone").mask("(99) 99999-9999");
 
     $("form#id_form_search").submit(function() {
         var $this = $(this);

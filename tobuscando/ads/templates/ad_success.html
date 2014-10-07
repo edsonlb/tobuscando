@@ -36,7 +36,7 @@
                         {% endfor %}
                     </div>
                     <strong>Descrição:</strong>
-                    <p>{{ ad.description }}</p>
+                    <p>{{ ad.description|safe }}</p>
 
                     <strong>Preço:</strong>
                     <p>{{ ad.price }}</p>

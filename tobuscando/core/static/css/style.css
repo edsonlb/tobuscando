@@ -19,6 +19,9 @@ input, input.form-control, textarea.form-control {
     margin-bottom: 0px !important;
     height: 38px;
 }
+input[type="checkbox"] {
+    height: inherit;
+}
 .form-group {
     margin-bottom: 10px;
 }
@@ -111,57 +114,62 @@ ul.breadcrumb {
 }
 
 /*  */
-ul.categories { 
-	background: none repeat scroll 0 0 #FFFFFF; 
-	border-radius: 4px 4px 4px 4px; 
-	padding-top:10px; 
+ul.categories {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-radius: 4px 4px 4px 4px;
+	padding-top:10px;
 	padding-bottom:10px;
 }
-ul.categories li { 
-	display:block; 
+ul.categories li {
+	display:block;
 	border-bottom:1px dashed #FFF;
 }
-ul.categories li:last-child { 
+ul.categories li:last-child {
 	border:none;
 }
-ul.categories li a.active { 
+ul.categories li a.active {
 	color:#FFF;
 }
 /* Categories dropdown */
-ul.categories li { 
-	position:relative 
+ul.categories li {
+	position:relative
 }
-ul.categories li > ul { 
-	display:none; 
-	position:absolute; 
-	top:80%; 
-	left:80%; 
-	z-index:10; 
-	background:#fff; 
-	padding:10px; 
-	border:1px solid #E7E7E7; 
+ul.categories li > ul {
+	display:none;
+	position:absolute;
+	top:80%;
+	left:80%;
+	z-index:10;
+	background:#fff;
+	padding:10px;
+	border:1px solid #E7E7E7;
 }
-ul.categories li:hover > ul { 
+ul.categories li:hover > ul {
 	display:block;
 }
-ul.categories li ul li, ul.categories li ul li a { 
-	display:block; 
+ul.categories li ul li, ul.categories li ul li a {
+	display:block;
 }
-ul.categories li { 
-	position:relative 
+ul.categories li {
+	position:relative
 }
-ul.categories li ul li ul { 
-	display:none; position:absolute; 
-	top:80%; 
-	left:80%; 
-	z-index:10; 
-	background:#fff; 
-	padding:10px; 
-	border:1px solid #E7E7E7; 
+ul.categories li ul li ul {
+	display:none; position:absolute;
+	top:80%;
+	left:80%;
+	z-index:10;
+	background:#fff;
+	padding:10px;
+	border:1px solid #E7E7E7;
 }
-ul.categories li ul li:hover ul { 
-	display:block 
+ul.categories li ul li:hover ul {
+	display:block
 }
-ul.categories li ul li ul li, ul.categories li li ul ul li a { 
-	display:block; 
+ul.categories li ul li ul li, ul.categories li li ul ul li a {
+	display:block;
+}
+span.required label::after {
+    content: " *";
+    color: #AC0000;
+    font-size: 22px;
 }
