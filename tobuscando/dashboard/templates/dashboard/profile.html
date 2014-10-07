@@ -50,19 +50,22 @@
         {% endfor %}
 
         {% buttons %}
-        <script language=javascript>  
-            function confirmar_exclusao(){  
-                msg = "Tem certeza que deseja excluir a sua conta?";  
-                
-                if(confirm(msg)){  
-                    location.href="/dashboard/profile/delete/";  
-                }  
-            }  
-        </script> 
+        <script language=javascript>
+            function confirmar_exclusao(){
+                msg = "Tem certeza que deseja excluir a sua conta?";
+
+                if(confirm(msg)){
+                    location.href="/dashboard/profile/delete/";
+                }
+            }
+        </script>
+
+        <div class="form-group">
+        <a href="#" onclick="confirmar_exclusao();" class="btn btn-danger" style="border-radius: none;">Excluir</a>
+        </div>
 
         <div class="col-sm-offset-2">
-            <a href="#" onClick="confirmar_exclusao();" class="btn btn-link">Excluir</a> 
-            <a href="javascript:history.back()" class="btn btn-link">Cancelar</a> 
+            <a href="javascript:history.back()" class="btn btn-link">Cancelar</a>
             <button type="submit" class="button_outline text-center btn-info btn-new_ad hidden-xs">Salvar</button>
         </div>
         {% endbuttons %}
