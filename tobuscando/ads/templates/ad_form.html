@@ -31,7 +31,7 @@
 <h2>Faça seu anúncio grátis!</h2>
 
 {% if form_ad.is_multipart %}
-<form novalidate enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
+<form enctype="multipart/form-data" id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
     {% else %}
     <form id="id_form_ad" name="form_ad" action="." method="POST" class="form-horizontal">
         {% endif %}
