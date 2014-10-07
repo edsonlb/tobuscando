@@ -8,6 +8,7 @@ from django.utils.translation import ugettext as _
 from tobuscando.ads.models import Ad, AdMeta, Offer
 from tobuscando.ads.forms import AdUpdateForm, CategoryMetaInlineFormset
 from .forms import OfferResponseForm, ProfileForm
+from tobuscando.core.models import Person
 
 
 class DashboardView(TemplateView):
