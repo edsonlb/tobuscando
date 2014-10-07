@@ -19,7 +19,7 @@ from datetime import date
 URL = 'http://www.tobuscando.com/'
 
 from django.dispatch import receiver
-from allauth.account.signals import user_signed_up, password_reset, email_confirmed, email_confirmation_sent
+from allauth.account.signals import user_signed_up, password_reset, email_confirmed, email_confirmation_sent, password_changed
 
 
 @receiver(user_signed_up, dispatch_uid="some.unique.string.id.for.allauth.user_signed_up")
@@ -87,6 +87,21 @@ def to_email(sender, request, **kwargs):
 def do_you_confirmed(sender, **kwargs):
     print 'Redirect to url'
 
+@receiver(password_changed)
+def change_your_pass(sender, user, **kwargs):
+    subject = 'Senha alterada com sucesso!'
+    from_email = settings.EMAIL_HOST_USER
+    to_list = [user.email, settings.EMAIL_HOST_USER]
+    to = user.email
+    text_content = ''
+    c = Context({
+            'username': user.username
+            })
+    html_content = render_to_string('account/email/changed_pass.txt', c)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+    print user.email
 
 class HomeView(TemplateView):
     template_name = 'index.html'
