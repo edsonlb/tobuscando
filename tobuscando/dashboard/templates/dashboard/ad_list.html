@@ -21,7 +21,7 @@
         <div class="cleafix">
             <ul class="list-unstyle list-inline">
                 <li><a href="{% url 'dashboard:ad_edit' pk=ad.pk %}"><i class="fa fa-edit"></i> Editar</a></li>
-                <li><a class="delete" data-toggle="modal" data-target=".bs-example-modal-sm" style="cursor: pointer;"><i class="fa fa-remove"></i> Excluir</a></li>
+                <li><a href="{% url 'dashboard:ad_delete' pk=ad.pk %}" class="delete"> Excluir</li>
                 {% if ad.is_active %}
                 <li><strong>Status:</strong> <span class="fa  fa-check-circle"></span></li>
                 {% else %}
@@ -31,22 +31,6 @@
         </div>
     </div>
 </div>
-<!-- modal delete -->
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-    <div class="modal-header">
-  </div>
-    <div class="modal-body">
-     <h4 class="modal-title" id="myModalLabel">Confirma a exclusão do seu anúncio?</h4>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-        <a href="{% url 'dashboard:ad_delete' pk=ad.pk %}" type="button" class="btn btn-danger">Sim</a>
-    </div>
-    </div>
-  </div>
-</div>
 {% empty %}
 <div class="alert alert-info">Você ainda não possui anúncios. <a href="{% url 'ads:ad_create' %}"><strong>Crie aqui</strong></a> o seu primeiro.</div>
 
@@ -54,6 +38,13 @@
 {% endfor %}
 
 {% paginate %}
+
+<script type="text/javascript">
+   $("a.delete").click(function() {
+        if(!confirm('Confirma a exclusão do seu anuncio?'))
+          return false;
+   });
+</script>
 
 
 {% endblock dashboard_content %}
