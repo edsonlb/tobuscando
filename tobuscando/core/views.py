@@ -11,6 +11,7 @@ from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
 from tobuscando.ads.models import Ad, Category
 from django.template import Context
 from .models import Person
+from allauth.account.models import EmailAddress
 
 from datetime import date
 
