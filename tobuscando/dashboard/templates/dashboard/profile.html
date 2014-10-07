@@ -62,7 +62,7 @@
 
         <div class="form-group clearfix ">
         <div class="col-sm-6 col-sm-offset-2">
-                <a href="#" onclick="confirmar_exclusao();" class="btn btn-danger" style="border-radius: none;">Excluir</a>
+                <a class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm" style="cursor: pointer; border-radius: none;">Excluir</a>
             </div>
         </div>
 
@@ -72,5 +72,22 @@
         </div>
         {% endbuttons %}
     </form>
+
+    <!-- modal delete -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+    <div class="modal-header">
+  </div>
+    <div class="modal-body">
+     <h4 class="modal-title" id="myModalLabel">Confirma a exclusão do seu anúncio?</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+        <a href="/dashboard/profile/delete/" type="button" class="btn btn-danger">Sim</a>
+    </div>
+    </div>
+  </div>
+</div>
 
     {% endblock dashboard_content %}
