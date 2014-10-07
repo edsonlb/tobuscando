@@ -61,6 +61,7 @@ $(document).ready(function() {
                         $("div#formOffer form div").html(data.html);
 
                     $("div#formOffer form div").html(data.html);
+                    return window.location.reload();
                 }
             }
         });
