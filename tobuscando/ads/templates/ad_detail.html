@@ -102,7 +102,7 @@
                         {% endif %}
                         <li><strong>{% trans "Criado em:" %}</strong> {{ object.created_at|date:"d/m/Y" }}</li>
                         {% if object.limit_date %}
-                        <li><strong>{% trans "Termina em:" %}</strong> {{ object.limit_date|date:"d/m/Y" }} ({{ object.limit_date|timeuntil:now }})</li>
+                        <li><strong>{% trans "Termina em:" %}</strong> {{ object.limit_date|date:"d/m/Y" }} ({{ object.limit_date|timeuntil }})</li>
                         {% else %}
                         <li><strong>{% trans "Sem prazo de término. Vence quando receber a melhor oferta/proposta." %}</strong></li>
                         {% endif %}
