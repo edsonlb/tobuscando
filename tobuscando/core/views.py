@@ -62,6 +62,7 @@ def set_attribute(sender, request, **kwargs):
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+        return HttpResponseRedirect('/dashboard/')
     else:
         subject = 'Bem vindo ao Tobuscando!'
         from_email = settings.EMAIL_HOST_USER
