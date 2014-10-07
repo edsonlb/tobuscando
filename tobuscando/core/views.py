@@ -29,6 +29,7 @@ def set_attribute(sender, request, **kwargs):
     try:
         extra_data = user.socialaccount_set.filter(
             provider='facebook')[0].extra_data
+        result = EmailAddress.objects.filter(email=user.email)
     except Exception:
         extra_data = None
     if extra_data is not None:
@@ -49,6 +50,9 @@ def set_attribute(sender, request, **kwargs):
         user.first_name = first_name
         user.last_name = last_name
         user.save()
+
+        result[0].verified = True
+        result.save()
 
         # try to send welcome email
         subject = 'Bem vindo ao TôBuscando!'
