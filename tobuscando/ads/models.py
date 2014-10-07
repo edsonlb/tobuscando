@@ -20,7 +20,7 @@ class Ad(models.Model):
     description = models.TextField(_(u'descrição:'))
     link_reference = models.URLField(_(u'anúncio de referência:'), blank=True)
     image = CloudinaryField(_(u'imagem:'), blank=True, null=True)
-    limit_date = models.DateTimeField(_(u'data limite do anúncio:'),
+    limit_date = models.DateField(_(u'data limite do anúncio:'),
                                       blank=True, null=True)
     view_phone = models.BooleanField(_(u'exibir telefone no anúncio?'))
     is_bargain = models.BooleanField(_(u'topa negociar?'))
