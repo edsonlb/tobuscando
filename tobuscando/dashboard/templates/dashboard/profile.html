@@ -25,15 +25,15 @@
         {% if field.value %}
         <div class="col-sm-offset-2 col-sm-10">
             {% if user.avatar %}
-            {% cloudinary user.avatar width=100 height=100 %}
+            {% cloudinary user.avatar width=200 height=200 style="border-radius: 25px;" %}
             {% else %}
-            <img src="{% static 'images/avatar.png' %}" alt="Usuário" width="100" height="100">
+            <img src="{% static 'images/avatar.png' %}" alt="Usuário" width="100" height="100" style="border-radius: 25px;">
             {% endif %}
         </div>
         {% else %}
         <div class="clearfix">
             <div class="col-sm-2 col-sm-offset-2">
-                <img src="{% static '/static/images/avatar.png' %}" width="100" height="100">
+                <img src="{% static '/static/images/avatar.png' %}" width="100" height="100" style="border-radius: 25px;">
                 <br><br>
             </div>
         </div>
