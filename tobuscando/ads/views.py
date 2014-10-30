@@ -170,7 +170,7 @@ class OfferCreateView(View):
             })
             html_content = render_to_string('emails-response/offer_success.html', c)
             msg = EmailMultiAlternatives(
-                subject, text_content, from_email, to_list)
+                subject, text_content, from_email, to_list = [offer.ad.person.email])
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
