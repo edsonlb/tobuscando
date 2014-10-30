@@ -191,9 +191,19 @@ EMAIL_PORT = 587    # config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False)
 """
 # .env fail
+
+""" 
+#Não usar Gmail, fazer o possível para usar o oficial.
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'tobuscando@gmail.com'
 EMAIL_HOST_PASSWORD = 'entercds2014'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+"""
+
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_HOST_USER = 'webmaster@tobuscando.com'
+EMAIL_HOST_PASSWORD = 'Bu4-Owel5LDbUquSoqEWdg'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
