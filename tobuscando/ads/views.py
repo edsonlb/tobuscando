@@ -164,7 +164,7 @@ class OfferCreateView(View):
             to_list = [offer.ad.person.email]
             text_content = 'Do you like coffee?'
             c = Context({
-            'username': request.user.username,
+            'username': offer.ad.person.username,
             'url': settings.SITE_URL,
             'url2': offer.ad.get_absolute_url()
             })
