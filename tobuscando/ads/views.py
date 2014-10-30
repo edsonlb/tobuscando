@@ -161,7 +161,7 @@ class OfferCreateView(View):
 
             subject = u'Você recebeu uma proposta!'
             from_email = settings.EMAIL_HOST_USER
-            to_list = [offer.person.email]
+            to_list = [offer.ad.person.email]
             text_content = 'Do you like coffee?'
             c = Context({
             'username': request.user.username,
@@ -170,7 +170,7 @@ class OfferCreateView(View):
             })
             html_content = render_to_string('emails-response/offer_success.html', c)
             msg = EmailMultiAlternatives(
-                subject, text_content, from_email, to_list = [offer.ad.person.email])
+                subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
