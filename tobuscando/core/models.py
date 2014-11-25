@@ -75,7 +75,7 @@ class Person(AbstractUser):
         return self.offer_set.filter(ad__person=self.pk)
 
     def offers_give(self):
-        return self.offer_set.filter(person=self.pk)
+        return self.offer_set.filter(person__id=self.pk)
 
     def offers_receive(self):
         return self.offer_set.filter(ad__person=self.pk)
