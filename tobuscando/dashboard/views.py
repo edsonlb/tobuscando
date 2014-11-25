@@ -30,7 +30,16 @@ class OfferView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(OfferView, self).get_context_data(**kwargs)
-        context['offers_give'] = self.request.user.offers()
+        context['offers_give'] = self.request.user.offers_give()
+
+        return context
+
+class OfferViewReceive(TemplateView):
+    template_name = "dashboard/offer_list_receive.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(OfferViewReceive, self).get_context_data(**kwargs)
+        context['offers_receive'] = self.request.user.offers_receive()
 
         return context
 

@@ -14,6 +14,8 @@ urlpatterns = patterns('tobuscando.dashboard.views',
         (DashboardAdsView.as_view()), name='ad_list'),
     url(r'^offers/$', login_required
         (OfferView.as_view()), name='offers_give_list'),
+    url(r'^offers_receive/$', login_required
+        (OfferViewReceive.as_view()), name='offers_receive_list'),
     #url(r'^offers/$', login_required
     #    (OfferView.as_view()), name='offer_list'),
     url(r'^offers/response/(?P<pk>\d+)/$', login_required
