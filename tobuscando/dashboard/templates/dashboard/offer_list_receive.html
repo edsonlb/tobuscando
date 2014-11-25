@@ -5,10 +5,10 @@
 {% load core_tags %}
 
 {% block dashboard_content %}
-<h2>Ofertas</h2>
+<h2>Ofertas Recebidas</h2>
 <br><br>
 
-{% autopaginate offers 10 %}
+{% autopaginate offers_receive 10 %}
 {% for offer in offers_receive %}
 <div class="item clearfix">
     <div class="col-sm-1">
