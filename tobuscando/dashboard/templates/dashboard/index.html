@@ -14,15 +14,15 @@
 </div>
 
 <div class="col-sm-4">
-    <a href="{% url 'dashboard:offer_list' %}" class="btn-info btn-block">
-        <h4><i class="fa fa-gavel"></i><br><br>{% trans "Ofertas Enviadas" %}</h4>
+    <a href="{% url 'dashboard:offer_list' %}" class="btn btn-info btn-block">
+        <h4><i class="fa fa-gavel fa-lg"></i><br><br>{% trans "Ofertas Enviadas" %}</h4>
         <strong>{{ user.offers.count }}</strong><br><br>
     </a>
 </div>
 
 <div class="col-sm-4">
     <a href="{% url 'dashboard:offer_list' %}" class="btn btn-warning btn-block">
-        <h4><i class="fa fa-bell"></i><br><br>{% trans "Ofertas Recebidas" %}</h4>
+        <h4><i class="fa fa-bell fa-lg"></i><br><br>{% trans "Ofertas Recebidas" %}</h4>
         <strong>{{ user.offers.count }}</strong><br><br>
     </a>
 </div>
