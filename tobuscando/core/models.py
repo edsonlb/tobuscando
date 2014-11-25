@@ -69,8 +69,16 @@ class Person(AbstractUser):
     def ads(self):
         return self.ad_set.all()
 
-    def offers(self):
+    def offers(self): 
+        #Recriado para recebidos e enviados conforme Dashboard. 
+        #Não será usado mais essa função.
         return self.offer_set.filter(ad__person=self.pk)
+
+    def offers_give(self):
+        return self.offer_set.filter(person__pk=self.pk)
+
+    def offers_receive(self):
+        return self.offer_set.filter(ad__person__pk=self.pk)
 
     def get_accounts_facebook(self):
         account_fc = SocialAccount.objects.filter(user_id=self.id)

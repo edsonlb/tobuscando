@@ -140,7 +140,9 @@
     <div id="offers" class="clearfix">
 
         <h3><i class="fa fa-star"></i> {% trans "Ofertas" %}</h3>
-        <small>{% trans "Proposta de compra criada em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
+        <small>{% trans "Proposta de compra criada em:" %} {{ object.created_at|date:"d/m/Y" }}<br />
+        {% trans "O site Tobuscando não interfere nas negociações, sendo de inteira responsabilidade dos usuários." %} 
+        </small>
 
         <div class="panel panel-default">
 

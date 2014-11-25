@@ -217,7 +217,6 @@ class Offer(models.Model):
 
 
 def ad_pre_save(signal, instance, sender, **kwargs):
-    print 'oi'
     instance.slug = slug(instance, sender, instance.title)
 
 models.signals.pre_save.connect(ad_pre_save, sender=Ad)

@@ -38,7 +38,7 @@ class OfferForm(forms.ModelForm):
         exclude = ('is_active',)
         widgets = {
             'link': forms.TextInput(attrs={
-                'placeholder': 'http://tobuscando/seuproduto'
+                'placeholder': 'http://site.com.br/produto'
             }),
             'price': forms.TextInput(),
             'ad': forms.HiddenInput(),
