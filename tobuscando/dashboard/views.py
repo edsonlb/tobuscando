@@ -30,9 +30,20 @@ class OfferView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(OfferView, self).get_context_data(**kwargs)
+        context['offers_give'] = self.request.user.offers()
+
+        return context
+
+''' Edson = Retirei para colocar mais dois quadros na Dashboard.
+class OfferView(TemplateView):
+    template_name = "dashboard/offer_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(OfferView, self).get_context_data(**kwargs)
         context['offers'] = self.request.user.offers()
 
         return context
+'''
 
 
 class OfferResponseView(View):
