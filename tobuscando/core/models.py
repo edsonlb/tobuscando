@@ -80,7 +80,7 @@ class Person(AbstractUser):
 
     def offers_receive(self):
         var = self.offer_set.all()
-        return var.filter(ad__person__id=self.pk)
+        return var #filter(ad__person__id=self.pk)
 
     def get_accounts_facebook(self):
         account_fc = SocialAccount.objects.filter(user_id=self.id)
