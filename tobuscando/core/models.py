@@ -75,10 +75,10 @@ class Person(AbstractUser):
         return self.offer_set.filter(ad__person=self.pk)
 
     def offers_give(self):
-        return self.offer_set.filter(person__pk=self.pk)
+        return self.offer_set.filter(person__id=self.pk)
 
     def offers_receive(self):
-        return self.offer_set.filter(ad__person__pk=self.pk)
+        return self.offer_set.filter(ad__person__id=self.pk)
 
     def get_accounts_facebook(self):
         account_fc = SocialAccount.objects.filter(user_id=self.id)
