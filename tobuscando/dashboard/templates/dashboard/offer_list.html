@@ -1,11 +1,12 @@
 {% extends 'dashboard/base_dashboard.html' %}
+{% load i18n %}
 
 {% load pagination_tags %}
 {% load cloudinary %}
 {% load core_tags %}
 
 {% block dashboard_content %}
-<h2>Ofertas Enviadas</h2>
+<h2>{% trans "Ofertas Enviadas" %}</h2>
 <br><br>
 
 {% autopaginate offers_give 10 %}
@@ -15,23 +16,21 @@
         {% cloudinary offer.ad.image class='img-responsive' width=50 height=50 %}
     </div>
     <div class="col-sm-8">
-        <div class="clearfix ad-title">{{ offer.ad.title }} <a href="{{ offer.ad.get_absolute_url }}" target="_blank" class="small"><i class="fa fa-link"></i></a> </div>
+        <div class="clearfix ad-title"><a href="{{ offer.ad.get_absolute_url }}" target="_blank" class="small">{{ offer.ad.title }} <i class="fa fa-link"></i></a></div>
         <div class="cleafix">
             <ul class="list-unstyle list-inline">
-                <li><a href="{% url 'dashboard:offer_response' pk=offer.pk %}"><i class="fa fa-edit"></i> Responder</a></li>
+                <li><span class="label label-success">{{ offer.price|brl }}</span></li>
+                <li><a href="{% url 'dashboard:offer_response' pk=offer.pk %}"><i class="fa fa-edit"></i>{% trans "Responder" %}</a></li>
+                <li><strong>{% trans "Usuário:" %}</strong> {{ offer.person.username }}</li>
                 {% if offer.is_active %}
-                <li><strong>Status:</strong> <span class="fa fa-check-circle"></span></li>
+                <li><div title="{% trans "Mensagem Publicada." %}"><strong>{% trans "Status:" %}</strong> <span class="fa fa-check-circle"></span></div></li>
                 {% else %}
-                <li><strong>Status:</strong> <span class="fa fa-close"></span></li>
+                <li><div title="{% trans "Mensavem Apagada." %}"><strong>{% trans "Status:" %}</strong> <span class="fa fa-close"></span></div></li>
                 {% endif %}
                 <div class="clearfix col-sm-12">
                     <dl>
-                        <dt><strong>Usuário</strong></dt>
-                        <dd>{{ offer.person.username }}</dd>
-                        <dt>Mensagem</dt>
+                        <dt>{% trans "Mensagem" %}</dt>
                         <dd>{{ offer.message|truncatewords:100|safe }}</dd>
-                        <dt><strong>Valor da oferta</strong></dt>
-                        <dd class="label label-success">{{ offer.price|brl }}</dd>
                     </dl>
                 </div>
             </ul>
@@ -39,7 +38,7 @@
     </div>
 </div>
 {% empty %}
-<div class="alert alert-info">Você ainda não recebeu ofertas. Aguarde.</div>
+<div class="alert alert-info">{% trans "Você ainda não recebeu ofertas. Aguarde mais um pouco." %}</div>
 {% endfor %}
 
 {% paginate %}
