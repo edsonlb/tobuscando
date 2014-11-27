@@ -28,10 +28,10 @@ from allauth.socialaccount.signals import pre_social_login
 def set_attribute(sender, request, **kwargs):
     user = kwargs.pop('user')
     try:
-        extra_data = user.socialaccount_set.filter(
-            provider='facebook')[0].extra_data
+        extra_data = user.socialaccount_set.filter( provider='facebook')[0].extra_data
     except Exception:
         extra_data = None
+    
     if extra_data is not None:
         social_link = extra_data['link']
         name = extra_data['name']
@@ -55,27 +55,22 @@ def set_attribute(sender, request, **kwargs):
         EmailAddress.objects.filter(email=user.email).update(verified=True)
 
         # try to send welcome email
-        subject = 'Bem vindo ao TôBuscando!'
+        subject = 'Bem-Vindo ao Tobuscando!'
         from_email = settings.EMAIL_HOST_USER
         to_list = [email, settings.EMAIL_HOST_USER]
         to = email
         text_content = ''
-        c = Context({
-                'username': user.username
-                })
-        html_content = render_to_string('welcome.html', c)
+        html_content = render_to_string('welcome.html', {'equipe': 'Tobuscando', 'username': user.username} )
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
     else:
-        subject = 'Bem vindo ao Tobuscando!'
+        subject = 'Bem-Vindo ao Tobuscando!'
         from_email = settings.EMAIL_HOST_USER
         to_list = [user.email, settings.EMAIL_HOST_USER]
         to = user.email
-        text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
-        html_content = render_to_string(
-            'welcome.html', {'equipe': 'tobuscando'}
-        )
+        text_content = 'Obrigado por entrar em contato!'
+        html_content = render_to_string('welcome.html', {'equipe': 'Tobuscando', 'username': user.username} )
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
