@@ -70,7 +70,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.twitter',
 )
 
-SITE_ID = 2
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -201,10 +201,17 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 """
 
-EMAIL_HOST = 'smtp.mandrillapp.com'
+'''EMAIL_HOST = 'smtp.mandrillapp.com'
 EMAIL_HOST_USER = 'webmaster@tobuscando.com'
 EMAIL_HOST_PASSWORD = 'Bu4-Owel5LDbUquSoqEWdg'
 EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+'''
+
+EMAIL_HOST = 'br194.hostgator.com.br'
+EMAIL_HOST_USER = 'webmaster@tobuscando.com'
+EMAIL_HOST_PASSWORD = 'entercds2014'
+EMAIL_PORT = 465
 EMAIL_USE_TLS = True
 
 MPTT_LEVEL_INDENT = 20
