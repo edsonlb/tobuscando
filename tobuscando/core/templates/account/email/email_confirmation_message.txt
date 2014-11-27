@@ -1,4 +1,4 @@
-{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with current_site.name as site_name %}Olá, {{ user_display }} bem vindo ao {{ site_name }}!
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with current_site.name as site_name %}Olá, {{ user_display }} bem-vindo ao {{ site_name }}!
 
 Para ativar sua conta, clique em: {{ activate_url }}
 {% endblocktrans %}{% endautoescape %}
