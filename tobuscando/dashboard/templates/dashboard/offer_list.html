@@ -16,10 +16,9 @@
         {% cloudinary offer.ad.image class='img-responsive' width=50 height=50 %}
     </div>
     <div class="col-sm-8">
-        <div class="clearfix ad-title"><a href="{{ offer.ad.get_absolute_url }}" target="_blank" class="small">{{ offer.ad.title }} <i class="fa fa-link"></i></a></div>
+        <div class="clearfix ad-title"><span class="label label-success">{{ offer.price|brl }}</span> <a href="{{ offer.ad.get_absolute_url }}" target="_blank" class="small">{{ offer.ad.title }} <i class="fa fa-link"></i></a></div>
         <div class="cleafix">
             <ul class="list-unstyle list-inline">
-                <li><span class="label label-success">{{ offer.price|brl }}</span></li>
                 <li><a href="{% url 'dashboard:offer_response' pk=offer.pk %}"><i class="fa fa-edit"></i>{% trans "Responder" %}</a></li>
                 <li><strong>{% trans "Usuário:" %}</strong> {{ offer.person.username }}</li>
                 {% if offer.is_active %}
