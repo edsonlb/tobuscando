@@ -26,9 +26,9 @@
                     <dl>
                         <dt>{% trans "Mensagem:" %} 
                         {% if offer.is_active %}
-                            <div title="{% trans "Mensagem Publicada." %}"><span class="fa fa-check-circle"></span></div>
+                            <span title="{% trans "Mensagem Publicada." %}" class="fa fa-check-circle"></span>
                         {% else %}
-                            <div title="{% trans "Mensavem Apagada." %}"><span class="fa fa-close"></span></div>
+                            <span title="{% trans "Mensavem Apagada." %}" class="fa fa-close"></span>
                         {% endif %}
                         </dt>
                         <dd>{{ offer.message|truncatewords:100|safe }}...</dd>
