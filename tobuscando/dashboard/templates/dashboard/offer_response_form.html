@@ -14,7 +14,6 @@
         {% endif %}
         <h2>{% trans "Responder" %}</h2>
         <br><br>
-
         <h4>{% trans "Oferta Recebida" %}</h4>
 
         <div class="col-sm-12">
@@ -41,11 +40,11 @@
         {% csrf_token %}
 
         {% for field in form %}
-        {% bootstrap_field field layout='horizontal' %}
+            {% bootstrap_field field layout='horizontal' %}
         {% endfor %}
 
         {% buttons %}
-        <button type="submit" class="button_medium">{% trans "Enviar!" %}</button>
+            <button type="submit" class="button_medium">{% trans "Enviar!" %}</button>
         {% endbuttons %}
     </form>
 
