@@ -185,7 +185,7 @@ class CategoryMeta(models.Model):
 
 
 class Offer(models.Model):
-    HELP_LINK = _(u'Link para página ou imagem de produto que está ofertando.')
+    HELP_LINK = _(u'Link de referência para a página ou imagem do produto.')
 
     ad = models.ForeignKey('Ad', verbose_name=_(u'Anúncio'))
     person = models.ForeignKey('core.Person', verbose_name=_(u'Pessoa'))
