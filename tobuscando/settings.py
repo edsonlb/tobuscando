@@ -5,7 +5,7 @@ from decouple import config
 from dj_database_url import parse as db_url
 
 #SITE_ID = 1 #1 OFFLINE
-SITE_ID = 1 #2 ONLINE
+SITE_ID = 2 #2 ONLINE
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
