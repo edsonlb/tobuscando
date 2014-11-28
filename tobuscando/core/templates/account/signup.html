@@ -9,6 +9,15 @@
 
 {% block content %}
 <div class="row">
+  {% if form.errors %}
+    <div class="alert alert-danger">
+      <div class="clearfix">
+      {{ form.errors|default_if_none:"" }}
+      </div>  
+    </div>
+  {% endif %}
+
+
     <h2 class="text-center">Registre-se</h2>
     <br>
     <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">

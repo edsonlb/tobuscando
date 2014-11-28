@@ -4,8 +4,8 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 from decouple import config
 from dj_database_url import parse as db_url
 
-#SITE_ID = 1 #OFFLINE
-SITE_ID = 2 #ONLINE
+#SITE_ID = 1 #1 OFFLINE
+SITE_ID = 1 #2 ONLINE
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -172,6 +172,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+MPTT_LEVEL_INDENT = 20
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
@@ -183,7 +185,8 @@ CLOUDINARY = {
     'api_secret': 'fullE2Yhx3OJcH9PB-p357eDyTU'
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 """
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
@@ -191,16 +194,15 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587    # config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False)
 """
-# .env fail
 
-""" 
+
 #Não usar Gmail, fazer o possível para usar o oficial.
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'tobuscando@gmail.com'
 EMAIL_HOST_PASSWORD = 'entercds2014'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-"""
+
 
 '''EMAIL_HOST = 'smtp.mandrillapp.com'
 EMAIL_HOST_USER = 'webmaster@tobuscando.com'
@@ -209,10 +211,13 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 '''
 
+
+
+
+''' EMAIL DIRETO PELO HOSTGATOR TB NÃO FUNCIONOU
 EMAIL_HOST = 'br194.hostgator.com.br'
 EMAIL_HOST_USER = 'webmaster@tobuscando.com'
 EMAIL_HOST_PASSWORD = 'entercds2014'
 EMAIL_PORT = 465
-EMAIL_USE_TLS = True
-
-MPTT_LEVEL_INDENT = 20
+EMAIL_USE_TLS = False
+'''
