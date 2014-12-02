@@ -58,7 +58,7 @@ class OfferView(TemplateView):
 class OfferResponseView(View):
     template_name = 'dashboard/offer_response_form.html'
     form_class = OfferResponseForm
-    success_message = _(u'Oferta respondido com sucesso.')
+    success_message = _(u'Oferta respondida com sucesso!')
 
     def get(self, request, *args, **kwargs):
         offer = Offer.objects.get(pk=kwargs.get('pk'))
@@ -75,7 +75,7 @@ class OfferResponseView(View):
         offer = Offer.objects.get(pk=kwargs.get('pk'))
         form = self.form_class(request.POST)
 
-        offer.is_active = request.POST.get('offer_is_active')
+        offer.is_active = True #request.POST.get('offer_is_active')
         offer.save()
 
         if form.is_valid():
