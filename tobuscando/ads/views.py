@@ -72,7 +72,7 @@ class AdCreateView(View):
             subject = u'Proposta de compra cadastrada!'
             from_email = settings.EMAIL_HOST_USER
             to_list = [person.email, settings.EMAIL_HOST_USER]
-            text_content = 'Do something...'
+            text_content = ''
             #to = user.email
             c = Context({
                 'username': request.user.username,
@@ -81,8 +81,7 @@ class AdCreateView(View):
                 })
             html_content = render_to_string(
                 'emails-response/ad_success.html', c)
-            msg = EmailMultiAlternatives(
-                subject, text_content, from_email, to_list)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
@@ -148,29 +147,44 @@ class OfferCreateView(View):
         if form_offer.is_valid():
             offer = form_offer.save()
 
-            message = u'Sua oferta foi enviada com sucesso. \
-                        Aguarde retorno do anunciante.'
+            # ENVIA MSG PARA A PESSOA QUE RECEBEU A OFERTA
+            #message = u'Sua oferta foi enviada com sucesso. \
+            #            Aguarde o retorno do usuário.'
 
-            html = loader.render_to_string(self.template_name, {
-                'form_offer': self.form_class(initial={
-                    'ad': offer.ad.pk,
-                    'person': request.user.pk
-                }),
-                'message': message
-            })
+            #html = loader.render_to_string(self.template_name, {
+            #    'form_offer': self.form_class(initial={
+            #        'ad': offer.ad.pk,
+            #        'person': request.user.pk
+            #    }),
+            #    'message': message
+            #})
 
             subject = u'Você recebeu uma proposta!'
             from_email = settings.EMAIL_HOST_USER
             to_list = [offer.ad.person.email]
-            text_content = ''
+            text_content = u'Voce recebeu uma proposta! Entre no Tobuscando.com e veja!'
             c = Context({
             'username': offer.ad.person.username,
             'url': settings.SITE_URL,
             'url2': offer.ad.get_absolute_url()
             })
             html_content = render_to_string('emails-response/offer_success.html', c)
-            msg = EmailMultiAlternatives(
-                subject, text_content, from_email, to_list)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+            # ENVIA MSG PARA A PESSOA QUE FEZ A OFERTA
+            subject = u'Você fez uma proposta!'
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [request.user.email]
+            text_content = u'Voce fez uma oferta! Parabens! Acompanhe o link para fechar bons negocios!'
+            c = Context({
+            'username': request.user.username,
+            'url': settings.SITE_URL,
+            'url2': offer.ad.get_absolute_url()
+            })
+            html_content = render_to_string('emails-response/offer_success_ofertafeita.html', c)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 

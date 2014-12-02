@@ -4,8 +4,9 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 from decouple import config
 from dj_database_url import parse as db_url
 
-#SITE_ID = 1 #1 OFFLINE
-SITE_ID = 2 #2 ONLINE
+#MUDAR PARA TESTAR LOGINS OFFLINE E ONLINE
+# 1 = OFFLINE / 2 = ONLINE
+SITE_ID = 2
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
