@@ -162,7 +162,7 @@ class OfferCreateView(View):
             subject = u'Você recebeu uma proposta!'
             from_email = settings.EMAIL_HOST_USER
             to_list = [offer.ad.person.email]
-            text_content = 'Do you like coffee?'
+            text_content = ''
             c = Context({
             'username': offer.ad.person.username,
             'url': settings.SITE_URL,
@@ -209,8 +209,10 @@ class CategoryDetailView(DetailView):
 
         categories = self.object.get_children()
         q = Q()
+        #q.add(Q(category=self.object) |
+        #      Q(category__in=self.object.get_children()), Q.AND)
         q.add(Q(category=self.object) |
-              Q(category__in=self.object.get_children()), Q.AND)
+            Q(category__parent_id=self.object.id), Q.AND)
 
         min_price = self.request.GET.get('min_price')
         max_price = self.request.GET.get('max_price')
