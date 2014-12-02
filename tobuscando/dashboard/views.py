@@ -78,7 +78,7 @@ class OfferResponseView(View):
         offer.is_active = True #request.POST.get('offer_is_active')
         offer.save()
 
-        #mandar email para as pessoas aqui!!!
+        #MANDAR EMAIL PARA A PESSOA!!!
 
         if form.is_valid():
             offer = form.save()
