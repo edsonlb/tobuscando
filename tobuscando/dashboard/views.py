@@ -78,6 +78,8 @@ class OfferResponseView(View):
         offer.is_active = True #request.POST.get('offer_is_active')
         offer.save()
 
+        #mandar email para as pessoas aqui!!!
+
         if form.is_valid():
             offer = form.save()
 
@@ -85,7 +87,7 @@ class OfferResponseView(View):
             offer.parent.save()
 
             messages.success(self.request, self.success_message)
-            return HttpResponseRedirect(r('dashboard:offer_list'))
+            return HttpResponseRedirect(r('dashboard:offers_receive_list'))
 
         return render(request, self.template_name, locals())
 
