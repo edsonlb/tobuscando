@@ -55,7 +55,7 @@ def set_attribute(sender, request, **kwargs):
         EmailAddress.objects.filter(email=user.email).update(verified=True)
 
         # try to send welcome email
-        subject = 'Bem-Vindo ao Tobuscando!'
+        subject = 'Bem-Vindo ao Tobuscando! (1)'
         from_email = settings.EMAIL_HOST_USER
         to_list = [email, settings.EMAIL_HOST_USER]
         to = email
@@ -63,17 +63,17 @@ def set_attribute(sender, request, **kwargs):
         html_content = render_to_string('welcome.html', {'equipe': 'Tobuscando', 'username': user.username} )
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
+        #msg.send()
     else:
-        subject = 'Bem-Vindo ao Tobuscando!'
+        subject = 'Bem-Vindo ao Tobuscando! (2)'
         from_email = settings.EMAIL_HOST_USER
         to_list = [user.email, settings.EMAIL_HOST_USER]
         to = user.email
-        text_content = 'Obrigado por entrar em contato!'
+        text_content = ''
         html_content = render_to_string('welcome.html', {'equipe': 'Tobuscando', 'username': user.username} )
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
+        #msg.send()
 
 @receiver(password_reset)
 def password_reset(sender, request, **kwargs):
