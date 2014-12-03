@@ -78,7 +78,20 @@ class OfferResponseView(View):
         offer.is_active = True #request.POST.get('offer_is_active')
         offer.save()
 
-        #MANDAR EMAIL PARA A PESSOA!!!
+        #envia email para a pessoa que possui o anuncio
+        subject = u'Você recebeu uma resposta!'
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [offer.ad.person.email]
+        text_content = u'Voce recebeu uma resposta! Entre no Tobuscando.com e veja!'
+        c = Context({
+        'username': offer.ad.person.username,
+        'url': settings.SITE_URL,
+        'url2': offer.ad.get_absolute_url()
+        })
+        html_content = render_to_string('emails-response/offer_success.html', c)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
+        msg.attach_alternative(html_content, "text/html")
+         msg.send()
 
         if form.is_valid():
             offer = form.save()
