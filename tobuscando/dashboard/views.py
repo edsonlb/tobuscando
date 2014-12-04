@@ -9,7 +9,7 @@ from tobuscando.ads.models import Ad, AdMeta, Offer
 from tobuscando.ads.forms import AdUpdateForm, CategoryMetaInlineFormset
 from .forms import OfferResponseForm, ProfileForm
 from tobuscando.core.models import Person
-
+from django.core.mail import EmailMultiAlternatives
 
 class DashboardView(TemplateView):
     template_name = "dashboard/index.html"
@@ -91,7 +91,7 @@ class OfferResponseView(View):
         html_content = render_to_string('emails-response/offer_success.html', c)
         msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
         msg.attach_alternative(html_content, "text/html")
-         msg.send()
+        msg.send()
 
         if form.is_valid():
             offer = form.save()

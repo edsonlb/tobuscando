@@ -7,6 +7,8 @@ from dj_database_url import parse as db_url
 #MUDAR PARA TESTAR LOGINS OFFLINE E ONLINE
 # 1 = OFFLINE / 2 = ONLINE
 SITE_ID = 2
+DEBUG = False #config('DEBUG', default=True)
+TEMPLATE_DEBUG = False
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -19,12 +21,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECRET TOKEN: for email validation
 SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #config('DEBUG', default=True)
-
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = ['.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com']
+ALLOWED_HOSTS = ['.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com', 'tobuscando.com', 'www.tobuscando.com', 'tobuscando.com.br']
 
 SITE_URL = 'http://www.tobuscando.com'
 
