@@ -7,8 +7,8 @@ from dj_database_url import parse as db_url
 #MUDAR PARA TESTAR LOGINS OFFLINE E ONLINE
 # 1 = OFFLINE / 2 = ONLINE
 SITE_ID = 2
-DEBUG = False #config('DEBUG', default=True)
-TEMPLATE_DEBUG = False
+DEBUG = True #config('DEBUG', default=True)
+TEMPLATE_DEBUG = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
