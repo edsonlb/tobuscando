@@ -265,8 +265,7 @@ class CategoryDetailView(DetailView):
 
         categories = self.object.get_children()
         q = Q()
-        q.add(Q(category=self.object) &
-              Q(category__parent=self.object) &
+        q.add(Q(category=self.object) |
               Q(category__in=self.object.get_children()), Q.AND)
         
         min_price = self.request.GET.get('min_price')
