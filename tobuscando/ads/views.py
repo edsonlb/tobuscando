@@ -268,6 +268,9 @@ class CategoryDetailView(DetailView):
         q.add(Q(category=self.object) |
               Q(category__in=self.object.get_children()), Q.AND)
         
+        q.add(Q(limit_date__gte=date.today()) |
+              Q(limit_date=None), Q.AND)
+        
         min_price = self.request.GET.get('min_price')
         max_price = self.request.GET.get('max_price')
         if min_price and max_price:
@@ -285,7 +288,6 @@ class CategoryDetailView(DetailView):
 
         object_list = Ad.objects.filter(q)\
                                 .filter(**f)
-                                #.filter(limit_date__gte=date.today())
         # href="{% url 'core:person_view' object.person.username %}"
 
         order_by = self.request.GET.get('order_by')
