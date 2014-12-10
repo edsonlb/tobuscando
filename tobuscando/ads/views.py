@@ -255,6 +255,7 @@ class CategoryListView(ListView):
         context.update(locals())
         return context
 """
+
 class CategoryDetailView(DetailView):
     model = Category
     template_name = "category_detail.html"
@@ -284,8 +285,8 @@ class CategoryDetailView(DetailView):
                 f['metas__option'] = get[1]
 
         object_list = Ad.objects.filter(q)\
-                                .filter(**f)\
-                                .filter(limit_date__gte=date.today())
+                                .filter(**f)
+                                #.filter(limit_date__gte=date.today())
         # href="{% url 'core:person_view' object.person.username %}"
 
         order_by = self.request.GET.get('order_by')
