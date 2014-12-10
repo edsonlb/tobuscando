@@ -266,10 +266,9 @@ class CategoryDetailView(DetailView):
         categories = self.object.get_children()
         q = Q()
         q.add(Q(category=self.object) |
-              Q(category__in=self.object.get_children()), Q.AND)
-        
-        q.add(Q(limit_date__gte=date.today()) |
-              Q(limit_date=None), Q.AND)
+              Q(category__in=self.object.get_children()),
+              Q(limit_date__gte=date.today()) |
+              Q(limit_date__isnull=True), Q.AND)
         
         min_price = self.request.GET.get('min_price')
         max_price = self.request.GET.get('max_price')
