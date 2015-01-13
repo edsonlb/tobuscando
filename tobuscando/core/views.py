@@ -107,6 +107,7 @@ def change_your_pass(sender, user, **kwargs):
 def pre_social_account(sender, **kwargs):
     print 'confirm account'
 
+
 class HomeView(TemplateView):
     template_name = 'index.html'
 
@@ -139,8 +140,8 @@ class SearchView(ListView):
         return context
 
     def get_queryset(self):
-        keyword = self.get_slug(self.kwargs.get('slug'))
-    
+        keyword = self.get_slug(self.kwargs.get('slug', 'Busca'))
+
         object_list = self.model.objects.filter(Q(title__icontains=keyword) | 
                                                 Q(description__icontains=keyword) |
                                                 Q(slug__icontains=keyword) |
@@ -156,9 +157,6 @@ class SearchView(ListView):
         return object_list
 
     def get_slug(self, slug):
-        if not slug:
-            return None
-
         if slug.count('-'):
             return slug.replace('-', ' ')
 

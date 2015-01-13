@@ -17,6 +17,23 @@ from datetime import date
 import simplejson
 from django.template import Context
 
+
+class AdListView(ListView):
+    model = Ad
+    template_name = "ad_list.html"
+    model = Ad
+
+    def get_context_data(self, **kwargs):
+        context = super(AdListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['slug'] = u'Anúncios'
+
+        return context
+
+    def get_queryset(self):
+        return self.model.objects.all().order_by('-created_at', '?')
+
+
 class AdCreateView(View):
     template_name = "ad_form.html"
     model_class = Ad
@@ -134,7 +151,7 @@ class AdDetailView(DetailView):
     def get_object(self):
         return self.model.objects.get(Q(limit_date__isnull=True) |
                                       Q(limit_date__gte=date.today()),
-                                      slug__exact=self.kwargs['slug'])
+                                      pk__exact=self.kwargs['pk'])
 
 
 class OfferCreateView(View):
@@ -214,48 +231,6 @@ class CategoryListView(ListView):
     template_name = "category_list.html"
 
 
-"""class CategoryDetailView(DetailView):
-    model = Category
-    template_name = "category_detail.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(CategoryDetailView, self).get_context_data(**kwargs)
-
-        categories = self.object.get_children()
-        q = Q()
-        #q.add(Q(category=self.object) |
-        #      Q(category__in=self.object.get_children()), Q.AND)
-        q.add(Q(category=self.object) |
-            Q(category__parent_id=self.object.id), Q.AND)
-
-        min_price = self.request.GET.get('min_price')
-        max_price = self.request.GET.get('max_price')
-        if min_price and max_price:
-            q.add(Q(price__in=[min_price, max_price]), Q.AND)
-        elif min_price:
-            q.add(Q(price__gte=min_price), Q.AND)
-        elif max_price:
-            q.add(Q(price__lte=max_price), Q.AND)
-
-        f = dict()
-        for get in self.request.GET.iteritems():
-            if get[0].count('meta'):
-                meta = get[0].split('_')
-                f['metas__option'] = get[1]
-
-        object_list = Ad.objects.filter(q)\
-                                .filter(**f)\
-                                .filter(limit_date__gte=date.today())
-        # href="{% url 'core:person_view' object.person.username %}"
-
-        order_by = self.request.GET.get('order_by')
-        if order_by:
-            object_list = object_list.order_by(order_by)
-
-        context.update(locals())
-        return context
-"""
-
 class CategoryDetailView(DetailView):
     model = Category
     template_name = "category_detail.html"
@@ -287,7 +262,6 @@ class CategoryDetailView(DetailView):
 
         object_list = Ad.objects.filter(q)\
                                 .filter(**f)
-        # href="{% url 'core:person_view' object.person.username %}"
 
         order_by = self.request.GET.get('order_by')
         if order_by:

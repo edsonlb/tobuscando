@@ -19,14 +19,15 @@
                     <h4>{{ object.category.name|title }}</h4>
                     <p><strong>{{ object.title|safe }}:</strong> {{ object.description|safe|truncatechars_html:"140" }}</p>
                     {% if object.minor_offer %}
-                        <p><strong>Menor oferta:</strong> {{ object.minor_offer|brl }}</p>
+                    <p><strong>Menor oferta:</strong> {{ object.minor_offer|brl }}</p>
                     {% endif %}
                 </div>
                 <div class="price col-sm-3">{{ object.price|brl }}</div>
                 <div class="price col-sm-2 text-right">
-                <span class="label label-info">{{ object.person.username }}</span>
-                <br />
-                <small>{% trans "criado em" %}<br>{{ object.created_at|date:"d/m/y" }}</small></div>
+                    <span class="label label-info">{{ object.person.username }}</span>
+                    <br />
+                    <small>{% trans "criado em" %}<br>{{ object.created_at|date:"d/m/y" }}</small>
+                </div>
             </div>
         </div>
         <div class="clearfix"></div>

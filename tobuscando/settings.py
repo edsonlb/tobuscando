@@ -4,26 +4,30 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 from decouple import config
 from dj_database_url import parse as db_url
 
-#MUDAR PARA TESTAR LOGINS OFFLINE E ONLINE
-# 1 = OFFLINE / 2 = ONLINE
-SITE_ID = 2
-DEBUG = True #config('DEBUG', default=True)
-TEMPLATE_DEBUG = True
-
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
+DEBUG = config('DEBUG', default=True)
+
+TEMPLATE_DEBUG = True
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 # SECRET TOKEN: for email validation
 SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
 
-ALLOWED_HOSTS = ['.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com', 'tobuscando.com', 'www.tobuscando.com', 'tobuscando.com.br']
+ALLOWED_HOSTS = [
+    '.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com', 
+    'tobuscando.com', 'www.tobuscando.com', 'tobuscando.com.br'
+]
 
 SITE_URL = 'http://www.tobuscando.com'
+
+# 1 = OFFLINE / 2 = ONLINE
+SITE_ID = 1
 
 AUTH_USER_MODEL = 'core.Person'
 
@@ -59,16 +63,16 @@ INSTALLED_APPS = (
     'mptt',
     'bootstrap3',
 
-    'tobuscando.core',
-    'tobuscando.dashboard',
-    'tobuscando.ads',
-
     'pagination',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
+
+    'tobuscando.core',
+    'tobuscando.dashboard',
+    'tobuscando.ads',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -107,7 +111,6 @@ DATABASES = {
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
-
 
 ACCOUNT_ADAPTER = "allauth.account.adapter.DefaultAccountAdapter"
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
