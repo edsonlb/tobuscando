@@ -20,14 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
 
 ALLOWED_HOSTS = [
-    '.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com', 
+    '.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com',
     'tobuscando.com', 'www.tobuscando.com', 'tobuscando.com.br'
 ]
 
 SITE_URL = 'http://www.tobuscando.com'
 
 # 1 = OFFLINE / 2 = ONLINE
-SITE_ID = 1
+SITE_ID = 2
 
 AUTH_USER_MODEL = 'core.Person'
 
