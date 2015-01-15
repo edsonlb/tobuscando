@@ -28,10 +28,10 @@ from allauth.socialaccount.signals import pre_social_login
 def set_attribute(sender, request, **kwargs):
     user = kwargs.pop('user')
     try:
-        extra_data = user.socialaccount_set.filter(
-            provider='facebook')[0].extra_data
+        extra_data = user.socialaccount_set.filter( provider='facebook')[0].extra_data
     except Exception:
         extra_data = None
+    
     if extra_data is not None:
         social_link = extra_data['link']
         name = extra_data['name']
@@ -55,30 +55,25 @@ def set_attribute(sender, request, **kwargs):
         EmailAddress.objects.filter(email=user.email).update(verified=True)
 
         # try to send welcome email
-        subject = 'Bem vindo ao TôBuscando!'
+        subject = 'Bem-Vindo ao Tobuscando! (1)'
         from_email = settings.EMAIL_HOST_USER
         to_list = [email, settings.EMAIL_HOST_USER]
         to = email
         text_content = ''
-        c = Context({
-                'username': user.username
-                })
-        html_content = render_to_string('welcome.html', c)
+        html_content = render_to_string('welcome.html', {'equipe': 'Tobuscando', 'username': user.username} )
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
+        #msg.send()
     else:
-        subject = 'Bem vindo ao Tobuscando!'
+        subject = 'Bem-Vindo ao Tobuscando! (2)'
         from_email = settings.EMAIL_HOST_USER
         to_list = [user.email, settings.EMAIL_HOST_USER]
         to = user.email
-        text_content = 'Obrigado por entrar em contato. Em breve teremos muitas novidades!'
-        html_content = render_to_string(
-            'welcome.html', {'equipe': 'tobuscando'}
-        )
+        text_content = ''
+        html_content = render_to_string('welcome.html', {'equipe': 'Tobuscando', 'username': user.username} )
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
+        #msg.send()
 
 @receiver(password_reset)
 def password_reset(sender, request, **kwargs):
@@ -112,6 +107,7 @@ def change_your_pass(sender, user, **kwargs):
 def pre_social_account(sender, **kwargs):
     print 'confirm account'
 
+
 class HomeView(TemplateView):
     template_name = 'index.html'
 
@@ -144,8 +140,8 @@ class SearchView(ListView):
         return context
 
     def get_queryset(self):
-        keyword = self.get_slug(self.kwargs.get('slug'))
-    
+        keyword = self.get_slug(self.kwargs.get('slug', 'Busca'))
+
         object_list = self.model.objects.filter(Q(title__icontains=keyword) | 
                                                 Q(description__icontains=keyword) |
                                                 Q(slug__icontains=keyword) |
@@ -161,9 +157,6 @@ class SearchView(ListView):
         return object_list
 
     def get_slug(self, slug):
-        if not slug:
-            return None
-
         if slug.count('-'):
             return slug.replace('-', ' ')
 

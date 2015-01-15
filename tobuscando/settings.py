@@ -4,25 +4,30 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 from decouple import config
 from dj_database_url import parse as db_url
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
-# SECRET TOKEN: for email validation
-SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #config('DEBUG', default=True)
+DEBUG = config('DEBUG', default=True)
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com']
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+# SECRET TOKEN: for email validation
+SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
+
+ALLOWED_HOSTS = [
+    '.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com',
+    'tobuscando.com', 'www.tobuscando.com', 'tobuscando.com.br'
+]
 
 SITE_URL = 'http://www.tobuscando.com'
+
+# 1 = OFFLINE / 2 = ONLINE
+SITE_ID = 1
 
 AUTH_USER_MODEL = 'core.Person'
 
@@ -58,19 +63,17 @@ INSTALLED_APPS = (
     'mptt',
     'bootstrap3',
 
-    'tobuscando.core',
-    'tobuscando.dashboard',
-    'tobuscando.ads',
-
     'pagination',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
-)
 
-SITE_ID = 1
+    'tobuscando.core',
+    'tobuscando.dashboard',
+    'tobuscando.ads',
+)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -108,7 +111,6 @@ DATABASES = {
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
-
 
 ACCOUNT_ADAPTER = "allauth.account.adapter.DefaultAccountAdapter"
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
@@ -171,6 +173,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+MPTT_LEVEL_INDENT = 20
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
@@ -182,7 +186,8 @@ CLOUDINARY = {
     'api_secret': 'fullE2Yhx3OJcH9PB-p357eDyTU'
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 """
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
@@ -190,11 +195,36 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587    # config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False)
 """
-# .env fail
+
+
+# Não usar Gmail, fazer o possível para usar o oficial.
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'nao_responda@celuladigital.com.br'
+EMAIL_HOST_PASSWORD = 'entercds'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+'''
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'tobuscando@gmail.com'
 EMAIL_HOST_PASSWORD = 'entercds2014'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+'''
 
-MPTT_LEVEL_INDENT = 20
+
+'''EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_HOST_USER = 'webmaster@tobuscando.com'
+EMAIL_HOST_PASSWORD = 'Bu4-Owel5LDbUquSoqEWdg'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+'''
+
+
+''' EMAIL DIRETO PELO HOSTGATOR TB NÃO FUNCIONOU
+EMAIL_HOST = 'br194.hostgator.com.br'
+EMAIL_HOST_USER = 'webmaster@tobuscando.com'
+EMAIL_HOST_PASSWORD = 'entercds2014'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+'''

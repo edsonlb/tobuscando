@@ -15,10 +15,10 @@
         </div>
     </div>
     <div class="cbp_tmlabel">
-        <p><strong>Valor: </strong> {{ offer.price|brl }}</p>
+        <p><strong>Nome: {{ offer.person.username }} Valor: {{ offer.price|brl }}</strong></p>
         <p>{{ offer.message|safe }}</p>
         {% if offer.link %}
-        <a href="{{ offer.link }}" title="{{ object.title }}" target="_blank"><strong>Clique aqui e veja o produto de referência <i class="fa fa-link"></i></strong></a>
+        <a href="{{ offer.link }}" title="Tobuscando.com avisa: Cuidado ao acessar sites desconhecidos." target="_blank"><strong>Clique aqui e veja o link que eu enviei <i class="fa fa-link"></i></strong></a>
         {% endif %}
     </div>
 </li>

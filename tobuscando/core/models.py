@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser, User
 from cloudinary.models import CloudinaryField
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialLogin
+from tobuscando.ads.models import Offer
 
 
 class Person(AbstractUser):
@@ -69,8 +70,16 @@ class Person(AbstractUser):
     def ads(self):
         return self.ad_set.all()
 
-    def offers(self):
+    def offers(self): 
+        #Recriado para recebidos e enviados conforme Dashboard. 
+        #Não será usado mais essa função.
         return self.offer_set.filter(ad__person=self.pk)
+
+    def offers_give(self):
+        return Offer.objects.filter(person__id=self.pk)
+
+    def offers_receive(self):
+        return Offer.objects.filter(ad__person__id=self.pk)
 
     def get_accounts_facebook(self):
         account_fc = SocialAccount.objects.filter(user_id=self.id)

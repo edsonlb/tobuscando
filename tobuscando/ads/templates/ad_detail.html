@@ -41,13 +41,17 @@
 </script>
 {% endblock js %}
 
-{% block breadcrumb %}
-<li>{% trans "Categories" %}</li>
-<li class="active"><span>{{ slug|title }}</span></li>
-{% endblock breadcrumb %}
-
 
 {% block content %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a href="/" title="Home">Home</a></li>
+    <li><a href="{{ object.category.get_absolute_url }}" title="{{ object.category.name }}">{{ object.category.name }}</a></li>
+    <li class="active"><span>{{ object.title|title }}</span></li>
+</ul>
+{% endblock breadcrumb %}
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -84,7 +88,7 @@
             <br><br><br>
         </div>
         <div class="row clearfix">
-            <a href="{% url 'core:person_view' object.person.username %}" title="{{ object.person.get_full_name }}" style="color: #444;">
+            <a title="Clique aqui para ver mais anúncios dessa pessoa!" href="{% url 'core:person_view' object.person.username %}" title="{{ object.person.get_full_name }}" style="color: #444;">
                 {% if object.person.avatar %}
                 <div class="col-sm-2">
                     {% cloudinary object.person.avatar width=75 height=75 style="border-radius: 15px;" %}
@@ -140,7 +144,9 @@
     <div id="offers" class="clearfix">
 
         <h3><i class="fa fa-star"></i> {% trans "Ofertas" %}</h3>
-        <small>{% trans "Proposta de compra criada em:" %} {{ object.created_at|date:"d/m/Y" }}</small>
+        <small>{% trans "Proposta de compra criada em:" %} {{ object.created_at|date:"d/m/Y" }}<br />
+            {% trans "O site Tobuscando não interfere nas negociações, sendo de inteira responsabilidade dos usuários." %} 
+        </small>
 
         <div class="panel panel-default">
 
@@ -148,7 +154,7 @@
 
             <div id="formOffer" class="panel-body panel-collapse collapse">
                 {% if not user.is_authenticated %}
-                <p>{% trans "Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar" %} <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se"><strong>clique aqui</strong></a>. Para fazer login <a href="{% url 'account_login' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se"><strong>clique aqui</strong></a>.</p>
+                <p>{% trans "Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar" %} <a href="{% url 'account_signup' %}?next={{ object.get_absolute_url }}" title="Cadastre-se"><strong>clique aqui</strong></a>. Para fazer login <a href="{% url 'account_login' %}?next={{ object.get_absolute_url }}" title="Cadastre-se"><strong>clique aqui</strong></a>.</p>
                 {% else %}
                 <form id="id_form_offer" name="form_offer" action="{% url 'ads:offer_create' %}" method="POST">
                     {% csrf_token %}

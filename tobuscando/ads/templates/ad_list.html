@@ -8,9 +8,12 @@
 
 {% block content %}
 
-<div id="breadcrumb" class="clearfix col-sm-12">
-    <ul class="breadcrumb">{% block breadcrumb %}{% endblock breadcrumb %}</ul>
-</div>
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a href="/" title="{% trans "Home" %}">{% trans "Home" %}</a></li>
+    <li class="active">{% trans "Anúncios" %}</li>
+</ul>
+{% endblock breadcrumb %}
 
 <aside class="col-lg-3 col-md-4 col-sm-4">
     {% include 'category_nav.html' %}
@@ -19,7 +22,7 @@
 <div class="col-sm-9">
     <div class="clearfix">
         <ul class="list-unstyle list-inline pull-right">
-            <li>{% trans 'Ordernar por:' %}</li>
+            <li>{% trans 'Ordenar por:' %}</li>
             <li><a href="?order_by=price" title="Menor preço">Menor preço</a></li>
             <li><a href="?order_by=-price" title="Maior preço">Maior preço</a></li>
         </ul>

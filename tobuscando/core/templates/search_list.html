@@ -3,6 +3,11 @@
 
 
 {% block breadcrumb %}
-<li>{% trans "Busca" %}</li>
-<li class="active"><span>{{ slug|title }}</span></li>
+<ul class="breadcrumb">
+	<li><a href="/" title="{% trans "Home" %}">{% trans "Home" %}</a></li>
+	<li><a href="/busca/" title="{% trans "Busca" %}">{% trans "Busca" %}</a></li>
+	{% if slug %}
+	<li class="active"><span>{{ slug|title }}</span></li>
+	{% endif %}
+</ul>
 {% endblock breadcrumb %}

@@ -41,7 +41,7 @@ class Ad(models.Model):
         if not self.slug:
             return ('core:home')
 
-        return ('ads:ad_detail', (), {'slug': self.slug})
+        return ('ads:ad_detail', (), {'pk': self.pk, 'slug': self.slug})
 
     def offers(self):
         return self.offer_set.filter(parent=None, is_active=True)
@@ -131,8 +131,8 @@ class Meta(models.Model):
                              choices=FIELD_CHOICES)
     slug = models.SlugField(_(u'slug'), blank=True, null=True)
     order = models.PositiveIntegerField(_(u'ordem'), default=0,
-                                        help_text=HELP_ORDER)
-    is_active = models.BooleanField(_(u'ativo?'), default=True)
+                                        help_text=HELP_ORDER, null=True)
+    is_active = models.BooleanField(_(u'ativo?'))
     created_at = models.DateTimeField(_(u'criado em'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'alterado em'), auto_now=True)
 
@@ -142,10 +142,6 @@ class Meta(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('')
 
 
 class MetaOption(models.Model):
@@ -185,7 +181,7 @@ class CategoryMeta(models.Model):
 
 
 class Offer(models.Model):
-    HELP_LINK = _(u'Link para página ou imagem de produto que está ofertando.')
+    HELP_LINK = _(u'Link de referência para a página ou imagem do produto.')
 
     ad = models.ForeignKey('Ad', verbose_name=_(u'Anúncio'))
     person = models.ForeignKey('core.Person', verbose_name=_(u'Pessoa'))
@@ -217,7 +213,6 @@ class Offer(models.Model):
 
 
 def ad_pre_save(signal, instance, sender, **kwargs):
-    print 'oi'
     instance.slug = slug(instance, sender, instance.title)
 
 models.signals.pre_save.connect(ad_pre_save, sender=Ad)

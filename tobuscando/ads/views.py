@@ -17,6 +17,23 @@ from datetime import date
 import simplejson
 from django.template import Context
 
+
+class AdListView(ListView):
+    model = Ad
+    template_name = "ad_list.html"
+    model = Ad
+
+    def get_context_data(self, **kwargs):
+        context = super(AdListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['slug'] = u'Anúncios'
+
+        return context
+
+    def get_queryset(self):
+        return self.model.objects.all().order_by('-created_at', '?')
+
+
 class AdCreateView(View):
     template_name = "ad_form.html"
     model_class = Ad
@@ -72,7 +89,7 @@ class AdCreateView(View):
             subject = u'Proposta de compra cadastrada!'
             from_email = settings.EMAIL_HOST_USER
             to_list = [person.email, settings.EMAIL_HOST_USER]
-            text_content = 'Do something...'
+            text_content = ''
             #to = user.email
             c = Context({
                 'username': request.user.username,
@@ -81,8 +98,7 @@ class AdCreateView(View):
                 })
             html_content = render_to_string(
                 'emails-response/ad_success.html', c)
-            msg = EmailMultiAlternatives(
-                subject, text_content, from_email, to_list)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
@@ -135,7 +151,7 @@ class AdDetailView(DetailView):
     def get_object(self):
         return self.model.objects.get(Q(limit_date__isnull=True) |
                                       Q(limit_date__gte=date.today()),
-                                      slug__exact=self.kwargs['slug'])
+                                      pk__exact=self.kwargs['pk'])
 
 
 class OfferCreateView(View):
@@ -148,29 +164,44 @@ class OfferCreateView(View):
         if form_offer.is_valid():
             offer = form_offer.save()
 
-            message = u'Sua oferta foi enviada com sucesso. \
-                        Aguarde retorno do anunciante.'
+            # ENVIA MSG PARA A PESSOA QUE RECEBEU A OFERTA
+            #message = u'Sua oferta foi enviada com sucesso. \
+            #            Aguarde o retorno do usuário.'
 
-            html = loader.render_to_string(self.template_name, {
-                'form_offer': self.form_class(initial={
-                    'ad': offer.ad.pk,
-                    'person': request.user.pk
-                }),
-                'message': message
-            })
+            #html = loader.render_to_string(self.template_name, {
+            #    'form_offer': self.form_class(initial={
+            #        'ad': offer.ad.pk,
+            #        'person': request.user.pk
+            #    }),
+            #    'message': message
+            #})
 
             subject = u'Você recebeu uma proposta!'
             from_email = settings.EMAIL_HOST_USER
-            to_list = [offer.person.email]
-            text_content = 'Do you like coffee?'
+            to_list = [offer.ad.person.email]
+            text_content = u'Voce recebeu uma proposta! Entre no Tobuscando.com e veja!'
+            c = Context({
+            'username': offer.ad.person.username,
+            'url': settings.SITE_URL,
+            'url2': offer.ad.get_absolute_url()
+            })
+            html_content = render_to_string('emails-response/offer_success.html', c)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+            # ENVIA MSG PARA A PESSOA QUE FEZ A OFERTA
+            subject = u'Você fez uma proposta!'
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [request.user.email]
+            text_content = u'Voce fez uma oferta! Parabens! Acompanhe o link para fechar bons negocios!'
             c = Context({
             'username': request.user.username,
             'url': settings.SITE_URL,
             'url2': offer.ad.get_absolute_url()
             })
-            html_content = render_to_string('emails-response/offer_success.html', c)
-            msg = EmailMultiAlternatives(
-                subject, text_content, from_email, to_list)
+            html_content = render_to_string('emails-response/offer_success_ofertafeita.html', c)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
@@ -210,8 +241,10 @@ class CategoryDetailView(DetailView):
         categories = self.object.get_children()
         q = Q()
         q.add(Q(category=self.object) |
-              Q(category__in=self.object.get_children()), Q.AND)
-
+              Q(category__in=self.object.get_children()),
+              Q(limit_date__gte=date.today()) |
+              Q(limit_date__isnull=True), Q.AND)
+        
         min_price = self.request.GET.get('min_price')
         max_price = self.request.GET.get('max_price')
         if min_price and max_price:
@@ -228,9 +261,7 @@ class CategoryDetailView(DetailView):
                 f['metas__option'] = get[1]
 
         object_list = Ad.objects.filter(q)\
-                                .filter(**f)\
-                                .filter(limit_date__gte=date.today())
-        # href="{% url 'core:person_view' object.person.username %}"
+                                .filter(**f)
 
         order_by = self.request.GET.get('order_by')
         if order_by:

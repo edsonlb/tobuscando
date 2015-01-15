@@ -9,7 +9,7 @@ from tobuscando.ads.models import Ad, AdMeta, Offer
 from tobuscando.ads.forms import AdUpdateForm, CategoryMetaInlineFormset
 from .forms import OfferResponseForm, ProfileForm
 from tobuscando.core.models import Person
-
+from django.core.mail import EmailMultiAlternatives
 
 class DashboardView(TemplateView):
     template_name = "dashboard/index.html"
@@ -30,15 +30,35 @@ class OfferView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(OfferView, self).get_context_data(**kwargs)
+        context['offers_give'] = self.request.user.offers_give()
+
+        return context
+
+class OfferViewReceive(TemplateView):
+    template_name = "dashboard/offer_list_receive.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(OfferViewReceive, self).get_context_data(**kwargs)
+        context['offers_receive'] = self.request.user.offers_receive()
+
+        return context
+
+''' Edson = Retirei para colocar mais dois quadros na Dashboard.
+class OfferView(TemplateView):
+    template_name = "dashboard/offer_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(OfferView, self).get_context_data(**kwargs)
         context['offers'] = self.request.user.offers()
 
         return context
+'''
 
 
 class OfferResponseView(View):
     template_name = 'dashboard/offer_response_form.html'
     form_class = OfferResponseForm
-    success_message = _(u'Oferta respondido com sucesso.')
+    success_message = _(u'Oferta respondida com sucesso!')
 
     def get(self, request, *args, **kwargs):
         offer = Offer.objects.get(pk=kwargs.get('pk'))
@@ -55,8 +75,23 @@ class OfferResponseView(View):
         offer = Offer.objects.get(pk=kwargs.get('pk'))
         form = self.form_class(request.POST)
 
-        offer.is_active = request.POST.get('offer_is_active')
+        offer.is_active = True #request.POST.get('offer_is_active')
         offer.save()
+
+        #envia email para a pessoa que possui o anuncio
+        subject = u'Você recebeu uma resposta!'
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [offer.ad.person.email]
+        text_content = u'Voce recebeu uma resposta! Entre no Tobuscando.com e veja!'
+        c = Context({
+        'username': offer.ad.person.username,
+        'url': settings.SITE_URL,
+        'url2': offer.ad.get_absolute_url()
+        })
+        html_content = render_to_string('emails-response/offer_success.html', c)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, to_list)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
 
         if form.is_valid():
             offer = form.save()
@@ -65,7 +100,7 @@ class OfferResponseView(View):
             offer.parent.save()
 
             messages.success(self.request, self.success_message)
-            return HttpResponseRedirect(r('dashboard:offer_list'))
+            return HttpResponseRedirect(r('dashboard:offers_receive_list'))
 
         return render(request, self.template_name, locals())
 

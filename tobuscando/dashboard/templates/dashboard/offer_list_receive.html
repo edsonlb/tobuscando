@@ -6,11 +6,11 @@
 {% load core_tags %}
 
 {% block dashboard_content %}
-<h2>{% trans "Ofertas Enviadas" %}</h2>
+<h2>{% trans "Ofertas Recebidas" %}</h2>
 <br><br>
 
-{% autopaginate offers_give 10 %}
-{% for offer in offers_give %}
+{% autopaginate offers_receive 10 %}
+{% for offer in offers_receive %}
 <div class="item clearfix">
     <div class="col-sm-1">
         {% cloudinary offer.ad.image class='img-responsive' width=50 height=50 %}
@@ -19,8 +19,8 @@
         <div class="clearfix ad-title"><span class="label label-success">{{ offer.price|brl }}</span> <a href="{{ offer.ad.get_absolute_url }}" target="_blank" class="small">{{ offer.ad.title }} <i class="fa fa-link"></i></a></div>
         <div class="cleafix">
             <ul class="list-unstyle list-inline">
-                <!-- <li><a href="{% url 'dashboard:offer_response' pk=offer.pk %}"><i class="fa fa-edit"></i>{% trans "Responder" %}</a></li>
-                <li><strong>{% trans "Usuário:" %}</strong> {{ offer.person.username }}</li> -->
+                <li><a href="{% url 'dashboard:offer_response' pk=offer.pk %}"><i class="fa fa-edit"></i>{% trans "Responder" %}</a></li>
+                <li><strong>{% trans "Usuário:" %}</strong> {{ offer.person.username }}</li>
         
                 <div class="clearfix col-sm-12">
                     <dl>
@@ -39,7 +39,7 @@
     </div>
 </div>
 {% empty %}
-<div class="alert alert-info">{% trans "Você não ofertou em nenhum anúncio..." %}</div>
+<div class="alert alert-info">{% trans "Você não recebeu nenhuma oferta ainda..." %}</div>
 {% endfor %}
 
 {% paginate %}

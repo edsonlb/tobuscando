@@ -1,31 +1,34 @@
 {% extends 'base_site.html' %}
+
 {% load i18n %}
 {% load mptt_tags %}
+{% load staticfiles %}
 
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/products.css" %}">
+{% endblock css %}
 
 {% block content %}
-<h2>{% trans 'Categorias' %}</h2>
 
 {% block breadcrumb %}
 <ul class="breadcrumb">
-    <li>{% trans "Busca" %}</li>
+    <li><a href="/" title="{% trans "Home" %}">{% trans "Home" %}</a></li>
     <li class="active"><span>{% trans 'Categorias' %}</span></li>
 </ul>
 {% endblock breadcrumb %}
 
+<h2>{% trans 'Categorias' %}</h2>
 
 <div class="clearfix">
     {% recursetree category_list %}
-    <ul>
-        <li><a href="{{ node.get_absolute_url }}" title="{{ node.name }}">{{ node.name }}</a>
+    <div class="category-item col-sm-3">
+        <a href="{{ node.get_absolute_url }}" title="{{ node.name }}">{{ node.name }}</a>
 
-            {% if not node.is_leaf_node %}
-            <ul>
-                {{ children }}
-            </ul>
-            {% endif %}
-        </li>
-    </ul>
+        {% if not node.is_leaf_node %}
+        {{ children }}
+        {% endif %}
+    </div>
     {% endrecursetree %}
 </div>
 {% endblock content %}
