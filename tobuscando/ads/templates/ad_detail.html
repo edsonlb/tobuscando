@@ -154,7 +154,7 @@
 
             <div id="formOffer" class="panel-body panel-collapse collapse">
                 {% if not user.is_authenticated %}
-                <p>{% trans "Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar" %} <a href="{% url 'account_signup' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se"><strong>clique aqui</strong></a>. Para fazer login <a href="{% url 'account_login' %}?next={% url 'ads:ad_detail' object.slug %}" title="Cadastre-se"><strong>clique aqui</strong></a>.</p>
+                <p>{% trans "Para fazer uma oferta é necessário se cadastrar no sistema. Para se cadastrar" %} <a href="{% url 'account_signup' %}?next={{ object.get_absolute_url }}" title="Cadastre-se"><strong>clique aqui</strong></a>. Para fazer login <a href="{% url 'account_login' %}?next={{ object.get_absolute_url }}" title="Cadastre-se"><strong>clique aqui</strong></a>.</p>
                 {% else %}
                 <form id="id_form_offer" name="form_offer" action="{% url 'ads:offer_create' %}" method="POST">
                     {% csrf_token %}
