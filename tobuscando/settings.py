@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_TOKEN = config('SECRET_TOKEN', cast=int)
 
 ALLOWED_HOSTS = [
-    '.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com',
+    '.locahost:*', '127.0.0.1:*', 'tobuscando.herokuapp.com', 
     'tobuscando.com', 'www.tobuscando.com', 'tobuscando.com.br'
 ]
 
@@ -57,6 +57,21 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.flatpages',
 
+    'tobuscando.core',
+    'tobuscando.dashboard',
+    'tobuscando.ads',
+)
+
+"""
+It's a External Apps.
+
+** Please, don't remove it, you can do stop run allauth if to change it. **
+
+For default, the allauth apps are for last. EVER!
+
+"""
+
+INSTALLED_APPS += (
     'south',
     'cloudinary',
     'smart_selects',
@@ -69,10 +84,6 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
-
-    'tobuscando.core',
-    'tobuscando.dashboard',
-    'tobuscando.ads',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -151,14 +162,14 @@ SOCIALACCOUNT_PROVIDERS = {
 
 LANGUAGE_CODE = 'pt-BR'
 
-# MANUAL PARA GERAÇÃO DAS TRADUÇÕES
+# MANUAL PARA GERAÃ‡ÃƒO DAS TRADUÃ‡Ã•ES
 # django-admin.py makemessages -l pt-br
 # django-admin.py compilemessages -l pt-br
 
 LANGUAGE = (
-    ('pt-br', u'Português'),
+    ('pt-br', u'PortuguÃªs'),
     ('en-us', u'English'),
-    ('es', u'Español'),
+    ('es', u'EspaÃ±ol'),
 )
 
 LOCALE_PATHS = (
@@ -197,7 +208,7 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False)
 """
 
 
-# Não usar Gmail, fazer o possível para usar o oficial.
+#NÃ£o usar Gmail, fazer o possÃ­vel para usar o oficial.
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'nao_responda@celuladigital.com.br'
 EMAIL_HOST_PASSWORD = 'entercds'
@@ -221,7 +232,9 @@ EMAIL_USE_TLS = True
 '''
 
 
-''' EMAIL DIRETO PELO HOSTGATOR TB NÃO FUNCIONOU
+
+
+''' EMAIL DIRETO PELO HOSTGATOR TB NÃƒO FUNCIONOU
 EMAIL_HOST = 'br194.hostgator.com.br'
 EMAIL_HOST_USER = 'webmaster@tobuscando.com'
 EMAIL_HOST_PASSWORD = 'entercds2014'
