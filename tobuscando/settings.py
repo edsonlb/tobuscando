@@ -27,7 +27,7 @@ ALLOWED_HOSTS = [
 SITE_URL = 'http://www.tobuscando.com'
 
 # 1 = OFFLINE / 2 = ONLINE
-SITE_ID = 1
+SITE_ID = 2
 
 AUTH_USER_MODEL = 'core.Person'
 
