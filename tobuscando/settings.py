@@ -192,9 +192,9 @@ STATIC_URL = '/static/'
 
 CLOUDINARY = {
     'cloud_name': 'to-buscando',  # config('CLOUDINARY_NAME'),
-    'api_key': '698993111417921',   # config('CLOUDINARY_API_KEY'),
+    'api_key': '',   # config('CLOUDINARY_API_KEY'),
     # config('CLOUDINARY_API_SECRET')
-    'api_secret': 'fullE2Yhx3OJcH9PB-p357eDyTU'
+    'api_secret': ''
 }
 
 MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -210,34 +210,7 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False)
 
 #NÃ£o usar Gmail, fazer o possÃ­vel para usar o oficial.
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'nao_responda@celuladigital.com.br'
-EMAIL_HOST_PASSWORD = 'entercds'
+EMAIL_HOST_USER = 'nao_responda@.com.br'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
-'''
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'tobuscando@gmail.com'
-EMAIL_HOST_PASSWORD = 'entercds2014'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-'''
-
-
-'''EMAIL_HOST = 'smtp.mandrillapp.com'
-EMAIL_HOST_USER = 'webmaster@tobuscando.com'
-EMAIL_HOST_PASSWORD = 'Bu4-Owel5LDbUquSoqEWdg'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-'''
-
-
-
-
-''' EMAIL DIRETO PELO HOSTGATOR TB NÃƒO FUNCIONOU
-EMAIL_HOST = 'br194.hostgator.com.br'
-EMAIL_HOST_USER = 'webmaster@tobuscando.com'
-EMAIL_HOST_PASSWORD = 'entercds2014'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-'''
